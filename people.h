@@ -4,6 +4,8 @@
 
 using namespace std;
 
+const int notDead = -1;
+
 class people
 {
 public:
