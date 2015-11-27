@@ -3,8 +3,11 @@
 #include <string>
 
 using namespace std;
+<<<<<<< HEAD
 
 const int notDead = -1;
+=======
+>>>>>>> 87cd73d5ead78c1f622e3196845bd72ad4ded4eb
 
 class people
 {
