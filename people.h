@@ -2,6 +2,7 @@
 #define PEOPLE_H
 #include <string>
 
+using namespace std;
 
 class people
 {
