@@ -5,16 +5,18 @@
 
 using namespace std;
 
+void InsertPersonInfo(ostream& outs);
+
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
     ifstream fin;
     ofstream fout;
-    fin.open("database.csv");
-    fout.open("database.csv");
+    fin.open("database.txt");
+    fout.open("database.txt");
 
-    List theList(fin);
+    //List theList(fin);
 
     int choice;
     cout << "Welcome to Computer Sciense DB." << endl;
@@ -29,7 +31,7 @@ int main(int argc, char *argv[])
         cin >> choice;
 
         if (choice == 1)
-            theList.InsertPerson();
+            InsertPersonInfo(fout);
         else if (choice == 2);
         else if (choice == 3);
         else if (choice == 4);
@@ -39,6 +41,23 @@ int main(int argc, char *argv[])
 
     }while(choice != 5);
 
+
+    fin.close();
+    fout.close();
     return a.exec();
 }
 
+void InsertPersonInfo(ostream& outs)
+{
+    string Name;
+    int born, death;
+    cout << "Name: ";
+    cin >> Name;
+    cout << "Year of birth: ";
+    cin >> born;
+    cout << "Year of death (-1 if still alive): ";
+    cin >> death;
+
+    outs << Name << " " << born << "-" << death << endl;
+
+}
