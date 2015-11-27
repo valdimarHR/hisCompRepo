@@ -16,7 +16,12 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    list.cpp
+    list.cpp \
+    people.cpp
 
 HEADERS += \
-    list.h
+    list.h \
+    people.h
+
+FORMS += \
+    people.ui
