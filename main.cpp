@@ -17,6 +17,11 @@ int main(int argc, char *argv[])
              << "Enter your choice:" << endl;
         cout.flush();
         cin >> choice;
+
+        if (choice == 1);
+        if (choice == 2);
+        if (choice == 3);
+
     }while(choice != 4);
 
     return a.exec();
