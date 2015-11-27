@@ -52,7 +52,8 @@ void InsertPersonInfo(ostream& outs)
     string Name;
     int born, death;
     cout << "Name: ";
-    cin >> Name;
+    cin.ignore();
+    getline(cin, Name);
     cout << "Year of birth: ";
     cin >> born;
     cout << "Year of death (-1 if still alive): ";
