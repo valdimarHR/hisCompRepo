@@ -5,8 +5,9 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    //Merge purfa
     QCoreApplication a(argc, argv);
+    cout << "Hello world" << endl;
+    cout << "Hello friends";
 
     int choice = 0;
     cout << "Welcome to Computer Sciense DB." << endl;
@@ -20,4 +21,3 @@ int main(int argc, char *argv[])
     return a.exec();
 }
 
-//comment
