@@ -1,6 +1,7 @@
 #include <QCoreApplication>
 #include <iostream>
-#include <ifstream>
+#include <fstream>
+#include "list.h"
 
 using namespace std;
 
@@ -11,7 +12,7 @@ int main(int argc, char *argv[])
     ifstream fin;
     ofstream fout;
     fin.open("database.csv");
-    out_stream.open("database.csv");
+    fout.open("database.csv");
 
     list theList();
 
