@@ -23,5 +23,4 @@ HEADERS += \
     list.h \
     people.h
 
-FORMS += \
-    people.ui
+FORMS +=
