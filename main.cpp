@@ -21,6 +21,9 @@ int main(int argc, char *argv[])
         if (choice == 1);
         if (choice == 2);
         if (choice == 3);
+        if (choice == 4);
+        else
+            cout << "Invalid choice!" << endl;
 
     }while(choice != 4);
 
