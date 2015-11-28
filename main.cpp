@@ -41,9 +41,17 @@ int main(int argc, char *argv[])
 
     }while(choice != 5);
 
+    cout << "Thank you for your visit, hope to see you again soon." << endl;
+
+    fin.close("database.csv");
+    fout.close("database.csv");
 
     fin.close();
     fout.close();
+
+    fin.close();
+    fout.close();
+
     return a.exec();
 }
 
