@@ -10,13 +10,11 @@ List::List()
 List::List(istream& fin)
 {
     string line;
-    char newline;
     int indexStart, indexEnd;
     people peoplePush;
 
-    while(!fin.eof( ))
+    while(getline(fin, line))
     {
-        getline(fin, line);
         indexEnd = line.find(",");
         peoplePush.setName(line.substr(0, indexEnd));
         indexStart = indexEnd + 2;
@@ -29,7 +27,6 @@ List::List(istream& fin)
         indexEnd = line.size();
         peoplePush.setBirth(line.substr(indexStart, indexStart-indexEnd));
         listOfPeople.push_back(peoplePush);
-        fin >> newline;
     }
 }
 
