@@ -58,12 +58,7 @@ void InsertPersonInfo(ostream& outs)
     cout << "Year of death (-1 if still alive): ";
     cin >> death;
 
-    outs << Name << ", " << gender << ", " << born << "-";
-    if (death == notDead)
-        outs << " " << endl;
-    else
-        outs << death << endl;
-
+    outs << Name << ", " << gender << ", " << born << ", " << death << endl;
 
 }
 
