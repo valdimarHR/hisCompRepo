@@ -1,0 +1,28 @@
+#ifndef PEOPLE_H
+#define PEOPLE_H
+#include <string>
+
+using namespace std;
+
+const int notDead = -1;
+
+class people
+{
+public:
+    people();
+    setName(string fname);
+    setGender(string fgender);
+    setBirth(int fbirth);
+    setDeath(int fdeath);
+    getName();
+    getGender();
+    getBirth();
+    getDeath();
+private:
+    string name;
+    string gender;
+    int yearOfBirth;
+    int yearOfDeath;
+};
+
+#endif // PEOPLE_H

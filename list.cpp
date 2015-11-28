@@ -2,9 +2,9 @@
 
 using namespace std;
 
-List::List()
+List::List(ostream& fin)
 {
-
+    while(!in_stream.eof( ));
 }
 
 
