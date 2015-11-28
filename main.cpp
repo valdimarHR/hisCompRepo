@@ -7,14 +7,16 @@ using namespace std;
 
 void InsertPersonInfo(ostream& outs);
 
+
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
     ifstream fin;
     ofstream fout;
+
     fin.open("database.csv");
-    fout.open("database.csv");
+    fout.open("database.csv", fstream::app);
 
     //List theList(fin);
 
@@ -63,6 +65,11 @@ void InsertPersonInfo(ostream& outs)
     cout << "Year of death (-1 if still alive): ";
     cin >> death;
 
-    outs << Name << " " << born << "-" << death << endl;
+    outs << Name << ", " << gender << ", " << born << "-";
+    if (death == notDead)
+        outs << " ." << endl;
+    else
+        outs << death << "." << endl;
+
 
 }

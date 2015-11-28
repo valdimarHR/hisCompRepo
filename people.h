@@ -10,6 +10,14 @@ class people
 {
 public:
     people();
+    void setName(string fname);
+    void setGender(string fgender);
+    void setBirth(int fbirth);
+    void setDeath(int fdeath);
+    string getName();
+    string getGender();
+    int getBirth();
+    int getDeath();
 private:
     string name;
     string gender;

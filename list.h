@@ -10,6 +10,7 @@ const int notDead = -1;
 class List
 {
 public:
+    List();
     List(ostream& fin);
     void InsertPerson();
 
