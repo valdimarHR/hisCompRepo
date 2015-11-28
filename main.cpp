@@ -13,8 +13,8 @@ int main(int argc, char *argv[])
 
     ifstream fin;
     ofstream fout;
-    fin.open("database.txt");
-    fout.open("database.txt");
+    fin.open("database.csv");
+    fout.open("database.csv");
 
     //List theList(fin);
 
@@ -42,12 +42,6 @@ int main(int argc, char *argv[])
     }while(choice != 5);
 
     cout << "Thank you for your visit, hope to see you again soon." << endl;
-
-    fin.close("database.csv");
-    fout.close("database.csv");
-
-    fin.close();
-    fout.close();
 
     fin.close();
     fout.close();
