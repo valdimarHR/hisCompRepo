@@ -6,7 +6,7 @@
 using namespace std;
 
 void InsertPersonInfo(ostream& outs);
-
+int theMenuChoice();
 
 int main(int argc, char *argv[])
 {
@@ -22,14 +22,7 @@ int main(int argc, char *argv[])
     int choice;
     cout << "Welcome to Computer Sciense DB." << endl;
     do{
-        cout << "1: Insert" << endl
-             << "2: Search" << endl
-             << "3: Print" << endl
-             << "4: Delete" << endl
-             << "5: Exit" << endl
-             << "Enter your choice: ";
-        cout.flush();
-        cin >> choice;
+        choice = theMenuChoice();
 
         if (choice == 1)
             InsertPersonInfo(fout);
@@ -67,9 +60,25 @@ void InsertPersonInfo(ostream& outs)
 
     outs << Name << ", " << gender << ", " << born << "-";
     if (death == notDead)
-        outs << " ." << endl;
+        outs << " " << endl;
     else
-        outs << death << "." << endl;
+        outs << death << endl;
 
 
+}
+
+
+int theMenuChoice()
+{
+    int choice;
+
+    cout << "1: Insert" << endl
+         << "2: Search" << endl
+         << "3: Print" << endl
+         << "4: Delete" << endl
+         << "5: Exit" << endl
+         << "Enter your choice: ";
+    cout.flush();
+    cin >> choice;
+    return choice;
 }
