@@ -17,14 +17,16 @@ void people::setGender(string fgender)
     gender = fgender;
 }
 
-void people::setBirth(int fbirth)
+void people::setBirth(string fbirth)
 {
-    yearOfBirth = fbirth;
+    //Fyrst breyta í int
+    //yearOfBirth = fbirth;
 }
 
-void people::setDeath(int fdeath)
+void people::setDeath(string fdeath)
 {
-    yearOfDeath = fdeath;
+    //Fyrst breyta í int
+    //yearOfDeath = fdeath;
 }
 
 string people::getName()

@@ -1,6 +1,7 @@
 #include <QCoreApplication>
 #include <iostream>
 #include <fstream>
+#include <string>
 #include "list.h"
 
 using namespace std;

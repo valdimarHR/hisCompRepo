@@ -12,8 +12,8 @@ public:
     people();
     void setName(string fname);
     void setGender(string fgender);
-    void setBirth(int fbirth);
-    void setDeath(int fdeath);
+    void setBirth(string fbirth);
+    void setDeath(string fdeath);
     string getName();
     string getGender();
     int getBirth();
