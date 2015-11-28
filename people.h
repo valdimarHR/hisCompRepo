@@ -16,13 +16,13 @@ public:
     void setDeath(string fdeath);
     string getName() const;
     string getGender() const;
-    int getBirth() const;
-    int getDeath() const;
+    string getBirth() const;
+    string getDeath() const;
 private:
     string name;
     string gender;
-    int yearOfBirth;
-    int yearOfDeath;
+    string yearOfBirth;
+    string yearOfDeath;
 };
 
 #endif // PEOPLE_H

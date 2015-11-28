@@ -12,6 +12,7 @@ List::List(istream& fin)
     string line;
     int indexStart, indexEnd;
     people peoplePush;
+    char newline;
 
     while(getline(fin, line))
     {
@@ -19,14 +20,15 @@ List::List(istream& fin)
         peoplePush.setName(line.substr(0, indexEnd));
         indexStart = indexEnd + 2;
         indexEnd = line.find("," , indexStart);
-        peoplePush.setGender(line.substr(indexStart, indexStart-indexEnd));
+        peoplePush.setGender(line.substr(indexStart, (indexEnd-indexStart)));
         indexStart = indexEnd + 2;
         indexEnd = line.find("," , indexStart);
-        peoplePush.setBirth(line.substr(indexStart, indexStart-indexEnd));
+        peoplePush.setBirth(line.substr(indexStart, (indexEnd-indexStart)));
         indexStart = indexEnd + 2;
         indexEnd = line.size();
-        peoplePush.setBirth(line.substr(indexStart, indexStart-indexEnd));
+        peoplePush.setDeath(line.substr(indexStart, (indexEnd-indexStart)));
         listOfPeople.push_back(peoplePush);
+        fin >> newline;
     }
 }
 
