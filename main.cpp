@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     fin.open("database.txt");
     fout.open("database.txt", fstream::app);
 
-    //List theList(fin);
+    List theList(fin);
 
     int choice;
     cout << "Welcome to Computer Sciense DB." << endl;

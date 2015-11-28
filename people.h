@@ -14,10 +14,10 @@ public:
     void setGender(string fgender);
     void setBirth(string fbirth);
     void setDeath(string fdeath);
-    string getName();
-    string getGender();
-    int getBirth();
-    int getDeath();
+    string getName() const;
+    string getGender() const;
+    int getBirth() const;
+    int getDeath() const;
 private:
     string name;
     string gender;
