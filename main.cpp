@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
              << "3: Print" << endl
              << "4: Delete" << endl
              << "5: Exit" << endl
-             << "Enter your choice:" << endl;
+             << "Enter your choice: ";
         cout.flush();
         cin >> choice;
 
@@ -49,11 +49,13 @@ int main(int argc, char *argv[])
 
 void InsertPersonInfo(ostream& outs)
 {
-    string Name;
+    string Name, gender;
     int born, death;
     cout << "Name: ";
     cin.ignore();
     getline(cin, Name);
+    cout << "Gender: ";
+    cin >> gender;
     cout << "Year of birth: ";
     cin >> born;
     cout << "Year of death (-1 if still alive): ";
