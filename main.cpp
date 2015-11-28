@@ -7,6 +7,7 @@ using namespace std;
 
 void InsertPersonInfo(ostream& outs);
 
+
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
@@ -14,7 +15,7 @@ int main(int argc, char *argv[])
     ifstream fin;
     ofstream fout;
     fin.open("database.txt");
-    fout.open("database.txt");
+    fout.open("database.txt", fstream::app);
 
     //List theList(fin);
 
@@ -43,11 +44,6 @@ int main(int argc, char *argv[])
 
     cout << "Thank you for your visit, hope to see you again soon." << endl;
 
-    fin.close("database.csv");
-    fout.close("database.csv");
-
-    fin.close();
-    fout.close();
 
     fin.close();
     fout.close();
@@ -69,6 +65,11 @@ void InsertPersonInfo(ostream& outs)
     cout << "Year of death (-1 if still alive): ";
     cin >> death;
 
-    outs << Name << " " << born << "-" << death << endl;
+    outs << Name << ", " << gender << ", " << born << "-";
+    if (death == notDead)
+        outs << " ." << endl;
+    else
+        outs << death << "." << endl;
+
 
 }
