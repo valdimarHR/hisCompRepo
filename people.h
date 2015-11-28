@@ -1,6 +1,7 @@
 #ifndef PEOPLE_H
 #define PEOPLE_H
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -23,6 +24,7 @@ private:
     string gender;
     int yearOfBirth;
     int yearOfDeath;
+    pair<int, string> list;
 };
 
 #endif // PEOPLE_H

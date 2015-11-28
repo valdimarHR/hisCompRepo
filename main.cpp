@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include "list.h"
+#include "people.h"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ int main(int argc, char *argv[])
     fin.open("database.txt");
     fout.open("database.txt", fstream::app);
 
-    //List theList(fin);
+    List level = new List(fin);
 
     int choice;
     cout << "Welcome to Computer Sciense DB." << endl;
@@ -60,8 +61,12 @@ void InsertPersonInfo(ostream& outs)
 
     outs << Name << ", " << gender << ", " << born << ", " << death << endl;
 
+    /*people per = new people();
+    per.setName(Name);
+    per.setGender(gender);
+    per.setBirth(born);
+    per.setDeath(death);*/
 }
-
 
 int theMenuChoice()
 {
