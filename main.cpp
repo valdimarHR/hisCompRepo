@@ -3,12 +3,13 @@
 #include <fstream>
 #include "list.h"
 #include <string>
+#include <vector>
 
 using namespace std;
 
 void InsertPersonInfo(ostream& outs);
 int theMenuChoice();
-string PrintDB(ifstream& file);
+vector<string> dbList(ifstream& file);
 
 
 int main(int argc, char *argv[])
@@ -32,7 +33,8 @@ int main(int argc, char *argv[])
             InsertPersonInfo(fout);
         else if (choice == 2);
         else if (choice == 3)
-            cout << PrintDB(fin);
+            for(const string line:dbList(fin))
+                cout << line << endl;
         else if (choice == 4);
         else if (choice == 5);
         else
@@ -87,17 +89,22 @@ int theMenuChoice()
     return choice;
 }
 
-string PrintDB(ifstream& file){
+vector<string> dbList(ifstream& file){
+    vector<string> dbOutput;
     string line;
+
     if (file.is_open()){
         file.seekg (0, ios::end);
         int end = file.tellg();
         file.seekg(0);
         while ( getline (file,line )){
-            cout << line << '\n';
+            dbOutput.push_back(line);
             if(file.tellg() == end) break;
         }
     } else cout << "Unable to open file\n";
-    return "Done!\n";
+
+    sort(dbOutput.begin(), dbOutput.end());
+
+    return dbOutput;
 }
 
