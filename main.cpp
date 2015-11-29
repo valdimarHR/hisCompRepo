@@ -97,9 +97,9 @@ vector<string> dbList(ifstream& file){
         file.seekg (0, ios::end);
         int end = file.tellg();
         file.seekg(0);
-        while ( getline (file,line )){
+        while (file.tellg() != end){
+            getline (file,line);
             dbOutput.push_back(line);
-            if(file.tellg() == end) break;
         }
     } else cout << "Unable to open file\n";
 
