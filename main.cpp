@@ -1,6 +1,7 @@
 #include <QCoreApplication>
 #include <iostream>
 #include <fstream>
+#include <string>
 #include "list.h"
 #include <string>
 #include <vector>
@@ -17,12 +18,9 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     ifstream fin("database.csv");
-    ofstream fout;
+    ofstream fout("database.csv", fstream::app);
 
-    //fin.open("database.csv");
-    fout.open("database.csv", fstream::app);
-
-    //List theList(fin);
+    List theList(fin);
 
     int choice;
     cout << "Welcome to Computer Sciense DB." << endl;
@@ -44,7 +42,7 @@ int main(int argc, char *argv[])
 
     cout << "Thank you for your visit, hope to see you again soon." << endl;
 
-    //fin.close();
+    fin.close();
     fout.close();
 
     return a.exec();
@@ -64,12 +62,7 @@ void InsertPersonInfo(ostream& outs)
     cout << "Year of death (-1 if still alive): ";
     cin >> death;
 
-    outs << Name << ", " << gender << ", " << born << "-";
-    if (death == notDead)
-        outs << " " << endl;
-    else
-        outs << death << endl;
-
+    outs << Name << ", " << gender << ", " << born << ", " << death << endl;
 
 }
 
@@ -89,15 +82,16 @@ int theMenuChoice()
     return choice;
 }
 
+//FYI. Creation of List object must be commented out at the top for this to work.
 vector<string> dbList(ifstream& file){
     vector<string> dbOutput;
     string line;
 
     if (file.is_open()){
-        file.seekg (0, ios::end);
-        int end = file.tellg();
-        file.seekg(0);
-        while (file.tellg() != end){
+        file.seekg (0, ios::end);       //file readpointer to end.
+        int end = file.tellg();         //keep end placement/index.
+        file.seekg(0);                  //file readpointer back to start.
+        while (file.tellg() != end){    //while readpointer not at the end.
             getline (file,line);
             dbOutput.push_back(line);
         }

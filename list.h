@@ -2,17 +2,19 @@
 #define LIST_H
 
 #include <iostream>
-#include <fstream>
+#include <vector>
+#include <string>
+#include "people.h"
 using namespace std;
-
-const int notDead = -1;
 
 class List
 {
 public:
     List();
-    List(ostream& fin);
+    List(istream& fin);
     void InsertPerson();
+private:
+    vector <people> listOfPeople;
 
 };
 

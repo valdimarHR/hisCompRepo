@@ -12,17 +12,17 @@ public:
     people();
     void setName(string fname);
     void setGender(string fgender);
-    void setBirth(int fbirth);
-    void setDeath(int fdeath);
-    string getName();
-    string getGender();
-    int getBirth();
-    int getDeath();
+    void setBirth(string fbirth);
+    void setDeath(string fdeath);
+    string getName() const;
+    string getGender() const;
+    string getBirth() const;
+    string getDeath() const;
 private:
     string name;
     string gender;
-    int yearOfBirth;
-    int yearOfDeath;
+    string yearOfBirth;
+    string yearOfDeath;
 };
 
 #endif // PEOPLE_H
