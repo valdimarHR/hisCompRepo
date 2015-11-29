@@ -6,8 +6,8 @@ people::people()
 {
     name = "default";
     gender = "default";
-    yearOfBirth = "default";
-    yearOfDeath = "default";
+    yearOfBirth = 0;
+    yearOfDeath = 0;
 }
 
 void people::setName(string fname)
@@ -20,12 +20,12 @@ void people::setGender(string fgender)
     gender = fgender;
 }
 
-void people::setBirth(string fbirth)
+void people::setBirth(int fbirth)
 {
     yearOfBirth = fbirth;
 }
 
-void people::setDeath(string fdeath)
+void people::setDeath(int fdeath)
 {
     yearOfDeath = fdeath;
 }
@@ -42,13 +42,13 @@ const
     return gender;
 }
 
-string people::getBirth()
+int people::getBirth()
 const
 {
     return yearOfBirth;
 }
 
-string people::getDeath()
+int people::getDeath()
 const
 {
     return yearOfDeath;
