@@ -2,20 +2,23 @@
 #include <iostream>
 #include <fstream>
 #include "list.h"
+#include <string>
 
 using namespace std;
 
 void InsertPersonInfo(ostream& outs);
+int theMenuChoice();
+string PrintDB(ifstream& file);
 
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    ifstream fin;
+    ifstream fin("database.csv");
     ofstream fout;
 
-    fin.open("database.csv");
+    //fin.open("database.csv");
     fout.open("database.csv", fstream::app);
 
     //List theList(fin);
@@ -23,19 +26,13 @@ int main(int argc, char *argv[])
     int choice;
     cout << "Welcome to Computer Sciense DB." << endl;
     do{
-        cout << "1: Insert" << endl
-             << "2: Search" << endl
-             << "3: Print" << endl
-             << "4: Delete" << endl
-             << "5: Exit" << endl
-             << "Enter your choice: ";
-        cout.flush();
-        cin >> choice;
+        choice = theMenuChoice();
 
         if (choice == 1)
             InsertPersonInfo(fout);
         else if (choice == 2);
-        else if (choice == 3);
+        else if (choice == 3)
+            cout << PrintDB(fin);
         else if (choice == 4);
         else if (choice == 5);
         else
@@ -45,7 +42,7 @@ int main(int argc, char *argv[])
 
     cout << "Thank you for your visit, hope to see you again soon." << endl;
 
-    fin.close();
+    //fin.close();
     fout.close();
 
     return a.exec();
@@ -67,9 +64,40 @@ void InsertPersonInfo(ostream& outs)
 
     outs << Name << ", " << gender << ", " << born << "-";
     if (death == notDead)
-        outs << " ." << endl;
+        outs << " " << endl;
     else
-        outs << death << "." << endl;
+        outs << death << endl;
 
 
 }
+
+
+int theMenuChoice()
+{
+    int choice;
+
+    cout << "1: Insert" << endl
+         << "2: Search" << endl
+         << "3: Print" << endl
+         << "4: Delete" << endl
+         << "5: Exit" << endl
+         << "Enter your choice: ";
+    cout.flush();
+    cin >> choice;
+    return choice;
+}
+
+string PrintDB(ifstream& file){
+    string line;
+    if (file.is_open()){
+        file.seekg (0, ios::end);
+        int end = file.tellg();
+        file.seekg(0);
+        while ( getline (file,line )){
+            cout << line << '\n';
+            if(file.tellg() == end) break;
+        }
+    } else cout << "Unable to open file\n";
+    return "Done!\n";
+}
+

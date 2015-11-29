@@ -24,3 +24,6 @@ HEADERS += \
     people.h
 
 FORMS +=
+
+OTHER_FILES += \
+    database.csv
