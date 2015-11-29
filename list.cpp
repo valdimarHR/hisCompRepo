@@ -12,7 +12,6 @@ List::List(istream& fin)
     string line, year;
     int indexStart, indexEnd;
     people peoplePush;
-    char newline;
 
     while(getline(fin, line))
     {
@@ -30,7 +29,6 @@ List::List(istream& fin)
         year = line.substr(indexStart, (indexEnd-indexStart));
         peoplePush.setDeath(stringToInt(year));
         listOfPeople.push_back(peoplePush);
-        fin >> newline;
     }
 }
 
