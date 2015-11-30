@@ -9,6 +9,7 @@
 using namespace std;
 
 string theMenuChoice();
+void printTree();
 
 int main(int argc, char *argv[])
 {
@@ -27,6 +28,7 @@ int main(int argc, char *argv[])
     fin.close();
 
     string choice;
+    printTree();
     cout << "Welcome to Computer Sciense DB." << endl;
     do{
         choice = theMenuChoice();
@@ -66,4 +68,46 @@ string theMenuChoice()
     cout.flush();
     cin >> choice;
     return choice;
+}
+
+void printTree()
+{
+    cout << "----Merry christmas!!----" << endl;
+        cout << endl;
+
+        int star = 1;
+
+            int size = 10;
+
+            int Height = size / 3;
+            int Width = size / 2;
+
+            for(int total = size; total > 0; --total)
+            {
+
+                for(int i = (total - 1); i > 0; --i)
+                   cout << " ";
+
+
+                for(int j = 0; j < star ; ++j)
+                    cout << "*";
+
+
+                star += 2;
+
+                cout << '\n';
+            }
+
+            for(int i = 0; i < Height; ++i)
+            {
+                for(int j = 0; j < (size - (Width - (Width / 2))); ++j)
+                    cout << " ";
+
+                for(int k = 0; k < Width; ++k)
+                    cout << "|";
+
+               cout << '\n';
+            }
+
+            cout << endl;
 }
