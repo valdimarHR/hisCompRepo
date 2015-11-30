@@ -18,8 +18,9 @@ public:
     void InsertPersonInfo(ostream& outs);
     void Print();
 private:
-    int stringToInt(string str) const;
+    int stringToInt(const string& str) const;
     vector <people> listOfPeople;
+    bool checkIfpersonOnList(people person);
 
 };
 
