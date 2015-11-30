@@ -54,13 +54,13 @@ void people::printPerson() const
 {
     cout << "Name: " << name
          << " |Gender: " << gender
-         << " |Year of Birth: " << yearOfBirth
-         << " |Year of Death: ";
+         << " |Birth: " << yearOfBirth
+         << " |Death: ";
     if (yearOfDeath == notDead)
     {
-        cout << " |Person is still alive" << endl;
+        cout << "Still alive" << endl;
     } else {
-        cout << " |Year of Death: " << yearOfDeath << endl;
+        cout << yearOfDeath << endl;
     }
 }
 
@@ -77,4 +77,3 @@ bool operator == (const people& person1, const people& person2)
         theSame = false;
     return theSame;
 }
-

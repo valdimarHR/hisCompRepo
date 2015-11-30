@@ -22,7 +22,7 @@ public:
     int getBirth() const;
     int getDeath() const;
     void printPerson() const;
-    friend bool operator == (const people& person1, const people& person2);
+    friend bool operator == (const people &person1, const people &person2);
 private:
     string name;
     string gender;

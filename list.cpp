@@ -125,8 +125,8 @@ void List::InsertPersonInfo(ostream& outs)
     per.setDeath(death);
     if (checkIfpersonOnList(per))
     {
-        cout << "This person was aldready on the list and was therefore not added again."
-             << endl;
+        cout << endl << "This person was aldready on the list and was therefore not added again."
+             << endl << endl;
         return;
     }
 
@@ -134,7 +134,7 @@ void List::InsertPersonInfo(ostream& outs)
     listOfPeople.push_back(per);
 }
 
-bool List::checkIfpersonOnList(people person)
+bool List::checkIfpersonOnList(const people &person)
 {
     bool isOnList = false;
     int size = listOfPeople.size();

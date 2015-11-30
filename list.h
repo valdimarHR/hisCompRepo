@@ -17,18 +17,14 @@ public:
     List(istream& fin);
     void InsertPersonInfo(ostream& outs);
     void Print();
+    void searchPerson(istream& fin);
 private:
-    vector<people> People;
-    void InsertPerson();
-    int stringToInt(string str) const;
+    vector<people> listOfPeople;
     static bool sortName(people a, people b);
     static bool sortGender(people a, people b);
     static bool sortBirth(people a, people b);
     static bool sortDeath(people a, people b);
-    void searchPerson(istream& fin);
-    vector <people> listOfPeople;
-    bool checkIfpersonOnList(people person);
-
+    bool checkIfpersonOnList(const people& person);
 };
 
 #endif // LIST_H
