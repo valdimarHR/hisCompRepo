@@ -4,12 +4,11 @@
 #include <string>
 #include "list.h"
 #include "people.h"
-#include <string>
 #include <vector>
 
 using namespace std;
 
-int theMenuChoice();
+string theMenuChoice();
 
 int main(int argc, char *argv[])
 {
@@ -19,35 +18,37 @@ int main(int argc, char *argv[])
     List theList(fin);
     fin.close();
 
-    int choice;
+    string choice;
     cout << "Welcome to Computer Sciense DB." << endl;
     do{
         choice = theMenuChoice();
 
-        if (choice == 1)
+        if (choice.size() != 1)
+            cout << "Invalid choice!" << endl;
+        else if (choice == "1")
         {
             ofstream fout("database.csv", fstream::app);
             theList.InsertPersonInfo(fout);
             fout.close();
         }
-        else if (choice == 2);
-        else if (choice == 3)
+        else if (choice == "2");
+        else if (choice == "3")
             theList.Print();
-        else if (choice == 4);
-        else if (choice == 5);
+        else if (choice == "4");
+        else if (choice == "5");
         else
             cout << "Invalid choice!" << endl;
 
-    }while(choice != 5);
+    }while(choice != "5");
 
     cout << "Thank you for your visit, hope to see you again soon." << endl;
 
     return a.exec();
 }
 
-int theMenuChoice()
+string theMenuChoice()
 {
-    int choice;
+    string choice;
 
     cout << "1: Insert" << endl
          << "2: Search" << endl
