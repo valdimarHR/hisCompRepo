@@ -4,10 +4,11 @@
 #include <iostream>
 #include <fstream>
 #include "people.h"
+#include <vector>
+#include <string>
+#include "people.h"
 
 using namespace std;
-
-const int notDead = -1;
 
 class List
 {
@@ -17,6 +18,11 @@ public:
     void InsertPerson(people person);
 private:
     vector<people> People;
+    List(istream& fin);
+    void InsertPerson();
+private:
+    vector <people> listOfPeople;
+
 };
 
 #endif // LIST_H

@@ -13,12 +13,12 @@ public:
     people();
     void setName(string fname);
     void setGender(string fgender);
-    void setBirth(int fbirth);
-    void setDeath(int fdeath);
-    string getName();
-    string getGender();
-    int getBirth();
-    int getDeath();
+    void setBirth(string fbirth);
+    void setDeath(string fdeath);
+    string getName() const;
+    string getGender() const;
+    int getBirth() const;
+    int getDeath() const;
 private:
     string name;
     string gender;

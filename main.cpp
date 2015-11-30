@@ -1,6 +1,7 @@
 #include <QCoreApplication>
 #include <iostream>
 #include <fstream>
+#include <string>
 #include "list.h"
 #include "people.h"
 
@@ -19,6 +20,7 @@ int main(int argc, char *argv[])
     fout.open("database.txt", fstream::app);
 
     List level = new List(fin);
+    List theList(fin);
 
     int choice;
     cout << "Welcome to Computer Sciense DB." << endl;
