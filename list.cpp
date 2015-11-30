@@ -32,11 +32,6 @@ List::List(istream& fin)
     }
 }
 
-void List::InsertPerson()
-{
-
-}
-
 void List::Print()
 {
     int orderBy;
