@@ -37,8 +37,9 @@ void List::Print()
 {
     int orderBy;
     bool desending;
+    system("cls");
 
-    cout << endl << "Printing" << endl
+    cout << "* PRINTING *" << endl
          << "Ordered  by:" << endl
          << "\t1: Name" << endl
          << "\t2: Gender" << endl
@@ -48,6 +49,7 @@ void List::Print()
          << "Enter your choice: ";
     cout.flush();
     cin >> orderBy;
+    system("cls");
     cout << "Do you want this list in desenging order?" << endl
          << "\t0: No" << endl
          << "\t1: Yes" << endl
@@ -77,6 +79,7 @@ void List::Print()
           cout << "Invalid input" << endl;
        }
     if(desending) reverse(sortedList.begin(), sortedList.end());
+    system("cls");
 
     for(const auto person:sortedList)
         person.printPerson();
