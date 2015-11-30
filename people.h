@@ -13,8 +13,8 @@ public:
     people();
     void setName(string fname);
     void setGender(string fgender);
-    void setBirth(string fbirth);
-    void setDeath(string fdeath);
+    void setBirth(int fbirth);
+    void setDeath(int fdeath);
     string getName() const;
     string getGender() const;
     int getBirth() const;
@@ -24,7 +24,6 @@ private:
     string gender;
     int yearOfBirth;
     int yearOfDeath;
-    pair<int, string> list;
 };
 
 #endif // PEOPLE_H

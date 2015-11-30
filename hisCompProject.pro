@@ -11,6 +11,7 @@ QT       -= gui
 TARGET = hisCompProject
 CONFIG   += console
 CONFIG   -= app_bundle
+CONFIG   += c++11
 
 TEMPLATE = app
 
@@ -24,3 +25,6 @@ HEADERS += \
     people.h
 
 FORMS +=
+
+OTHER_FILES += \
+    database.csv

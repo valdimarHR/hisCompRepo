@@ -4,7 +4,10 @@ using namespace std;
 
 people::people()
 {
-
+    name = "default";
+    gender = "default";
+    yearOfBirth = 0;
+    yearOfDeath = 0;
 }
 
 void people::setName(string fname)
@@ -17,16 +20,14 @@ void people::setGender(string fgender)
     gender = fgender;
 }
 
-void people::setBirth(string fbirth)
+void people::setBirth(int fbirth)
 {
-    //Fyrst breyta í int
-    //yearOfBirth = fbirth;
+    yearOfBirth = fbirth;
 }
 
-void people::setDeath(string fdeath)
+void people::setDeath(int fdeath)
 {
-    //Fyrst breyta í int
-    //yearOfDeath = fdeath;
+    yearOfDeath = fdeath;
 }
 
 string people::getName()

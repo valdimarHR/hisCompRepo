@@ -20,6 +20,7 @@ private:
     vector<people> People;
     List(istream& fin);
     void InsertPerson();
+    int stringToInt(string str) const;
 private:
     vector <people> listOfPeople;
 
