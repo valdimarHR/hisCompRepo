@@ -39,15 +39,9 @@ int main(int argc, char *argv[])
         else
             cout << "Invalid choice!" << endl;
 
-<<<<<<< HEAD
-    }while(choice != 5);
+    //fout.close();
 
-    List::searchPerson();
-
-    fout.close();
-=======
     }while(choice != "5");
->>>>>>> e4fb7d75df9b4948ff88a7bef35051a73f2afdad
 
     cout << "Thank you for your visit, hope to see you again soon." << endl;
 

@@ -6,7 +6,6 @@
 #include "people.h"
 #include <vector>
 #include <string>
-#include "people.h"
 
 using namespace std;
 
@@ -17,11 +16,11 @@ public:
     List(istream& fin);
     void InsertPersonInfo(ostream& outs);
     void Print();
-    void searchPerson();
-    virtual string getName(istream& fin) = 0;
-    virtual string getGender(istream& fin) = 0;
-    virtual int getBirthYear(istream& fin) = 0;
-    virtual int getDeathYear(istream& fin) = 0;
+    void searchPerson(istream& fin);
+    virtual string getName(istream& fin);
+    virtual string getGender(istream& fin);
+    virtual int getBirthYear(istream& fin);
+    virtual int getDeathYear(istream& fin);
 private:
     int stringToInt(const string& str) const;
     vector <people> listOfPeople;

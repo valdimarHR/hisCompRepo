@@ -1,4 +1,5 @@
 #include "list.h"
+#include <iostream>
 
 using namespace std;
 
@@ -154,7 +155,7 @@ string getGender(istream& fin)
 
 int getBirthYear(istream& fin)
 {
-    int yearOfBirth, line;
+    string yearOfBirth, line;
 
     cout << "Please enter year of birth";
     cin >> yearOfBirth;
@@ -164,12 +165,14 @@ int getBirthYear(istream& fin)
             cout << line << endl;
     }
 
-    return yearOfBirth;
+    int birthYear = std::stoi(yearOfBirth);
+
+    return birthYear;
 }
 
 int getDeathYear(istream& fin)
 {
-    int yearOfDeath, line;
+    string yearOfDeath, line;
 
     cout << "Please enter year of death";
     cin >> yearOfDeath;
@@ -179,11 +182,13 @@ int getDeathYear(istream& fin)
             cout << line << endl;
     }
 
-    return yearOfDeath;
+    int deathYear = std::stoi(yearOfDeath);
+
+    return deathYear;
 }
 
 
-void List::searchPerson()
+void List::searchPerson(istream& fin)
 {
     int n, yearOfBirth, yearOfDeath;
     string name, gender;
