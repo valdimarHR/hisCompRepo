@@ -9,9 +9,7 @@
 
 using namespace std;
 
-void InsertPersonInfo(ostream& outs);
 int theMenuChoice();
-
 
 int main(int argc, char *argv[])
 {
@@ -21,15 +19,15 @@ int main(int argc, char *argv[])
     ofstream fout("database.csv", fstream::app);
 
     List theList(fin);
+    fin.close();
 
     int choice;
     cout << "Welcome to Computer Sciense DB." << endl;
     do{
         choice = theMenuChoice();
 
-        if (choice == 1){
-            InsertPersonInfo(fout);
-        }
+        if (choice == 1)
+            theList.InsertPersonInfo(fout);
         else if (choice == 2);
         else if (choice == 3)
             theList.Print();
@@ -40,35 +38,11 @@ int main(int argc, char *argv[])
 
     }while(choice != 5);
 
-    fin.close();
     fout.close();
 
     cout << "Thank you for your visit, hope to see you again soon." << endl;
 
     return a.exec();
-}
-
-void InsertPersonInfo(ostream& outs)
-{
-    string Name, gender;
-    int born, death;
-    cout << "Name: ";
-    cin.ignore();
-    getline(cin, Name);
-    cout << "Gender: ";
-    cin >> gender;
-    cout << "Year of birth: ";
-    cin >> born;
-    cout << "Year of death (-1 if still alive): ";
-    cin >> death;
-
-    outs << Name << ", " << gender << ", " << born << ", " << death << endl;
-
-    /*people per = new people();
-    per.setName(Name);
-    per.setGender(gender);
-    per.setBirth(born);
-    per.setDeath(death);*/
 }
 
 int theMenuChoice()

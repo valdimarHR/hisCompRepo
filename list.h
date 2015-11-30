@@ -15,7 +15,7 @@ class List
 public:
     List();
     List(istream& fin);
-    void InsertPerson(people person);
+    void InsertPersonInfo(ostream& outs);
     void Print();
 private:
     vector<people> People;
