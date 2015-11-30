@@ -16,7 +16,7 @@ public:
     List();
     List(istream& fin);
     void InsertPersonInfo(ostream& outs);
-    void Print(); 
+    void Print();
 private:
     vector<people> People;
     void InsertPerson();
@@ -25,8 +25,10 @@ private:
     static bool sortGender(people a, people b);
     static bool sortBirth(people a, people b);
     static bool sortDeath(people a, people b);
-private:
+    void searchPerson(istream& fin);
+    int stringToInt(const string& str) const;
     vector <people> listOfPeople;
+    bool checkIfpersonOnList(people person);
 
 };
 

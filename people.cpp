@@ -58,8 +58,23 @@ void people::printPerson() const
          << " |Year of Death: ";
     if (yearOfDeath == notDead)
     {
-        cout << "Person is still alive" << endl;
+        cout << " |Person is still alive" << endl;
     } else {
-        cout << yearOfDeath << endl;
+        cout << " |Year of Death: " << yearOfDeath << endl;
     }
 }
+
+bool operator == (const people& person1, const people& person2)
+{
+    bool theSame = true;
+    if (!(person1.getName()== person2.getName()))
+        theSame = false;
+    if (!(person1.getGender()== person2.getGender()))
+        theSame = false;
+    if (!(person1.getBirth()== person2.getBirth()))
+        theSame = false;
+    if (!(person1.getDeath()== person2.getDeath()))
+        theSame = false;
+    return theSame;
+}
+
