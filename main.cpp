@@ -5,58 +5,62 @@
 #include "list.h"
 #include "people.h"
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
-string theMenuChoice();
+int theMenuChoice();
 void printTree();
+void printError();
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    ifstream fin("database.csv");
 
+    ifstream fin("database.csv");
     if (fin.fail( ))
         {
-             cout << endl << "ERROR" << endl
-                  << "Please make a file with the name database.csv and put it in the right folder"
-                  << endl << "then open the program again." << endl << endl;
+             printError();
              return 0;
-         }
-
+        }
     List theList(fin);
     fin.close();
 
-    string choice;
     printTree();
     cout << "Welcome to Computer Sciense DB." << endl;
+    int choice;
     do{
         choice = theMenuChoice();
 
-        if (choice.size() != 1)
-            cout << "Invalid choice!" << endl;
-        else if (choice == "1")
+        switch(choice)
         {
+        case 1 :
+         {
             ofstream fout("database.csv", fstream::app);
             theList.InsertPersonInfo(fout);
             fout.close();
+         }      break;
+         case 2 :
+                break;
+         case 3 :
+             theList.Print();
+         case 4 :
+                break;
+         case 5 :
+                break;
+         default:
+             cout << "Invalid choice!" << endl;
         }
-        else if (choice == "2");
-        else if (choice == "3")
-            theList.Print();
-        else if (choice == "4");
-        else if (choice == "5");
-        else
-            cout << "Invalid choice!" << endl;
-    }while(choice != "5");
+    }while(choice != 5);
 
     cout << "Thank you for your visit, hope to see you again soon." << endl;
     return a.exec();
 }
 
-string theMenuChoice()
+int theMenuChoice()
 {
-    string choice;
+    string choicestr;
+    int choice;
 
     cout << "-----------------------" << endl;
     cout << "---Main menu---" << endl;
@@ -68,48 +72,52 @@ string theMenuChoice()
          << "5: Exit" << endl
          << "Enter your choice: ";
     cout.flush();
-    cin >> choice;
+    cin >> choicestr;
+    if (choicestr.size() != 1)
+        choice = 6;
+    else
+    choice = static_cast<int>(choicestr[0]);
+    choice -= '0';
     return choice;
+}
+
+void printError()
+{
+    cout << endl << "ERROR" << endl
+         << "Please make a file with the name database.csv and put it in the right folder"
+         << endl << "then open the program again." << endl << endl;
 }
 
 void printTree()
 {
     cout << "----Merry christmas!!----" << endl;
-        cout << endl;
+    cout << endl;
 
-        int star = 1;
+    int star = 1, size = 10;
+    int Height = size / 3, Width = size / 2;
 
-            int size = 10;
+    for(int total = size; total > 0; --total)
+    {
+        for(int i = (total - 1); i > 0; --i)
+            cout << " ";
 
-            int Height = size / 3;
-            int Width = size / 2;
+        for(int j = 0; j < star ; ++j)
+            cout << "*";
 
-            for(int total = size; total > 0; --total)
-            {
+        star += 2;
+        cout << '\n';
+    }
 
-                for(int i = (total - 1); i > 0; --i)
-                   cout << " ";
+    for(int i = 0; i < Height; ++i)
+    {
+        for(int j = 0; j < (size - (Width - (Width / 2))); ++j)
+             cout << " ";
 
+        for(int k = 0; k < Width; ++k)
+             cout << "|";
 
-                for(int j = 0; j < star ; ++j)
-                    cout << "*";
+        cout << '\n';
+    }
 
-
-                star += 2;
-
-                cout << '\n';
-            }
-
-            for(int i = 0; i < Height; ++i)
-            {
-                for(int j = 0; j < (size - (Width - (Width / 2))); ++j)
-                    cout << " ";
-
-                for(int k = 0; k < Width; ++k)
-                    cout << "|";
-
-               cout << '\n';
-            }
-
-            cout << endl;
+    cout << endl;
 }
