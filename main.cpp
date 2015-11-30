@@ -59,6 +59,9 @@ string theMenuChoice()
 {
     string choice;
 
+    cout << "-----------------------" << endl;
+    cout << "---Main menu---" << endl;
+    cout << endl;
     cout << "1: Insert" << endl
          << "2: Search" << endl
          << "3: Print" << endl
