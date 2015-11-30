@@ -23,18 +23,13 @@ List::List(istream& fin)
         indexStart = indexEnd + 2;
         indexEnd = line.find("," , indexStart);
         year = line.substr(indexStart, (indexEnd-indexStart));
-        peoplePush.setBirth(stringToInt(year));
+        peoplePush.setBirth(stoi(year));
         indexStart = indexEnd + 2;
         indexEnd = line.size();
         year = line.substr(indexStart, (indexEnd-indexStart));
-        peoplePush.setDeath(stringToInt(year));
+        peoplePush.setDeath(stoi(year));
         listOfPeople.push_back(peoplePush);
     }
-}
-
-void List::InsertPerson()
-{
-
 }
 
 void List::Print()
@@ -99,27 +94,6 @@ bool List::sortDeath(people a, people b)
     return (a.getDeath() < b.getDeath());
 }
 
-
-int List::stringToInt(string str)
-const
-{
-    int year = 0, decimals, place = 1;
-    char number;
-    if (str == "-1")
-        return notDead;
-    else
-    {
-        decimals = str.size();
-        for (int i = decimals; i > 0; i--)
-        {
-            number = str[i-1];
-            year += (number - '0')*place;
-            place *= 10;
-        }
-        return year;
-    }
-}
-
 void List::InsertPersonInfo(ostream& outs)
 {
     string Name, gender;
@@ -127,18 +101,37 @@ void List::InsertPersonInfo(ostream& outs)
     cout << "Name: ";
     cin.ignore();
     getline(cin, Name);
-    cout << "Gender: ";
+    cout << "Gender (please write male or female): ";
     cin >> gender;
     cout << "Year of birth: ";
     cin >> born;
     cout << "Year of death (-1 if still alive): ";
     cin >> death;
 
-    outs << Name << ", " << gender << ", " << born << ", " << death << endl;
-
-    /*people per = new people();
+    people per;
     per.setName(Name);
     per.setGender(gender);
     per.setBirth(born);
-    per.setDeath(death);*/
+    per.setDeath(death);
+    if (checkIfpersonOnList(per))
+    {
+        cout << endl << "This person was aldready on the list and was therefore not added again."
+             << endl << endl;
+        return;
+    }
+
+    outs << Name << ", " << gender << ", " << born << ", " << death << endl;
+    listOfPeople.push_back(per);
+}
+
+bool List::checkIfpersonOnList(const people &person)
+{
+    bool isOnList = false;
+    int size = listOfPeople.size();
+    for(int i=0; i<size; i++)
+    {
+        if(listOfPeople[i] == person)
+            isOnList = true;
+    }
+    return isOnList;
 }

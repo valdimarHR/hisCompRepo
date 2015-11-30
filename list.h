@@ -19,15 +19,12 @@ public:
     void Print(); 
 private:
     vector<people> People;
-    void InsertPerson();
-    int stringToInt(string str) const;
     static bool sortName(people a, people b);
     static bool sortGender(people a, people b);
     static bool sortBirth(people a, people b);
     static bool sortDeath(people a, people b);
-private:
+    bool checkIfpersonOnList(const people& person);
     vector <people> listOfPeople;
-
 };
 
 #endif // LIST_H
