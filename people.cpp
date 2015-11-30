@@ -59,9 +59,8 @@ void people::printPerson() const
     if (yearOfDeath == notDead)
     {
         cout << "Still alive" << endl;
-        cout << " |Person is still alive" << endl;
     } else {
-        cout << " |Year of Death: " << yearOfDeath << endl;
+        cout << yearOfDeath << endl;
     }
 }
 

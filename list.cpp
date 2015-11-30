@@ -95,29 +95,6 @@ bool List::sortDeath(people a, people b)
     return (a.getDeath() < b.getDeath());
 }
 
-<<<<<<< HEAD
-=======
-int List::stringToInt(const string &str)
-const
-{
-    int year = 0, decimals, place = 1;
-    char number;
-    if (str == "-1")
-        return notDead;
-    else
-    {
-        decimals = str.size();
-        for (int i = decimals; i > 0; i--)
-        {
-            number = str[i-1];
-            year += (number - '0')*place;
-            place *= 10;
-        }
-        return year;
-    }
-}
-
->>>>>>> 646e490d736daed0d9189ddea8ced65f50af5e6c
 void List::InsertPersonInfo(ostream& outs)
 {
     string Name, gender;
@@ -139,13 +116,8 @@ void List::InsertPersonInfo(ostream& outs)
     per.setDeath(death);
     if (checkIfpersonOnList(per))
     {
-<<<<<<< HEAD
         cout << endl << "This person was aldready on the list and was therefore not added again."
              << endl << endl;
-=======
-        cout << "This person was aldready on the list and was therefore not added again."
-             << endl;
->>>>>>> 646e490d736daed0d9189ddea8ced65f50af5e6c
         return;
     }
 
@@ -153,11 +125,7 @@ void List::InsertPersonInfo(ostream& outs)
     listOfPeople.push_back(per);
 }
 
-<<<<<<< HEAD
 bool List::checkIfpersonOnList(const people &person)
-=======
-bool List::checkIfpersonOnList(people person)
->>>>>>> 646e490d736daed0d9189ddea8ced65f50af5e6c
 {
     bool isOnList = false;
     int size = listOfPeople.size();
@@ -167,8 +135,6 @@ bool List::checkIfpersonOnList(people person)
             isOnList = true;
     }
     return isOnList;
-<<<<<<< HEAD
-=======
 }
 
 string getName(istream& fin)
@@ -261,5 +227,4 @@ void List::searchPerson(istream& fin)
     if (n == 4) {
         getDeathYear(fin);
     }
->>>>>>> 646e490d736daed0d9189ddea8ced65f50af5e6c
 }
