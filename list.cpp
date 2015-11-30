@@ -56,3 +56,26 @@ const
         return year;
     }
 }
+
+void List::InsertPersonInfo(ostream& outs)
+{
+    string Name, gender;
+    int born, death;
+    cout << "Name: ";
+    cin.ignore();
+    getline(cin, Name);
+    cout << "Gender: ";
+    cin >> gender;
+    cout << "Year of birth: ";
+    cin >> born;
+    cout << "Year of death (-1 if still alive): ";
+    cin >> death;
+
+    outs << Name << ", " << gender << ", " << born << ", " << death << endl;
+
+    /*people per = new people();
+    per.setName(Name);
+    per.setGender(gender);
+    per.setBirth(born);
+    per.setDeath(death);*/
+}

@@ -14,11 +14,11 @@ class List
 {
 public:
     List();
-    List(ostream& fin);
+    List(istream& fin);
     void InsertPerson(people person);
+    void InsertPersonInfo(ostream& outs);
 private:
     vector<people> People;
-    List(istream& fin);
     void InsertPerson();
     int stringToInt(string str) const;
 private:

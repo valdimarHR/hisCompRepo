@@ -21,8 +21,8 @@ int main(int argc, char *argv[])
     ifstream fin("database.csv");
     ofstream fout("database.csv", fstream::app);
 
-    //List level = new List(fin);
     List theList(fin);
+    fin.close();
 
     int choice;
     cout << "Welcome to Computer Sciense DB." << endl;
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
         choice = theMenuChoice();
 
         if (choice == 1)
-            InsertPersonInfo(fout);
+            theList.InsertPersonInfo(fout);
         else if (choice == 2);
         else if (choice == 3)
             for(const string line:dbList(fin))
@@ -44,33 +44,9 @@ int main(int argc, char *argv[])
 
     cout << "Thank you for your visit, hope to see you again soon." << endl;
 
-    fin.close();
     fout.close();
 
     return a.exec();
-}
-
-void InsertPersonInfo(ostream& outs)
-{
-    string Name, gender;
-    int born, death;
-    cout << "Name: ";
-    cin.ignore();
-    getline(cin, Name);
-    cout << "Gender: ";
-    cin >> gender;
-    cout << "Year of birth: ";
-    cin >> born;
-    cout << "Year of death (-1 if still alive): ";
-    cin >> death;
-
-    outs << Name << ", " << gender << ", " << born << ", " << death << endl;
-
-    /*people per = new people();
-    per.setName(Name);
-    per.setGender(gender);
-    per.setBirth(born);
-    per.setDeath(death);*/
 }
 
 int theMenuChoice()
