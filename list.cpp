@@ -45,7 +45,7 @@ void List::Print()
     cout << endl << "Printing" << endl
          << "Ordered  by:" << endl
          << "\t1: Name" << endl
-         << "\t2: Sex" << endl
+         << "\t2: Gender" << endl
          << "\t3: Year of birth" << endl
          << "\t4: Year of death" << endl
          << "Enter your choice: ";

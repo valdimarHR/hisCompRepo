@@ -2,9 +2,12 @@
 #define LIST_H
 
 #include <iostream>
+#include <fstream>
+#include "people.h"
 #include <vector>
 #include <string>
 #include "people.h"
+
 using namespace std;
 
 class List
@@ -12,9 +15,12 @@ class List
 public:
     List();
     List(istream& fin);
+    void InsertPerson(people person);
+    void Print();
+private:
+    vector<people> People;
     void InsertPerson();
     int stringToInt(string str) const;
-    void Print();
 private:
     vector <people> listOfPeople;
 

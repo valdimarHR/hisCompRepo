@@ -1,6 +1,7 @@
 #ifndef PEOPLE_H
 #define PEOPLE_H
 #include <string>
+#include <vector>
 
 using namespace std;
 
