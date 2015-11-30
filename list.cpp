@@ -36,6 +36,7 @@ List::List(istream& fin)
 void List::Print()
 {
     int orderBy;
+    bool desending;
 
     cout << endl << "Printing" << endl
          << "Ordered  by:" << endl
@@ -47,6 +48,13 @@ void List::Print()
          << "Enter your choice: ";
     cout.flush();
     cin >> orderBy;
+    cout << "Do you want this list in desenging order?" << endl
+         << "\t0: No" << endl
+         << "\t1: Yes" << endl
+         << "Enter your choice: ";
+    cout.flush();
+    cin >> desending;
+
     vector<people> sortedList = listOfPeople;
 
     if (orderBy < 5) sort(sortedList.begin(), sortedList.end(), sortName);
@@ -68,6 +76,7 @@ void List::Print()
        default :
           cout << "Invalid input" << endl;
        }
+    if(desending) reverse(sortedList.begin(), sortedList.end());
 
     for(const auto person:sortedList)
         person.printPerson();
@@ -93,26 +102,6 @@ bool List::sortBirth(people a, people b)
 bool List::sortDeath(people a, people b)
 {
     return (a.getDeath() < b.getDeath());
-}
-
-int List::stringToInt(const string &str)
-const
-{
-    int year = 0, decimals, place = 1;
-    char number;
-    if (str == "-1")
-        return notDead;
-    else
-    {
-        decimals = str.size();
-        for (int i = decimals; i > 0; i--)
-        {
-            number = str[i-1];
-            year += (number - '0')*place;
-            place *= 10;
-        }
-        return year;
-    }
 }
 
 void List::InsertPersonInfo(ostream& outs)

@@ -26,7 +26,6 @@ private:
     static bool sortBirth(people a, people b);
     static bool sortDeath(people a, people b);
     void searchPerson(istream& fin);
-    int stringToInt(const string& str) const;
     vector <people> listOfPeople;
     bool checkIfpersonOnList(people person);
 

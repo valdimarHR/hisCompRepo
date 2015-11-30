@@ -12,9 +12,15 @@ string theMenuChoice();
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
 
     ifstream fin("database.csv");
+    if (fin.fail( ))
+        {
+             cout << endl << "ERROR" << endl
+                  << "Please make a file with the name database.csv and put it in the right folder"
+                  << endl << "then open the program again." << endl << endl;
+             return 0;
+         }
     List theList(fin);
     fin.close();
 
@@ -45,7 +51,6 @@ int main(int argc, char *argv[])
 
     cout << "Thank you for your visit, hope to see you again soon." << endl;
 
-    return a.exec();
 }
 
 string theMenuChoice()
