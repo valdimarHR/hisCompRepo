@@ -2,6 +2,7 @@
 #define PEOPLE_H
 #include <string>
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -19,6 +20,7 @@ public:
     string getGender() const;
     int getBirth() const;
     int getDeath() const;
+    void printPerson() const;
 private:
     string name;
     string gender;

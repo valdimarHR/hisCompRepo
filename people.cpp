@@ -54,3 +54,11 @@ const
     return yearOfDeath;
 }
 
+void people::printPerson() const
+{
+    cout << "Name: " << name
+         << " |Gender: " << gender
+         << " |Year of Birth: " << yearOfBirth
+         << " |Year of Death: " << yearOfDeath << endl;
+}
+

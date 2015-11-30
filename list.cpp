@@ -87,7 +87,7 @@ void List::InsertPersonInfo(ostream& outs)
     cout << "Name: ";
     cin.ignore();
     getline(cin, Name);
-    cout << "Gender: ";
+    cout << "Gender (please write male or female): ";
     cin >> gender;
     cout << "Year of birth: ";
     cin >> born;
@@ -96,9 +96,10 @@ void List::InsertPersonInfo(ostream& outs)
 
     outs << Name << ", " << gender << ", " << born << ", " << death << endl;
 
-    /*people per = new people();
+    people per;
     per.setName(Name);
     per.setGender(gender);
     per.setBirth(born);
-    per.setDeath(death);*/
+    per.setDeath(death);
+    listOfPeople.push_back(per);
 }
