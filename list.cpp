@@ -107,3 +107,91 @@ void List::InsertPersonInfo(ostream& outs)
     per.setBirth(born);
     per.setDeath(death);*/
 }
+
+string getName(istream& fin)
+{
+    string name, line;
+
+    cout << "Please enter a name: ";
+    cin >> name;
+
+    while(getline(fin, line)) {
+        if (line.find(name) != string::npos)
+            cout << line << endl;
+    }
+
+    return name;
+}
+
+string getGender(istream& fin)
+{
+    string gender, line;
+
+    cout << "Please enter a gender (male or female): ";
+    cin >> gender;
+
+    while(getline(fin, line)) {
+        if (line.find(gender) != string::npos)
+            cout << line << endl;
+    }
+
+    return gender;
+}
+
+int getBirthYear(istream& fin)
+{
+    int yearOfBirth, line;
+
+    cout << "Please enter year of birth";
+    cin >> yearOfBirth;
+
+    while(getline(fin, line)) {
+        if (line.find(yearOfBirth) != string::npos)
+            cout << line << endl;
+    }
+
+    return yearOfBirth;
+}
+
+int getDeathYear(istream& fin)
+{
+    int yearOfDeath, line;
+
+    cout << "Please enter year of death";
+    cin >> yearOfDeath;
+
+    while(getline(fin, line)) {
+        if (line.find(yearOfDeath) != string::npos)
+            cout << line << endl;
+    }
+
+    return yearOfDeath;
+}
+
+
+void List::searchPerson()
+{
+    int n, yearOfBirth, yearOfDeath;
+    string name, gender;
+
+    cout << "Would you like to search by" << endl
+         << "1. Name" << endl
+         << "2. Gender" << endl
+         << "3. Year of birth" << endl
+         << "4. Year of death" << endl
+         << "Enter your choice: ";
+    cin >> n;
+
+    if (n == 1) {
+        getName(fin);
+    }
+    if (n == 2) {
+        getGender(fin);
+    }
+    if (n == 3) {
+        getBirthYear(fin);
+    }
+    if (n == 4) {
+        getDeathYear(fin);
+    }
+}

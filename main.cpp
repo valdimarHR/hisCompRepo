@@ -38,6 +38,8 @@ int main(int argc, char *argv[])
 
     }while(choice != 5);
 
+    List::searchPerson();
+
     fout.close();
 
     cout << "Thank you for your visit, hope to see you again soon." << endl;
