@@ -13,7 +13,7 @@ void printTree();
 
 int main(int argc, char *argv[])
 {
-
+    QCoreApplication a(argc, argv);
     ifstream fin("database.csv");
 
     if (fin.fail( ))
@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
     }while(choice != "5");
 
     cout << "Thank you for your visit, hope to see you again soon." << endl;
-
+    return a.exec();
 }
 
 string theMenuChoice()

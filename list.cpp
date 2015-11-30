@@ -128,7 +128,7 @@ void List::InsertPersonInfo(ostream& outs)
     per.setDeath(death);
     if (checkIfpersonOnList(per))
     {
-        cout << endl << "This person was aldready on the list and was therefore not added again."
+        cout << endl << "This person was already on the list and was therefore not added again."
              << endl << endl;
         return;
     }
