@@ -54,3 +54,25 @@ const
     return yearOfDeath;
 }
 
+void people::printPerson() const
+{
+    cout << "Name: " << name
+         << " |Gender: " << gender
+         << " |Year of Birth: " << yearOfBirth
+         << " |Year of Death: " << yearOfDeath << endl;
+}
+
+bool operator == (const people& person1, const people& person2)
+{
+    bool theSame = true;
+    if (!(person1.getName()== person2.getName()))
+        theSame = false;
+    if (!(person1.getGender()== person2.getGender()))
+        theSame = false;
+    if (!(person1.getBirth()== person2.getBirth()))
+        theSame = false;
+    if (!(person1.getDeath()== person2.getDeath()))
+        theSame = false;
+    return theSame;
+}
+

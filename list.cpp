@@ -32,11 +32,6 @@ List::List(istream& fin)
     }
 }
 
-void List::InsertPerson()
-{
-
-}
-
 void List::Print()
 {
     int orderBy;
@@ -65,7 +60,7 @@ void List::Print()
     cout << endl;
 }
 
-int List::stringToInt(string str)
+int List::stringToInt(const string &str)
 const
 {
     int year = 0, decimals, place = 1;
@@ -92,20 +87,39 @@ void List::InsertPersonInfo(ostream& outs)
     cout << "Name: ";
     cin.ignore();
     getline(cin, Name);
-    cout << "Gender: ";
+    cout << "Gender (please write male or female): ";
     cin >> gender;
     cout << "Year of birth: ";
     cin >> born;
     cout << "Year of death (-1 if still alive): ";
     cin >> death;
 
-    outs << Name << ", " << gender << ", " << born << ", " << death << endl;
-
-    /*people per = new people();
+    people per;
     per.setName(Name);
     per.setGender(gender);
     per.setBirth(born);
-    per.setDeath(death);*/
+    per.setDeath(death);
+    if (checkIfpersonOnList(per))
+    {
+        cout << "This person was aldready on the list and was therefore not added again."
+             << endl;
+        return;
+    }
+
+    outs << Name << ", " << gender << ", " << born << ", " << death << endl;
+    listOfPeople.push_back(per);
+}
+
+bool List::checkIfpersonOnList(people person)
+{
+    bool isOnList = false;
+    int size = listOfPeople.size();
+    for(int i=0; i<size; i++)
+    {
+        if(listOfPeople[i] == person)
+            isOnList = true;
+    }
+    return isOnList;
 }
 
 string getName(istream& fin)
