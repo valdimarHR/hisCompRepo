@@ -30,27 +30,36 @@ void people::setDeath(int fdeath)
     yearOfDeath = fdeath;
 }
 
-string people::getName()
-const
+string people::getName() const
 {
     return name;
 }
 
-string people::getGender()
-const
+string people::getGender() const
 {
     return gender;
 }
 
-int people::getBirth()
-const
+int people::getBirth() const
 {
     return yearOfBirth;
 }
 
-int people::getDeath()
-const
+int people::getDeath() const
 {
     return yearOfDeath;
 }
 
+void people::printPerson() const
+{
+    cout << "Name: " << name
+         << " |Gender: " << gender
+         << " |Year of Birth: " << yearOfBirth
+         << " |Year of Death: ";
+    if (yearOfDeath == notDead)
+    {
+        cout << "Person is still alive" << endl;
+    } else {
+        cout << yearOfDeath << endl;
+    }
+}

@@ -1,5 +1,6 @@
 #ifndef PEOPLE_H
 #define PEOPLE_H
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -19,6 +20,7 @@ public:
     string getGender() const;
     int getBirth() const;
     int getDeath() const;
+    void printPerson() const;
 private:
     string name;
     string gender;

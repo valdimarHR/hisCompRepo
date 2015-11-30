@@ -6,7 +6,7 @@
 #include "people.h"
 #include <vector>
 #include <string>
-#include "people.h"
+#include <algorithm>
 
 using namespace std;
 
@@ -16,11 +16,15 @@ public:
     List();
     List(istream& fin);
     void InsertPersonInfo(ostream& outs);
-    void Print();
+    void Print(); 
 private:
     vector<people> People;
     void InsertPerson();
     int stringToInt(string str) const;
+    static bool sortName(people a, people b);
+    static bool sortGender(people a, people b);
+    static bool sortBirth(people a, people b);
+    static bool sortDeath(people a, people b);
 private:
     vector <people> listOfPeople;
 

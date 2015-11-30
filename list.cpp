@@ -40,7 +40,6 @@ void List::InsertPerson()
 void List::Print()
 {
     int orderBy;
-    char sorted;
 
     cout << endl << "Printing" << endl
          << "Ordered  by:" << endl
@@ -48,22 +47,58 @@ void List::Print()
          << "\t2: Gender" << endl
          << "\t3: Year of birth" << endl
          << "\t4: Year of death" << endl
+         << "\t5: As in file" << endl
          << "Enter your choice: ";
     cout.flush();
     cin >> orderBy;
-    cout << "\ta: Asending" << endl
-         << "\td: Desending" << endl
-         << "Enter your choice: ";
-    cout.flush();
-    cin >> sorted;
-    cout << endl;
+    vector<people> sortedList = listOfPeople;
 
-    for(const auto person:listOfPeople)
-        cout << "Name: " << person.getName()
-             << " |Gender: " << person.getGender() << endl;
+    if (orderBy < 5) sort(sortedList.begin(), sortedList.end(), sortName);
+    switch(orderBy)
+       {
+       case 1 :
+          break;
+       case 2 :
+          sort(sortedList.begin(), sortedList.end(), sortGender);
+          break;
+       case 3 :
+          sort(sortedList.begin(), sortedList.end(), sortBirth);
+          break;
+       case 4 :
+          sort(sortedList.begin(), sortedList.end(), sortDeath);
+          break;
+        case 5 :
+           break;
+       default :
+          cout << "Invalid input" << endl;
+       }
+
+    for(const auto person:sortedList)
+        person.printPerson();
 
     cout << endl;
 }
+
+bool List::sortName(people a, people b)
+{
+    return (a.getName() < b.getName());
+}
+
+bool List::sortGender(people a, people b)
+{
+    return (a.getGender() < b.getGender());
+}
+
+bool List::sortBirth(people a, people b)
+{
+    return (a.getBirth() < b.getBirth());
+}
+
+bool List::sortDeath(people a, people b)
+{
+    return (a.getDeath() < b.getDeath());
+}
+
 
 int List::stringToInt(string str)
 const
