@@ -1,4 +1,5 @@
 #include "list.h"
+#include <iostream>
 
 using namespace std;
 
@@ -94,6 +95,29 @@ bool List::sortDeath(people a, people b)
     return (a.getDeath() < b.getDeath());
 }
 
+<<<<<<< HEAD
+=======
+int List::stringToInt(const string &str)
+const
+{
+    int year = 0, decimals, place = 1;
+    char number;
+    if (str == "-1")
+        return notDead;
+    else
+    {
+        decimals = str.size();
+        for (int i = decimals; i > 0; i--)
+        {
+            number = str[i-1];
+            year += (number - '0')*place;
+            place *= 10;
+        }
+        return year;
+    }
+}
+
+>>>>>>> 646e490d736daed0d9189ddea8ced65f50af5e6c
 void List::InsertPersonInfo(ostream& outs)
 {
     string Name, gender;
@@ -115,8 +139,13 @@ void List::InsertPersonInfo(ostream& outs)
     per.setDeath(death);
     if (checkIfpersonOnList(per))
     {
+<<<<<<< HEAD
         cout << endl << "This person was aldready on the list and was therefore not added again."
              << endl << endl;
+=======
+        cout << "This person was aldready on the list and was therefore not added again."
+             << endl;
+>>>>>>> 646e490d736daed0d9189ddea8ced65f50af5e6c
         return;
     }
 
@@ -124,7 +153,11 @@ void List::InsertPersonInfo(ostream& outs)
     listOfPeople.push_back(per);
 }
 
+<<<<<<< HEAD
 bool List::checkIfpersonOnList(const people &person)
+=======
+bool List::checkIfpersonOnList(people person)
+>>>>>>> 646e490d736daed0d9189ddea8ced65f50af5e6c
 {
     bool isOnList = false;
     int size = listOfPeople.size();
@@ -134,4 +167,99 @@ bool List::checkIfpersonOnList(const people &person)
             isOnList = true;
     }
     return isOnList;
+<<<<<<< HEAD
+=======
+}
+
+string getName(istream& fin)
+{
+    string name, line;
+
+    cout << "Please enter a name: ";
+    cin >> name;
+
+    while(getline(fin, line)) {
+        if (line.find(name) != string::npos)
+            cout << line << endl;
+    }
+
+    return name;
+}
+
+string getGender(istream& fin)
+{
+    string gender, line;
+
+    cout << "Please enter a gender (male or female): ";
+    cin >> gender;
+
+    while(getline(fin, line)) {
+        if (line.find(gender) != string::npos)
+            cout << line << endl;
+    }
+
+    return gender;
+}
+
+int getBirthYear(istream& fin)
+{
+    string yearOfBirth, line;
+
+    cout << "Please enter year of birth";
+    cin >> yearOfBirth;
+
+    while(getline(fin, line)) {
+        if (line.find(yearOfBirth) != string::npos)
+            cout << line << endl;
+    }
+
+    int birthYear = std::stoi(yearOfBirth);
+
+    return birthYear;
+}
+
+int getDeathYear(istream& fin)
+{
+    string yearOfDeath, line;
+
+    cout << "Please enter year of death";
+    cin >> yearOfDeath;
+
+    while(getline(fin, line)) {
+        if (line.find(yearOfDeath) != string::npos)
+            cout << line << endl;
+    }
+
+    int deathYear = std::stoi(yearOfDeath);
+
+    return deathYear;
+}
+
+
+void List::searchPerson(istream& fin)
+{
+    int n, yearOfBirth, yearOfDeath;
+    string name, gender;
+
+    cout << "Would you like to search by" << endl
+         << "1. Name" << endl
+         << "2. Gender" << endl
+         << "3. Year of birth" << endl
+         << "4. Year of death" << endl
+         << "Enter your choice: ";
+    cin >> n;
+
+    if (n == 1) {
+        getName(fin);
+    }
+    if (n == 2) {
+        getGender(fin);
+    }
+    if (n == 3) {
+        getBirthYear(fin);
+    }
+    if (n == 4) {
+        getDeathYear(fin);
+    }
+>>>>>>> 646e490d736daed0d9189ddea8ced65f50af5e6c
 }

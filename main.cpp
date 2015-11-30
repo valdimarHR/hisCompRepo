@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     ifstream fin("database.csv");
+<<<<<<< HEAD
 
     if (fin.fail( ))
     {
@@ -23,6 +24,8 @@ int main(int argc, char *argv[])
               << endl << "then open the program again." << endl << endl;
          return 0;
      }
+=======
+>>>>>>> 646e490d736daed0d9189ddea8ced65f50af5e6c
     List theList(fin);
     fin.close();
 
@@ -33,8 +36,12 @@ int main(int argc, char *argv[])
 
         if (choice.size() != 1)
             cout << "Invalid choice!" << endl;
+<<<<<<< HEAD
 
         if (choice == "1")
+=======
+        else if (choice == "1")
+>>>>>>> 646e490d736daed0d9189ddea8ced65f50af5e6c
         {
             ofstream fout("database.csv", fstream::app);
             theList.InsertPersonInfo(fout);
@@ -48,6 +55,11 @@ int main(int argc, char *argv[])
         else
             cout << "Invalid choice!" << endl;
 
+<<<<<<< HEAD
+=======
+    //fout.close();
+
+>>>>>>> 646e490d736daed0d9189ddea8ced65f50af5e6c
     }while(choice != "5");
 
     cout << "Thank you for your visit, hope to see you again soon." << endl;

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -21,7 +22,11 @@ public:
     int getBirth() const;
     int getDeath() const;
     void printPerson() const;
+<<<<<<< HEAD
     friend bool operator == (const people &person1, const people &person2);
+=======
+    friend bool operator == (const people& person1, const people& person2);
+>>>>>>> 646e490d736daed0d9189ddea8ced65f50af5e6c
 private:
     string name;
     string gender;
