@@ -34,7 +34,35 @@ List::List(istream& fin)
 
 void List::InsertPerson()
 {
-    
+
+}
+
+void List::Print()
+{
+    int orderBy;
+    char sorted;
+
+    cout << endl << "Printing" << endl
+         << "Ordered  by:" << endl
+         << "\t1: Name" << endl
+         << "\t2: Gender" << endl
+         << "\t3: Year of birth" << endl
+         << "\t4: Year of death" << endl
+         << "Enter your choice: ";
+    cout.flush();
+    cin >> orderBy;
+    cout << "\ta: Asending" << endl
+         << "\td: Desending" << endl
+         << "Enter your choice: ";
+    cout.flush();
+    cin >> sorted;
+    cout << endl;
+
+    for(const auto person:listOfPeople)
+        cout << "Name: " << person.getName()
+             << " |Gender: " << person.getGender() << endl;
+
+    cout << endl;
 }
 
 int List::stringToInt(string str)

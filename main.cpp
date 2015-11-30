@@ -9,10 +9,7 @@
 
 using namespace std;
 
-void InsertPersonInfo(ostream& outs);
 int theMenuChoice();
-vector<string> dbList(ifstream& file);
-
 
 int main(int argc, char *argv[])
 {
@@ -33,8 +30,7 @@ int main(int argc, char *argv[])
             theList.InsertPersonInfo(fout);
         else if (choice == 2);
         else if (choice == 3)
-            for(const string line:dbList(fin))
-                cout << line << endl;
+            theList.Print();
         else if (choice == 4);
         else if (choice == 5);
         else
@@ -42,9 +38,9 @@ int main(int argc, char *argv[])
 
     }while(choice != 5);
 
-    cout << "Thank you for your visit, hope to see you again soon." << endl;
-
     fout.close();
+
+    cout << "Thank you for your visit, hope to see you again soon." << endl;
 
     return a.exec();
 }
@@ -63,24 +59,3 @@ int theMenuChoice()
     cin >> choice;
     return choice;
 }
-
-//FYI. Creation of List object must be commented out at the top for this to work.
-vector<string> dbList(ifstream& file){
-    vector<string> dbOutput;
-    string line;
-
-    if (file.is_open()){
-        file.seekg (0, ios::end);       //file readpointer to end.
-        int end = file.tellg();         //keep end placement/index.
-        file.seekg(0);                  //file readpointer back to start.
-        while (file.tellg() != end){    //while readpointer not at the end.
-            getline (file,line);
-            dbOutput.push_back(line);
-        }
-    } else cout << "Unable to open file\n";
-
-    sort(dbOutput.begin(), dbOutput.end());
-
-    return dbOutput;
-}
-

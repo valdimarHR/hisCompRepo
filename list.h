@@ -16,6 +16,7 @@ public:
     List();
     List(istream& fin);
     void InsertPersonInfo(ostream& outs);
+    void Print();
 private:
     int stringToInt(string str) const;
     vector <people> listOfPeople;
