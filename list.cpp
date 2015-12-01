@@ -280,7 +280,7 @@ int getSearchAttribute()
          << "1. Name" << endl
          << "2. Gender" << endl
          << "3. Year of birth" << endl
-         << "4. Year of death" << endl
+         << "4. Year of death (write -1 for alive)" << endl
          << "Enter your choice: ";
     cin >> n;
     while (cin.fail() || n < 1 || n > 4) {
@@ -289,9 +289,6 @@ int getSearchAttribute()
             cin.ignore(256,'\n');
             cin >> n;
     }
-
-
-
     return n;
 }
 
@@ -363,9 +360,38 @@ void List::searchPerson()
     }
 }
 
-void List::eraseListOfVector()
+bool List::eraseListOfVector()
 {
-    listOfPeople.clear();
+    string warning;
+    bool didDelete = false;
+    system("cls");
+    cout << "This will erase everything in the database permanently!!" << endl;
+    cout    << "Type the following to confirm \"continue\" (anything else to cancel)" << endl;
+        cin >> warning;
+
+        if(warning != "continue")
+        {
+            cout << "Good!";
+            sleep(1);
+            system("cls");
+            return didDelete;
+        }
+        else
+        {
+            system("cls");
+            listOfPeople.clear();
+            didDelete = true;
+            cout << "Deleting";
+            sleep(1);
+            system("cls");
+            cout << "Deleting.";
+            sleep(1);
+            system("cls");
+            cout << "Deleting..";
+            sleep(1);
+            system("cls");
+            return didDelete;
+        }
 }
 
 void List::getInsertedInfo(string& name, string& gender, int& born, int& death) const

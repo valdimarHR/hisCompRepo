@@ -139,34 +139,11 @@ void printTree()
 //------------------------------ choice 4 -------------------------------
 void eraseEverything(List& list)
 {
-    string warning;
-    system("cls");
-    cout << "This will erase everything in the database permanently!!" << endl;
-    cout    << "Type the following to confirm \"continue\" (anything else to cancel)" << endl;
-        cin >> warning;
 
-        if(warning != "continue")
+    if (list.eraseListOfVector())
         {
-            cout << "Good!";
-            sleep(1);
-            system("cls");
-            return;
-        }
-        else
-        {
-            system("cls");
-            list.eraseListOfVector();
             ofstream fout("database.csv");
             fout.close();
-
-            cout << "Deleting";
-            sleep(1);
-            system("cls");
-            cout << "Deleting.";
-            sleep(1);
-            system("cls");
-            cout << "Deleting..";
-            sleep(1);
-            system("cls");
         }
-};
+
+}
