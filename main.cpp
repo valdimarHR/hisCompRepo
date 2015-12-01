@@ -142,7 +142,7 @@ void eraseEverything(List& list)
     string warning;
     system("cls");
     cout << "This will erase everything in the database permanently!!" << endl;
-    cout    << "Type the following to confirm \"continue\" everything else to not" << endl;
+    cout    << "Type the following to confirm \"continue\" (anything else to cancel)" << endl;
         cin >> warning;
 
         if(warning != "continue")
