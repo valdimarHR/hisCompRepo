@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <unistd.h>
 #include <typeinfo>
+#include <stdio.h>
 
 using namespace std;
 
@@ -18,20 +19,19 @@ public:
     List();
     List(istream& fin);
     void InsertPersonInfo(ostream& outs);
-    void Print();
+    void Print() const;
     void searchPerson();
     void eraseListOfVector();
 private:
-    int stringToInt(const string& str) const;
     vector<people> listOfPeople;
-    static bool sortName(people a, people b);
-    static bool sortGender(people a, people b);
-    static bool sortBirth(people a, people b);
-    static bool sortDeath(people a, people b);
-    bool checkIfpersonOnList(const people& person);
-    void getInsertedInfo(string& name, string& gender, int& born, int& death);
-    void printVector(const vector<people> list);
-    void printerMenu(int& orderBy, bool& ascending);
+    static bool sortName(const people& a, const people& b);
+    static bool sortGender(const people& a, const people& b);
+    static bool sortBirth(const people& a, const people& b);
+    static bool sortDeath(const people& a, const people& b);
+    bool checkIfpersonOnList(const people& person) const;
+    void getInsertedInfo(string& name, string& gender, int& born, int& death)const;
+    void printVector(const vector<people>& list)const;
+    void printerMenu(int& orderBy, bool& ascending)const;
 };
 
 #endif // LIST_H

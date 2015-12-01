@@ -1,5 +1,4 @@
 #include "list.h"
-#include <stdio.h>
 
 using namespace std;
 
@@ -33,7 +32,7 @@ List::List(istream& fin)
     }
 }
 
-void List::Print()
+void List::Print() const
 {
     int orderBy;
     bool ascending;
@@ -66,7 +65,7 @@ void List::Print()
     printVector(sortedList);
 }
 
-void List::printerMenu(int& orderBy, bool& ascending){
+void List::printerMenu(int& orderBy, bool& ascending) const{
     cout << "* PRINTING *" << endl
          << "Ordered  by:" << endl
          << "\t1: Name" << endl
@@ -111,7 +110,7 @@ void List::printerMenu(int& orderBy, bool& ascending){
 
 }
 
-void List::printVector(const vector<people> list)
+void List::printVector(const vector<people>& list) const
 {
     system("cls");
     cout << "+------------------------------------------------------+" << endl;
@@ -125,22 +124,22 @@ void List::printVector(const vector<people> list)
     system("cls");
 }
 
-bool List::sortName(people a, people b)
+bool List::sortName(const people &a, const people &b)
 {
     return (a.getName() < b.getName());
 }
 
-bool List::sortGender(people a, people b)
+bool List::sortGender(const people& a, const people& b)
 {
     return (a.getGender() < b.getGender());
 }
 
-bool List::sortBirth(people a, people b)
+bool List::sortBirth(const people& a, const people& b)
 {
     return (a.getBirth() < b.getBirth());
 }
 
-bool List::sortDeath(people a, people b)
+bool List::sortDeath(const people& a, const people& b)
 {
     if(b.getDeath() == -1 && a.getDeath() != -1)
         return true;
@@ -176,7 +175,7 @@ void List::InsertPersonInfo(ostream& outs)
     system("cls");
 }
 
-bool List::checkIfpersonOnList(const people &person)
+bool List::checkIfpersonOnList(const people &person) const
 {
     bool isOnList = false;
     int size = listOfPeople.size();
@@ -369,7 +368,7 @@ void List::eraseListOfVector()
     listOfPeople.clear();
 }
 
-void List::getInsertedInfo(string& name, string& gender, int& born, int& death)
+void List::getInsertedInfo(string& name, string& gender, int& born, int& death) const
 {
     system("cls");
     cout << "* INSERTING PERSON *" << endl;
