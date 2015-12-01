@@ -6,6 +6,7 @@
 #include "people.h"
 #include <vector>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -16,14 +17,10 @@ public:
     List(istream& fin);
     void InsertPersonInfo(ostream& outs);
     void Print();
-    void searchPerson(istream& fin);
-    virtual string getName(istream& fin);
-    virtual string getGender(istream& fin);
-    virtual int getBirthYear(istream& fin);
-    virtual int getDeathYear(istream& fin);
+    void searchPerson(vector<people>& listOfPeople);
 private:
     int stringToInt(const string& str) const;
-    vector <people> listOfPeople;
+    vector<people> listOfPeople;
     bool checkIfpersonOnList(people person);
 
 };

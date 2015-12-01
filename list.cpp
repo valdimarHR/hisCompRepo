@@ -1,5 +1,7 @@
 #include "list.h"
 #include <iostream>
+#include <algorithm>
+#include <typeinfo>
 
 using namespace std;
 
@@ -123,75 +125,76 @@ bool List::checkIfpersonOnList(people person)
     return isOnList;
 }
 
-string getName(istream& fin)
+void printSearchResult(vector<people>& foundPeople)
 {
-    string name, line;
-
-    cout << "Please enter a name: ";
-    cin >> name;
-
-    while(getline(fin, line)) {
-        if (line.find(name) != string::npos)
-            cout << line << endl;
+    if (foundPeople.size() == 0)
+        cout << "Search result not found!";
+    else {
+        for (int i = 0; i < foundPeople.size(); i++) {
+            foundPeople[i].printPerson();
+        }
     }
-
-    return name;
 }
 
-string getGender(istream& fin)
+vector<people> findByName(vector<people>& listOfPeople, string name)
 {
-    string gender, line;
+    auto it = (find_if(listOfPeople.begin(), listOfPeople.end(), [&name](const people& per){return per.getName() == name;}));
 
-    cout << "Please enter a gender (male or female): ";
-    cin >> gender;
+    vector<people> found;
 
-    while(getline(fin, line)) {
-        if (line.find(gender) != string::npos)
-            cout << line << endl;
+    while(it != listOfPeople.end()) {
+        cout << typeid(*it).name() << endl;
+        found.push_back(*it);
     }
 
-    return gender;
+    return found;
 }
 
-int getBirthYear(istream& fin)
+vector<people> findByGender(vector<people>& listOfPeople, string gender)
 {
-    string yearOfBirth, line;
+    auto it = (find_if(listOfPeople.begin(), listOfPeople.end(), [&gender](const people& per){return per.getGender() == gender;}));
 
-    cout << "Please enter year of birth";
-    cin >> yearOfBirth;
+    vector<people> found;
 
-    while(getline(fin, line)) {
-        if (line.find(yearOfBirth) != string::npos)
-            cout << line << endl;
+    while(it != listOfPeople.end()) {
+        cout << typeid(*it).name() << endl;
+        found.push_back(*it);
     }
 
-    int birthYear = std::stoi(yearOfBirth);
-
-    return birthYear;
+    return found;
 }
 
-int getDeathYear(istream& fin)
+vector<people> findByBirth(vector<people>& listOfPeople, int birthYear)
 {
-    string yearOfDeath, line;
+    auto it = (find_if(listOfPeople.begin(), listOfPeople.end(), [&birthYear](const people& per){return per.getBirth() == birthYear;}));
 
-    cout << "Please enter year of death";
-    cin >> yearOfDeath;
+    vector<people> found;
 
-    while(getline(fin, line)) {
-        if (line.find(yearOfDeath) != string::npos)
-            cout << line << endl;
+    while(it != listOfPeople.end()) {
+        cout << typeid(*it).name() << endl;
+        found.push_back(*it);
     }
 
-    int deathYear = std::stoi(yearOfDeath);
-
-    return deathYear;
+    return found;
 }
 
-
-void List::searchPerson(istream& fin)
+vector<people> findByDeath(vector<people>& listOfPeople, int deathYear)
 {
-    int n, yearOfBirth, yearOfDeath;
-    string name, gender;
+    auto it = (find_if(listOfPeople.begin(), listOfPeople.end(), [&deathYear](const people& per){return per.getDeath() == deathYear;}));
+
+    vector<people> found;
+
+    while(it != listOfPeople.end()) {
+        cout << typeid(*it).name() << endl;
+        found.push_back(*it);
+    }
+
+    return found;
+}
+
+int getSearchAttribute()
+{
+    int n;
 
     cout << "Would you like to search by" << endl
          << "1. Name" << endl
@@ -201,16 +204,47 @@ void List::searchPerson(istream& fin)
          << "Enter your choice: ";
     cin >> n;
 
-    if (n == 1) {
-        getName(fin);
-    }
-    if (n == 2) {
-        getGender(fin);
-    }
-    if (n == 3) {
-        getBirthYear(fin);
-    }
-    if (n == 4) {
-        getDeathYear(fin);
-    }
+    return n;
 }
+
+string getSearchValue()
+{
+    string value;
+
+    cout << "What would you like to search for?" << endl;
+    cin >> value;
+
+    return value;
+}
+
+void List::searchPerson(vector<people>& listOfPeople)
+{
+
+    int n = getSearchAttribute();
+
+    string searchValue = getSearchValue();
+    int searchV = stoi(getSearchValue());
+
+    vector<people> foundPeople;
+
+    switch(n) {
+        case 1: {
+            foundPeople = findByName(listOfPeople, searchValue);
+            break;
+        }
+        case 2: {
+            foundPeople = findByGender(listOfPeople, searchValue);
+        }
+        case 3: {
+            foundPeople = findByBirth(listOfPeople, searchV);
+            break;
+        }
+        case 4: {
+            foundPeople = findByDeath(listOfPeople, searchV);
+            break;
+        }
+    }
+    printSearchResult(foundPeople);
+}
+
+
