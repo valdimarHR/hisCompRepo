@@ -58,7 +58,8 @@ int main()
         }
     }while(choice != 5);
 
-    cout << "Thank you for your visit, hope to see you again soon." << endl;
+    system("cls");
+    cout << "Thank you for your visit, hope to see you again soon." << endl << endl;
     return 0;
 }
 
