@@ -1,7 +1,4 @@
 #include "list.h"
-#include <iostream>
-#include <algorithm>
-#include <typeinfo>
 
 using namespace std;
 

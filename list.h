@@ -8,6 +8,7 @@
 #include <string>
 #include <algorithm>
 #include <unistd.h>
+#include <typeinfo>
 
 using namespace std;
 
