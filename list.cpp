@@ -50,7 +50,7 @@ void List::Print()
     cout.flush();
     cin >> orderBy;
     system("cls");
-    cout << "Do you want this list in desenging order?" << endl
+    cout << "Do you want this list in descending order?" << endl
          << "\t0: No" << endl
          << "\t1: Yes" << endl
          << "Enter your choice: ";
@@ -218,29 +218,49 @@ void List::searchPerson(istream& fin)
 {
     int n;
     string name, gender;
+    bool wrong;
+    do{
+        wrong = false;
 
-    cout << "Would you like to search by" << endl
-         << "1. Name" << endl
-         << "2. Gender" << endl
-         << "3. Year of birth" << endl
-         << "4. Year of death" << endl
-         << "Enter your choice: ";
-    cin >> n;
+        cout << "Would you like to search by" << endl
+            << "\t1. Name" << endl
+            << "\t2. Gender" << endl
+            << "\t3. Year of birth" << endl
+            << "\t4. Year of death" << endl
+            << "Enter your choice: ";
+        cin >> n;
 
-    if (n == 1) {
-        getName(fin);
-    }
-    if (n == 2) {
-        getGender(fin);
-    }
-    if (n == 3) {
-        getBirthYear(fin);
-    }
-    if (n == 4) {
-        getDeathYear(fin);
-    }
+        switch(n)
+        {
+            case 1:
+            {
+                getName(fin);
+                break;
+            }
+            case 2:
+            {
+                getGender(fin);
+                break;
+            }
+            case 3:
+            {
+                getBirthYear(fin);
+                break;
+            }
+            case 4:
+            {
+                getDeathYear(fin);
+                break;
+            }
+            default:
+            {
+                cout << "Invalid choice!" << endl;
+                wrong = true;
+
+            }
+        }
+    }while(wrong);
 }
-
 
 void List::eraseListOfVector()
 {

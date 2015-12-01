@@ -16,10 +16,8 @@ void printTree();
 void printError();
 void eraseEverything(List& list);
 
-int main(int argc, char *argv[])
+int main()
 {
-    QCoreApplication a(argc, argv);
-
     ifstream fin("database.csv");
     if (fin.fail( ))
         {
@@ -59,7 +57,7 @@ int main(int argc, char *argv[])
     }while(choice != 5);
 
     cout << "Thank you for your visit, hope to see you again soon." << endl;
-    return a.exec();
+    return 0;
 }
 
 int theMenuChoice()
@@ -136,7 +134,7 @@ void eraseEverything(List& list)
 {
     string warning;
     system("cls");
-    cout << "This will erase everything in the database permanantly!!" << endl;
+    cout << "This will erase everything in the database permanently!!" << endl;
     cout    << "Type the following to confirm \"continue\"" << endl;
         cin >> warning;
 
