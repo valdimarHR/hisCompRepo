@@ -9,6 +9,8 @@
 
 using namespace std;
 
+const int invalidChoice = 0;
+
 int theMenuChoice();
 void printTree();
 void printError();
@@ -74,7 +76,7 @@ int theMenuChoice()
     cout.flush();
     cin >> choicestr;
     if (choicestr.size() != 1)
-        choice = 6;
+        choice = invalidChoice;
     else
     choice = static_cast<int>(choicestr[0]);
     choice -= '0';
