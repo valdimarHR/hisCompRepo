@@ -11,6 +11,8 @@
 
 using namespace std;
 
+const int invalidChoice = 0;
+
 int theMenuChoice();
 void printTree();
 void printError();
@@ -46,7 +48,7 @@ int main()
          case 3 :
              theList.Print();
                 break;
-        case 4 :
+         case 4 :
             eraseEverything(theList);
                 break;
          case 5 :
@@ -56,8 +58,8 @@ int main()
         }
     }while(choice != 5);
 
-    cout << "Thank you for your visit, hope to see you again soon." << endl;
-
+    system("cls");
+    cout << "Thank you for your visit, hope to see you again soon." << endl << endl;
     return 0;
 }
 
@@ -81,7 +83,7 @@ int theMenuChoice()
     cout.flush();
     cin >> choicestr;
     if (choicestr.size() != 1)
-        choice = 6;
+        choice = invalidChoice;
     else
     choice = static_cast<int>(choicestr[0]);
     choice -= '0';
@@ -136,7 +138,7 @@ void eraseEverything(List& list)
     string warning;
     system("cls");
     cout << "This will erase everything in the database permanently!!" << endl;
-    cout    << "Type the following to confirm \"continue\"" << endl;
+    cout    << "Type the following to confirm \"continue\" everything else to not" << endl;
         cin >> warning;
 
         if(warning != "continue")

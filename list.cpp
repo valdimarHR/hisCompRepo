@@ -1,5 +1,4 @@
 #include "list.h"
-#include <iostream>
 
 using namespace std;
 
@@ -133,8 +132,10 @@ bool List::sortDeath(people a, people b)
 
 void List::InsertPersonInfo(ostream& outs)
 {
+    system("cls");
     string Name, gender;
     int born, death;
+    cout << "* INSERTING PERSON *" << endl;
     cout << "Name: ";
     cin.ignore();
     getline(cin, Name);
@@ -154,11 +155,16 @@ void List::InsertPersonInfo(ostream& outs)
     {
         cout << endl << "This person was already on the list and was therefore not added again."
              << endl << endl;
+        sleep(3);
+        system("cls");
         return;
     }
 
     outs << Name << ", " << gender << ", " << born << ", " << death << endl;
     listOfPeople.push_back(per);
+    cout << endl << "Person was added to the list.";
+    sleep(2);
+    system("cls");
 }
 
 bool List::checkIfpersonOnList(const people &person)
