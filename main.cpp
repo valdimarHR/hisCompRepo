@@ -6,6 +6,8 @@
 #include "people.h"
 #include <vector>
 #include <algorithm>
+#include <windows.h>
+#include <unistd.h>
 
 using namespace std;
 
@@ -14,11 +16,10 @@ const int invalidChoice = 0;
 int theMenuChoice();
 void printTree();
 void printError();
+void eraseEverything(List& list);
 
-int main(int argc, char *argv[])
+int main()
 {
-    QCoreApplication a(argc, argv);
-
     ifstream fin("database.csv");
     if (fin.fail( ))
         {
@@ -46,7 +47,9 @@ int main(int argc, char *argv[])
                 break;
          case 3 :
              theList.Print();
-         case 4 :
+                break;
+        case 4 :
+            eraseEverything(theList);
                 break;
          case 5 :
                 break;
@@ -56,7 +59,7 @@ int main(int argc, char *argv[])
     }while(choice != 5);
 
     cout << "Thank you for your visit, hope to see you again soon." << endl;
-    return a.exec();
+    return 0;
 }
 
 int theMenuChoice()
@@ -64,15 +67,18 @@ int theMenuChoice()
     string choicestr;
     int choice;
 
-    cout << "-----------------------" << endl;
-    cout << "---Main menu---" << endl;
-    cout << endl;
-    cout << "1: Insert" << endl
-         << "2: Search" << endl
-         << "3: Print" << endl
-         << "4: Delete" << endl
-         << "5: Exit" << endl
+    cout << "//-------------------------\\\\" << endl
+         << "||        MAIN MENU        ||" << endl
+         << "||                         ||" << endl
+         << "||     1: Insert           ||" << endl
+         << "||     2: Search           ||" << endl
+         << "||     3: Print            ||" << endl
+         << "||     4: Erase Database   ||" << endl
+         << "||     5: Exit             ||" << endl
+         << "||                         ||" << endl
+         << "\\\\-------------------------//" << endl
          << "Enter your choice: ";
+
     cout.flush();
     cin >> choicestr;
     if (choicestr.size() != 1)
@@ -122,4 +128,40 @@ void printTree()
     }
 
     cout << endl;
+}
+
+
+//------------------------------ choice 4 -------------------------------
+void eraseEverything(List& list)
+{
+    string warning;
+    system("cls");
+    cout << "This will erase everything in the database permanently!!" << endl;
+    cout    << "Type the following to confirm \"continue\"" << endl;
+        cin >> warning;
+
+        if(warning != "continue")
+        {
+            cout << "Good!";
+            sleep(1);
+            system("cls");
+            return;
+        }
+        else
+        {
+            system("cls");
+            list.eraseListOfVector();
+            ofstream fout("database.csv");
+            fout.close();
+
+            cout << "Deleting";
+            sleep(1);
+            system("cls");
+            cout << "Deleting.";
+            sleep(1);
+            system("cls");
+            cout << "Deleting..";
+            sleep(1);
+            system("cls");
+        }
 }
