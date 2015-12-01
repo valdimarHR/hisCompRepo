@@ -48,7 +48,7 @@ int main()
          case 3 :
              theList.Print();
                 break;
-        case 4 :
+         case 4 :
             eraseEverything(theList);
                 break;
          case 5 :
