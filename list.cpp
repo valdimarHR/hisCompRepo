@@ -183,14 +183,24 @@ void printSearchResult(vector<people>& foundPeople)
 vector<people> findByName(vector<people>& listOfPeople, string name)
 {
     auto it = find_if(listOfPeople.begin(), listOfPeople.end(),
-        [&name](const people& per){return per.getName().find(name) != string::npos;});
+        [&name](const people& per){
+            string objName = per.getName();
+            std::transform(objName.begin(), objName.end(), objName.begin(), ::tolower);
+            std::transform(name.begin(), name.end(), name.begin(), ::tolower);
+            return objName.find(name) != string::npos;
+        });
 
     vector<people> found;
 
     while(it != listOfPeople.end()) {
         found.push_back(*it);
         it = find_if(++it, listOfPeople.end(),
-                [&name](const people& per){return per.getName().find(name) != string::npos;});
+            [&name](const people& per) {
+                string objName = per.getName();
+                std::transform(objName.begin(), objName.end(), objName.begin(), ::tolower);
+                std::transform(name.begin(), name.end(), name.begin(), ::tolower);
+                return objName.find(name) != string::npos;
+            });
     }
 
     return found;
@@ -199,14 +209,24 @@ vector<people> findByName(vector<people>& listOfPeople, string name)
 vector<people> findByGender(vector<people>& listOfPeople, string gender)
 {
     auto it = find_if(listOfPeople.begin(), listOfPeople.end(),
-        [&gender](const people& per){return per.getGender() == gender;});
+        [&gender](const people& per) {
+            string objGender = per.getGender();
+            std::transform(objGender.begin(), objGender.end(), objGender.begin(), ::tolower);
+            std::transform(gender.begin(), gender.end(), gender.begin(), ::tolower);
+            return objGender == gender;
+        });
 
     vector<people> found;
 
     while(it != listOfPeople.end()) {
         found.push_back(*it);
         it = find_if(++it, listOfPeople.end(),
-            [&gender](const people& per){return per.getGender() == gender;});
+            [&gender](const people& per) {
+                string objGender = per.getGender();
+                std::transform(objGender.begin(), objGender.end(), objGender.begin(), ::tolower);
+                std::transform(gender.begin(), gender.end(), gender.begin(), ::tolower);
+                return objGender == gender;
+            });
     }
 
     return found;

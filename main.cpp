@@ -103,7 +103,7 @@ void printError()
 
 void printTree()
 {
-    cout << "----Merry christmas!!----" << endl;
+    cout << "----Merry Christmas!!----" << endl;
     cout << endl;
 
     int star = 1, size = 10;
