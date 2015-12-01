@@ -291,15 +291,20 @@ int getSearchAttribute()
          << "3. Year of birth" << endl
          << "4. Year of death" << endl
          << "Enter your choice: ";
-    do{
-        cin >> n;
-        if (n < 1 || n > 4)
+    cin >> n;
+    while (cin.fail() || n < 1 || n > 4) {
             cout << "Invalid choice! Choose again: ";
-    } while(n < 1 || n > 4);
+            cin.clear();
+            cin.ignore(256,'\n');
+            cin >> n;
+    }
+
+
+
     return n;
 }
 
-string getSearchValue()
+string getStringSearchValue()
 {
     string value;
 
@@ -309,30 +314,47 @@ string getSearchValue()
     return value;
 }
 
+int getIntSearchValue()
+{
+    int value;
+
+    cout << "What would you like to search for?" << endl;
+    cin >> value;
+
+    while(cin.fail()) {
+        cout << "A year can only be a numer! Try again: ";
+        cin.clear();
+        cin.ignore(256, '\n');
+        cin >> value;
+    }
+
+    return value;
+}
+
 void List::searchPerson()
 {
-
     int n = getSearchAttribute();
 
-    string searchValue = getSearchValue();
-
     vector<people> foundPeople;
-
     switch(n) {
         case 1: {
+            string searchValue = getStringSearchValue();
             foundPeople = findByName(listOfPeople, searchValue);
             break;
         }
         case 2: {
+            string searchValue = getStringSearchValue();
             foundPeople = findByGender(listOfPeople, searchValue);
             break;
         }
         case 3: {
-            foundPeople = findByBirth(listOfPeople, stoi(searchValue));
+            int searchValue = getIntSearchValue();
+            foundPeople = findByBirth(listOfPeople, searchValue);
             break;
         }
         case 4: {
-            foundPeople = findByDeath(listOfPeople, stoi(searchValue));
+            int searchValue = getIntSearchValue();
+            foundPeople = findByDeath(listOfPeople, searchValue);
             break;
         }
         default: {
