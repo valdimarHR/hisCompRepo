@@ -240,3 +240,9 @@ void List::searchPerson(istream& fin)
         getDeathYear(fin);
     }
 }
+
+
+void List::eraseListOfPeople()
+{
+    listOfPeople.clear();
+}

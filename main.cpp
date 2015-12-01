@@ -6,12 +6,15 @@
 #include "people.h"
 #include <vector>
 #include <algorithm>
+#include <windows.h>
+#include <unistd.h>
 
 using namespace std;
 
 int theMenuChoice();
 void printTree();
 void printError();
+void eraseEverything(List& list);
 
 int main(int argc, char *argv[])
 {
@@ -44,7 +47,9 @@ int main(int argc, char *argv[])
                 break;
          case 3 :
              theList.Print();
-         case 4 :
+                break;
+        case 4 :
+            eraseEverything(theList);
                 break;
          case 5 :
                 break;
@@ -68,7 +73,7 @@ int theMenuChoice()
     cout << "1: Insert" << endl
          << "2: Search" << endl
          << "3: Print" << endl
-         << "4: Delete" << endl
+         << "4: erase database" << endl
          << "5: Exit" << endl
          << "Enter your choice: ";
     cout.flush();
@@ -120,4 +125,40 @@ void printTree()
     }
 
     cout << endl;
+}
+
+
+//------------------------------ choice 4 -------------------------------
+void eraseEverything(List& list)
+{
+    string warning;
+    system("cls");
+    cout << "This will erase everything in the database permanantly!!" << endl;
+    cout    << "Type the following to continue \"confirm\"" << endl;
+        cin >> warning;
+
+        if(warning != "confirm" && warning != "Confirm")
+        {
+            cout << "Good!";
+            sleep(1);
+            system("cls");
+            return;
+        }
+        else
+        {
+            system("cls");
+            list.eraseListOfPeople();
+            ofstream fout("database.csv");
+            fout.close();
+
+            cout << "Deleting";
+            sleep(1);
+            system("cls");
+            cout << "Deleting.";
+            sleep(1);
+            system("cls");
+            cout << "Deleting..";
+            sleep(1);
+            system("cls");
+        }
 }
