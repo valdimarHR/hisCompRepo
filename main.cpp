@@ -98,7 +98,7 @@ void printError()
 {
     cout << endl << "ERROR" << endl
          << "Please make a file with the name database.csv and put it in the right folder"
-         << endl << "then open the program again." << endl << endl;
+         << endl << "then run the program again." << endl << endl;
 }
 
 void printTree()
