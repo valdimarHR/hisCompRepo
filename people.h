@@ -5,7 +5,7 @@
 #include <vector>
 #include <iostream>
 
-//using namespace std;
+using namespace std;
 
 const int notDead = -1;
 
