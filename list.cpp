@@ -278,7 +278,7 @@ int getSearchAttribute()
 
     cout << "Would you like to search by" << endl
          << "1. Name" << endl
-         << "2. Gender" << endl
+         << "2. Gender (male or female)" << endl
          << "3. Year of birth" << endl
          << "4. Year of death (write -1 for alive)" << endl
          << "Enter your choice: ";
@@ -292,11 +292,11 @@ int getSearchAttribute()
     return n;
 }
 
-string getStringSearchValue()
+string getStringSearchValue(string question)
 {
     string value;
 
-    cout << "What would you like to search for?" << endl;
+    cout << question << endl;
     cin >> value;
 
     return value;
@@ -326,12 +326,12 @@ void List::searchPerson()
     vector<people> foundPeople;
     switch(n) {
         case 1: {
-            string searchValue = getStringSearchValue();
+            string searchValue = getStringSearchValue("What would you like to search for?");
             foundPeople = findByName(listOfPeople, searchValue);
             break;
         }
         case 2: {
-            string searchValue = getStringSearchValue();
+            string searchValue = getStringSearchValue("What would you like to search for? (male or female)");
             foundPeople = findByGender(listOfPeople, searchValue);
             break;
         }
