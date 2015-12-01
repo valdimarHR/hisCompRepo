@@ -39,6 +39,34 @@ void List::Print()
     bool ascending;
     system("cls");
 
+    printerMenu(orderBy, ascending);
+
+    vector<people> sortedList = listOfPeople;
+
+    if (orderBy < 5) sort(sortedList.begin(), sortedList.end(), sortName);
+    switch(orderBy)
+       {
+       case 1 :
+          break;
+       case 2 :
+          sort(sortedList.begin(), sortedList.end(), sortGender);
+          break;
+       case 3 :
+          sort(sortedList.begin(), sortedList.end(), sortBirth);
+          break;
+       case 4 :
+          sort(sortedList.begin(), sortedList.end(), sortDeath);
+          break;
+        case 5 :
+           break;
+       default :
+          cout << "Invalid input" << endl;
+       }
+    if(!ascending) reverse(sortedList.begin(), sortedList.end());
+    printVector(sortedList);
+}
+
+void List::printerMenu(int& orderBy, bool& ascending){
     cout << "* PRINTING *" << endl
          << "Ordered  by:" << endl
          << "\t1: Name" << endl
@@ -81,29 +109,6 @@ void List::Print()
             cin >> ascending;
         }
 
-    vector<people> sortedList = listOfPeople;
-
-    if (orderBy < 5) sort(sortedList.begin(), sortedList.end(), sortName);
-    switch(orderBy)
-       {
-       case 1 :
-          break;
-       case 2 :
-          sort(sortedList.begin(), sortedList.end(), sortGender);
-          break;
-       case 3 :
-          sort(sortedList.begin(), sortedList.end(), sortBirth);
-          break;
-       case 4 :
-          sort(sortedList.begin(), sortedList.end(), sortDeath);
-          break;
-        case 5 :
-           break;
-       default :
-          cout << "Invalid input" << endl;
-       }
-    if(!ascending) reverse(sortedList.begin(), sortedList.end());
-    printVector(sortedList);
 }
 
 void List::printVector(const vector<people> list)

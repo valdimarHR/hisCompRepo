@@ -31,6 +31,7 @@ private:
     bool checkIfpersonOnList(const people& person);
     void getInsertedInfo(string& name, string& gender, int& born, int& death);
     void printVector(const vector<people> list);
+    void printerMenu(int& orderBy, bool& ascending);
 };
 
 #endif // LIST_H
