@@ -18,12 +18,11 @@ public:
     List(istream& fin);
     void InsertPersonInfo(ostream& outs);
     void Print();
-    void searchPerson(vector<people>& listOfPeople);
+    void searchPerson();
     void eraseListOfVector();
 private:
     int stringToInt(const string& str) const;
     std::vector<people> listOfPeople;
-    void searchPerson(istream& fin);
     static bool sortName(people a, people b);
     static bool sortGender(people a, people b);
     static bool sortBirth(people a, people b);

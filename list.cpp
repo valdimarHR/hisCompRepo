@@ -175,9 +175,9 @@ bool List::checkIfpersonOnList(const people &person)
 void printSearchResult(vector<people>& foundPeople)
 {
     if (foundPeople.size() == 0)
-        cout << "Search result not found!";
+        cout << "No search results found!" << endl;
     else {
-        for (int i = 0; i < foundPeople.size(); i++) {
+        for (unsigned long i = 0; i < foundPeople.size(); i++) {
             foundPeople[i].printPerson();
         }
     }
@@ -185,13 +185,15 @@ void printSearchResult(vector<people>& foundPeople)
 
 vector<people> findByName(vector<people>& listOfPeople, string name)
 {
-    auto it = (find_if(listOfPeople.begin(), listOfPeople.end(), [&name](const people& per){return per.getName() == name;}));
+    auto it = find_if(listOfPeople.begin(), listOfPeople.end(),
+        [&name](const people& per){return per.getName().find(name) != string::npos;});
 
     vector<people> found;
 
     while(it != listOfPeople.end()) {
-        cout << typeid(*it).name() << endl;
         found.push_back(*it);
+        it = find_if(++it, listOfPeople.end(),
+                [&name](const people& per){return per.getName().find(name) != string::npos;});
     }
 
     return found;
@@ -199,13 +201,15 @@ vector<people> findByName(vector<people>& listOfPeople, string name)
 
 vector<people> findByGender(vector<people>& listOfPeople, string gender)
 {
-    auto it = (find_if(listOfPeople.begin(), listOfPeople.end(), [&gender](const people& per){return per.getGender() == gender;}));
+    auto it = find_if(listOfPeople.begin(), listOfPeople.end(),
+        [&gender](const people& per){return per.getGender() == gender;});
 
     vector<people> found;
 
     while(it != listOfPeople.end()) {
-        cout << typeid(*it).name() << endl;
         found.push_back(*it);
+        it = find_if(++it, listOfPeople.end(),
+            [&gender](const people& per){return per.getGender() == gender;});
     }
 
     return found;
@@ -213,13 +217,15 @@ vector<people> findByGender(vector<people>& listOfPeople, string gender)
 
 vector<people> findByBirth(vector<people>& listOfPeople, int birthYear)
 {
-    auto it = (find_if(listOfPeople.begin(), listOfPeople.end(), [&birthYear](const people& per){return per.getBirth() == birthYear;}));
+    auto it = find_if(listOfPeople.begin(), listOfPeople.end(),
+        [&birthYear](const people& per){return per.getBirth() == birthYear;});
 
     vector<people> found;
 
     while(it != listOfPeople.end()) {
-        cout << typeid(*it).name() << endl;
         found.push_back(*it);
+        it = find_if(++it, listOfPeople.end(),
+            [&birthYear](const people& per){return per.getBirth() == birthYear;});
     }
 
     return found;
@@ -227,13 +233,15 @@ vector<people> findByBirth(vector<people>& listOfPeople, int birthYear)
 
 vector<people> findByDeath(vector<people>& listOfPeople, int deathYear)
 {
-    auto it = (find_if(listOfPeople.begin(), listOfPeople.end(), [&deathYear](const people& per){return per.getDeath() == deathYear;}));
+    auto it = find_if(listOfPeople.begin(), listOfPeople.end(),
+        [&deathYear](const people& per){return per.getDeath() == deathYear;});
 
     vector<people> found;
 
     while(it != listOfPeople.end()) {
-        cout << typeid(*it).name() << endl;
         found.push_back(*it);
+        it = find_if(++it, listOfPeople.end(),
+            [&deathYear](const people& per){return per.getDeath() == deathYear;});
     }
 
     return found;
@@ -252,7 +260,7 @@ int getSearchAttribute()
     do{
         cin >> n;
         if (n < 1 || n > 4)
-            cout << "Invalid choice! Choose again.";
+            cout << "Invalid choice! Choose again." << endl;
     } while(n < 1 || n > 4);
     return n;
 }
@@ -267,7 +275,7 @@ string getSearchValue()
     return value;
 }
 
-void List::searchPerson(vector<people>& listOfPeople)
+void List::searchPerson()
 {
 
     int n = getSearchAttribute();
@@ -283,6 +291,7 @@ void List::searchPerson(vector<people>& listOfPeople)
         }
         case 2: {
             foundPeople = findByGender(listOfPeople, searchValue);
+            break;
         }
         case 3: {
             foundPeople = findByBirth(listOfPeople, stoi(searchValue));
@@ -296,6 +305,8 @@ void List::searchPerson(vector<people>& listOfPeople)
             break;
         }
     }
+
+    printSearchResult(foundPeople);
 
 }
 

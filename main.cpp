@@ -43,6 +43,7 @@ int main()
             fout.close();
          }      break;
          case 2 :
+            theList.searchPerson();
                 break;
          case 3 :
              theList.Print();
