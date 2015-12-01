@@ -191,14 +191,24 @@ bool List::checkIfpersonOnList(const people &person)
 vector<people> findByName(vector<people>& listOfPeople, string name)
 {
     auto it = find_if(listOfPeople.begin(), listOfPeople.end(),
-        [&name](const people& per){return per.getName().find(name) != string::npos;});
+        [&name](const people& per){
+            string objName = per.getName();
+            std::transform(objName.begin(), objName.end(), objName.begin(), ::tolower);
+            std::transform(name.begin(), name.end(), name.begin(), ::tolower);
+            return objName.find(name) != string::npos;
+        });
 
     vector<people> found;
 
     while(it != listOfPeople.end()) {
         found.push_back(*it);
         it = find_if(++it, listOfPeople.end(),
-                [&name](const people& per){return per.getName().find(name) != string::npos;});
+            [&name](const people& per) {
+                string objName = per.getName();
+                std::transform(objName.begin(), objName.end(), objName.begin(), ::tolower);
+                std::transform(name.begin(), name.end(), name.begin(), ::tolower);
+                return objName.find(name) != string::npos;
+            });
     }
 
     return found;
@@ -207,14 +217,24 @@ vector<people> findByName(vector<people>& listOfPeople, string name)
 vector<people> findByGender(vector<people>& listOfPeople, string gender)
 {
     auto it = find_if(listOfPeople.begin(), listOfPeople.end(),
-        [&gender](const people& per){return per.getGender() == gender;});
+        [&gender](const people& per) {
+            string objGender = per.getGender();
+            std::transform(objGender.begin(), objGender.end(), objGender.begin(), ::tolower);
+            std::transform(gender.begin(), gender.end(), gender.begin(), ::tolower);
+            return objGender == gender;
+        });
 
     vector<people> found;
 
     while(it != listOfPeople.end()) {
         found.push_back(*it);
         it = find_if(++it, listOfPeople.end(),
-            [&gender](const people& per){return per.getGender() == gender;});
+            [&gender](const people& per) {
+                string objGender = per.getGender();
+                std::transform(objGender.begin(), objGender.end(), objGender.begin(), ::tolower);
+                std::transform(gender.begin(), gender.end(), gender.begin(), ::tolower);
+                return objGender == gender;
+            });
     }
 
     return found;
@@ -263,15 +283,20 @@ int getSearchAttribute()
          << "3. Year of birth" << endl
          << "4. Year of death" << endl
          << "Enter your choice: ";
-    do{
-        cin >> n;
-        if (n < 1 || n > 4)
+    cin >> n;
+    while (cin.fail() || n < 1 || n > 4) {
             cout << "Invalid choice! Choose again: ";
-    } while(n < 1 || n > 4);
+            cin.clear();
+            cin.ignore(256,'\n');
+            cin >> n;
+    }
+
+
+
     return n;
 }
 
-string getSearchValue()
+string getStringSearchValue()
 {
     string value;
 
@@ -281,30 +306,47 @@ string getSearchValue()
     return value;
 }
 
+int getIntSearchValue()
+{
+    int value;
+
+    cout << "What would you like to search for?" << endl;
+    cin >> value;
+
+    while(cin.fail()) {
+        cout << "A year can only be a numer! Try again: ";
+        cin.clear();
+        cin.ignore(256, '\n');
+        cin >> value;
+    }
+
+    return value;
+}
+
 void List::searchPerson()
 {
-
     int n = getSearchAttribute();
 
-    string searchValue = getSearchValue();
-
     vector<people> foundPeople;
-
     switch(n) {
         case 1: {
+            string searchValue = getStringSearchValue();
             foundPeople = findByName(listOfPeople, searchValue);
             break;
         }
         case 2: {
+            string searchValue = getStringSearchValue();
             foundPeople = findByGender(listOfPeople, searchValue);
             break;
         }
         case 3: {
-            foundPeople = findByBirth(listOfPeople, stoi(searchValue));
+            int searchValue = getIntSearchValue();
+            foundPeople = findByBirth(listOfPeople, searchValue);
             break;
         }
         case 4: {
-            foundPeople = findByDeath(listOfPeople, stoi(searchValue));
+            int searchValue = getIntSearchValue();
+            foundPeople = findByDeath(listOfPeople, searchValue);
             break;
         }
         default: {
