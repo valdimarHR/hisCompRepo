@@ -1,4 +1,5 @@
 #include "list.h"
+#include <stdio.h>
 
 using namespace std;
 
@@ -104,10 +105,15 @@ void List::Print()
     if(!ascending) reverse(sortedList.begin(), sortedList.end());
     system("cls");
 
-    for(const auto person:sortedList)
+    cout << "+------------------------------------------------------+" << endl;
+    printf("|%25s|%10s|%8s|%8s|\n", "NAME", "GENDER", "BIRTH", "DEATH");
+    cout << "+------------------------------------------------------+" << endl;
+    for(const auto person:sortedList){
         person.printPerson();
-
-    cout << endl;
+    }
+    cout << "+------------------------------------------------------+" << endl;
+    system("pause");
+    system("cls");
 }
 
 bool List::sortName(people a, people b)
@@ -127,6 +133,10 @@ bool List::sortBirth(people a, people b)
 
 bool List::sortDeath(people a, people b)
 {
+    if(b.getDeath() == -1 && a.getDeath() != -1)
+        return true;
+    if(a.getDeath() == -1 && b.getDeath() != -1)
+        return false;
     return (a.getDeath() < b.getDeath());
 }
 
@@ -174,10 +184,16 @@ void printSearchResult(vector<people>& foundPeople)
     if (foundPeople.size() == 0)
         cout << "No search results found!" << endl;
     else {
+        cout << "+------------------------------------------------------+" << endl;
+        printf("|%25s|%10s|%8s|%8s|\n", "NAME", "GENDER", "BIRTH", "DEATH");
+        cout << "+------------------------------------------------------+" << endl;
         for (unsigned long i = 0; i < foundPeople.size(); i++) {
             foundPeople[i].printPerson();
         }
+        cout << "+------------------------------------------------------+" << endl;
     }
+    system("pause");
+    system("cls");
 }
 
 vector<people> findByName(vector<people>& listOfPeople, string name)
@@ -267,6 +283,7 @@ vector<people> findByDeath(vector<people>& listOfPeople, int deathYear)
 int getSearchAttribute()
 {
     int n;
+    system("cls");
 
     cout << "Would you like to search by" << endl
          << "1. Name" << endl

@@ -52,16 +52,9 @@ int people::getDeath() const
 
 void people::printPerson() const
 {
-    cout << "Name: " << name
-         << " |Gender: " << gender
-         << " |Birth: " << yearOfBirth
-         << " |Death: ";
-    if (yearOfDeath == notDead)
-    {
-        cout << "Still alive" << endl;
-    } else {
-        cout << yearOfDeath << endl;
-    }
+    string death = to_string(yearOfDeath);
+    if(yearOfDeath == -1) death = "Alive";
+    printf("|%25s|%10s|%8i|%8s|\n", name.c_str(), gender.c_str(), yearOfBirth, death.c_str());
 }
 
 bool operator == (const people& person1, const people& person2)
