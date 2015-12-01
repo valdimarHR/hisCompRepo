@@ -26,11 +26,11 @@ List::List(istream& fin)
         indexStart = indexEnd + 2;
         indexEnd = line.find("," , indexStart);
         year = line.substr(indexStart, (indexEnd-indexStart));
-        peoplePush.setBirth(stringToInt(year));
+        peoplePush.setBirth(stoi(year));
         indexStart = indexEnd + 2;
         indexEnd = line.size();
         year = line.substr(indexStart, (indexEnd-indexStart));
-        peoplePush.setDeath(stringToInt(year));
+        peoplePush.setDeath(stoi(year));
         listOfPeople.push_back(peoplePush);
     }
 }
@@ -38,55 +38,83 @@ List::List(istream& fin)
 void List::Print()
 {
     int orderBy;
-    char sorted;
+    bool desending;
+    system("cls");
 
-    cout << endl << "Printing" << endl
+    cout << "* PRINTING *" << endl
          << "Ordered  by:" << endl
          << "\t1: Name" << endl
          << "\t2: Gender" << endl
          << "\t3: Year of birth" << endl
          << "\t4: Year of death" << endl
+         << "\t5: As in file" << endl
          << "Enter your choice: ";
     cout.flush();
     cin >> orderBy;
-    cout << "\ta: Asending" << endl
-         << "\td: Desending" << endl
+    system("cls");
+    cout << "Do you want this list in descending order?" << endl
+         << "\t0: No" << endl
+         << "\t1: Yes" << endl
          << "Enter your choice: ";
     cout.flush();
-    cin >> sorted;
-    cout << endl;
+    cin >> desending;
 
-    for(const auto person:listOfPeople)
-        cout << "Name: " << person.getName()
-             << " |Gender: " << person.getGender() << endl;
+    vector<people> sortedList = listOfPeople;
+
+    if (orderBy < 5) sort(sortedList.begin(), sortedList.end(), sortName);
+    switch(orderBy)
+       {
+       case 1 :
+          break;
+       case 2 :
+          sort(sortedList.begin(), sortedList.end(), sortGender);
+          break;
+       case 3 :
+          sort(sortedList.begin(), sortedList.end(), sortBirth);
+          break;
+       case 4 :
+          sort(sortedList.begin(), sortedList.end(), sortDeath);
+          break;
+        case 5 :
+           break;
+       default :
+          cout << "Invalid input" << endl;
+       }
+    if(desending) reverse(sortedList.begin(), sortedList.end());
+    system("cls");
+
+    for(const auto person:sortedList)
+        person.printPerson();
 
     cout << endl;
 }
 
-int List::stringToInt(const string &str)
-const
+bool List::sortName(people a, people b)
 {
-    int year = 0, decimals, place = 1;
-    char number;
-    if (str == "-1")
-        return notDead;
-    else
-    {
-        decimals = str.size();
-        for (int i = decimals; i > 0; i--)
-        {
-            number = str[i-1];
-            year += (number - '0')*place;
-            place *= 10;
-        }
-        return year;
-    }
+    return (a.getName() < b.getName());
+}
+
+bool List::sortGender(people a, people b)
+{
+    return (a.getGender() < b.getGender());
+}
+
+bool List::sortBirth(people a, people b)
+{
+    return (a.getBirth() < b.getBirth());
+}
+
+bool List::sortDeath(people a, people b)
+{
+    return (a.getDeath() < b.getDeath());
 }
 
 void List::InsertPersonInfo(ostream& outs)
 {
+    system("cls");
     string Name, gender;
     int born, death;
+    cout << "* INSERTING PERSON *" << endl;
     cout << "Name: ";
     cin.ignore();
     getline(cin, Name);
@@ -104,16 +132,21 @@ void List::InsertPersonInfo(ostream& outs)
     per.setDeath(death);
     if (checkIfpersonOnList(per))
     {
-        cout << "This person was aldready on the list and was therefore not added again."
-             << endl;
+        cout << endl << "This person was already on the list and was therefore not added again."
+             << endl << endl;
+        sleep(3);
+        system("cls");
         return;
     }
 
     outs << Name << ", " << gender << ", " << born << ", " << death << endl;
     listOfPeople.push_back(per);
+    cout << endl << "Person was added to the list.";
+    sleep(2);
+    system("cls");
 }
 
-bool List::checkIfpersonOnList(people person)
+bool List::checkIfpersonOnList(const people &person)
 {
     bool isOnList = false;
     int size = listOfPeople.size();
@@ -243,8 +276,17 @@ void List::searchPerson(vector<people>& listOfPeople)
             foundPeople = findByDeath(listOfPeople, searchV);
             break;
         }
+        default {
+            "Invalid choice!"
+            break;
+        }
     }
-    printSearchResult(foundPeople);
+
+}
+
+void List::eraseListOfVector()
+{
+    listOfPeople.clear();
 }
 
 
