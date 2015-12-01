@@ -108,19 +108,9 @@ bool List::sortDeath(people a, people b)
 
 void List::InsertPersonInfo(ostream& outs)
 {
-    system("cls");
     string Name, gender;
     int born, death;
-    cout << "* INSERTING PERSON *" << endl;
-    cout << "Name: ";
-    cin.ignore();
-    getline(cin, Name);
-    cout << "Gender (please write male or female): ";
-    cin >> gender;
-    cout << "Year of birth: ";
-    cin >> born;
-    cout << "Year of death (-1 if still alive): ";
-    cin >> death;
+    getInsertedInfo(Name, gender, born, death);
 
     people per;
     per.setName(Name);
@@ -271,4 +261,25 @@ void List::searchPerson(istream& fin)
 void List::eraseListOfVector()
 {
     listOfPeople.clear();
+}
+
+void List::getInsertedInfo(string& name, string& gender, int& born, int& death)
+{
+    system("cls");
+    cout << "* INSERTING PERSON *" << endl;
+    cout << "Name: ";
+    cin.ignore();
+    getline(cin, name);
+    do
+    {
+        cout << "Gender (please write male or female): ";
+        cin >> gender;
+    } while(!((gender == "female")||(gender == "male")));
+    cout << "Year of birth: ";
+    string yearstr;
+    cin >> yearstr;
+    born = stoi(yearstr);
+    cout << "Year of death (-1 if still alive): ";
+    cin >> yearstr;
+    death = stoi(yearstr);
 }

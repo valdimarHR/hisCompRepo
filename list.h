@@ -29,6 +29,7 @@ private:
     static bool sortBirth(people a, people b);
     static bool sortDeath(people a, people b);
     bool checkIfpersonOnList(const people& person);
+    void getInsertedInfo(string& name, string& gender, int& born, int& death);
 };
 
 #endif // LIST_H
