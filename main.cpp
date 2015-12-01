@@ -54,7 +54,11 @@ int main()
          case 5 :
                 break;
          default:
-             cout << "Invalid choice!" << endl;
+        {
+            cout << "Invalid choice!" << endl;
+            sleep(2);
+            system("cls");
+        }
         }
     }while(choice != 5);
 
