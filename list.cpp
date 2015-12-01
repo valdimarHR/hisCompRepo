@@ -38,7 +38,7 @@ List::List(istream& fin)
 void List::Print()
 {
     int orderBy;
-    bool desending;
+    bool ascending;
     system("cls");
 
     cout << "* PRINTING *" << endl
@@ -51,13 +51,37 @@ void List::Print()
          << "Enter your choice: ";
     cout.flush();
     cin >> orderBy;
+
+    while(cin.fail() || orderBy > 5 || orderBy < 1) {
+            cout << "Invalid choice!" << endl;
+            cin.clear();
+            cin.ignore(256,'\n');
+            cout << "Try again: ";
+            cin >> orderBy;
+        }
     system("cls");
-    cout << "Do you want this list in descending order?" << endl
-         << "\t0: No" << endl
-         << "\t1: Yes" << endl
-         << "Enter your choice: ";
+
+    if(orderBy != 2){
+        cout << "Do you want this list in ascending or descending order?" << endl
+             << "\t0: descending" << endl
+             << "\t1: ascending" << endl;
+    } else {
+        cout << "Do you want this list to be ordered by females or males first?" << endl
+             << "\t0: males" << endl
+             << "\t1: females" << endl;
+    }
+
+    cout << "Enter your choice: ";
     cout.flush();
-    cin >> desending;
+    cin >> ascending;
+
+    while(cin.fail()) {
+            cout << "Invalid choice!" << endl;
+            cin.clear();
+            cin.ignore(256,'\n');
+            cout << "Try again:";
+            cin >> ascending;
+        }
 
     vector<people> sortedList = listOfPeople;
 
@@ -80,7 +104,7 @@ void List::Print()
        default :
           cout << "Invalid input" << endl;
        }
-    if(desending) reverse(sortedList.begin(), sortedList.end());
+    if(!ascending) reverse(sortedList.begin(), sortedList.end());
     system("cls");
 
     for(const auto person:sortedList)
@@ -111,19 +135,9 @@ bool List::sortDeath(people a, people b)
 
 void List::InsertPersonInfo(ostream& outs)
 {
-    system("cls");
     string Name, gender;
     int born, death;
-    cout << "* INSERTING PERSON *" << endl;
-    cout << "Name: ";
-    cin.ignore();
-    getline(cin, Name);
-    cout << "Gender (please write male or female): ";
-    cin >> gender;
-    cout << "Year of birth: ";
-    cin >> born;
-    cout << "Year of death (-1 if still alive): ";
-    cin >> death;
+    getInsertedInfo(Name, gender, born, death);
 
     people per;
     per.setName(Name);
@@ -235,8 +249,11 @@ int getSearchAttribute()
          << "3. Year of birth" << endl
          << "4. Year of death" << endl
          << "Enter your choice: ";
-    cin >> n;
-
+    do{
+        cin >> n;
+        if (n < 1 || n > 4)
+            cout << "Invalid choice! Choose again.";
+    } while(n < 1 || n > 4);
     return n;
 }
 
@@ -276,7 +293,6 @@ void List::searchPerson(vector<people>& listOfPeople)
             break;
         }
         default: {
-            cout >> "Invalid choice!";
             break;
         }
     }
@@ -288,4 +304,38 @@ void List::eraseListOfVector()
     listOfPeople.clear();
 }
 
-
+void List::getInsertedInfo(string& name, string& gender, int& born, int& death)
+{
+    system("cls");
+    cout << "* INSERTING PERSON *" << endl;
+    cout << "Name: ";
+    cin.ignore();
+    getline(cin, name);
+    cout << "Gender (please write male or female): ";
+    cin >> gender;
+    while(!((gender == "female")||(gender == "male")))
+    {
+        cout << "Invalid choice!" << endl << "Try again: ";
+        cin >> gender;
+    }
+    cout << "Year of birth: ";
+    cin >> born;
+    while(cin.fail())
+    {
+        cout << "Invalid choice!" << endl;
+        cin.clear();
+        cin.ignore(256,'\n');
+        cout << "Try again: ";
+        cin >> born;
+    }
+    cout << "Year of death (-1 if still alive): ";
+    cin >> death;
+    while(cin.fail())
+    {
+        cout << "Invalid choice!" << endl;
+        cin.clear();
+        cin.ignore(256,'\n');
+        cout << "Try again: ";
+        cin >> death;
+    }
+}

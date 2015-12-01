@@ -19,16 +19,17 @@ public:
     void InsertPersonInfo(ostream& outs);
     void Print();
     void searchPerson(vector<people>& listOfPeople);
+    void eraseListOfVector();
 private:
     int stringToInt(const string& str) const;
     std::vector<people> listOfPeople;
-    bool checkIfpersonOnList(people person);
     void searchPerson(istream& fin);
-    void eraseListOfVector();
     static bool sortName(people a, people b);
     static bool sortGender(people a, people b);
     static bool sortBirth(people a, people b);
     static bool sortDeath(people a, people b);
     bool checkIfpersonOnList(const people& person);
+    void getInsertedInfo(string& name, string& gender, int& born, int& death);
+};
 
 #endif // LIST_H
