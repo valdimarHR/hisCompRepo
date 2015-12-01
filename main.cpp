@@ -67,15 +67,18 @@ int theMenuChoice()
     string choicestr;
     int choice;
 
-    cout << "-----------------------" << endl;
-    cout << "---Main menu---" << endl;
-    cout << endl;
-    cout << "1: Insert" << endl
-         << "2: Search" << endl
-         << "3: Print" << endl
-         << "4: erase database" << endl
-         << "5: Exit" << endl
+    cout << "//-------------------------\\\\" << endl
+         << "||        MAIN MENU        ||" << endl
+         << "||                         ||" << endl
+         << "||     1: Insert           ||" << endl
+         << "||     2: Search           ||" << endl
+         << "||     3: Print            ||" << endl
+         << "||     4: erase database   ||" << endl
+         << "||     5: Exit             ||" << endl
+         << "||                         ||" << endl
+         << "\\\\-------------------------//" << endl
          << "Enter your choice: ";
+
     cout.flush();
     cin >> choicestr;
     if (choicestr.size() != 1)
@@ -134,10 +137,10 @@ void eraseEverything(List& list)
     string warning;
     system("cls");
     cout << "This will erase everything in the database permanantly!!" << endl;
-    cout    << "Type the following to continue \"confirm\"" << endl;
+    cout    << "Type the following to confirm \"continue\"" << endl;
         cin >> warning;
 
-        if(warning != "confirm" && warning != "Confirm")
+        if(warning != "continue")
         {
             cout << "Good!";
             sleep(1);
@@ -147,7 +150,7 @@ void eraseEverything(List& list)
         else
         {
             system("cls");
-            list.eraseListOfPeople();
+            list.eraseListOfVector();
             ofstream fout("database.csv");
             fout.close();
 

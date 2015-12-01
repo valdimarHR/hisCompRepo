@@ -216,7 +216,7 @@ int getDeathYear(istream& fin)
 
 void List::searchPerson(istream& fin)
 {
-    int n, yearOfBirth, yearOfDeath;
+    int n;
     string name, gender;
 
     cout << "Would you like to search by" << endl
@@ -242,7 +242,7 @@ void List::searchPerson(istream& fin)
 }
 
 
-void List::eraseListOfPeople()
+void List::eraseListOfVector()
 {
     listOfPeople.clear();
 }

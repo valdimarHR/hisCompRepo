@@ -18,7 +18,7 @@ public:
     void InsertPersonInfo(ostream& outs);
     void Print();
     void searchPerson(istream& fin);
-    void eraseListOfPeople();
+    void eraseListOfVector();
 private:
     vector<people> listOfPeople;
     static bool sortName(people a, people b);
