@@ -109,8 +109,10 @@ bool List::sortDeath(people a, people b)
 
 void List::InsertPersonInfo(ostream& outs)
 {
+    system("cls");
     string Name, gender;
     int born, death;
+    cout << "* INSERTING PERSON *" << endl;
     cout << "Name: ";
     cin.ignore();
     getline(cin, Name);
