@@ -103,12 +103,16 @@ void List::Print()
           cout << "Invalid input" << endl;
        }
     if(!ascending) reverse(sortedList.begin(), sortedList.end());
-    system("cls");
+    printVector(sortedList);
+}
 
+void List::printVector(const vector<people> list)
+{
+    system("cls");
     cout << "+------------------------------------------------------+" << endl;
     printf("|%25s|%10s|%8s|%8s|\n", "NAME", "GENDER", "BIRTH", "DEATH");
     cout << "+------------------------------------------------------+" << endl;
-    for(const auto person:sortedList){
+    for(const auto person:list){
         person.printPerson();
     }
     cout << "+------------------------------------------------------+" << endl;
@@ -177,23 +181,6 @@ bool List::checkIfpersonOnList(const people &person)
             isOnList = true;
     }
     return isOnList;
-}
-
-void printSearchResult(vector<people>& foundPeople)
-{
-    if (foundPeople.size() == 0)
-        cout << "No search results found!" << endl;
-    else {
-        cout << "+------------------------------------------------------+" << endl;
-        printf("|%25s|%10s|%8s|%8s|\n", "NAME", "GENDER", "BIRTH", "DEATH");
-        cout << "+------------------------------------------------------+" << endl;
-        for (unsigned long i = 0; i < foundPeople.size(); i++) {
-            foundPeople[i].printPerson();
-        }
-        cout << "+------------------------------------------------------+" << endl;
-    }
-    system("pause");
-    system("cls");
 }
 
 vector<people> findByName(vector<people>& listOfPeople, string name)
@@ -362,8 +349,14 @@ void List::searchPerson()
         }
     }
 
-    printSearchResult(foundPeople);
+    if (foundPeople.size() == 0){
+        cout << "No search results found!" << endl;
+        system("pause");
+        system("cls");
 
+    } else {
+        printVector(foundPeople);
+    }
 }
 
 void List::eraseListOfVector()

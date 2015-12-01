@@ -23,13 +23,14 @@ public:
     void eraseListOfVector();
 private:
     int stringToInt(const string& str) const;
-    std::vector<people> listOfPeople;
+    vector<people> listOfPeople;
     static bool sortName(people a, people b);
     static bool sortGender(people a, people b);
     static bool sortBirth(people a, people b);
     static bool sortDeath(people a, people b);
     bool checkIfpersonOnList(const people& person);
     void getInsertedInfo(string& name, string& gender, int& born, int& death);
+    void printVector(const vector<people> list);
 };
 
 #endif // LIST_H
