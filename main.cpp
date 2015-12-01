@@ -6,7 +6,6 @@
 #include "people.h"
 #include <vector>
 #include <algorithm>
-#include <windows.h>
 #include <unistd.h>
 
 using namespace std;
@@ -44,6 +43,7 @@ int main()
             fout.close();
          }      break;
          case 2 :
+            theList.searchPerson();
                 break;
          case 3 :
              theList.Print();
@@ -54,7 +54,11 @@ int main()
          case 5 :
                 break;
          default:
-             cout << "Invalid choice!" << endl;
+        {
+            cout << "Invalid choice!" << endl;
+            sleep(2);
+            system("cls");
+        }
         }
     }while(choice != 5);
 
@@ -94,7 +98,7 @@ void printError()
 {
     cout << endl << "ERROR" << endl
          << "Please make a file with the name database.csv and put it in the right folder"
-         << endl << "then open the program again." << endl << endl;
+         << endl << "then run the program again." << endl << endl;
 }
 
 void printTree()
@@ -138,7 +142,7 @@ void eraseEverything(List& list)
     string warning;
     system("cls");
     cout << "This will erase everything in the database permanently!!" << endl;
-    cout    << "Type the following to confirm \"continue\" everything else to not" << endl;
+    cout    << "Type the following to confirm \"continue\" (anything else to cancel)" << endl;
         cin >> warning;
 
         if(warning != "continue")
@@ -165,4 +169,4 @@ void eraseEverything(List& list)
             sleep(1);
             system("cls");
         }
-}
+};

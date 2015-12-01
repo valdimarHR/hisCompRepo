@@ -7,9 +7,8 @@
 #include <vector>
 #include <string>
 #include <algorithm>
-#include <windows.h>
 #include <unistd.h>
-#include <iostream>
+#include <typeinfo>
 
 using namespace std;
 
@@ -20,15 +19,17 @@ public:
     List(istream& fin);
     void InsertPersonInfo(ostream& outs);
     void Print();
-    void searchPerson(istream& fin);
+    void searchPerson();
     void eraseListOfVector();
 private:
-    vector<people> listOfPeople;
+    int stringToInt(const string& str) const;
+    std::vector<people> listOfPeople;
     static bool sortName(people a, people b);
     static bool sortGender(people a, people b);
     static bool sortBirth(people a, people b);
     static bool sortDeath(people a, people b);
     bool checkIfpersonOnList(const people& person);
+    void getInsertedInfo(string& name, string& gender, int& born, int& death);
 };
 
 #endif // LIST_H

@@ -54,7 +54,7 @@ void List::Print()
             cout << "Invalid choice!" << endl;
             cin.clear();
             cin.ignore(256,'\n');
-            cout << "Try again:";
+            cout << "Try again: ";
             cin >> orderBy;
         }
     system("cls");
@@ -142,19 +142,9 @@ bool List::sortDeath(people a, people b)
 
 void List::InsertPersonInfo(ostream& outs)
 {
-    system("cls");
     string Name, gender;
     int born, death;
-    cout << "* INSERTING PERSON *" << endl;
-    cout << "Name: ";
-    cin.ignore();
-    getline(cin, Name);
-    cout << "Gender (please write male or female): ";
-    cin >> gender;
-    cout << "Year of birth: ";
-    cin >> born;
-    cout << "Year of death (-1 if still alive): ";
-    cin >> death;
+    getInsertedInfo(Name, gender, born, death);
 
     people per;
     per.setName(Name);
@@ -189,120 +179,188 @@ bool List::checkIfpersonOnList(const people &person)
     return isOnList;
 }
 
-string getName(istream& fin)
+void printSearchResult(vector<people>& foundPeople)
 {
-    string name, line;
-
-    cout << "Please enter a name: ";
-    cin >> name;
-
-    while(getline(fin, line)) {
-        if (line.find(name) != string::npos)
-            cout << line << endl;
+    if (foundPeople.size() == 0)
+        cout << "No search results found!" << endl;
+    else {
+        cout << "+------------------------------------------------------+" << endl;
+        printf("|%25s|%10s|%8s|%8s|\n", "NAME", "GENDER", "BIRTH", "DEATH");
+        cout << "+------------------------------------------------------+" << endl;
+        for (unsigned long i = 0; i < foundPeople.size(); i++) {
+            foundPeople[i].printPerson();
+        }
+        cout << "+------------------------------------------------------+" << endl;
     }
-
-    return name;
+    system("pause");
+    system("cls");
 }
 
-string getGender(istream& fin)
+vector<people> findByName(vector<people>& listOfPeople, string name)
 {
-    string gender, line;
+    auto it = find_if(listOfPeople.begin(), listOfPeople.end(),
+        [&name](const people& per){return per.getName().find(name) != string::npos;});
 
-    cout << "Please enter a gender (male or female): ";
-    cin >> gender;
+    vector<people> found;
 
-    while(getline(fin, line)) {
-        if (line.find(gender) != string::npos)
-            cout << line << endl;
+    while(it != listOfPeople.end()) {
+        found.push_back(*it);
+        it = find_if(++it, listOfPeople.end(),
+                [&name](const people& per){return per.getName().find(name) != string::npos;});
     }
 
-    return gender;
+    return found;
 }
 
-int getBirthYear(istream& fin)
+vector<people> findByGender(vector<people>& listOfPeople, string gender)
 {
-    string yearOfBirth, line;
+    auto it = find_if(listOfPeople.begin(), listOfPeople.end(),
+        [&gender](const people& per){return per.getGender() == gender;});
 
-    cout << "Please enter year of birth";
-    cin >> yearOfBirth;
+    vector<people> found;
 
-    while(getline(fin, line)) {
-        if (line.find(yearOfBirth) != string::npos)
-            cout << line << endl;
+    while(it != listOfPeople.end()) {
+        found.push_back(*it);
+        it = find_if(++it, listOfPeople.end(),
+            [&gender](const people& per){return per.getGender() == gender;});
     }
 
-    int birthYear = std::stoi(yearOfBirth);
-
-    return birthYear;
+    return found;
 }
 
-int getDeathYear(istream& fin)
+vector<people> findByBirth(vector<people>& listOfPeople, int birthYear)
 {
-    string yearOfDeath, line;
+    auto it = find_if(listOfPeople.begin(), listOfPeople.end(),
+        [&birthYear](const people& per){return per.getBirth() == birthYear;});
 
-    cout << "Please enter year of death";
-    cin >> yearOfDeath;
+    vector<people> found;
 
-    while(getline(fin, line)) {
-        if (line.find(yearOfDeath) != string::npos)
-            cout << line << endl;
+    while(it != listOfPeople.end()) {
+        found.push_back(*it);
+        it = find_if(++it, listOfPeople.end(),
+            [&birthYear](const people& per){return per.getBirth() == birthYear;});
     }
 
-    int deathYear = std::stoi(yearOfDeath);
-
-    return deathYear;
+    return found;
 }
 
+vector<people> findByDeath(vector<people>& listOfPeople, int deathYear)
+{
+    auto it = find_if(listOfPeople.begin(), listOfPeople.end(),
+        [&deathYear](const people& per){return per.getDeath() == deathYear;});
 
-void List::searchPerson(istream& fin)
+    vector<people> found;
+
+    while(it != listOfPeople.end()) {
+        found.push_back(*it);
+        it = find_if(++it, listOfPeople.end(),
+            [&deathYear](const people& per){return per.getDeath() == deathYear;});
+    }
+
+    return found;
+}
+
+int getSearchAttribute()
 {
     int n;
-    string name, gender;
-    bool wrong;
+    system("cls");
+
+    cout << "Would you like to search by" << endl
+         << "1. Name" << endl
+         << "2. Gender" << endl
+         << "3. Year of birth" << endl
+         << "4. Year of death" << endl
+         << "Enter your choice: ";
     do{
-        wrong = false;
-
-        cout << "Would you like to search by" << endl
-            << "\t1. Name" << endl
-            << "\t2. Gender" << endl
-            << "\t3. Year of birth" << endl
-            << "\t4. Year of death" << endl
-            << "Enter your choice: ";
         cin >> n;
+        if (n < 1 || n > 4)
+            cout << "Invalid choice! Choose again: ";
+    } while(n < 1 || n > 4);
+    return n;
+}
 
-        switch(n)
-        {
-            case 1:
-            {
-                getName(fin);
-                break;
-            }
-            case 2:
-            {
-                getGender(fin);
-                break;
-            }
-            case 3:
-            {
-                getBirthYear(fin);
-                break;
-            }
-            case 4:
-            {
-                getDeathYear(fin);
-                break;
-            }
-            default:
-            {
-                cout << "Invalid choice!" << endl;
-                wrong = true;
+string getSearchValue()
+{
+    string value;
 
-            }
+    cout << "What would you like to search for?" << endl;
+    cin >> value;
+
+    return value;
+}
+
+void List::searchPerson()
+{
+
+    int n = getSearchAttribute();
+
+    string searchValue = getSearchValue();
+
+    vector<people> foundPeople;
+
+    switch(n) {
+        case 1: {
+            foundPeople = findByName(listOfPeople, searchValue);
+            break;
         }
-    }while(wrong);
+        case 2: {
+            foundPeople = findByGender(listOfPeople, searchValue);
+            break;
+        }
+        case 3: {
+            foundPeople = findByBirth(listOfPeople, stoi(searchValue));
+            break;
+        }
+        case 4: {
+            foundPeople = findByDeath(listOfPeople, stoi(searchValue));
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+
+    printSearchResult(foundPeople);
+
 }
 
 void List::eraseListOfVector()
 {
     listOfPeople.clear();
+}
+
+void List::getInsertedInfo(string& name, string& gender, int& born, int& death)
+{
+    system("cls");
+    cout << "* INSERTING PERSON *" << endl;
+    cout << "Name: ";
+    cin.ignore();
+    getline(cin, name);
+    cout << "Gender (please write male or female): ";
+    cin >> gender;
+    while(!((gender == "female")||(gender == "male")))
+    {
+        cout << "Invalid choice!" << endl << "Try again: ";
+        cin >> gender;
+    }
+    cout << "Year of birth: ";
+    cin >> born;
+    while(cin.fail())
+    {
+        cout << "Invalid choice!" << endl;
+        cin.clear();
+        cin.ignore(256,'\n');
+        cout << "Try again: ";
+        cin >> born;
+    }
+    cout << "Year of death (-1 if still alive): ";
+    cin >> death;
+    while(cin.fail())
+    {
+        cout << "Invalid choice!" << endl;
+        cin.clear();
+        cin.ignore(256,'\n');
+        cout << "Try again: ";
+        cin >> death;
+    }
 }
