@@ -256,7 +256,6 @@ void List::searchPerson(vector<people>& listOfPeople)
     int n = getSearchAttribute();
 
     string searchValue = getSearchValue();
-    int searchV = stoi(getSearchValue());
 
     vector<people> foundPeople;
 
@@ -269,15 +268,15 @@ void List::searchPerson(vector<people>& listOfPeople)
             foundPeople = findByGender(listOfPeople, searchValue);
         }
         case 3: {
-            foundPeople = findByBirth(listOfPeople, searchV);
+            foundPeople = findByBirth(listOfPeople, stoi(searchValue));
             break;
         }
         case 4: {
-            foundPeople = findByDeath(listOfPeople, searchV);
+            foundPeople = findByDeath(listOfPeople, stoi(searchValue));
             break;
         }
-        default {
-            "Invalid choice!"
+        default: {
+            cout >> "Invalid choice!";
             break;
         }
     }

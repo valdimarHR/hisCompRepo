@@ -13,19 +13,19 @@ class people
 {
 public:
     people();
-    void setName(std::string fname);
-    void setGender(std::string fgender);
+    void setName(string fname);
+    void setGender(string fgender);
     void setBirth(int fbirth);
     void setDeath(int fdeath);
-    std::string getName() const;
-    std::string getGender() const;
+    string getName() const;
+    string getGender() const;
     int getBirth() const;
     int getDeath() const;
     void printPerson() const;
     friend bool operator == (const people &person1, const people &person2);
 private:
-    std::string name;
-    std::string gender;
+    string name;
+    string gender;
     int yearOfBirth;
     int yearOfDeath;
 };

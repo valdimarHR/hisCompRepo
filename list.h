@@ -15,18 +15,16 @@ class List
 {
 public:
     List();
-    List(std::istream& fin);
-    void InsertPersonInfo(std::ostream& outs);
+    List(istream& fin);
+    void InsertPersonInfo(ostream& outs);
     void Print();
-    void searchPerson(std::vector<people>& listOfPeople);
+    void searchPerson(vector<people>& listOfPeople);
 private:
-    int stringToInt(const std::string& str) const;
+    int stringToInt(const string& str) const;
     std::vector<people> listOfPeople;
     bool checkIfpersonOnList(people person);
-    void searchPerson(std::istream& fin);
+    void searchPerson(istream& fin);
     void eraseListOfVector();
-private:
-    //std::vector<people> listOfPeople;
     static bool sortName(people a, people b);
     static bool sortGender(people a, people b);
     static bool sortBirth(people a, people b);
