@@ -52,6 +52,7 @@ int main(int argc, char *argv[])
 
     cout << "Thank you for your visit, hope to see you again soon." << endl;
 
+    return 0;
 }
 
 string theMenuChoice()
