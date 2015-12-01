@@ -73,7 +73,7 @@ int theMenuChoice()
          << "||     1: Insert           ||" << endl
          << "||     2: Search           ||" << endl
          << "||     3: Print            ||" << endl
-         << "||     4: erase database   ||" << endl
+         << "||     4: Erase Database   ||" << endl
          << "||     5: Exit             ||" << endl
          << "||                         ||" << endl
          << "\\\\-------------------------//" << endl
