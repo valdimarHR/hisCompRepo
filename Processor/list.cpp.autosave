@@ -7,29 +7,9 @@ List::List()
 
 }
 
-List::List(istream& fin)
+List::List(vector <people> list)
 {
-    string line, year;
-    int indexStart, indexEnd;
-    people peoplePush;
-
-    while(getline(fin, line))
-    {
-        indexEnd = line.find(",");
-        peoplePush.setName(line.substr(0, indexEnd));
-        indexStart = indexEnd + 2;
-        indexEnd = line.find("," , indexStart);
-        peoplePush.setGender(line.substr(indexStart, (indexEnd-indexStart)));
-        indexStart = indexEnd + 2;
-        indexEnd = line.find("," , indexStart);
-        year = line.substr(indexStart, (indexEnd-indexStart));
-        peoplePush.setBirth(stoi(year));
-        indexStart = indexEnd + 2;
-        indexEnd = line.size();
-        year = line.substr(indexStart, (indexEnd-indexStart));
-        peoplePush.setDeath(stoi(year));
-        listOfPeople.push_back(peoplePush);
-    }
+    theList = list;
 }
 
 void List::Print() const
@@ -65,7 +45,8 @@ void List::Print() const
     printVector(sortedList);
 }
 
-void List::printerMenu(int& orderBy, bool& ascending) const{
+void List::printerMenu(int& orderBy, bool& ascending) const
+{
     cout << "* PRINTING *" << endl
          << "Ordered  by:" << endl
          << "\t1: Name" << endl
@@ -108,20 +89,6 @@ void List::printerMenu(int& orderBy, bool& ascending) const{
             cin >> ascending;
         }
 
-}
-
-void List::printVector(const vector<people>& list) const
-{
-    system("cls");
-    cout << "+------------------------------------------------------+" << endl;
-    printf("|%25s|%10s|%8s|%8s|\n", "NAME", "GENDER", "BIRTH", "DEATH");
-    cout << "+------------------------------------------------------+" << endl;
-    for(const auto person:list){
-        person.printPerson();
-    }
-    cout << "+------------------------------------------------------+" << endl;
-    system("pause");
-    system("cls");
 }
 
 bool List::sortName(const people &a, const people &b)
@@ -358,40 +325,6 @@ void List::searchPerson()
     } else {
         printVector(foundPeople);
     }
-}
-
-bool List::eraseListOfVector()
-{
-    string warning;
-    bool didDelete = false;
-    system("cls");
-    cout << "This will erase everything in the database permanently!!" << endl;
-    cout    << "Type the following to confirm \"continue\" (anything else to cancel)" << endl;
-        cin >> warning;
-
-        if(warning != "continue")
-        {
-            cout << "Good!";
-            sleep(1);
-            system("cls");
-            return didDelete;
-        }
-        else
-        {
-            system("cls");
-            listOfPeople.clear();
-            didDelete = true;
-            cout << "Deleting";
-            sleep(1);
-            system("cls");
-            cout << "Deleting.";
-            sleep(1);
-            system("cls");
-            cout << "Deleting..";
-            sleep(1);
-            system("cls");
-            return didDelete;
-        }
 }
 
 void List::getInsertedInfo(string& name, string& gender, int& born, int& death) const

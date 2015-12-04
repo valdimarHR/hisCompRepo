@@ -7,8 +7,6 @@
 
 using namespace std;
 
-const int notDead = -1;
-
 class people
 {
 public:
@@ -21,7 +19,6 @@ public:
     string getGender() const;
     int getBirth() const;
     int getDeath() const;
-    void printPerson() const;
     friend bool operator == (const people &person1, const people &person2);
 private:
     string name;

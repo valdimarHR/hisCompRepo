@@ -17,20 +17,19 @@ class List
 {
 public:
     List();
-    List(istream& fin);
+    List(vector <people> list);
     void InsertPersonInfo(ostream& outs);
     void Print() const;
     void searchPerson();
     bool eraseListOfVector();
 private:
-    vector<people> listOfPeople;
+    vector<people> theList;
     static bool sortName(const people& a, const people& b);
     static bool sortGender(const people& a, const people& b);
     static bool sortBirth(const people& a, const people& b);
     static bool sortDeath(const people& a, const people& b);
     bool checkIfpersonOnList(const people& person) const;
     void getInsertedInfo(string& name, string& gender, int& born, int& death)const;
-    void printVector(const vector<people>& list)const;
     void printerMenu(int& orderBy, bool& ascending)const;
 };
 

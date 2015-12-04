@@ -17,12 +17,17 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    list.cpp \
-    people.cpp
+    Processor/list.cpp \
+    Models/people.cpp \
+    DataFetch/datafetch.cpp \
+    UI/display.cpp
 
 HEADERS += \
-    list.h \
-    people.h
+    Processor/list.h \
+    Models/people.h \
+    Utilities/constants.h \
+    DataFetch/datafetch.h \
+    UI/display.h
 
 FORMS +=
 
