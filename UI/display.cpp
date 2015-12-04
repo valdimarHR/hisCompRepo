@@ -33,6 +33,33 @@ void Display::title()
     cout << "Welcome to Computer Sciense DB." << endl;
 }
 
+int Display::theMenuChoice()
+{
+    string choicestr;
+    int choice;
+
+    cout << "//-------------------------\\\\" << endl
+         << "||        MAIN MENU        ||" << endl
+         << "||                         ||" << endl
+         << "||     1: Insert           ||" << endl
+         << "||     2: Search           ||" << endl
+         << "||     3: Print            ||" << endl
+         << "||     4: Erase Database   ||" << endl
+         << "||     5: Exit             ||" << endl
+         << "||                         ||" << endl
+         << "\\\\-------------------------//" << endl
+         << "Enter your choice: ";
+
+    cout.flush();
+    cin >> choicestr;
+    if (choicestr.size() != 1)
+        choice = invalidChoice;
+    else
+    choice = static_cast<int>(choicestr[0]);
+    choice -= '0';
+    return choice;
+}
+
 void Display::printTree()
 {
     cout << "----Merry Christmas!!----" << endl;

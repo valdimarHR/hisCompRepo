@@ -327,40 +327,6 @@ void List::searchPerson()
     }
 }
 
-bool List::eraseListOfVector()
-{
-    string warning;
-    bool didDelete = false;
-    system("cls");
-    cout << "This will erase everything in the database permanently!!" << endl;
-    cout    << "Type the following to confirm \"continue\" (anything else to cancel)" << endl;
-        cin >> warning;
-
-        if(warning != "continue")
-        {
-            cout << "Good!";
-            sleep(1);
-            system("cls");
-            return didDelete;
-        }
-        else
-        {
-            system("cls");
-            listOfPeople.clear();
-            didDelete = true;
-            cout << "Deleting";
-            sleep(1);
-            system("cls");
-            cout << "Deleting.";
-            sleep(1);
-            system("cls");
-            cout << "Deleting..";
-            sleep(1);
-            system("cls");
-            return didDelete;
-        }
-}
-
 void List::getInsertedInfo(string& name, string& gender, int& born, int& death) const
 {
     system("cls");
