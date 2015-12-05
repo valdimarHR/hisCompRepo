@@ -1,6 +1,6 @@
 #include "computers.h"
 
-Computers::Computers()
+computers::computers()
 {
     name = "default";
     yearCreated = 0;
@@ -8,38 +8,38 @@ Computers::Computers()
     wasBuilt = false;
 }
 
-void Computers::setName(string fname)
+void computers::setName(string fname)
 {
     name = fname;
 }
 
-void Computers::setYearCreated(int year)
+void computers::setYearCreated(int year)
 {
     yearCreated = year;
 }
-void Computers::setType(string ftype)
+void computers::setType(string ftype)
 {
     type = ftype;
 }
 
-void Computers::setWasBuilt(bool built)
+void computers::setWasBuilt(bool built)
 {
     wasBuilt = built;
 }
 
-string Computers::getName() const
+string computers::getName() const
 {
     return name;
 }
-int Computers::getYearCreated() const
+int computers::getYearCreated() const
 {
     return yearCreated;
 }
-string Computers::getType() const
+string computers::getType() const
 {
     return type;
 }
-bool Computers::getWasBuilt() const
+bool computers::getWasBuilt() const
 {
     return wasBuilt;
 }

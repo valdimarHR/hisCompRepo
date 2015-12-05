@@ -3,10 +3,10 @@
 #include <iostream>
 using namespace std;
 
-class Computers
+class computers
 {
 public:
-    Computers();
+    computers();
     void setName(string name);
     void setYearCreated(int year);
     void setType(string type);
