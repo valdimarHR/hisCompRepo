@@ -60,10 +60,7 @@ vector<people> dataFetch::convererCombinedTable(QSqlQuery& query)
 
 void dataFetch::inserPersonToDatabase(const people& a)
 {
-    QSqlDatabase db;
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbName = "database.sqlite";
-    db.setDatabaseName(dbName);
+
     db.open();
     QSqlQuery query(db);
 
@@ -78,5 +75,6 @@ void dataFetch::inserPersonToDatabase(const people& a)
     query.bindValue(":birth", birth);
     query.bindValue(":death", death );
     query.exec();
+    db.close();
 
 }
