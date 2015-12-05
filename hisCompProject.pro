@@ -22,7 +22,9 @@ SOURCES += main.cpp \
     DataFetch/datafetch.cpp \
     UI/ui.cpp \
     Processor/logic.cpp \
-    Models/computers.cpp
+    Models/computers.cpp \
+    Models/computerswithpeople.cpp \
+    Models/peoplewithcomputers.cpp
 
 HEADERS += \
     Models/people.h \
@@ -30,7 +32,9 @@ HEADERS += \
     DataFetch/datafetch.h \
     UI/ui.h \
     Processor/logic.h \
-    Models/computers.h
+    Models/computers.h \
+    Models/computerswithpeople.h \
+    Models/peoplewithcomputers.h
 
 FORMS +=
 
