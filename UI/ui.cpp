@@ -75,16 +75,16 @@ void ui::insertMenu()
     int n;
     system("cls");
 
-    cout << "* INSERT *" << endl;
+    cout << "* INSERT *" << endl << endl;
     cout << "Would you like in insert a:" << endl
-         << "0. Person" << endl
-         << "1. Computer" << endl
+         << "\t0. Person" << endl
+         << "\t1. Computer" << endl
          << "Enter your choice: ";
     cin >> n;
     inputIntCheck(cin.fail(), n, 0, 1);
 
     if(n == 0) insertMenuPerson();
-    else insertMenuCompter();
+    else insertMenuComputer();
 
 }
 
@@ -94,7 +94,7 @@ void ui::insertMenuPerson()
     int born, death;
 
     system("cls");
-    cout << "* INSERTING PERSON *" << endl;
+    cout << "* INSERTING PERSON *" << endl << endl;
     cout << "Name: ";
     cin.ignore();
     getline(cin, name);
@@ -130,20 +130,27 @@ void ui::insertMenuPerson()
 
 }
 
-void ui::insertMenuCompter()
+void ui::insertMenuComputer()
 {
-    //IMPLEMENT....
-    //IMPLEMENT....
-    //IMPLEMENT....
-
-    string name, type;
+    string name, type, builtCheck;
     int created;
     bool built;
 
 
     system("cls");
-    cout << "* INSERTING COMPUTER *" << endl;
-    cout << " ... implement ... ";
+    cout << "* INSERTING COMPUTER *" << endl << endl;
+    cout << "Name: ";
+    cin.ignore();
+    getline(cin, name);
+    cout << "Year Created (invented): ";
+    cin >> created;
+    inputIntCheck(cin.fail(), created);
+    cout << "What type of computer: ";
+    cin.ignore();
+    getline(cin, type);
+    cout << "Was it built (Y/N): ";
+    cin >> builtCheck;
+    built = inputStrToBool(builtCheck);
 
     bool exists = theLogic.insertComputer(name, created, type, built);
 
@@ -445,6 +452,22 @@ void ui::inputIntCheck(bool inputFail, int& var, int low, int high)
         cin >> var;
         inputFail = cin.fail();
     }
+}
+
+bool ui::inputStrToBool(string& built)
+{
+    do
+    {
+    if (built == "Y" || built == "y" || built == "Yes" || built == "yes" )
+        return true;
+    else if (built == "N" || built == "n" || built == "No" || built == "no")
+        return false;
+    else
+        cout << "Invalid input!" << endl
+             << "Try again: ";
+        cin.clear();
+        cin >> built;
+    }while(true);
 }
 
 void ui::printTree()const

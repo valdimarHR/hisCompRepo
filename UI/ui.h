@@ -21,7 +21,7 @@ private:
     void menuSwitch();
     void insertMenu();
     void insertMenuPerson();
-    void insertMenuCompter();
+    void insertMenuComputer();
     void searchMenu();
     void searchMenuPerson();
     void searchMenuComputer();
@@ -34,6 +34,7 @@ private:
     void inputIntCheck(bool inputFail, int& var, int low, int high);
     string getStringSearchValue(string question);
     int getIntSearchValue();
+    bool inputStrToBool(string& built);
 };
 
 #endif // UI_H

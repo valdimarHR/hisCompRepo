@@ -81,7 +81,7 @@ bool logic::insertComputer(string& name, int& created, string& type, bool& built
     //else
         theData.insertComputerToDatabase(comp);//Adds the comp item to the database.
 
-    return dataExisted;//Returns true if person is already on the list.
+    return dataExisted;//Returns true if computer is already on the list.
 }
 
 bool logic::checkIfpersonOnList(const people &person) const
