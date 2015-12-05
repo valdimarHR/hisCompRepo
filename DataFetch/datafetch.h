@@ -17,7 +17,8 @@ class dataFetch
 public:
     dataFetch();
     vector<people> fetch(QString sqlCommand);
-    void inserPersonToDatabase(const people& a);
+    void insertPersonToDatabase(const people& a);
+    void insertComputerToDatabase(const computers& c);
 private:
     vector<people> convererPeopleTable(QSqlQuery& query);
     vector<people> convererComputerTable(QSqlQuery& query);

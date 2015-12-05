@@ -7,6 +7,7 @@ class computers
 {
 public:
     computers();
+    computers(const string& n, const int& y, const string& t, const bool& b);
     void setName(string name);
     void setYearCreated(int year);
     void setType(string type);

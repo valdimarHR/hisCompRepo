@@ -23,7 +23,7 @@ class logic
 public:
     logic();
     bool insertPerson(string& name, string& gender, int& born, int& death);
-    bool insertComputer(string& name, string& type, int& created, bool& built);
+    bool insertComputer(string& name, int& created, string& type, bool& built);
     vector<people> findByPeopleName(string name);
     vector<people> findByPeopleGender(string gender);
     vector<people> findByPeopleBirth(int birthYear);

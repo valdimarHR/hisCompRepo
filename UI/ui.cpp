@@ -140,11 +140,26 @@ void ui::insertMenuCompter()
     int created;
     bool built;
 
+
     system("cls");
     cout << "* INSERTING COMPUTER *" << endl;
     cout << " ... implement ... ";
 
-    theLogic.insertComputer(name, type, created, built);
+    bool exists = theLogic.insertComputer(name, created, type, built);
+
+    if(exists)
+    {
+        cout << endl << "This computer was already on the list and was therefore not added again."
+             << endl << endl;
+        sleep(3);
+        system("cls");
+        return;
+    }
+
+    cout << endl << "Computer was added to the list.";
+    sleep(2);
+    system("cls");
+
 }
 
 void ui::searchMenu()

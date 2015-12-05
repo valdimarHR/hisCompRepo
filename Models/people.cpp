@@ -8,6 +8,14 @@ people::people()
     yearOfDeath = 0;
 }
 
+people::people(const string& n, const string& g, const int& b, const int& d)
+{
+    name = n;
+    gender = g;
+    yearOfBirth = b;
+    yearOfDeath = d;
+}
+
 void people::setName(string fname)
 {
     name = fname;
