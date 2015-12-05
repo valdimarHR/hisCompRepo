@@ -11,6 +11,7 @@ public:
     void setYearCreated(int year);
     void setType(string type);
     void setWasBuilt(bool built);
+    int getId() const;
     string getName() const;
     int getYearCreated() const;
     string getType() const;

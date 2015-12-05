@@ -28,6 +28,11 @@ void people::setDeath(int fdeath)
     yearOfDeath = fdeath;
 }
 
+int people::getId() const
+{
+    return id;
+}
+
 string people::getName() const
 {
     return name;

@@ -27,6 +27,11 @@ void computers::setWasBuilt(bool built)
     wasBuilt = built;
 }
 
+ int computers::getId() const
+ {
+     return id;
+ }
+
 string computers::getName() const
 {
     return name;
