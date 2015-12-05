@@ -3,7 +3,6 @@
 
 #include "Models/people.h"
 #include "Models/computers.h"
-#include "Processor/logic.h"
 #include <vector>
 #include <QSqlQuery>
 #include <QSql>

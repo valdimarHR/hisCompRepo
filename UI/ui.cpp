@@ -1,6 +1,5 @@
 #include "UI/ui.h"
-#include "Models/people.h"
-#include "Utilities/constants.h"
+
 
 ui::ui()
 {
@@ -289,13 +288,13 @@ void ui::printerMenuPeople()
     system("cls");
 
     if(orderBy != 2){
-        cout << "Do you want this list in ascending or descending order?" << endl
-             << "\t0: descending" << endl
-             << "\t1: ascending" << endl;
+        cout << "Do you want this list in descending or ascending order?" << endl
+             << "\t0: Descending" << endl
+             << "\t1: Ascending" << endl;
     } else {
-        cout << "Do you want this list to be ordered by females or males first?" << endl
-             << "\t0: males" << endl
-             << "\t1: females" << endl;
+        cout << "Do you want this list to be ordered by males or females first?" << endl
+             << "\t0: Males" << endl
+             << "\t1: Females" << endl;
     }
 
     cout << "Enter your choice: ";
@@ -338,6 +337,25 @@ void ui::printerMenuComputers()
     cout << "Enter your choice: ";
     cout.flush();
     cin >> ascending;
+
+    inputIntCheck(cin.fail(), orderBy, 1, 5);
+    system("cls");
+
+    if (orderBy != 4) {
+        cout << "Do you this list in descending or ascending order?" << endl
+             << "\t0: Descending" << endl
+             << "\t1: Ascending" << endl;
+    }
+    else {
+        cout << "Do you want this list to be ordered by whether it was built or not built first" << endl
+             << "\t0: Built" << endl
+             << "\t1: Not built" << endl;
+    }
+
+    cout << "Enter your choice: ";
+    cout.flush();
+    cin >> ascending;
+    inputIntCheck(cin.fail(), ascending, 0, 1);
 }
 
 void ui::deleteMenu()

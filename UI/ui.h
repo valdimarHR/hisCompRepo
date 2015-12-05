@@ -3,7 +3,9 @@
 
 #include "Models/people.h"
 #include "Processor/logic.h"
+#include "Utilities/constants.h"
 
+using namespace std;
 
 class ui
 {
