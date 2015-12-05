@@ -376,7 +376,7 @@ void ui::printVector(const vector<people>& list) const
         string gender = person.getGender();
         int yearOfBirth = person.getBirth();
         string death = to_string(person.getDeath());
-        if(person.getDeath() == notDead) death = "Alive";
+        if(person.getDeath() == constants::notDead) death = "Alive";
         printf("|%25s|%10s|%8i|%8s|\n", name.c_str(), gender.c_str(), yearOfBirth, death.c_str());
     }
     cout << "+------------------------------------------------------+" << endl;
