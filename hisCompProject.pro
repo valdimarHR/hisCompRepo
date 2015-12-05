@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core
+QT       += core sql
 
 QT       -= gui
 
@@ -17,17 +18,19 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    Processor/list.cpp \
     Models/people.cpp \
     DataFetch/datafetch.cpp \
-    UI/display.cpp
+    UI/ui.cpp \
+    Processor/logic.cpp \
+    Models/computers.cpp
 
 HEADERS += \
-    Processor/list.h \
     Models/people.h \
     Utilities/constants.h \
     DataFetch/datafetch.h \
-    UI/display.h
+    UI/ui.h \
+    Processor/logic.h \
+    Models/computers.h
 
 FORMS +=
 
