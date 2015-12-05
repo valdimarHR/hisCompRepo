@@ -59,9 +59,9 @@ bool logic::sortDeath(const people& a, const people& b)
 
 bool logic::insertPerson(string& name, string& gender, int& born, int& death)
 {
-    //NO "listOfPeople"
-    //NO "listOfPeople"
-    //NO "listOfPeople"
+    //NO "listOfPeople" NEEDS NEW IMPLEMENTATION.
+    //NO "listOfPeople" NEEDS NEW IMPLEMENTATION.
+    //NO "listOfPeople" NEEDS NEW IMPLEMENTATION.
 
     bool dataExisted = 0;
     people per;
