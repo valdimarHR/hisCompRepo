@@ -4,15 +4,20 @@
 #include "Models/people.h"
 #include "Models/computers.h"
 #include <vector>
-#include <QString>
 #include <QSqlQuery>
+#include <QSql>
+#include <QString>
+#include <QVariant>
+
+using namespace std;
 
 
-class DataFetch
+class dataFetch
 {
 public:
-    DataFetch();
+    dataFetch();
     vector<people> fetch(QString sqlCommand);
+    void inserPersonToDatabase(const people& a);
 private:
     vector<people> convererPeopleTable(QSqlQuery& query);
     vector<people> convererComputerTable(QSqlQuery& query);

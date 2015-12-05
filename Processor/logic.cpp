@@ -1,7 +1,5 @@
 #include "logic.h"
 
-using namespace std;
-
 logic::logic()
 {
 
@@ -56,25 +54,33 @@ bool logic::sortDeath(const people& a, const people& b)
         return false;
     return (a.getDeath() < b.getDeath());
 }
-
+//Creates a class of people with the user inputted info.
 bool logic::insertPerson(string& name, string& gender, int& born, int& death)
 {
+<<<<<<< HEAD
     //NO "listOfPeople" NEEDS NEW IMPLEMENTATION.
     //NO "listOfPeople" NEEDS NEW IMPLEMENTATION.
     //NO "listOfPeople" NEEDS NEW IMPLEMENTATION.
+=======
+>>>>>>> f93cdba0bcc02bad2285263c9d34b5c7ef7b7eea
 
-    bool dataExisted = 0;
+    bool dataExisted = false;
     people per;
+
     per.setName(name);
     per.setGender(gender);
     per.setBirth(born);
     per.setDeath(death);
-    if (checkIfpersonOnList(per)) dataExisted = 1;
+    if (checkIfpersonOnList(per))
+        return dataExisted = true;
+    else
+        theData.inserPersonToDatabase(per);//Adds the people item to the database.
 
-    //listOfPeople.push_back(per);  //HERE
-    return dataExisted;
+    return dataExisted;//Returns true if person is already on the list.
 }
 
+
+//Creates a class of people with the user inputted info.
 bool logic::insertComputer(string& name, string& type, int& created, bool& built)
 {
     return 0;

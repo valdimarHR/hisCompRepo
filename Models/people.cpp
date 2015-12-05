@@ -1,7 +1,5 @@
 #include "people.h"
 
-using namespace std;
-
 people::people()
 {
     name = "default";
@@ -28,6 +26,11 @@ void people::setBirth(int fbirth)
 void people::setDeath(int fdeath)
 {
     yearOfDeath = fdeath;
+}
+
+int people::getId() const
+{
+    return id;
 }
 
 string people::getName() const

@@ -1,17 +1,6 @@
-#include "datafetch.h"
-#include "Models/people.h"
-#include "Models/computers.h"
-#include "string"
-#include <QCoreApplication>
-#include <iostream>
-#include <vector>
-#include <QString>
-#include <QSqlQuery>
-#include <QSql>
+#include "DataFetch/datafetch.h"
 
-using namespace std;
-
-DataFetch::DataFetch()
+dataFetch::dataFetch()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
     QString dbName = "database.sqlite";
@@ -19,7 +8,7 @@ DataFetch::DataFetch()
 
 }
 
-vector<people> DataFetch::fetch(QString sqlCommand)
+vector<people> dataFetch::fetch(QString sqlCommand)
 {
 
     db.open();
@@ -30,7 +19,7 @@ vector<people> DataFetch::fetch(QString sqlCommand)
 
 }
 
-vector<people> DataFetch::convererPeopleTable(QSqlQuery& query)
+vector<people> dataFetch::convererPeopleTable(QSqlQuery& query)
 {
 //    vector<people> peopleVector;
 //    while(query.next())
@@ -51,7 +40,7 @@ vector<people> DataFetch::convererPeopleTable(QSqlQuery& query)
 //    return peopleVector;
 }
 
-vector<people> DataFetch::convererComputerTable(QSqlQuery& query)
+vector<people> dataFetch::convererComputerTable(QSqlQuery& query)
 {
     //NEED TO IMPLEMENT
     vector<people> peopleVector;
@@ -59,7 +48,7 @@ vector<people> DataFetch::convererComputerTable(QSqlQuery& query)
 
 }
 
-vector<people> DataFetch::convererCombinedTable(QSqlQuery& query)
+vector<people> dataFetch::convererCombinedTable(QSqlQuery& query)
 {
     //NEED TO IMPLEMENT
     vector<people> peopleVector;
@@ -67,3 +56,25 @@ vector<people> DataFetch::convererCombinedTable(QSqlQuery& query)
 
 }
 
+
+
+void dataFetch::inserPersonToDatabase(const people& a)
+{
+
+    db.open();
+    QSqlQuery query(db);
+
+    int birth = a.getBirth();
+    int death = a.getDeath();
+    string gender = a.getGender();
+    string name = a.getName();
+
+    query.prepare("INSERT INTO Scientists (name, gender, death, birth) VALUES (:name, :gender, :death, :birth)");
+    query.bindValue(":name", QString::fromStdString(name));
+    query.bindValue(":gender", QString::fromStdString(gender));
+    query.bindValue(":birth", birth);
+    query.bindValue(":death", death );
+    query.exec();
+    db.close();
+
+}

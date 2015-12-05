@@ -1,6 +1,5 @@
 #include "UI/ui.h"
-#include "Models/people.h"
-#include "Utilities/constants.h"
+
 
 ui::ui()
 {
@@ -275,7 +274,7 @@ void ui::printerMenuPeople()
 {
     int orderBy, ascending;
     cout << "* PRINTING PEOPLE *" << endl
-         << "Ordered  by:" << endl
+         << "Order  by:" << endl
          << "\t1: Name" << endl
          << "\t2: Gender" << endl
          << "\t3: Year of birth" << endl
@@ -289,13 +288,13 @@ void ui::printerMenuPeople()
     system("cls");
 
     if(orderBy != 2){
-        cout << "Do you want this list in ascending or descending order?" << endl
-             << "\t0: descending" << endl
-             << "\t1: ascending" << endl;
+        cout << "Do you want this list in descending or ascending order?" << endl
+             << "\t0: Descending" << endl
+             << "\t1: Ascending" << endl;
     } else {
-        cout << "Do you want this list to be ordered by females or males first?" << endl
-             << "\t0: males" << endl
-             << "\t1: females" << endl;
+        cout << "Do you want this list to be ordered by males or females first?" << endl
+             << "\t0: Males" << endl
+             << "\t1: Females" << endl;
     }
 
     cout << "Enter your choice: ";
@@ -309,10 +308,54 @@ void ui::printerMenuPeople()
 
 void ui::printerMenuComputers()
 {
-    //IMPLEMENT UI....
-    //IMPLEMENT UI....
-    //IMPLEMENT UI....
+    int orderBy, ascending;
+    cout << "* PRINTING COMPUTERS *" << endl
+         << "Order  by:" << endl
+         << "\t1: Name" << endl
+         << "\t2: Type" << endl
+         << "\t3: Year of Creation" << endl
+         << "\t4: Whether it was Built" << endl
+         << "\t5: As in file" << endl
+         << "Enter your choice: ";
+    cout.flush();
+    cin >> orderBy;
+    
+    inputIntCheck(cin.fail(), orderBy, 1, 5);
+    system("cls");
+    
+    if (orderBy != 4) {
+        cout << "Do you this lest in ascending or descending order?" << endl
+             << "\t0: descending" << endl
+             << "\t1: ascending" << endl;
+    }
+    else {
+        cout << "Do you want this list to be ordered by whether it was built or not built first" << endl
+             << "\t0: built" << endl
+             << "\t1: not built" << endl;
+    }
+    
+    cout << "Enter your choice: ";
+    cout.flush();
+    cin >> ascending;
 
+    inputIntCheck(cin.fail(), orderBy, 1, 5);
+    system("cls");
+
+    if (orderBy != 4) {
+        cout << "Do you this list in descending or ascending order?" << endl
+             << "\t0: Descending" << endl
+             << "\t1: Ascending" << endl;
+    }
+    else {
+        cout << "Do you want this list to be ordered by whether it was built or not built first" << endl
+             << "\t0: Built" << endl
+             << "\t1: Not built" << endl;
+    }
+
+    cout << "Enter your choice: ";
+    cout.flush();
+    cin >> ascending;
+    inputIntCheck(cin.fail(), ascending, 0, 1);
 }
 
 void ui::deleteMenu()
@@ -333,7 +376,7 @@ void ui::printVector(const vector<people>& list) const
         string gender = person.getGender();
         int yearOfBirth = person.getBirth();
         string death = to_string(person.getDeath());
-        if(person.getDeath() == notDead) death = "Alive";
+        if(person.getDeath() == constants::notDead) death = "Alive";
         printf("|%25s|%10s|%8i|%8s|\n", name.c_str(), gender.c_str(), yearOfBirth, death.c_str());
     }
     cout << "+------------------------------------------------------+" << endl;
