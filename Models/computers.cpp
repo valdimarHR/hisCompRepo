@@ -8,6 +8,14 @@ computers::computers()
     wasBuilt = false;
 }
 
+computers::computers(const string& n, const int& y, const string& t, const bool& b)
+{
+    name = n;
+    yearCreated = y;
+    type = t;
+    wasBuilt = b;
+}
+
 void computers::setName(string fname)
 {
     name = fname;

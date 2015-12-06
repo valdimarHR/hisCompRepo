@@ -54,36 +54,34 @@ bool logic::sortDeath(const people& a, const people& b)
         return false;
     return (a.getDeath() < b.getDeath());
 }
+
 //Creates a class of people with the user inputted info.
 bool logic::insertPerson(string& name, string& gender, int& born, int& death)
 {
-<<<<<<< HEAD
-    //NO "listOfPeople" NEEDS NEW IMPLEMENTATION.
-    //NO "listOfPeople" NEEDS NEW IMPLEMENTATION.
-    //NO "listOfPeople" NEEDS NEW IMPLEMENTATION.
-=======
->>>>>>> f93cdba0bcc02bad2285263c9d34b5c7ef7b7eea
-
     bool dataExisted = false;
-    people per;
+    people per(name,gender,born,death);
 
-    per.setName(name);
-    per.setGender(gender);
-    per.setBirth(born);
-    per.setDeath(death);
     if (checkIfpersonOnList(per))
         return dataExisted = true;
     else
-        theData.inserPersonToDatabase(per);//Adds the people item to the database.
+        theData.insertPersonToDatabase(per);//Adds the people item to the database.
 
     return dataExisted;//Returns true if person is already on the list.
 }
 
 
-//Creates a class of people with the user inputted info.
-bool logic::insertComputer(string& name, string& type, int& created, bool& built)
+//Creates a class of computer with the user inputted info.
+bool logic::insertComputer(string& name, int& created, string& type, bool& built)
 {
-    return 0;
+    bool dataExisted = false;
+    computers comp(name,created,type,built);
+
+    //if (checkIfcomputerOnList(per))
+    //    return dataExisted = true;
+    //else
+        theData.insertComputerToDatabase(comp);//Adds the comp item to the database.
+
+    return dataExisted;//Returns true if computer is already on the list.
 }
 
 bool logic::checkIfpersonOnList(const people &person) const

@@ -37,6 +37,7 @@ void ui::mainMenu()
     cout.flush();
     cin >> choice;
     inputIntCheck(cin.fail(), choice, 1, 5);
+    clear();
 }
 
 void ui::menuSwitch()
@@ -73,18 +74,18 @@ void ui::menuSwitch()
 void ui::insertMenu()
 {
     int n;
-    system("cls");
 
-    cout << "* INSERT *" << endl;
+    cout << "* INSERT *" << endl << endl;
     cout << "Would you like in insert a:" << endl
-         << "0. Person" << endl
-         << "1. Computer" << endl
+         << "\t0. Person" << endl
+         << "\t1. Computer" << endl
          << "Enter your choice: ";
     cin >> n;
     inputIntCheck(cin.fail(), n, 0, 1);
 
+    clear();
     if(n == 0) insertMenuPerson();
-    else insertMenuCompter();
+    else insertMenuComputer();
 
 }
 
@@ -93,8 +94,7 @@ void ui::insertMenuPerson()
     string name, gender;
     int born, death;
 
-    system("cls");
-    cout << "* INSERTING PERSON *" << endl;
+    cout << "* INSERTING PERSON *" << endl << endl;
     cout << "Name: ";
     cin.ignore();
     getline(cin, name);
@@ -130,27 +130,46 @@ void ui::insertMenuPerson()
 
 }
 
-void ui::insertMenuCompter()
+void ui::insertMenuComputer()
 {
-    //IMPLEMENT....
-    //IMPLEMENT....
-    //IMPLEMENT....
-
-    string name, type;
+    string name, type, builtCheck;
     int created;
     bool built;
 
-    system("cls");
-    cout << "* INSERTING COMPUTER *" << endl;
-    cout << " ... implement ... ";
+    cout << "* INSERTING COMPUTER *" << endl << endl;
+    cout << "Name: ";
+    cin.ignore();
+    getline(cin, name);
+    cout << "Year Created (invented): ";
+    cin >> created;
+    inputIntCheck(cin.fail(), created);
+    cout << "What type of computer: ";
+    cin.ignore();
+    getline(cin, type);
+    cout << "Was it built (Y/N): ";
+    cin >> builtCheck;
+    built = inputStrToBool(builtCheck);
 
-    theLogic.insertComputer(name, type, created, built);
+    bool exists = theLogic.insertComputer(name, created, type, built);
+
+    if(exists)
+    {
+        cout << endl << "This computer was already on the list and was therefore not added again."
+             << endl << endl;
+        sleep(3);
+        system("cls");
+        return;
+    }
+
+    cout << endl << "Computer was added to the list.";
+    sleep(2);
+    system("cls");
+
 }
 
 void ui::searchMenu()
 {
     int n;
-    system("cls");
 
     cout << "* SEARCH *" << endl;
     cout << "Would you like to search by" << endl
@@ -159,6 +178,7 @@ void ui::searchMenu()
          << "Enter your choice: ";
     cin >> n;
     inputIntCheck(cin.fail(), n, 0, 1);
+    clear();
 
     if(n == 0) searchMenuPerson();
     else searchMenuComputer();
@@ -172,7 +192,6 @@ void ui::searchMenuPerson()
     //findBy föllin notar ekki lengur "listOfPeople" -> breyta yfir í SQL fyrirspurn í logic.cpp.
 
     int n;
-    system("cls");
 
     cout << "* SEARCH PERSON *" << endl;
     cout << "Would you like to search by" << endl
@@ -228,7 +247,6 @@ void ui::searchMenuComputer()
     //IMPLEMENT....
 
     int n;
-    system("cls");
 
     cout << "* SEARCH COMPUTER *" << endl;
     cout << "Would you like to search by" << endl
@@ -259,7 +277,7 @@ void ui::printerMenu()
     if(printChoice == 1)printerMenuAll();
     else if(printChoice == 2)printerMenuPeople();
     else printerMenuComputers();
-    system("cls");
+    clear();
 
 }
 
@@ -285,7 +303,7 @@ void ui::printerMenuPeople()
     cin >> orderBy;
 
     inputIntCheck(cin.fail(), orderBy, 1, 5);
-    system("cls");
+    clear();
 
     if(orderBy != 2){
         cout << "Do you want this list in descending or ascending order?" << endl
@@ -321,7 +339,7 @@ void ui::printerMenuComputers()
     cin >> orderBy;
     
     inputIntCheck(cin.fail(), orderBy, 1, 5);
-    system("cls");
+    clear();
     
     if (orderBy != 4) {
         cout << "Do you this lest in ascending or descending order?" << endl
@@ -339,7 +357,7 @@ void ui::printerMenuComputers()
     cin >> ascending;
 
     inputIntCheck(cin.fail(), orderBy, 1, 5);
-    system("cls");
+    clear();
 
     if (orderBy != 4) {
         cout << "Do you this list in descending or ascending order?" << endl
@@ -367,7 +385,7 @@ void ui::deleteMenu()
 
 void ui::printVector(const vector<people>& list) const
 {
-    system("cls");
+    clear();
     cout << "+------------------------------------------------------+" << endl;
     printf("|%25s|%10s|%8s|%8s|\n", "NAME", "GENDER", "BIRTH", "DEATH");
     cout << "+------------------------------------------------------+" << endl;
@@ -381,7 +399,7 @@ void ui::printVector(const vector<people>& list) const
     }
     cout << "+------------------------------------------------------+" << endl;
     system("pause");
-    system("cls");
+    clear();
 }
 
 string ui::getStringSearchValue(string question)
@@ -432,6 +450,22 @@ void ui::inputIntCheck(bool inputFail, int& var, int low, int high)
     }
 }
 
+bool ui::inputStrToBool(string& built)
+{
+    do
+    {
+    if (built == "Y" || built == "y" || built == "Yes" || built == "yes" )
+        return true;
+    else if (built == "N" || built == "n" || built == "No" || built == "no")
+        return false;
+    else
+        cout << "Invalid input!" << endl
+             << "Try again: ";
+        cin.clear();
+        cin >> built;
+    }while(true);
+}
+
 void ui::printTree()const
 {
     cout << "----Merry Christmas!!----" << endl;
@@ -464,5 +498,14 @@ void ui::printTree()const
     }
 
     cout << endl;
+}
+
+void ui::clear() const
+{
+    #ifdef Q_OS_WIN32 //All Windows versions
+        system("cls");
+    #else //In any other OS
+        system("clear");
+    #endif
 }
 

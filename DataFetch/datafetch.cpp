@@ -58,7 +58,7 @@ vector<people> dataFetch::convererCombinedTable(QSqlQuery& query)
 
 
 
-void dataFetch::inserPersonToDatabase(const people& a)
+void dataFetch::insertPersonToDatabase(const people& a)
 {
 
     db.open();
@@ -76,5 +76,26 @@ void dataFetch::inserPersonToDatabase(const people& a)
     query.bindValue(":death", death );
     query.exec();
     db.close();
+}
 
+
+void dataFetch::insertComputerToDatabase(const computers& c)
+{
+
+    db.open();
+    QSqlQuery query(db);
+
+    string name = c.getName();
+    int yearCreated = c.getYearCreated();
+    string type = c.getType();
+    bool wasBuilt = c.getWasBuilt();
+
+
+    query.prepare("INSERT INTO Computers (name, yearCreated, type, wasBuilt) VALUES (:name, :yearCreated, :type, :wasBuilt)");
+    query.bindValue(":name", QString::fromStdString(name));
+    query.bindValue(":yearCreated", yearCreated);
+    query.bindValue(":type", QString::fromStdString(type));
+    query.bindValue(":wasBuilt", wasBuilt );
+    query.exec();
+    db.close();
 }
