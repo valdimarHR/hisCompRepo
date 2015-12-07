@@ -27,12 +27,10 @@ public:
     bool insertPerson(string& name, string& gender, int& born, int& death);
     bool insertComputer(string& name, int& created, string& type, bool& built);
     bool insertConnection(const int& sid, const int& cid);
-    vector<people> findByPeopleName(string name);
-    vector<people> findByPeopleGender(string gender);
-    vector<people> findByPeopleBirth(int birthYear);
-    vector<people> findByPeopleDeath(int deathYear);
     vector<peopleWithComputers> printerSortPeople(int orderBy, int ascending);
     vector<computersWithPeople> printerSortComputers(int orderBy, int ascending);
+    vector<peopleWithComputers> findPeople(string column, string searchValue);
+    vector<computersWithPeople> findComputerByName(string name);
     void searchPerson();
     bool eraseListOfVector();
 private:

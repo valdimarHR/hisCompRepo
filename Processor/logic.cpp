@@ -156,85 +156,12 @@ bool logic::checkIfpersonOnList(const people &person) const
     return 0;
 }
 
-vector<people> logic::findByPeopleName(string name)
+vector<peopleWithComputers> logic::findPeople(string column, string searchValue)
 {
-//    auto it = find_if(listOfPeople.begin(), listOfPeople.end(),
-//        [&name](const people& per){
-//            string objName = per.getName();
-//            std::transform(objName.begin(), objName.end(), objName.begin(), ::tolower);
-//            std::transform(name.begin(), name.end(), name.begin(), ::tolower);
-//            return objName.find(name) != string::npos;
-//        });
-
-    vector<people> found;
-
-//    while(it != listOfPeople.end()) {
-//        found.push_back(*it);
-//        it = find_if(++it, listOfPeople.end(),
-//            [&name](const people& per) {
-//                string objName = per.getName();
-//                std::transform(objName.begin(), objName.end(), objName.begin(), ::tolower);
-//                std::transform(name.begin(), name.end(), name.begin(), ::tolower);
-//                return objName.find(name) != string::npos;
-//            });
-//    }
-
-    return found;
+    return theData.fetchPeople(column, searchValue);
 }
 
-vector<people> logic::findByPeopleGender(string gender)
+vector<computersWithPeople> logic::findComputerByName(string name)
 {
-//    auto it = find_if(listOfPeople.begin(), listOfPeople.end(),
-//        [&gender](const people& per) {
-//            string objGender = per.getGender();
-//            std::transform(objGender.begin(), objGender.end(), objGender.begin(), ::tolower);
-//            std::transform(gender.begin(), gender.end(), gender.begin(), ::tolower);
-//            return objGender == gender;
-//        });
-
-    vector<people> found;
-
-//    while(it != listOfPeople.end()) {
-//        found.push_back(*it);
-//        it = find_if(++it, listOfPeople.end(),
-//            [&gender](const people& per) {
-//                string objGender = per.getGender();
-//                std::transform(objGender.begin(), objGender.end(), objGender.begin(), ::tolower);
-//                std::transform(gender.begin(), gender.end(), gender.begin(), ::tolower);
-//                return objGender == gender;
-//            });
-//    }
-
-    return found;
-}
-
-vector<people> logic::findByPeopleBirth(int birthYear)
-{
-//    auto it = find_if(listOfPeople.begin(), listOfPeople.end(),
-//        [&birthYear](const people& per){return per.getBirth() == birthYear;});
-
-    vector<people> found;
-
-//    while(it != listOfPeople.end()) {
-//        found.push_back(*it);
-//        it = find_if(++it, listOfPeople.end(),
-//            [&birthYear](const people& per){return per.getBirth() == birthYear;});
-//    }
-
-    return found;
-}
-
-vector<people> logic::findByPeopleDeath(int deathYear)
-{
-//    auto it = find_if(listOfPeople.begin(), listOfPeople.end(),
-//        [&deathYear](const people& per){return per.getDeath() == deathYear;});
-
-    vector<people> found;
-
-//    while(it != listOfPeople.end()) {
-//        found.push_back(*it);
-//        it = find_if(++it, listOfPeople.end(),
-//            [&deathYear](const people& per){return per.getDeath() == deathYear;});
-//    }
-    return found;
+    return theData.fetchComputers("name", name);
 }

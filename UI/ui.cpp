@@ -245,40 +245,44 @@ void ui::searchMenuPerson()
     cin >> n;
     inputIntCheck(cin.fail(), n, 1, 4);
 
-    vector<people> foundPeople;
+    vector<peopleWithComputers> foundPeople;
+    string question;
+    string column;
     switch(n) {
         case 1: {
-            string searchValue = getStringSearchValue("What would you like to search for?");
-            foundPeople = theLogic.findByPeopleName(searchValue);
+            question = "What would you like to search for?";
+            column = "name";
             break;
         }
         case 2: {
-            string searchValue = getStringSearchValue("What would you like to search for? (male or female)");
-            foundPeople = theLogic.findByPeopleGender(searchValue);
+            question = "What would you like to search for (male or female)?";
+            column = "gender";
             break;
         }
         case 3: {
-            int searchValue = getIntSearchValue();
-            foundPeople = theLogic.findByPeopleBirth(searchValue);
+            question = "Enter a year: ";
+            column = "birth";
             break;
         }
         case 4: {
-            int searchValue = getIntSearchValue();
-            foundPeople = theLogic.findByPeopleDeath(searchValue);
+            question = "Enter a year: ";
+            column = "death";
             break;
         }
         default: {
             break;
         }
+    }
 
-        if (foundPeople.size() == 0){
-            cout << "No search results found!" << endl;
-            system("pause");
-            system("cls");
+    string searchValue = getStringSearchValue(question);
+    foundPeople = theLogic.findPeople(column, searchValue);
 
-        } else {
-//            printVector(foundPeople);
-        }
+    if (foundPeople.size() == 0){
+        cout << "No search results found!" << endl;
+        system("pause");
+        system("cls");
+    } else {
+        printPeopleVector(foundPeople);
     }
 }
 
@@ -492,18 +496,6 @@ string ui::getStringSearchValue(string question)
 
     cout << question << endl;
     cin >> value;
-
-    return value;
-}
-
-int ui::getIntSearchValue()
-{
-    int value;
-
-    cout << "What would you like to search for?" << endl;
-    cin >> value;
-
-    inputIntCheck(cin.fail(), value);
 
     return value;
 }
