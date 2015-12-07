@@ -182,15 +182,18 @@ void ui::insertMenuConnection()
     cout << "Scientist number: ";
     int sid;
     cin >> sid;
+    inputIntCheck(cin.fail(), sid, 1, sortedVector.size());
     clear();
 
     cout << "Now choose a computer from this list:";
     sleep(2);
     clear();
-    cout << "hérna kemur listi þegar fetchComputer er tilbúið" << endl;
+    vector<computersWithPeople> sortVector = theLogic.printerSortComputers(orderBy, ascending);
+    printVector(sortVector);
     int cid;
     cout << "Computer number: ";
     cin >> cid;
+    inputIntCheck(cin.fail(), cid, 1, sortVector.size());
 
     bool connected = theLogic.insertConnection(sid, cid);
     if (connected)
@@ -404,7 +407,6 @@ void ui::deleteMenu()
 
 void ui::printVector(const vector<peopleWithComputers> &list) const
 {
-    int size = list.size();
     for(const peopleWithComputers person:list)
     {
         cout << person.p.getId() << '\t' << person.p.getName()
@@ -418,7 +420,6 @@ void ui::printVector(const vector<peopleWithComputers> &list) const
 
 void ui::printVector(const vector<computersWithPeople> &list) const
 {
-    int size = list.size();
     for(const computersWithPeople computer:list)
     {
         cout << computer.c.getId() << '\t' << computer.c.getName()
@@ -444,7 +445,7 @@ void ui::printPeopleVector(const vector<peopleWithComputers>& list) const
         string computerName = person.creations[0].getName().c_str();
         if(computerName != "default")
         {
-            for(int i = 0; i < person.creations.size(); i++)
+            for(unsigned int i = 0; i < person.creations.size(); i++)
             {
                 printf("|%64s %25s|\n", "", person.creations[i].getName().c_str());
             }
@@ -473,7 +474,7 @@ void ui::printComputersVector(const vector<computersWithPeople>& list) const
         string personName = comp.creators[0].getName().c_str();
         if(personName != "default")
         {
-            for(int i = 0; i < comp.creators.size(); i++)
+            for(unsigned int i = 0; i < comp.creators.size(); i++)
             {
                 printf("|%56s %33s|\n", "", comp.creators[i].getName().c_str());
             }

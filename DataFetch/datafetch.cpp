@@ -137,6 +137,7 @@ vector<computersWithPeople> dataFetch::convererComputersTable(QSqlQuery& query)
         string Ctype = query.value("type").toString().toStdString();
         bool CwasBuilt = query.value("wasBuilt").toUInt();
 
+        comp.c.setId(currentComputerId);
         comp.c.setName(Cname);
         comp.c.setYearCreated(CyearCreated);
         comp.c.setType(Ctype);
