@@ -10,7 +10,8 @@ bool ui::start()
 {
     cout << "Welcome to Computer Sciense DB." << endl;
 
-    do{
+    do
+    {
         mainMenu();
         menuSwitch();
     }while(choice != 5);
@@ -414,7 +415,7 @@ void ui::printVector(const vector<peopleWithComputers> &list) const
     for(const peopleWithComputers person:list)
     {
         cout << person.p.getId() << '\t' << person.p.getName()
-             << '\t' << person.p.getBirth() << "-";
+             << " " << person.p.getBirth() << "-";
         if (person.p.getDeath() != -1)
             cout << person.p.getDeath() << endl;
         else
@@ -427,7 +428,7 @@ void ui::printVector(const vector<computersWithPeople> &list) const
     for(const computersWithPeople computer:list)
     {
         cout << computer.c.getId() << '\t' << computer.c.getName()
-             << '\t' << computer.c.getYearCreated() << endl;
+             << ", " << computer.c.getYearCreated() << endl;
     }
 }
 
