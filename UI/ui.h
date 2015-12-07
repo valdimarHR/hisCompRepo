@@ -16,6 +16,7 @@ public:
     bool start();
     void printTree() const;
     void printPeopleVector(const vector<peopleWithComputers>& list) const;
+    void printComputersVector(const vector<computersWithPeople>& list) const;
 private:
     logic theLogic;
     int choice;

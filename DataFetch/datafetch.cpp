@@ -9,7 +9,7 @@ dataFetch::dataFetch()
 
 }
 
-vector<peopleWithComputers> dataFetch::fetchPeople(QString columnName, QString seartchString)
+vector<peopleWithComputers> dataFetch::fetchPeople(string columnName, string seartchString)
 {
     db.open();
     QSqlQuery query(db);
@@ -18,11 +18,11 @@ vector<peopleWithComputers> dataFetch::fetchPeople(QString columnName, QString s
     command += "LEFT JOIN (SELECT * FROM Computers AS C ";
     command += "LEFT JOIN Invents AS I ";
     command += "ON I.cid = C.id) AS T ";
-    command += "ON T.sid = S.id WHERE S." + columnName + " LIKE '%" + seartchString + "%'";
+    command += "ON T.sid = S.id WHERE S." + QString::fromStdString(columnName) + " LIKE '%" + QString::fromStdString(seartchString) + "%'";
 
     query.prepare(command);
-    query.bindValue(":columnName", columnName);
-    query.bindValue(":seartchString", seartchString);
+    //query.bindValue(":columnName", columnName);
+    //query.bindValue(":seartchString", seartchString);
     query.exec();
 
     vector<peopleWithComputers> pepVector = convererPeopleTable(query);
@@ -30,6 +30,30 @@ vector<peopleWithComputers> dataFetch::fetchPeople(QString columnName, QString s
     db.close();
 
     return pepVector;
+
+}
+
+vector<computersWithPeople> dataFetch::fetchComputers(string columnName, string seartchString)
+{
+    db.open();
+    QSqlQuery query(db);
+
+    QString command = "SELECT * FROM Computers AS C ";
+    command += "LEFT JOIN (SELECT * FROM Scientists AS S ";
+    command += "LEFT JOIN Invents AS I ";
+    command += "ON I.sid = S.id) AS T ";
+    command += "ON T.cid = C.id WHERE C." + QString::fromStdString(columnName) + " LIKE '%" + QString::fromStdString(seartchString) + "%'";
+
+    query.prepare(command);
+    //query.bindValue(":columnName", columnName);
+    //query.bindValue(":seartchString", seartchString);
+    query.exec();
+
+    vector<computersWithPeople> comVector = convererComputersTable(query);
+
+    db.close();
+
+    return comVector;
 
 }
 
@@ -80,11 +104,50 @@ vector<peopleWithComputers> dataFetch::convererPeopleTable(QSqlQuery& query)
     return peopleVector;
 }
 
-vector<people> dataFetch::convererComputerTable(QSqlQuery& query)
+vector<computersWithPeople> dataFetch::convererComputersTable(QSqlQuery& query)
 {
-    //NEED TO IMPLEMENT
-    vector<people> peopleVector;
-    return peopleVector;
+    vector<computersWithPeople> computersVector;
+    int lastId = -1;
+    while(query.next())
+    {
+        int currentComputerId = query.value(0).toUInt();
+
+        people per;
+        if(query.value(5).toUInt() != 0)
+        {
+            string Pname = query.value(6).toString().toStdString();
+            string Pgender = query.value("gender").toString().toStdString();
+            int Pborn = query.value("birth").toUInt();
+            int Pdeath = query.value("death").toUInt();
+
+            per.setName(Pname);
+            per.setGender(Pgender);
+            per.setBirth(Pborn);
+            per.setDeath(Pdeath);
+
+            if(currentComputerId == lastId){
+                computersVector.back().creators.push_back(per);
+                continue;
+            }
+        }
+
+        computersWithPeople comp;
+        string Cname = query.value(1).toString().toStdString();
+        int CyearCreated = query.value("yearCreated").toUInt();
+        string Ctype = query.value("type").toString().toStdString();
+        bool CwasBuilt = query.value("wasBuilt").toUInt();
+
+        comp.c.setName(Cname);
+        comp.c.setYearCreated(CyearCreated);
+        comp.c.setType(Ctype);
+        comp.c.setWasBuilt(CwasBuilt);
+        comp.creators.push_back(per);
+
+        computersVector.push_back(comp);
+
+        lastId = currentComputerId;
+    }
+    return computersVector;
 
 }
 
