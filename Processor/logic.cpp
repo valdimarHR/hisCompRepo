@@ -5,9 +5,9 @@ logic::logic()
 
 }
 
-vector<people> logic::printerSortPeople(int orderBy, int ascending) const
+vector<peopleWithComputers> logic::printerSortPeople(int orderBy, int ascending)
 {
-    vector<people> sortedVector;// = datafetch.SOMETHING();
+    vector<peopleWithComputers> sortedVector = theData.fetchPeople("name", "");
 
     if (orderBy < 5) sort(sortedVector.begin(), sortedVector.end(), sortName);
     switch(orderBy)
@@ -31,28 +31,28 @@ vector<people> logic::printerSortPeople(int orderBy, int ascending) const
     return sortedVector;
 }
 
-bool logic::sortName(const people &a, const people &b)
+bool logic::sortName(const peopleWithComputers &a, const peopleWithComputers &b)
 {
-    return (a.getName() < b.getName());
+    return (a.p.getName() < b.p.getName());
 }
 
-bool logic::sortGender(const people& a, const people& b)
+bool logic::sortGender(const peopleWithComputers& a, const peopleWithComputers& b)
 {
-    return (a.getGender() < b.getGender());
+    return (a.p.getGender() < b.p.getGender());
 }
 
-bool logic::sortBirth(const people& a, const people& b)
+bool logic::sortBirth(const peopleWithComputers& a, const peopleWithComputers& b)
 {
-    return (a.getBirth() < b.getBirth());
+    return (a.p.getBirth() < b.p.getBirth());
 }
 
-bool logic::sortDeath(const people& a, const people& b)
+bool logic::sortDeath(const peopleWithComputers& a, const peopleWithComputers& b)
 {
-    if(b.getDeath() == -1 && a.getDeath() != -1)
+    if(b.p.getDeath() == -1 && a.p.getDeath() != -1)
         return true;
-    if(a.getDeath() == -1 && b.getDeath() != -1)
+    if(a.p.getDeath() == -1 && b.p.getDeath() != -1)
         return false;
-    return (a.getDeath() < b.getDeath());
+    return (a.p.getDeath() < b.p.getDeath());
 }
 
 //Creates a class of people with the user inputted info.

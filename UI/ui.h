@@ -16,6 +16,7 @@ public:
     bool start();
     void printTree() const;
     void printVector(const vector<people>& list) const;
+    void printPeopleVector(const vector<peopleWithComputers>& list) const;
 private:
     logic theLogic;
     int choice;
@@ -30,7 +31,6 @@ private:
     void printerMenu();
     void printerMenuPeople();
     void printerMenuComputers();
-    void printerMenuAll();
     void deleteMenu();
     void inputIntCheck(bool inputFail, int& var);
     void inputIntCheck(bool inputFail, int& var, int low, int high);

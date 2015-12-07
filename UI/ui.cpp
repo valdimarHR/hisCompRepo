@@ -266,26 +266,17 @@ void ui::printerMenu()
     int printChoice;
     cout << "* PRINTING *" << endl
          << "Do you want to print:" << endl
-         << "\t1: All" << endl
-         << "\t2: People only" << endl
-         << "\t3: Computers only" << endl
+         << "\t1: People" << endl
+         << "\t2: Computers" << endl
          << "Enter your choice: ";
     cout.flush();
     cin >> printChoice;
-    inputIntCheck(cin.fail(), printChoice, 1, 3);
-
-    if(printChoice == 1)printerMenuAll();
-    else if(printChoice == 2)printerMenuPeople();
-    else printerMenuComputers();
+    inputIntCheck(cin.fail(), printChoice, 1, 2);
     clear();
 
-}
+    if(printChoice == 1)printerMenuPeople();
+    else printerMenuComputers();
 
-void ui::printerMenuAll()
-{
-    //IMPLEMENT UI....
-    //IMPLEMENT UI....
-    //IMPLEMENT UI....
 }
 
 void ui::printerMenuPeople()
@@ -319,9 +310,11 @@ void ui::printerMenuPeople()
     cout.flush();
     cin >> ascending;
     inputIntCheck(cin.fail(), ascending, 0, 1);
+    clear();
 
-    vector<people> sortedVector = theLogic.printerSortPeople(orderBy, ascending);
-    printVector(sortedVector);
+
+    vector<peopleWithComputers> sortedVector = theLogic.printerSortPeople(orderBy, ascending);
+    printPeopleVector(sortedVector);
 }
 
 void ui::printerMenuComputers()
@@ -340,24 +333,6 @@ void ui::printerMenuComputers()
     
     inputIntCheck(cin.fail(), orderBy, 1, 5);
     clear();
-    
-    if (orderBy != 4) {
-        cout << "Do you this lest in ascending or descending order?" << endl
-             << "\t0: descending" << endl
-             << "\t1: ascending" << endl;
-    }
-    else {
-        cout << "Do you want this list to be ordered by whether it was built or not built first" << endl
-             << "\t0: built" << endl
-             << "\t1: not built" << endl;
-    }
-    
-    cout << "Enter your choice: ";
-    cout.flush();
-    cin >> ascending;
-
-    inputIntCheck(cin.fail(), orderBy, 1, 5);
-    clear();
 
     if (orderBy != 4) {
         cout << "Do you this list in descending or ascending order?" << endl
@@ -374,6 +349,7 @@ void ui::printerMenuComputers()
     cout.flush();
     cin >> ascending;
     inputIntCheck(cin.fail(), ascending, 0, 1);
+    clear();
 }
 
 void ui::deleteMenu()
@@ -386,18 +362,36 @@ void ui::deleteMenu()
 void ui::printVector(const vector<people>& list) const
 {
     clear();
-    cout << "+------------------------------------------------------+" << endl;
-    printf("|%25s|%10s|%8s|%8s|\n", "NAME", "GENDER", "BIRTH", "DEATH");
-    cout << "+------------------------------------------------------+" << endl;
-    for(const auto person:list){
-        string name = person.getName();
-        string gender = person.getGender();
-        int yearOfBirth = person.getBirth();
-        string death = to_string(person.getDeath());
-        if(person.getDeath() == constants::notDead) death = "Alive";
-        printf("|%25s|%10s|%8i|%8s|\n", name.c_str(), gender.c_str(), yearOfBirth, death.c_str());
+    cout << "OLD" << endl;
+    system("pause");
+    clear();
+}
+
+void ui::printPeopleVector(const vector<peopleWithComputers>& list) const
+{
+    //clear();
+    cout << "+----------------------------------------------------------------------+" << endl;
+    printf("|%25s|%10s|%8s|%8s|%15s|\n", "NAME", "GENDER", "BIRTH", "DEATH", "COMPUTERS");
+    cout << "+----------------------------------------------------------------------+" << endl;
+    for(const peopleWithComputers person:list){
+        string name = person.p.getName();
+        string gender = person.p.getGender();
+        int yearOfBirth = person.p.getBirth();
+        string death = to_string(person.p.getDeath());
+        if(person.p.getDeath() == constants::notDead) death = "Alive";
+        printf("|%25s|%10s|%8i|%8s|%15s|\n", name.c_str(), gender.c_str(), yearOfBirth, death.c_str(), "");
+
+        string computerName = person.creations[0].getName().c_str();
+        if(computerName != "default")
+        {
+            for(int i = 0; i < person.creations.size(); i++)
+            {
+                printf("|%54s %15s|\n", "", person.creations[i].getName().c_str());
+            }
+        }
+        cout << "+----------------------------------------------------------------------+" << endl;
     }
-    cout << "+------------------------------------------------------+" << endl;
+    //cout << "+----------------------------------------------------------------------+" << endl;
     system("pause");
     clear();
 }

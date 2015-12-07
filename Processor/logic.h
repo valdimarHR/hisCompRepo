@@ -4,6 +4,8 @@
 #include <iostream>
 #include <fstream>
 #include "Models/people.h"
+#include "Models/peoplewithcomputers.h"
+#include "Models/computerswithpeople.h"
 #include "DataFetch/datafetch.h"
 #include <vector>
 #include <string>
@@ -28,15 +30,15 @@ public:
     vector<people> findByPeopleGender(string gender);
     vector<people> findByPeopleBirth(int birthYear);
     vector<people> findByPeopleDeath(int deathYear);
-    vector<people> printerSortPeople(int orderBy, int ascending) const;
+    vector<peopleWithComputers> printerSortPeople(int orderBy, int ascending);
     void searchPerson();
     bool eraseListOfVector();
 private:
     dataFetch theData;
-    static bool sortName(const people& a, const people& b);
-    static bool sortGender(const people& a, const people& b);
-    static bool sortBirth(const people& a, const people& b);
-    static bool sortDeath(const people& a, const people& b);
+    static bool sortName(const peopleWithComputers& a, const peopleWithComputers& b);
+    static bool sortGender(const peopleWithComputers& a, const peopleWithComputers& b);
+    static bool sortBirth(const peopleWithComputers& a, const peopleWithComputers& b);
+    static bool sortDeath(const peopleWithComputers& a, const peopleWithComputers& b);
     bool checkIfpersonOnList(const people& person) const;
     void getInsertedInfo(string& name, string& gender, int& born, int& death)const;
 

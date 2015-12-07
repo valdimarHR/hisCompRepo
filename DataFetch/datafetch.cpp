@@ -1,4 +1,5 @@
 #include "DataFetch/datafetch.h"
+#include <QVariant>
 
 dataFetch::dataFetch()
 {
@@ -8,36 +9,74 @@ dataFetch::dataFetch()
 
 }
 
-vector<people> dataFetch::fetch(QString sqlCommand)
+vector<peopleWithComputers> dataFetch::fetchPeople(QString columnName, QString seartchString)
 {
-
     db.open();
     QSqlQuery query(db);
 
-    query.exec("SELECT * FROM Scientists"); //"sqlCommand" will be used here
-    return convererPeopleTable(query);
+    QString command = "SELECT * FROM Scientists AS S ";
+    command += "LEFT JOIN (SELECT * FROM Computers AS C ";
+    command += "LEFT JOIN Invents AS I ";
+    command += "ON I.cid = C.id) AS T ";
+    command += "ON T.sid = S.id WHERE S." + columnName + " LIKE '%" + seartchString + "%'";
+
+    query.prepare(command);
+    query.bindValue(":columnName", columnName);
+    query.bindValue(":seartchString", seartchString);
+    query.exec();
+
+    vector<peopleWithComputers> pepVector = convererPeopleTable(query);
+
+    db.close();
+
+    return pepVector;
 
 }
 
-vector<people> dataFetch::convererPeopleTable(QSqlQuery& query)
+vector<peopleWithComputers> dataFetch::convererPeopleTable(QSqlQuery& query)
 {
-//    vector<people> peopleVector;
-//    while(query.next())
-//    {
-//        string name = query.value("name").toString().toStdString();
-//        string gender = query.value("gender").toString().toStdString();
-//        int born = query.value("born").toUInt();
-//        int death = query.value("death").toUInt();
+    vector<peopleWithComputers> peopleVector;
+    int lastId = -1;
+    while(query.next())
+    {
+        int currentPersonId = query.value(0).toUInt();
 
-//        people per;
-//        per.setName(name);
-//        per.setGender(gender);
-//        per.setBirth(born);
-//        per.setDeath(death);
+        computers comp;
+        if(query.value(5).toUInt() != 0)
+        {
+            string Cname = query.value(6).toString().toStdString();
+            int CyearCreated = query.value("yearCreated").toUInt();
+            string Ctype = query.value("type").toString().toStdString();
+            bool CwasBuilt = query.value("wasBuilt").toUInt();
 
-//        peopleVector.push_back(per);
-//    }
-//    return peopleVector;
+            comp.setName(Cname);
+            comp.setYearCreated(CyearCreated);
+            comp.setType(Ctype);
+            comp.setWasBuilt(CwasBuilt);
+
+            if(currentPersonId == lastId){
+                peopleVector.back().creations.push_back(comp);
+                continue;
+            }
+        }
+
+        string Pname = query.value(1).toString().toStdString();
+        string Pgender = query.value("gender").toString().toStdString();
+        int Pborn = query.value("birth").toUInt();
+        int Pdeath = query.value("death").toUInt();
+
+        peopleWithComputers per;
+        per.p.setName(Pname);
+        per.p.setGender(Pgender);
+        per.p.setBirth(Pborn);
+        per.p.setDeath(Pdeath);
+        per.creations.push_back(comp);
+
+        peopleVector.push_back(per);
+
+        lastId = currentPersonId;
+    }
+    return peopleVector;
 }
 
 vector<people> dataFetch::convererComputerTable(QSqlQuery& query)
