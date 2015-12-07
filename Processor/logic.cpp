@@ -9,19 +9,19 @@ vector<peopleWithComputers> logic::printerSortPeople(int orderBy, int ascending)
 {
     vector<peopleWithComputers> sortedVector = theData.fetchPeople("name", "");
 
-    if (orderBy < 5) sort(sortedVector.begin(), sortedVector.end(), sortName);
+    if (orderBy < 5) sort(sortedVector.begin(), sortedVector.end(), sortPeopleName);
     switch(orderBy)
        {
        case 1 :
           break;
        case 2 :
-          sort(sortedVector.begin(), sortedVector.end(), sortGender);
+          sort(sortedVector.begin(), sortedVector.end(), sortPeopleGender);
           break;
        case 3 :
-          sort(sortedVector.begin(), sortedVector.end(), sortBirth);
+          sort(sortedVector.begin(), sortedVector.end(), sortPeopleBirth);
           break;
        case 4 :
-          sort(sortedVector.begin(), sortedVector.end(), sortDeath);
+          sort(sortedVector.begin(), sortedVector.end(), sortPeopleDeath);
           break;
        default :
           break;
@@ -31,28 +31,74 @@ vector<peopleWithComputers> logic::printerSortPeople(int orderBy, int ascending)
     return sortedVector;
 }
 
-bool logic::sortName(const peopleWithComputers &a, const peopleWithComputers &b)
+vector<computersWithPeople> logic::printerSortComputers(int orderBy, int ascending)
+{
+    vector<computersWithPeople> sortedVector = theData.fetchComputers("name", "");
+
+    if (orderBy < 5) sort(sortedVector.begin(), sortedVector.end(), sortComputersName);
+    switch(orderBy)
+       {
+       case 1 :
+          break;
+       case 2 :
+          sort(sortedVector.begin(), sortedVector.end(), sortComputersType);
+          break;
+       case 3 :
+          sort(sortedVector.begin(), sortedVector.end(), sortComputersYear);
+          break;
+       case 4 :
+          sort(sortedVector.begin(), sortedVector.end(), sortComputersBuilt);
+          break;
+       default :
+          break;
+       }
+    if(!ascending) reverse(sortedVector.begin(), sortedVector.end());
+
+    return sortedVector;
+}
+
+bool logic::sortPeopleName(const peopleWithComputers &a, const peopleWithComputers &b)
 {
     return (a.p.getName() < b.p.getName());
 }
 
-bool logic::sortGender(const peopleWithComputers& a, const peopleWithComputers& b)
+bool logic::sortPeopleGender(const peopleWithComputers& a, const peopleWithComputers& b)
 {
     return (a.p.getGender() < b.p.getGender());
 }
 
-bool logic::sortBirth(const peopleWithComputers& a, const peopleWithComputers& b)
+bool logic::sortPeopleBirth(const peopleWithComputers& a, const peopleWithComputers& b)
 {
     return (a.p.getBirth() < b.p.getBirth());
 }
 
-bool logic::sortDeath(const peopleWithComputers& a, const peopleWithComputers& b)
+bool logic::sortPeopleDeath(const peopleWithComputers& a, const peopleWithComputers& b)
 {
     if(b.p.getDeath() == -1 && a.p.getDeath() != -1)
         return true;
     if(a.p.getDeath() == -1 && b.p.getDeath() != -1)
         return false;
     return (a.p.getDeath() < b.p.getDeath());
+}
+
+bool logic::sortComputersName(const computersWithPeople &a, const computersWithPeople &b)
+{
+    return (a.c.getName() < b.c.getName());
+}
+
+bool logic::sortComputersType(const computersWithPeople& a, const computersWithPeople& b)
+{
+    return (a.c.getType() < b.c.getType());
+}
+
+bool logic::sortComputersYear(const computersWithPeople& a, const computersWithPeople& b)
+{
+    return (a.c.getYearCreated() < b.c.getYearCreated());
+}
+
+bool logic::sortComputersBuilt(const computersWithPeople& a, const computersWithPeople& b)
+{
+    return (a.c.getWasBuilt() < b.c.getWasBuilt());
 }
 
 //Creates a class of people with the user inputted info.

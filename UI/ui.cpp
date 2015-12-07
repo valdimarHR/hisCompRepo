@@ -350,6 +350,9 @@ void ui::printerMenuComputers()
     cin >> ascending;
     inputIntCheck(cin.fail(), ascending, 0, 1);
     clear();
+
+    vector<computersWithPeople> sortedVector = theLogic.printerSortComputers(orderBy, ascending);
+    printComputersVector(sortedVector);
 }
 
 void ui::deleteMenu()
@@ -371,7 +374,7 @@ void ui::printPeopleVector(const vector<peopleWithComputers>& list) const
 {
     //clear();
     cout << "+----------------------------------------------------------------------+" << endl;
-    printf("|%25s|%10s|%8s|%8s|%15s|\n", "NAME", "GENDER", "BIRTH", "DEATH", "COMPUTERS");
+    printf("|%25s|%10s|%8s|%8s|%15s|\n", "PEOPLE NAME", "GENDER", "BIRTH", "DEATH", "COMPUTERS");
     cout << "+----------------------------------------------------------------------+" << endl;
     for(const peopleWithComputers person:list){
         string name = person.p.getName();
@@ -387,6 +390,35 @@ void ui::printPeopleVector(const vector<peopleWithComputers>& list) const
             for(int i = 0; i < person.creations.size(); i++)
             {
                 printf("|%54s %15s|\n", "", person.creations[i].getName().c_str());
+            }
+        }
+        cout << "+----------------------------------------------------------------------+" << endl;
+    }
+    //cout << "+----------------------------------------------------------------------+" << endl;
+    system("pause");
+    clear();
+}
+
+void ui::printComputersVector(const vector<computersWithPeople>& list) const
+{
+    //clear();
+    cout << "+----------------------------------------------------------------------+" << endl;
+    printf("|%17s|%10s|%8s|%8s|%23s|\n", "COMPUTER NAME", "TYPE", "YEAR", "BUILT", "CREATORS");
+    cout << "+----------------------------------------------------------------------+" << endl;
+    for(const computersWithPeople comp:list){
+        string name = comp.c.getName();
+        string type = comp.c.getType();
+        int year = comp.c.getYearCreated();
+        string built = "No";
+        if(comp.c.getWasBuilt()) built = "Yes";
+        printf("|%17s|%10s|%8i|%8s|%23s|\n", name.c_str(), type.c_str(), year, built.c_str(), "");
+
+        string personName = comp.creators[0].getName().c_str();
+        if(personName != "default")
+        {
+            for(int i = 0; i < comp.creators.size(); i++)
+            {
+                printf("|%46s %23s|\n", "", comp.creators[i].getName().c_str());
             }
         }
         cout << "+----------------------------------------------------------------------+" << endl;

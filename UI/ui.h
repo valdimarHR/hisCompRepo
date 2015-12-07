@@ -17,6 +17,7 @@ public:
     void printTree() const;
     void printVector(const vector<people>& list) const;
     void printPeopleVector(const vector<peopleWithComputers>& list) const;
+    void printComputersVector(const vector<computersWithPeople>& list) const;
 private:
     logic theLogic;
     int choice;
