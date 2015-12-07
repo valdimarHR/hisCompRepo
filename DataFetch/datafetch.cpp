@@ -57,6 +57,27 @@ vector<computersWithPeople> dataFetch::fetchComputers(string columnName, string 
 
 }
 
+bool dataFetch::alreadyConnnected(const int sid, const int cid)
+{
+    db.open();
+
+    QSqlQuery query(db);
+
+    query.exec("SELECT * FROM Invents");
+
+    bool connected = false;
+
+    while(query.next())
+    {
+        int tableSid = query.value("sid").toUInt();
+        int tableCid = query.value("cid").toUInt();
+        if ((sid == tableSid)&&(cid == tableCid))
+            connected = true;
+    }
+
+    return connected;
+}
+
 vector<peopleWithComputers> dataFetch::convererPeopleTable(QSqlQuery& query)
 {
     vector<peopleWithComputers> peopleVector;

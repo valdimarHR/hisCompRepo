@@ -23,6 +23,7 @@ public:
     void insertPersonToDatabase(const people& a);
     void insertComputerToDatabase(const computers& c);
     void insertConnectionToDatabase(const int& sid, const int& cid);
+    bool alreadyConnnected(const int sid, const int cid);
 private:
     vector<peopleWithComputers> convererPeopleTable(QSqlQuery& query);
     vector<computersWithPeople> convererComputersTable(QSqlQuery& query);
