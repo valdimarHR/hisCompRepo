@@ -1,9 +1,12 @@
 #include "DataFetch/datafetch.h"
 #include <QVariant>
+#include <QFile>
 
 dataFetch::dataFetch()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
+    QFile dbfile;
+    if(!dbfile.exists("database.sqlite")) createDatabase();
     QString dbName = "database.sqlite";
     db.setDatabaseName(dbName);
 
@@ -233,6 +236,31 @@ void dataFetch::insertConnectionToDatabase(const int& sid, const int& cid)
     query.prepare("INSERT INTO Invents (sid, cid) VALUES (:sid, :cid)");
     query.bindValue(":sid", sid);
     query.bindValue(":cid", cid);
+    query.exec();
+    db.close();
+}
+
+void dataFetch::createDatabase()
+{
+    db.setDatabaseName("database.sqlite");
+    db.open();
+    QSqlQuery query(db);
+
+    query.prepare("CREATE TABLE 'Computers' ('id' INTEGER PRIMARY KEY  "
+                  "NOT NULL ,'name' VARCHAR NOT NULL ,'yearCreated' "
+                  "INTEGER NOT NULL ,'type' VARCHAR NOT NULL ,"
+                  "'wasBuilt' BOOL NOT NULL  DEFAULT (null) )");
+    query.exec();
+
+    query.prepare("CREATE TABLE 'Scientists' ('id' INTEGER PRIMARY KEY  AUTOINCREMENT  "
+                  "NOT NULL , 'name' VARCHAR NOT NULL , 'gender' VARCHAR NOT NULL , "
+                  "'birth' INTEGER NOT NULL , 'death' INTEGER)");
+    query.exec();
+
+    query.prepare("CREATE TABLE Invents(sid INTEGER,cid INTEGER,"
+                  "FOREIGN KEY (sid) REFERENCES Scientists(id),"
+                  "FOREIGN KEY (cid) REFERENCES Computers(id) "
+                  "PRIMARY KEY (sid, cid))");
     query.exec();
     db.close();
 }

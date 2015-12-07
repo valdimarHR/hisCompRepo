@@ -28,6 +28,7 @@ private:
     vector<peopleWithComputers> convererPeopleTable(QSqlQuery& query);
     vector<computersWithPeople> convererComputersTable(QSqlQuery& query);
     vector<people> convererCombinedTable(QSqlQuery& query);
+    void createDatabase();
     QSqlDatabase db;
 };
 
