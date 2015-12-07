@@ -70,6 +70,7 @@ vector<peopleWithComputers> dataFetch::convererPeopleTable(QSqlQuery& query)
         per.p.setGender(Pgender);
         per.p.setBirth(Pborn);
         per.p.setDeath(Pdeath);
+        per.p.setId(currentPersonId);
         per.creations.push_back(comp);
 
         peopleVector.push_back(per);
@@ -92,7 +93,7 @@ vector<people> dataFetch::convererCombinedTable(QSqlQuery& query)
     //NEED TO IMPLEMENT
     vector<people> peopleVector;
     return peopleVector;
-
+    //Þurfum við nokkuð þetta fall?
 }
 
 
@@ -135,6 +136,18 @@ void dataFetch::insertComputerToDatabase(const computers& c)
     query.bindValue(":yearCreated", yearCreated);
     query.bindValue(":type", QString::fromStdString(type));
     query.bindValue(":wasBuilt", wasBuilt );
+    query.exec();
+    db.close();
+}
+
+void dataFetch::insertConnectionToDatabase(const int& sid, const int& cid)
+{
+    db.open();
+    QSqlQuery query(db);
+
+    query.prepare("INSERT INTO Invents (sid, cid) VALUES (:sid, :cid)");
+    query.bindValue(":sid", sid);
+    query.bindValue(":cid", cid);
     query.exec();
     db.close();
 }

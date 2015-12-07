@@ -84,6 +84,18 @@ bool logic::insertComputer(string& name, int& created, string& type, bool& built
     return dataExisted;//Returns true if computer is already on the list.
 }
 
+bool logic::insertConnection(const int& sid, const int& cid)
+{
+    bool dataExisted = false;
+
+    //if (alreadyConnnected())
+    //    return dataExisted = true;
+    //else
+        theData.insertConnectionToDatabase(sid, cid);//Adds the connection to the DB.
+
+    return dataExisted;//Returns true if computer is already on the list.
+}
+
 bool logic::checkIfpersonOnList(const people &person) const
 {
     //MAKE NEW IMPLEMENTATION

@@ -16,6 +16,11 @@ people::people(const string& n, const string& g, const int& b, const int& d)
     yearOfDeath = d;
 }
 
+void people::setId(int fid)
+{
+    id = fid;
+}
+
 void people::setName(string fname)
 {
     name = fname;

@@ -15,7 +15,6 @@ public:
     ui();
     bool start();
     void printTree() const;
-    void printVector(const vector<people>& list) const;
     void printPeopleVector(const vector<peopleWithComputers>& list) const;
 private:
     logic theLogic;
@@ -25,6 +24,9 @@ private:
     void insertMenu();
     void insertMenuPerson();
     void insertMenuComputer();
+    void insertMenuConnection();
+    void printVector(const vector<peopleWithComputers> &list) const;
+    void printVector(const vector<computersWithPeople> &list) const;
     void searchMenu();
     void searchMenuPerson();
     void searchMenuComputer();

@@ -26,6 +26,7 @@ public:
     logic();
     bool insertPerson(string& name, string& gender, int& born, int& death);
     bool insertComputer(string& name, int& created, string& type, bool& built);
+    bool insertConnection(const int& sid, const int& cid);
     vector<people> findByPeopleName(string name);
     vector<people> findByPeopleGender(string gender);
     vector<people> findByPeopleBirth(int birthYear);

@@ -79,13 +79,15 @@ void ui::insertMenu()
     cout << "Would you like in insert a:" << endl
          << "\t0. Person" << endl
          << "\t1. Computer" << endl
+         << "\t2. Info who made which computer" << endl
          << "Enter your choice: ";
     cin >> n;
-    inputIntCheck(cin.fail(), n, 0, 1);
+    inputIntCheck(cin.fail(), n, 0, 2);
 
     clear();
     if(n == 0) insertMenuPerson();
-    else insertMenuComputer();
+    else if (n ==1) insertMenuComputer();
+    else insertMenuConnection();
 
 }
 
@@ -157,14 +159,51 @@ void ui::insertMenuComputer()
         cout << endl << "This computer was already on the list and was therefore not added again."
              << endl << endl;
         sleep(3);
-        system("cls");
+        clear();
         return;
     }
 
     cout << endl << "Computer was added to the list.";
     sleep(2);
-    system("cls");
+    clear();
 
+}
+
+void ui::insertMenuConnection()
+{
+    cout << "* WHO INVENTED WHAT *" << endl << endl;
+    int orderBy = 5; //as in file
+    int ascending = 1; //1 for true
+    cout << "First choose a scientist from this list:";
+    sleep(2);
+    clear();
+    vector<peopleWithComputers> sortedVector = theLogic.printerSortPeople(orderBy, ascending);
+    printVector(sortedVector);
+    cout << "Scientist number: ";
+    int sid;
+    cin >> sid;
+    clear();
+
+    cout << "Now choose a computer from this list:";
+    sleep(2);
+    clear();
+    cout << "hérna kemur listi þegar fetchComputer er tilbúið" << endl;
+    int cid;
+    cout << "Computer number: ";
+    cin >> cid;
+
+    bool connected = theLogic.insertConnection(sid, cid);
+    if (connected)
+    {
+        cout << "This connection was already in the database";
+        sleep(2);
+        clear();
+        return;
+    }
+
+    cout << "The connection was added to the database.";
+    sleep (2);
+    clear();
 }
 
 void ui::searchMenu()
@@ -235,7 +274,7 @@ void ui::searchMenuPerson()
             system("cls");
 
         } else {
-            printVector(foundPeople);
+//            printVector(foundPeople);
         }
     }
 }
@@ -339,7 +378,8 @@ void ui::printerMenuComputers()
              << "\t0: Descending" << endl
              << "\t1: Ascending" << endl;
     }
-    else {
+    else
+    {
         cout << "Do you want this list to be ordered by whether it was built or not built first" << endl
              << "\t0: Built" << endl
              << "\t1: Not built" << endl;
@@ -359,12 +399,28 @@ void ui::deleteMenu()
     //IMPLEMENT UI....
 }
 
-void ui::printVector(const vector<people>& list) const
+void ui::printVector(const vector<peopleWithComputers> &list) const
 {
-    clear();
-    cout << "OLD" << endl;
-    system("pause");
-    clear();
+    int size = list.size();
+    for(const peopleWithComputers person:list)
+    {
+        cout << person.p.getId() << '\t' << person.p.getName()
+             << '\t' << person.p.getBirth() << "-";
+        if (person.p.getDeath() != -1)
+            cout << person.p.getDeath() << endl;
+        else
+            cout << endl;
+    }
+}
+
+void ui::printVector(const vector<computersWithPeople> &list) const
+{
+    int size = list.size();
+    for(const computersWithPeople computer:list)
+    {
+        cout << computer.c.getId() << '\t' << computer.c.getName()
+             << '\t' << computer.c.getYearCreated() << endl;
+    }
 }
 
 void ui::printPeopleVector(const vector<peopleWithComputers>& list) const
@@ -373,7 +429,8 @@ void ui::printPeopleVector(const vector<peopleWithComputers>& list) const
     cout << "+----------------------------------------------------------------------+" << endl;
     printf("|%25s|%10s|%8s|%8s|%15s|\n", "NAME", "GENDER", "BIRTH", "DEATH", "COMPUTERS");
     cout << "+----------------------------------------------------------------------+" << endl;
-    for(const peopleWithComputers person:list){
+    for(const peopleWithComputers person:list)
+    {
         string name = person.p.getName();
         string gender = person.p.getGender();
         int yearOfBirth = person.p.getBirth();

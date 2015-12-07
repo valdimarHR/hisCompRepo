@@ -21,6 +21,7 @@ public:
     vector<peopleWithComputers> fetchPeople(QString columnName, QString seartchString);
     void insertPersonToDatabase(const people& a);
     void insertComputerToDatabase(const computers& c);
+    void insertConnectionToDatabase(const int& sid, const int& cid);
 private:
     vector<peopleWithComputers> convererPeopleTable(QSqlQuery& query);
     vector<people> convererComputerTable(QSqlQuery& query);
