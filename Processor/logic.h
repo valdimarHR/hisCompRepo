@@ -30,7 +30,7 @@ public:
     vector<peopleWithComputers> printerSortPeople(int orderBy, int ascending);
     vector<computersWithPeople> printerSortComputers(int orderBy, int ascending);
     vector<peopleWithComputers> findPeople(string column, string searchValue);
-    vector<computersWithPeople> findComputerByName(string name);
+    vector<computersWithPeople> findComputer(string column, string searchValue);
     void searchPerson();
     bool eraseListOfVector();
 private:

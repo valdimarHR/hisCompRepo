@@ -161,7 +161,7 @@ vector<peopleWithComputers> logic::findPeople(string column, string searchValue)
     return theData.fetchPeople(column, searchValue);
 }
 
-vector<computersWithPeople> logic::findComputerByName(string name)
+vector<computersWithPeople> logic::findComputer(string column, string searchValue)
 {
-    return theData.fetchComputers("name", name);
+    return theData.fetchComputers(column, searchValue);
 }

@@ -305,7 +305,46 @@ void ui::searchMenuComputer()
     cin >> n;
     inputIntCheck(cin.fail(), n, 1, 4);
 
-    cout << " ... implement swith like in search people ... ";
+    vector<computersWithPeople> foundComputer;
+
+    string question;
+    string column;
+    switch(n) {
+        case 1: {
+            question = "What would you like to search for?";
+            column = "name";
+            break;
+        }
+        case 2: {
+            question = "Enter a year: ";
+            column = "yearCreated";
+            break;
+        }
+        case 3: {
+            question = "Enter a type of computer: ";
+            column = "type";
+            break;
+        }
+        case 4: {
+            question = "Was it built? (Y/N): ";
+            column = "wasBuilt";
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+
+    string searchValue = getStringSearchValue(question);
+    foundComputer = theLogic.findComputer(column, searchValue);
+
+    if (foundComputer.size() == 0){
+        cout << "No search results found!" << endl;
+        system("pause");
+        system("cls");
+    } else {
+        printComputersVector(foundComputer);
+    }
 }
 
 void ui::printerMenu()
