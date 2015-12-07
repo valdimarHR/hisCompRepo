@@ -429,9 +429,9 @@ void ui::printVector(const vector<computersWithPeople> &list) const
 void ui::printPeopleVector(const vector<peopleWithComputers>& list) const
 {
     //clear();
-    cout << "+----------------------------------------------------------------------+" << endl;
-    printf("|%25s|%10s|%8s|%8s|%15s|\n", "PEOPLE NAME", "GENDER", "BIRTH", "DEATH", "COMPUTERS");
-    cout << "+----------------------------------------------------------------------+" << endl;
+    cout << "+------------------------------------------------------------------------------------------+" << endl;
+    printf("|%35s|%10s|%8s|%8s|%25s|\n", "PEOPLE NAME", "GENDER", "BIRTH", "DEATH", "COMPUTERS");
+    cout << "+------------------------------------------------------------------------------------------+" << endl;
     for(const peopleWithComputers person:list)
     {
         string name = person.p.getName();
@@ -439,19 +439,19 @@ void ui::printPeopleVector(const vector<peopleWithComputers>& list) const
         int yearOfBirth = person.p.getBirth();
         string death = to_string(person.p.getDeath());
         if(person.p.getDeath() == constants::notDead) death = "Alive";
-        printf("|%25s|%10s|%8i|%8s|%15s|\n", name.c_str(), gender.c_str(), yearOfBirth, death.c_str(), "");
+        printf("|%35s|%10s|%8i|%8s|%25s|\n", name.c_str(), gender.c_str(), yearOfBirth, death.c_str(), "");
 
         string computerName = person.creations[0].getName().c_str();
         if(computerName != "default")
         {
             for(int i = 0; i < person.creations.size(); i++)
             {
-                printf("|%54s %15s|\n", "", person.creations[i].getName().c_str());
+                printf("|%64s %25s|\n", "", person.creations[i].getName().c_str());
             }
         }
-        cout << "+----------------------------------------------------------------------+" << endl;
+        cout << "+------------------------------------------------------------------------------------------+" << endl;
     }
-    //cout << "+----------------------------------------------------------------------+" << endl;
+    //cout << "+------------------------------------------------------------------------------------------+" << endl;
     system("pause");
     clear();
 }
@@ -459,28 +459,28 @@ void ui::printPeopleVector(const vector<peopleWithComputers>& list) const
 void ui::printComputersVector(const vector<computersWithPeople>& list) const
 {
     //clear();
-    cout << "+----------------------------------------------------------------------+" << endl;
-    printf("|%17s|%10s|%8s|%8s|%23s|\n", "COMPUTER NAME", "TYPE", "YEAR", "BUILT", "CREATORS");
-    cout << "+----------------------------------------------------------------------+" << endl;
+    cout << "+------------------------------------------------------------------------------------------+" << endl;
+    printf("|%22s|%15s|%8s|%8s|%33s|\n", "COMPUTER NAME", "TYPE", "YEAR", "BUILT", "CREATORS");
+    cout << "+------------------------------------------------------------------------------------------+" << endl;
     for(const computersWithPeople comp:list){
         string name = comp.c.getName();
         string type = comp.c.getType();
         int year = comp.c.getYearCreated();
         string built = "No";
         if(comp.c.getWasBuilt()) built = "Yes";
-        printf("|%17s|%10s|%8i|%8s|%23s|\n", name.c_str(), type.c_str(), year, built.c_str(), "");
+        printf("|%22s|%15s|%8i|%8s|%33s|\n", name.c_str(), type.c_str(), year, built.c_str(), "");
 
         string personName = comp.creators[0].getName().c_str();
         if(personName != "default")
         {
             for(int i = 0; i < comp.creators.size(); i++)
             {
-                printf("|%46s %23s|\n", "", comp.creators[i].getName().c_str());
+                printf("|%56s %33s|\n", "", comp.creators[i].getName().c_str());
             }
         }
-        cout << "+----------------------------------------------------------------------+" << endl;
+        cout << "+------------------------------------------------------------------------------------------+" << endl;
     }
-    //cout << "+----------------------------------------------------------------------+" << endl;
+    //cout << "+------------------------------------------------------------------------------------------+" << endl;
     system("pause");
     clear();
 }
