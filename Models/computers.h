@@ -8,9 +8,10 @@ class computers
 public:
     computers();
     computers(const string& n, const int& y, const string& t, const bool& b);
-    void setName(string name);
+    void setId (int fid);
+    void setName(string fname);
     void setYearCreated(int year);
-    void setType(string type);
+    void setType(string ftype);
     void setWasBuilt(bool built);
     int getId() const;
     string getName() const;

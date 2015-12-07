@@ -16,6 +16,11 @@ computers::computers(const string& n, const int& y, const string& t, const bool&
     wasBuilt = b;
 }
 
+void computers::setId(int fid)
+{
+    id = fid;
+}
+
 void computers::setName(string fname)
 {
     name = fname;

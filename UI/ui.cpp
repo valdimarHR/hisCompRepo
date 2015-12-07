@@ -187,7 +187,8 @@ void ui::insertMenuConnection()
     cout << "Now choose a computer from this list:";
     sleep(2);
     clear();
-    cout << "hérna kemur listi þegar fetchComputer er tilbúið" << endl;
+    vector<computersWithPeople> sortVector = theLogic.printerSortComputers(orderBy, ascending);
+    printVector(sortVector);
     int cid;
     cout << "Computer number: ";
     cin >> cid;
@@ -404,7 +405,6 @@ void ui::deleteMenu()
 
 void ui::printVector(const vector<peopleWithComputers> &list) const
 {
-    int size = list.size();
     for(const peopleWithComputers person:list)
     {
         cout << person.p.getId() << '\t' << person.p.getName()
@@ -418,7 +418,6 @@ void ui::printVector(const vector<peopleWithComputers> &list) const
 
 void ui::printVector(const vector<computersWithPeople> &list) const
 {
-    int size = list.size();
     for(const computersWithPeople computer:list)
     {
         cout << computer.c.getId() << '\t' << computer.c.getName()
@@ -444,7 +443,7 @@ void ui::printPeopleVector(const vector<peopleWithComputers>& list) const
         string computerName = person.creations[0].getName().c_str();
         if(computerName != "default")
         {
-            for(int i = 0; i < person.creations.size(); i++)
+            for(signed int i = 0; i < person.creations.size(); i++)
             {
                 printf("|%54s %15s|\n", "", person.creations[i].getName().c_str());
             }
@@ -473,7 +472,7 @@ void ui::printComputersVector(const vector<computersWithPeople>& list) const
         string personName = comp.creators[0].getName().c_str();
         if(personName != "default")
         {
-            for(int i = 0; i < comp.creators.size(); i++)
+            for(signed int i = 0; i < comp.creators.size(); i++)
             {
                 printf("|%46s %23s|\n", "", comp.creators[i].getName().c_str());
             }
