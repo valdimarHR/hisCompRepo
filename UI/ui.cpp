@@ -182,6 +182,7 @@ void ui::insertMenuConnection()
     cout << "Scientist number: ";
     int sid;
     cin >> sid;
+    inputIntCheck(cin.fail(), sid, 1, sortedVector.size());
     clear();
 
     cout << "Now choose a computer from this list:";
@@ -192,6 +193,7 @@ void ui::insertMenuConnection()
     int cid;
     cout << "Computer number: ";
     cin >> cid;
+    inputIntCheck(cin.fail(), cid, 1, sortVector.size());
 
     bool connected = theLogic.insertConnection(sid, cid);
     if (connected)
@@ -443,7 +445,7 @@ void ui::printPeopleVector(const vector<peopleWithComputers>& list) const
         string computerName = person.creations[0].getName().c_str();
         if(computerName != "default")
         {
-            for(signed int i = 0; i < person.creations.size(); i++)
+            for(unsigned int i = 0; i < person.creations.size(); i++)
             {
                 printf("|%54s %15s|\n", "", person.creations[i].getName().c_str());
             }
@@ -472,7 +474,7 @@ void ui::printComputersVector(const vector<computersWithPeople>& list) const
         string personName = comp.creators[0].getName().c_str();
         if(personName != "default")
         {
-            for(signed int i = 0; i < comp.creators.size(); i++)
+            for(unsigned int i = 0; i < comp.creators.size(); i++)
             {
                 printf("|%46s %23s|\n", "", comp.creators[i].getName().c_str());
             }
