@@ -16,6 +16,15 @@ people::people(const string& n, const string& g, const int& b, const int& d)
     yearOfDeath = d;
 }
 
+people::people(const int& i,const string& n, const string& g, const int& b, const int& d)
+{
+    id = i;
+    name = n;
+    gender = g;
+    yearOfBirth = b;
+    yearOfDeath = d;
+}
+
 void people::setId(int fid)
 {
     id = fid;
@@ -68,8 +77,14 @@ int people::getDeath() const
 
 bool operator == (const people& person1, const people& person2)
 {
+    string name1Lower = person1.getName();
+    std::transform(name1Lower.begin(), name1Lower.end(), name1Lower.begin(), ::tolower);
+
+    string name2Lower = person2.getName();
+    std::transform(name2Lower.begin(), name2Lower.end(), name2Lower.begin(), ::tolower);
+
     bool theSame = true;
-    if (!(person1.getName()== person2.getName()))
+    if (!(name1Lower == name2Lower))
         theSame = false;
     if (!(person1.getGender()== person2.getGender()))
         theSame = false;
