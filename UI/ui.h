@@ -37,14 +37,13 @@ private:
     void searchMenu();
     /**
      * @brief asks the user in which way it wants to search for a person and gives the options of name,
-     * gender, year of birth and year of death
-     * @return returns the person or people that matches the user's search
+     * gender, year of birth and year of death and prints the people matching the user's input to standard output
      */
     void searchMenuPerson();
     /**
      * @brief asks the user in which way it wants to search for a computer and gices the options of name,
-     * type, year of creation and whether or not it was built
-     * @return returns the computer(s) that matches the user's search
+     * type, year of creation and whether or not it was built and prints the computers matching the user's
+     * input to standard output
      */
     void searchMenuComputer();
     /*
