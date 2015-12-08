@@ -404,7 +404,7 @@ void ui::printerMenu()
 void ui::printerMenuPeople()
 {
     int orderBy, ascending;
-    cout << "* PRINTING PEOPLE *" << endl
+    cout << "* PRINTING PEOPLE *" << endl << endl
          << "Order  by:" << endl
          << "\t1: Name" << endl
          << "\t2: Gender" << endl
@@ -449,7 +449,7 @@ void ui::printerMenuPeople()
 void ui::printerMenuComputers()
 {
     int orderBy, ascending;
-    cout << "* PRINTING COMPUTERS *" << endl
+    cout << "* PRINTING COMPUTERS *" << endl << endl
          << "Order  by:" << endl
          << "\t1: Name" << endl
          << "\t2: Type" << endl
