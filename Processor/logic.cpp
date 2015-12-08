@@ -139,13 +139,10 @@ vector<peopleWithComputers> logic::findPeople(string column, string searchValue)
 
 vector<computersWithPeople> logic::findComputer(string column, string searchValue)
 {
-    return theData.fetchComputers(column, searchValue);
-    if (searchValue == "Y" || searchValue == "y") {
-        searchValue = "1";
-    }
-    else if (searchValue == "N" || searchValue == "n") {
-        searchValue = "0";
-    }
+    vector<computersWithPeople> sortedVector = theData.fetchComputers(column, searchValue);
+    sort(sortedVector.begin(), sortedVector.end(), [](computersWithPeople const &a, computersWithPeople const &b)
+    {return (a.c.getName() < b.c.getName());});
+    return sortedVector;
 }
 
 vector<people> logic::printerPeople()

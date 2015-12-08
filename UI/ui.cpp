@@ -363,6 +363,11 @@ void ui::searchMenuComputer()
     }
 
     string searchValue = getStringSearchValue(question);
+    if (n == 4)
+    {
+        if(inputStrToBool(searchValue) == true) searchValue = "1";
+        else searchValue = "0";
+    }
     foundComputer = theLogic.findComputer(column, searchValue);
 
     if (foundComputer.size() == 0)
