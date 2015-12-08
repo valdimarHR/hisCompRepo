@@ -30,7 +30,14 @@ private:
     void printVector(const vector<peopleWithComputers> &list) const;
     void printVector(const vector<computersWithPeople> &list) const;
     void searchMenu();
+    /*
+     * Asks the user whether it wants to search for a person or a computer and uses the
+     * user input to go to the appropriate function
+     */
     void searchMenuPerson();
+    /*
+     *
+     */
     void searchMenuComputer();
     void printerMenu();
     void printerMenuPeople();

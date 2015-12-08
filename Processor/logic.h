@@ -30,8 +30,15 @@ public:
     vector<peopleWithComputers> printerSortPeople(int orderBy, int ascending);
     vector<computersWithPeople> printerSortComputers(int orderBy, int ascending);
     vector<peopleWithComputers> findPeople(string column, string searchValue);
+    /*
+     * findPeople function is used so the user can find a person in the database by name, gender,
+     * year of death and year of birth and returns said information
+     */
     vector<computersWithPeople> findComputer(string column, string searchValue);
-    void searchPerson();
+    /*
+     * findComputer function is used so the user can find a computer in the database by name, type,
+     * year of creation and whether it was built or not and returns said information
+     */
     bool eraseListOfVector();
 private:
     dataFetch theData;
