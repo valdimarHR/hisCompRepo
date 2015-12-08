@@ -10,9 +10,7 @@ using namespace std;
 
 namespace constants
 {
-    const string PEOPLE_DB = "";
-    const string COMPUTER_DB = "";
-    const string CONNECTION_DB = "";
+    const string NAME_OF_DATABASE = "database.sqlite";
     const int notDead = -1;
 }
 
