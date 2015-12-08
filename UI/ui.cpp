@@ -101,7 +101,7 @@ void ui::insertMenuPerson()
     cout << "Name: ";
     cin.ignore();
     getline(cin, name);
-    cout << "Gender (please write male or female): ";
+    cout << "Gender (please write Male or Female): ";
     cin >> gender;
     while(!((gender == "Male")||(gender == "Female")))
     {
@@ -468,7 +468,7 @@ void ui::printVector(const vector<peopleWithComputers> &list) const
     {
         cout << person.p.getId() << '\t' << person.p.getName()
              << " " << person.p.getBirth() << "-";
-        if (person.p.getDeath() != -1)
+        if (person.p.getDeath() != constants::notDead)
             cout << person.p.getDeath() << endl;
         else
             cout << endl;
