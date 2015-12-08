@@ -9,6 +9,10 @@
 
 using namespace std;
 
+/**
+ * @brief people includes all information about a person, but not what computer they have made.
+ */
+
 class people
 {
 public:
@@ -25,6 +29,10 @@ public:
     string getGender() const;
     int getBirth() const;
     int getDeath() const;
+    /**
+     * @brief Overwrites the comparison operator.
+     * @returns a bool that is true if the persons have all information the same except id.
+     */
     friend bool operator == (const people &person1, const people &person2);
 private:
     int id;

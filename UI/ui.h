@@ -7,6 +7,11 @@
 #include "DataFetch/datafetch.h"
 #include <QtGlobal>
 
+/**
+ * @brief The UI prints out display, gets information from the use to
+ * send to logic. Connects the user to the logic. Checks if the input
+ * is correct.
+ */
 
 using namespace std;
 
