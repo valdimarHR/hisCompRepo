@@ -467,9 +467,9 @@ void ui::printVector(const vector<computersWithPeople> &list) const
 void ui::printPeopleVector(const vector<peopleWithComputers>& list) const
 {
     //clear();
-    cout << "+------------------------------------------------------------------------------------------+" << endl;
-    printf("|%35s|%10s|%8s|%8s|%25s|\n", "PEOPLE NAME", "GENDER", "BIRTH", "DEATH", "COMPUTERS");
-    cout << "+------------------------------------------------------------------------------------------+" << endl;
+    cout << "+==========================================================================================+" << endl;
+    printf("|%-35s|%-10s|%-8s|%-8s|%-25s|\n", "PEOPLE NAME", "GENDER", "BIRTH", "DEATH", "COMPUTERS");
+    cout << "+==========================================================================================+" << endl;
     for(const peopleWithComputers person:list)
     {
         string name = person.p.getName();
@@ -477,15 +477,14 @@ void ui::printPeopleVector(const vector<peopleWithComputers>& list) const
         int yearOfBirth = person.p.getBirth();
         string death = to_string(person.p.getDeath());
         if(person.p.getDeath() == constants::notDead) death = "Alive";
-        printf("|%35s|%10s|%8i|%8s|%25s|\n", name.c_str(), gender.c_str(), yearOfBirth, death.c_str(), "");
 
-        string computerName = person.creations[0].getName().c_str();
-        if(computerName != "default")
+        string computerName = person.creations[0].getName();
+        if(computerName == "default") computerName = "";
+        printf("|%-35.35s|%-10.10s|%-8.8s|%-8.8s|%-25.25s|\n", name.c_str(), gender.c_str(), to_string(yearOfBirth).c_str(), death.c_str(), computerName.c_str());
+
+        for(unsigned int i = 1; i < person.creations.size(); i++)
         {
-            for(unsigned int i = 0; i < person.creations.size(); i++)
-            {
-                printf("|%64s %25s|\n", "", person.creations[i].getName().c_str());
-            }
+            printf("|%-64.64s %-25.25s|\n", "", person.creations[i].getName().c_str());
         }
         cout << "+------------------------------------------------------------------------------------------+" << endl;
     }
@@ -497,24 +496,23 @@ void ui::printPeopleVector(const vector<peopleWithComputers>& list) const
 void ui::printComputersVector(const vector<computersWithPeople>& list) const
 {
     //clear();
-    cout << "+------------------------------------------------------------------------------------------+" << endl;
-    printf("|%22s|%15s|%8s|%8s|%33s|\n", "COMPUTER NAME", "TYPE", "YEAR", "BUILT", "CREATORS");
-    cout << "+------------------------------------------------------------------------------------------+" << endl;
+    cout << "+==========================================================================================+" << endl;
+    printf("|%-22s|%-15s|%-8s|%-8s|%-33s|\n", "COMPUTER NAME", "TYPE", "YEAR", "BUILT", "CREATORS");
+    cout << "+==========================================================================================+" << endl;
     for(const computersWithPeople comp:list){
         string name = comp.c.getName();
         string type = comp.c.getType();
         int year = comp.c.getYearCreated();
         string built = "No";
         if(comp.c.getWasBuilt()) built = "Yes";
-        printf("|%22s|%15s|%8i|%8s|%33s|\n", name.c_str(), type.c_str(), year, built.c_str(), "");
 
         string personName = comp.creators[0].getName().c_str();
-        if(personName != "default")
+        if(personName == "default") personName = "";
+        printf("|%-22.22s|%-15.15s|%-8.8s|%-8.8s|%-33.33s|\n", name.c_str(), type.c_str(), to_string(year).c_str(), built.c_str(), personName.c_str());
+
+        for(unsigned int i = 1; i < comp.creators.size(); i++)
         {
-            for(unsigned int i = 0; i < comp.creators.size(); i++)
-            {
-                printf("|%56s %33s|\n", "", comp.creators[i].getName().c_str());
-            }
+            printf("|%-56.56s %-33.33s|\n", "", comp.creators[i].getName().c_str());
         }
         cout << "+------------------------------------------------------------------------------------------+" << endl;
     }
