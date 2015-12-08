@@ -28,7 +28,17 @@ public:
     bool insertPerson(string& name, string& gender, int& born, int& death);//Prepares to insert person to SQL DB.(already excisting etc.)
     bool insertComputer(string& name, int& created, string& type, bool& built);//Prepares to insert computer to SQL DB.
     bool insertConnection(const int& sid, const int& cid);
+    /**
+     * @brief sends a request for a people vector from data and then sorts that vector as the
+     * user has requested.
+     * @return returns a sorted vector with people to the ui for it to display.
+     */
     vector<peopleWithComputers> printerSortPeople(int orderBy, int ascending);
+    /**
+     * @brief sends a request for a computer vector from data and then sorts that vector as the
+     * user has requested.
+     * @return returns a sorted vector with computers to the ui for it to display.
+     */
     vector<computersWithPeople> printerSortComputers(int orderBy, int ascending);
     /**
      * @brief finds people in database using vector and sorts them as the user wants to sort them
