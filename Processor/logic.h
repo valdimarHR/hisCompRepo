@@ -35,14 +35,6 @@ public:
     bool eraseListOfVector();
 private:
     dataFetch theData;
-    static bool sortPeopleName(const peopleWithComputers& a, const peopleWithComputers& b);
-    static bool sortPeopleGender(const peopleWithComputers& a, const peopleWithComputers& b);
-    static bool sortPeopleBirth(const peopleWithComputers& a, const peopleWithComputers& b);
-    static bool sortPeopleDeath(const peopleWithComputers& a, const peopleWithComputers& b);
-    static bool sortComputersName(const computersWithPeople& a, const computersWithPeople& b);
-    static bool sortComputersType(const computersWithPeople& a, const computersWithPeople& b);
-    static bool sortComputersYear(const computersWithPeople& a, const computersWithPeople& b);
-    static bool sortComputersBuilt(const computersWithPeople& a, const computersWithPeople& b);
     bool checkIfpersonOnList(const people& person) const;
     void getInsertedInfo(string& name, string& gender, int& born, int& death)const;
 
