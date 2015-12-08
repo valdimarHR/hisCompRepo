@@ -192,7 +192,10 @@ void logic::eraseChosenComputer(const vector<computers>& c, const int& index)
     theData.deleteComputer(id);
 }
 
-
+void logic::eraseDB()
+{
+    theData.eraseEverything();
+}
 
 
 

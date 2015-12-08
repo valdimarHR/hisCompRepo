@@ -28,6 +28,7 @@ public:
     bool alreadyConnnected(const int sid, const int cid);
     void deletePeople(const int& id);
     void deleteComputer(const int& id);
+    void eraseEverything();
 private:
     vector<peopleWithComputers> convererPeopleTable(QSqlQuery& query);
     vector<computersWithPeople> convererComputersTable(QSqlQuery& query);

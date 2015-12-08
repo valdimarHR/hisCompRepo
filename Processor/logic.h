@@ -37,6 +37,7 @@ public:
     vector<computers> printerComputers();
     void eraseChosenPeople(const vector<people>& p, const int& index);
     void eraseChosenComputer(const vector<computers>& c, const int& index);
+    void eraseDB();
 private:
     dataFetch theData;
     static bool sortPeopleName(const peopleWithComputers& a, const peopleWithComputers& b);
