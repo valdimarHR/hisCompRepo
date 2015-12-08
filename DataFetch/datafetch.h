@@ -26,6 +26,8 @@ public:
     void fetchPeopleOnly(vector<people>& p);
     void fetchComputersOnly(vector<computers>& c);
     bool alreadyConnnected(const int sid, const int cid);
+    bool personAlreadyOnList(const people& person);
+    bool computerAlreadyOnList(const computers& computer);
     void deletePeople(const int& id);
     void deleteComputer(const int& id);
 private:

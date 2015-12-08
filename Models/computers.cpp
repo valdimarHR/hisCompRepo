@@ -70,3 +70,18 @@ bool computers::getWasBuilt() const
 {
     return wasBuilt;
 }
+
+bool operator == (const computers& computer1, const computers& computer2)
+{
+    bool theSame = true;
+    if (!(computer1.getName()== computer2.getName()))
+        theSame = false;
+    if (!(computer1.getYearCreated()== computer2.getYearCreated()))
+        theSame = false;
+    if (!(computer1.getType()== computer2.getType()))
+        theSame = false;
+    if (!(computer1.getWasBuilt()== computer2.getWasBuilt()))
+        theSame = false;
+    return theSame;
+}
+

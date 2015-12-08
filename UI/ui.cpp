@@ -103,7 +103,7 @@ void ui::insertMenuPerson()
     getline(cin, name);
     cout << "Gender (please write male or female): ";
     cin >> gender;
-    while(!((gender == "female")||(gender == "male")))
+    while(!((gender == "Male")||(gender == "Female")))
     {
         cout << "Invalid choice!" << endl << "Try again: ";
         cin >> gender;

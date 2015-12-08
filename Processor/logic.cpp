@@ -122,38 +122,35 @@ bool logic::insertComputer(string& name, int& created, string& type, bool& built
     bool dataExisted = false;
     computers comp(name,created,type,built);
 
-    //if (checkIfcomputerOnList(per))
-    //    return dataExisted = true;
-    //else
-        theData.insertComputerToDatabase(comp);//Adds the comp item to the database.
+    if (checkIfcomputerOnList(comp))
+        return dataExisted = true;
+    else
+        theData.insertComputerToDatabase(comp);
 
     return dataExisted;//Returns true if computer is already on the list.
 }
 
 bool logic::insertConnection(const int& sid, const int& cid)
 {
-
     bool dataExisted;
     if (theData.alreadyConnnected(sid, cid))
         dataExisted = true;
     else
-        theData.insertConnectionToDatabase(sid, cid);//Adds the connection to the DB.
+        theData.insertConnectionToDatabase(sid, cid);
 
     return dataExisted;//Returns true if computer is already on the list.
 }
 
-bool logic::checkIfpersonOnList(const people &person) const
+bool logic::checkIfpersonOnList(const people& person)
 {
-    //MAKE NEW IMPLEMENTATION
-//    bool isOnList = false;
-//    int size = listOfPeople.size();
-//    for(int i=0; i<size; i++)
-//    {
-//        if(listOfPeople[i] == person)
-//            isOnList = true;
-//    }
-//    return isOnList;
-    return 0;
+   bool alreadyOnList = theData.personAlreadyOnList(person);
+   return alreadyOnList;
+}
+
+bool logic::checkIfcomputerOnList(const computers& computer)
+{
+   bool alreadyOnList = theData.computerAlreadyOnList(computer);
+   return alreadyOnList;
 }
 
 vector<peopleWithComputers> logic::findPeople(string column, string searchValue)
@@ -191,9 +188,3 @@ void logic::eraseChosenComputer(const vector<computers>& c, const int& index)
     int id = c[index-1].getId();
     theData.deleteComputer(id);
 }
-
-
-
-
-
-

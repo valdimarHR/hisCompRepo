@@ -82,6 +82,56 @@ bool dataFetch::alreadyConnnected(const int sid, const int cid)
     return connected;
 }
 
+bool dataFetch::personAlreadyOnList(const people& person)
+{
+    db.open();
+
+    QSqlQuery query(db);
+
+    query.exec("SELECT * FROM Scientists");
+
+    bool onList = false;
+
+    while(query.next())
+    {
+        string name = query.value("name").toString().toStdString();
+        string gender = query.value("gender").toString().toStdString();
+        int birth = query.value("birth").toUInt();
+        int death = query.value("death").toUInt();
+
+        people personCheck(name, gender, birth, death);
+        if (personCheck == person)
+            return onList = true;
+    }
+
+    return onList;
+}
+
+bool dataFetch::computerAlreadyOnList(const computers& computer)
+{
+    db.open();
+
+    QSqlQuery query(db);
+
+    query.exec("SELECT * FROM Computers");
+
+    bool onList = false;
+
+    while(query.next())
+    {
+        string name = query.value("name").toString().toStdString();
+        int yearCreated = query.value("yearCreated").toUInt();
+        string type = query.value("type").toString().toStdString();
+        bool wasBuilt = query.value("wasBuilt").toUInt();
+
+        computers computerCheck(name, yearCreated, type, wasBuilt);
+        if (computerCheck == computer)
+            return onList = true;
+    }
+
+    return onList;
+}
+
 vector<peopleWithComputers> dataFetch::convererPeopleTable(QSqlQuery& query)
 {
     vector<peopleWithComputers> peopleVector;

@@ -19,6 +19,7 @@ public:
     int getYearCreated() const;
     string getType() const;
     bool getWasBuilt() const;
+    friend bool operator == (const computers& computer1, const computers& computer2);
 private:
     int id;
     string name;
