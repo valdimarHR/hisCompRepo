@@ -27,8 +27,20 @@ private:
     void insertMenuPerson();//Asks for info of the person that is to be added.
     void insertMenuComputer();//Asks for info of the computer that is to be added.
     void insertMenuConnection();
-    void searchMenu(); //Asks the user whether it wants to search for a person or a computer and goes to the appropriate function
+    /*
+     * searchMenu asks the user whether it wants to search for a person or a computer and goes to
+     * the appropriate function
+     */
+    void searchMenu();
+    /*
+     * searchMenuPerson asks the user in which way it wants to search for a person and gives the options of name,
+     * gender, year of birth and year of death and returns the person the user is searching for
+     */
     void searchMenuPerson();
+    /*
+     * searchMenuComputer asks the user in which way it wants to search for a computer and gives the options of name,
+     * type, year of creation and whether or not it was built and returns the computer the person is searching for
+     */
     void searchMenuComputer();
     void printerMenu();
     void printerMenuPeople();
