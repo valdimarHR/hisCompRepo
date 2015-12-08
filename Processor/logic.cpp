@@ -80,7 +80,6 @@ vector<computersWithPeople> logic::printerSortComputers(int orderBy, int ascendi
     return sortedVector;
 }
 
-//Creates a class of people with the user inputted info.
 bool logic::insertPerson(string& name, string& gender, int& born, int& death)
 {
     bool dataExisted = false;
@@ -94,8 +93,6 @@ bool logic::insertPerson(string& name, string& gender, int& born, int& death)
     return dataExisted;//Returns true if person is already on the list.
 }
 
-
-//Creates a class of computer with the user inputted info.
 bool logic::insertComputer(string& name, int& created, string& type, bool& built)
 {
     bool dataExisted = false;

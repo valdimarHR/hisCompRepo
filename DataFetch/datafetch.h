@@ -26,8 +26,12 @@ public:
     void insertConnectionToDatabase(const int& sid, const int& cid);
     void fetchPeopleOnly(vector<people>& p);//Takes info of all people from SQL DB and pushes in the vector p.
     void fetchComputersOnly(vector<computers>& c);//Takes info of all computer from SQL DB and pushes in the vector c.
+    /**
+     * @brief checks if connection between scientist and a computer is already in DB.
+     * @return a bool that is true if the connection was already in DB.
+     */
     bool alreadyConnnected(const int sid, const int cid);
-    bool personAlreadyOnList(const people& person);
+    bool personAlreadyOnList(const people& person); //Checks if person sent from logic is already in DB.
     bool computerAlreadyOnList(const computers& computer);
     void deletePeople(const int& id);//Takes in id number. Deletes the person in the SQL DB with matching id.
     void deleteComputer(const int& id);//Takes in id number. Deletes the computer in SQL DB with matching id.
