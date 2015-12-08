@@ -258,9 +258,9 @@ void ui::searchMenuPerson()
     cout << "* SEARCH PERSON *" << endl << endl
          << "Would you like to search by" << endl
          << "\t1: Name" << endl
-         << "\t1: Gender (male or female)" << endl
-         << "\t1: Year of birth" << endl
-         << "\t1: Year of death (write -1 for alive)" << endl
+         << "\t2: Gender (male or female)" << endl
+         << "\t3: Year of birth" << endl
+         << "\t4: Year of death (write -1 for alive)" << endl
          << "Enter your choice: ";
     cin >> n;
     inputIntCheck(cin.fail(), n, 1, 4);
@@ -320,9 +320,9 @@ void ui::searchMenuComputer()
     cout << "* SEARCH COMPUTER *" << endl
          << "Would you like to search by" << endl
          << "\t1: Name" << endl
-         << "\t1: Year created" << endl
-         << "\t1: Type" << endl
-         << "\t1: Ever built or not" << endl
+         << "\t2: Year created" << endl
+         << "\t3: Type" << endl
+         << "\t4: Ever built or not" << endl
          << "Enter your choice: ";
     cin >> n;
     inputIntCheck(cin.fail(), n, 1, 4);
@@ -365,6 +365,14 @@ void ui::searchMenuComputer()
     string searchValue = getStringSearchValue(question);
     foundComputer = theLogic.findComputer(column, searchValue);
 
+    if (n == 4) {
+        if (searchValue == "Y" || searchValue == "y") {
+            searchValue = "1";
+        }
+        else if (searchValue == "N" || searchValue == "n") {
+            searchValue = "0";
+        }
+    }
     if (foundComputer.size() == 0)
     {
         cout << "No search results found!" << endl;
