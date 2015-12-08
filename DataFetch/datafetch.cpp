@@ -150,7 +150,8 @@ vector<peopleWithComputers> dataFetch::convererPeopleTable(QSqlQuery& query)
             comp.setType(Ctype);
             comp.setWasBuilt(CwasBuilt);
 
-            if(currentPersonId == lastId){
+            if(currentPersonId == lastId)
+            {
                 peopleVector.back().creations.push_back(comp);
                 continue;
             }
@@ -197,7 +198,8 @@ vector<computersWithPeople> dataFetch::convererComputersTable(QSqlQuery& query)
             per.setBirth(Pborn);
             per.setDeath(Pdeath);
 
-            if(currentComputerId == lastId){
+            if(currentComputerId == lastId)
+            {
                 computersVector.back().creators.push_back(per);
                 continue;
             }
@@ -221,7 +223,6 @@ vector<computersWithPeople> dataFetch::convererComputersTable(QSqlQuery& query)
         lastId = currentComputerId;
     }
     return computersVector;
-
 }
 
 void dataFetch::insertPersonToDatabase(const people& a)

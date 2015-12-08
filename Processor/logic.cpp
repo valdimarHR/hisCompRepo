@@ -26,7 +26,9 @@ vector<peopleWithComputers> logic::printerSortPeople(int orderBy, int ascending)
        default :
           break;
        }
-    if(!ascending) reverse(sortedVector.begin(), sortedVector.end());
+
+    if(!ascending)
+        reverse(sortedVector.begin(), sortedVector.end());
 
     return sortedVector;
 }
@@ -35,7 +37,8 @@ vector<computersWithPeople> logic::printerSortComputers(int orderBy, int ascendi
 {
     vector<computersWithPeople> sortedVector = theData.fetchComputers("name", "");
 
-    if (orderBy < 5) sort(sortedVector.begin(), sortedVector.end(), sortComputersName);
+    if (orderBy < 5)
+        sort(sortedVector.begin(), sortedVector.end(), sortComputersName);
     switch(orderBy)
        {
        case 1 :
@@ -52,7 +55,8 @@ vector<computersWithPeople> logic::printerSortComputers(int orderBy, int ascendi
        default :
           break;
        }
-    if(!ascending) reverse(sortedVector.begin(), sortedVector.end());
+    if(!ascending)
+        reverse(sortedVector.begin(), sortedVector.end());
 
     return sortedVector;
 }
