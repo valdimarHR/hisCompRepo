@@ -585,8 +585,10 @@ void ui::deleteMenu()
     else if(choice == 3)
     {
         deleteDB();
+        clear();
     }
-    clear();
+    else
+        clear();
 
 }
 
