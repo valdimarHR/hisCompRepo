@@ -41,6 +41,8 @@ private:
     void deletePeople();
     void deleteComputer();
     void deleteDB();
+    int printOnlyPeople(const vector<people>& peep);
+    int printOnlyComputers(const vector<computers>& comp);
     string getStringSearchValue(string question);
     bool inputStrToBool(string& built);
     void clear() const;

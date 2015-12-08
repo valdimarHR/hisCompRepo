@@ -180,29 +180,39 @@ void ui::insertMenuComputer()
 void ui::insertMenuConnection()
 {
     cout << "* WHO INVENTED WHAT *" << endl << endl;
-    int orderBy = 5; //as in file
-    int ascending = 1; //1 for true
+
     cout << "First choose a scientist from this list:";
     sleep(2);
     clear();
-    vector<peopleWithComputers> sortedVector = theLogic.printerSortPeople(orderBy, ascending);
-    printVector(sortedVector);
+    vector<people> peep = theLogic.printerPeople();
+    int sizeP = printOnlyPeople(peep);
     cout << "Scientist number: ";
     int sid;
     cin >> sid;
-    inputIntCheck(cin.fail(), sid, 1, sortedVector.size());
+    inputIntCheck(cin.fail(), sid, 0, sizeP);
+    if(sid == 0)
+    {
+        clear();
+        return;
+    }
     clear();
 
     cout << "Now choose a computer from this list:";
     sleep(2);
     clear();
-    vector<computersWithPeople> sortVector = theLogic.printerSortComputers(orderBy, ascending);
-    printVector(sortVector);
+    vector<computers> comp = theLogic.printerComputers();
+    int sizeC = printOnlyComputers(comp);
     int cid;
     cout << "Computer number: ";
     cin >> cid;
-    inputIntCheck(cin.fail(), cid, 1, sortVector.size());
-
+    inputIntCheck(cin.fail(), cid, 0, sizeC);
+    if(cid == 0)
+    {
+        clear();
+        return;
+    }
+    cid = comp[cid-1].getId();
+    sid = peep[sid-1].getId();
     bool connected = theLogic.insertConnection(sid, cid);
     if (connected)
     {
@@ -462,28 +472,6 @@ void ui::printerMenuComputers()
     printComputersVector(sortedVector);
 }
 
-void ui::printVector(const vector<peopleWithComputers> &list) const
-{
-    for(const peopleWithComputers person:list)
-    {
-        cout << person.p.getId() << '\t' << person.p.getName()
-             << " " << person.p.getBirth() << "-";
-        if (person.p.getDeath() != constants::notDead)
-            cout << person.p.getDeath() << endl;
-        else
-            cout << endl;
-    }
-}
-
-void ui::printVector(const vector<computersWithPeople> &list) const
-{
-    for(const computersWithPeople computer:list)
-    {
-        cout << computer.c.getId() << '\t' << computer.c.getName()
-             << ", " << computer.c.getYearCreated() << endl;
-    }
-}
-
 void ui::printPeopleVector(const vector<peopleWithComputers>& list) const
 {
     //clear();
@@ -588,12 +576,7 @@ void ui::deletePeople()
     clear();
     cout << "* DELETE MENU *" << endl << endl;
     vector<people> peep = theLogic.printerPeople();
-    int size = peep.size();
-    for(int i = 0; i<size; i++)
-    {
-        cout << "\t" << i+1 << ". " << peep[i].getName() << endl;
-    }
-    cout << "\t0. Exit";
+    int size = printOnlyPeople(peep);
     cout << endl << "Choose which scientist to delete: ";
     int index;
     cin >> index;
@@ -612,12 +595,7 @@ void ui::deleteComputer()
     clear();
     cout << "* DELETE MENU *" << endl << endl;
     vector<computers> comp = theLogic.printerComputers();
-    int size = comp.size();
-    for(int i = 0; i<size; i++)
-    {
-        cout << "\t" << i+1 << ". " << comp[i].getName() << endl;
-    }
-    cout << "\t0. Exit";
+    int size = printOnlyComputers(comp);
     cout << endl << "Choose which computer to delete: ";
     int index;
     cin >> index;
@@ -660,6 +638,34 @@ void ui::deleteDB()
         sleep(1);
         system("cls");
     }
+}
+
+
+int ui::printOnlyPeople(const vector<people>& peep)
+{
+    int size = peep.size();
+
+    for(int i = 0; i<size; i++)
+    {
+        cout << "\t" << i+1 << ". " << peep[i].getName() << ", " << peep[i].getBirth() << "-";
+        if (peep[i].getDeath() == constants::notDead)
+            cout << endl;
+        else
+            cout << peep[i].getDeath()  << endl;
+    }
+    cout << "\t0. Exit" << endl;
+    return size;
+}
+
+int ui::printOnlyComputers(const vector<computers>& comp)
+{
+    int size = comp.size();
+    for(int i = 0; i<size; i++)
+    {
+        cout << "\t" << i+1 << ". " << comp[i].getName() << ", " << comp[i].getYearCreated() << endl;
+    }
+    cout << "\t0. Exit" << endl;
+    return size;
 }
 
 void ui::inputIntCheck(bool inputFail, int& var)
