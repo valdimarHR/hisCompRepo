@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include "Models/people.h"
+#include "Models/computers.h"
 #include "Models/peoplewithcomputers.h"
 #include "Models/computerswithpeople.h"
 #include "DataFetch/datafetch.h"
@@ -32,7 +33,10 @@ public:
     vector<peopleWithComputers> findPeople(string column, string searchValue);
     vector<computersWithPeople> findComputer(string column, string searchValue);
     void searchPerson();
-    bool eraseListOfVector();
+    vector<people> printerPeople();
+    vector<computers> printerComputers();
+    void eraseChosenPeople(const vector<people>& p, const int& index);
+    void eraseChosenComputer(const vector<computers>& c, const int& index);
 private:
     dataFetch theData;
     static bool sortPeopleName(const peopleWithComputers& a, const peopleWithComputers& b);
@@ -45,6 +49,7 @@ private:
     static bool sortComputersBuilt(const computersWithPeople& a, const computersWithPeople& b);
     bool checkIfpersonOnList(const people& person) const;
     void getInsertedInfo(string& name, string& gender, int& born, int& death)const;
+
 
 };
 

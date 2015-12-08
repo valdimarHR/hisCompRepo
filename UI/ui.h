@@ -38,6 +38,8 @@ private:
     void deleteMenu();
     void inputIntCheck(bool inputFail, int& var);
     void inputIntCheck(bool inputFail, int& var, int low, int high);
+    void deletePeople();
+    void deleteComputer();
     string getStringSearchValue(string question);
     bool inputStrToBool(string& built);
     void clear() const;

@@ -442,13 +442,6 @@ void ui::printerMenuComputers()
     printComputersVector(sortedVector);
 }
 
-void ui::deleteMenu()
-{
-    //IMPLEMENT UI....
-    //IMPLEMENT UI....
-    //IMPLEMENT UI....
-}
-
 void ui::printVector(const vector<peopleWithComputers> &list) const
 {
     for(const peopleWithComputers person:list)
@@ -538,6 +531,84 @@ string ui::getStringSearchValue(string question)
     cin >> value;
 
     return value;
+}
+
+void ui::deleteMenu()
+{
+    clear();
+    int choice;
+    cout << "* DELETE MENU *" << endl << endl;
+    cout << "\t1: Remove Scientist." << endl
+         << "\t2: Remove Computer." << endl
+         << "\t3: Remove Whole Database." << endl
+         << "\t0: Back." << endl
+         << "Enter your choice ";
+    cout.flush();
+    cin >> choice;
+    inputIntCheck(cin.fail(), choice, 0, 3);
+
+    if(choice == 1)
+    {
+        deletePeople();
+        cout << endl << "~~DELETING~~";
+        sleep(1);
+        clear();
+    }
+    else if(choice == 2)
+    {
+        deleteComputer();
+        cout << endl << "~~DELETING~~";
+        sleep(1);
+        clear();
+    }
+    else if(choice == 3)
+    {
+
+    }
+    clear();
+
+}
+
+void ui::deletePeople()
+{
+    clear();
+    cout << "* DELETE MENU *" << endl << endl;
+    vector<people> peep = theLogic.printerPeople();
+    int size = peep.size();
+    for(int i = 0; i<size; i++)
+    {
+        cout << "\t" << i+1 << ". " << peep[i].getName() << endl;
+    }
+    cout << "\t0. Exit";
+    cout << endl << "Choose which scientist to delete: ";
+    int index;
+    cin >> index;
+    inputIntCheck(cin.fail(), index, 0, size);
+    if(index == 0)
+        return;
+    theLogic.eraseChosenPeople(peep, index);
+    peep.clear();
+}
+
+void ui::deleteComputer()
+{
+    clear();
+    cout << "* DELETE MENU *" << endl << endl;
+    vector<computers> comp = theLogic.printerComputers();
+    int size = comp.size();
+    for(int i = 0; i<size; i++)
+    {
+        cout << "\t" << i+1 << ". " << comp[i].getName() << endl;
+    }
+    cout << "\t0. Exit";
+    cout << endl << "Choose which computer to delete: ";
+    int index;
+    cin >> index;
+    inputIntCheck(cin.fail(), index, 0, size);
+    if(index == 0)
+        return;
+    theLogic.eraseChosenComputer(comp, index);
+    comp.clear();
 }
 
 void ui::inputIntCheck(bool inputFail, int& var)

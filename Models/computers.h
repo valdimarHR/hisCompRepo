@@ -8,6 +8,7 @@ class computers
 public:
     computers();
     computers(const string& n, const int& y, const string& t, const bool& b);
+    computers(const int& i,const string& n, const int& y, const string& t, const bool& b);
     void setId (int fid);
     void setName(string fname);
     void setYearCreated(int year);

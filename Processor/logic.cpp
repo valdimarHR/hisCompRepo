@@ -165,3 +165,35 @@ vector<computersWithPeople> logic::findComputer(string column, string searchValu
 {
     return theData.fetchComputers(column, searchValue);
 }
+
+vector<people> logic::printerPeople()
+{
+    vector<people> p;
+    theData.fetchPeopleOnly(p);
+    return p;
+}
+
+vector<computers> logic::printerComputers()
+{
+    vector<computers> c;
+    theData.fetchComputersOnly(c);
+    return c;
+}
+
+void logic::eraseChosenPeople(const vector<people>& p, const int& index)
+{
+    int id = p[index-1].getId();
+    theData.deletePeople(id);
+}
+
+void logic::eraseChosenComputer(const vector<computers>& c, const int& index)
+{
+    int id = c[index-1].getId();
+    theData.deleteComputer(id);
+}
+
+
+
+
+
+
