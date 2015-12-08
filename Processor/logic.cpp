@@ -15,29 +15,29 @@ vector<peopleWithComputers> logic::printerSortPeople(int orderBy, int ascending)
         {return (a.p.getName() < b.p.getName());});
     }
     switch(orderBy)
-       {
-       case 1 :
-          break;
-       case 2 :
-          sort(sortedVector.begin(), sortedVector.end(), [](peopleWithComputers const &a, peopleWithComputers const &b)
-          {return (a.p.getGender() < b.p.getGender());});
-          break;
-       case 3 :
-          sort(sortedVector.begin(), sortedVector.end(), [](peopleWithComputers const &a, peopleWithComputers const &b)
-          {return (a.p.getBirth() < b.p.getBirth());});
-          break;
-       case 4 :
-          sort(sortedVector.begin(), sortedVector.end(), [](peopleWithComputers const &a, peopleWithComputers const &b)
-          {
-              if(b.p.getDeath() == -1 && a.p.getDeath() != -1)
-                  return true;
-              if(a.p.getDeath() == -1 && b.p.getDeath() != -1)
-                  return false;
-              return (a.p.getDeath() < b.p.getDeath());
-          });
-          break;
-       default :
-          break;
+    {
+    case 1 :
+        break;
+    case 2 :
+        sort(sortedVector.begin(), sortedVector.end(), [](peopleWithComputers const &a, peopleWithComputers const &b)
+        {return (a.p.getGender() < b.p.getGender());});
+        break;
+    case 3 :
+        sort(sortedVector.begin(), sortedVector.end(), [](peopleWithComputers const &a, peopleWithComputers const &b)
+        {return (a.p.getBirth() < b.p.getBirth());});
+        break;
+    case 4 :
+        sort(sortedVector.begin(), sortedVector.end(), [](peopleWithComputers const &a, peopleWithComputers const &b)
+        {
+            if(b.p.getDeath() == -1 && a.p.getDeath() != -1)
+                return true;
+            if(a.p.getDeath() == -1 && b.p.getDeath() != -1)
+                return false;
+            return (a.p.getDeath() < b.p.getDeath());
+         });
+         break;
+    default :
+         break;
        }
 
     if(!ascending)
