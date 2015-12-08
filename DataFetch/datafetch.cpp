@@ -13,13 +13,6 @@ vector<peopleWithComputers> dataFetch::fetchPeople(string columnName, string sea
 {
     db.open();
     QSqlQuery query(db);
-<<<<<<< HEAD
-    QString command = "SELECT * FROM Scientists AS S ";
-    command += "LEFT JOIN (SELECT * FROM Computers AS C ";
-    command += "LEFT JOIN Invents AS I ";
-    command += "ON I.cid = C.id) AS T ";
-    command += "ON T.sid = S.id WHERE S." + QString::fromStdString(columnName) + " LIKE '%" + QString::fromStdString(searchString) + "%'";
-=======
 
     QString command = "SELECT * FROM Scientists AS S "
             "LEFT JOIN (SELECT * FROM Computers AS C "
@@ -37,7 +30,6 @@ vector<peopleWithComputers> dataFetch::fetchPeople(string columnName, string sea
 
 
     query.prepare(command);
->>>>>>> 1f5c4454345138bf018fea25d525bd9b2d7e5780
     //query.bindValue(":columnName", QString::fromStdString(columnName));
     //query.bindValue(":seartchString", QString::fromStdString(seartchString));
     query.exec();
