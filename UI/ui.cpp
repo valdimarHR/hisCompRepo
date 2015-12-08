@@ -496,7 +496,6 @@ void ui::printerMenuComputers()
 
 void ui::printPeopleVector(const vector<peopleWithComputers>& list) const
 {
-    //clear();
     cout << "+==========================================================================================+" << endl;
     printf("|%-35s|%-10s|%-8s|%-8s|%-25s|\n", "PEOPLE NAME", "GENDER", "BIRTH", "DEATH", "COMPUTERS");
     cout << "+==========================================================================================+" << endl;
@@ -518,14 +517,11 @@ void ui::printPeopleVector(const vector<peopleWithComputers>& list) const
         }
         cout << "+------------------------------------------------------------------------------------------+" << endl;
     }
-    //cout << "+------------------------------------------------------------------------------------------+" << endl;
-    system("pause");
     clear();
 }
 
 void ui::printComputersVector(const vector<computersWithPeople>& list) const
 {
-    //clear();
     cout << "+==========================================================================================+" << endl;
     printf("|%-22s|%-15s|%-8s|%-8s|%-33s|\n", "COMPUTER NAME", "TYPE", "YEAR", "BUILT", "CREATORS");
     cout << "+==========================================================================================+" << endl;
@@ -547,7 +543,7 @@ void ui::printComputersVector(const vector<computersWithPeople>& list) const
         }
         cout << "+------------------------------------------------------------------------------------------+" << endl;
     }
-    //cout << "+------------------------------------------------------------------------------------------+" << endl;
+
     system("pause");
     clear();
 }

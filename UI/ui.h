@@ -86,7 +86,7 @@ private:
      * and the people that created them as a table to the display.
      */
     void printComputersVector(const vector<computersWithPeople>& list) const;
-    /**
+
     void deleteMenu();//Asks the user what attribute they want to delete(Scientist, computer or all).
     /*
      * inputIntCheck(bool, int&) checks if the input from the user was an integer. If not it will ask the user to
@@ -116,13 +116,13 @@ private:
      * the computers they made are ignored in this print function.
      * @param list is a vector with people to be printed,
      */
-    int printOnlyPeople(const vector<peopleWithComputers>& peep);//Simple print to screen only the list of people.
+    int printOnlyPeople(const vector<peopleWithComputers>& peep);
     /**
      * @brief printOnlyPeople() prints out the computers,
      * the invertors are ignored in this print function.
      * @param list is a vector with computers to be printed,
      */
-    int printOnlyComputers(const vector<computersWithPeople>& comp);//Simple print to screen only list of computers.
+    int printOnlyComputers(const vector<computersWithPeople>& comp);
     string getStringSearchValue(string question);
     bool inputStrToBool(string& built);
     /*
