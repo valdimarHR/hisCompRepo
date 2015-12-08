@@ -9,7 +9,7 @@
 
 /**
  * @brief The UI prints out to the display and gets information from the user and
- * send it to the logic layer. Connects the user to the logic. Checks if the input
+ * sends it to the logic layer. Connects the user to the logic. Checks if the input
  * is correct.
  */
 
@@ -20,15 +20,7 @@ class ui
 public:
     ui();
     bool start();
-    void printTree() const;
-    /*
-     * printPeopleVector() prints out the people and their computers as a table to the display.
-     */
-    void printPeopleVector(const vector<peopleWithComputers>& list) const;
-    /*
-     * printComputersVector() prints out the computers and the people that created them as a table to the display.
-     */
-    void printComputersVector(const vector<computersWithPeople>& list) const;
+
 private:
     logic theLogic;
     int choice;
@@ -68,6 +60,15 @@ private:
      * printerMenuComputers() is the UI for printing all the computers in the database.
      */
     void printerMenuComputers();
+    void printTree() const;
+    /**
+     * @brief printPeopleVector() prints out the people and their computers as a table to the display.
+     */
+    void printPeopleVector(const vector<peopleWithComputers>& list) const;
+    /**
+     * @brief printComputersVector() prints out the computers and the people that created them as a table to the display.
+     */
+    void printComputersVector(const vector<computersWithPeople>& list) const;
     void deleteMenu();//Asks the user what attribute they want to delete(Scientist, computer or all).
     /*
      * inputIntCheck(bool, int&) checks if the input from the user was an integer. If not it will ask the user to
