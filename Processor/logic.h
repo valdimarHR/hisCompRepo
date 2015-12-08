@@ -32,7 +32,6 @@ public:
     vector<computersWithPeople> printerSortComputers(int orderBy, int ascending);
     vector<peopleWithComputers> findPeople(string column, string searchValue);
     vector<computersWithPeople> findComputer(string column, string searchValue);
-    void searchPerson();
     vector<people> printerPeople();
     vector<computers> printerComputers();
     void eraseChosenPeople(const vector<people>& p, const int& index);
@@ -50,8 +49,6 @@ private:
     static bool sortComputersBuilt(const computersWithPeople& a, const computersWithPeople& b);
     bool checkIfpersonOnList(const people& person);
     bool checkIfcomputerOnList(const computers& computer);
-    void getInsertedInfo(string& name, string& gender, int& born, int& death)const;
-
 
 };
 
