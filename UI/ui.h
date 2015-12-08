@@ -27,8 +27,6 @@ private:
     void insertMenuPerson();//Asks for info of the person that is to be added.
     void insertMenuComputer();//Asks for info of the computer that is to be added.
     void insertMenuConnection();
-    void printVector(const vector<peopleWithComputers> &list) const;
-    void printVector(const vector<computersWithPeople> &list) const;
     void searchMenu();
     void searchMenuPerson();
     void searchMenuComputer();

@@ -32,12 +32,20 @@ public:
     vector<computersWithPeople> printerSortComputers(int orderBy, int ascending);
     vector<peopleWithComputers> findPeople(string column, string searchValue);
     vector<computersWithPeople> findComputer(string column, string searchValue);
+<<<<<<< HEAD
     void searchPerson();
     vector<people> printerPeople();//Creates a vector of people and calls dataFetch for all the info.
     vector<computers> printerComputers();//Creates a vector of computers and calls dataFetch for all the info.
     void eraseChosenPeople(const vector<people>& p, const int& index);//Finds id of Scientist to delete and sends to datafetch.
     void eraseChosenComputer(const vector<computers>& c, const int& index);//Finds id of computer to delete and sends to datafetch.
     void eraseDB();//Calls datafetch to erase everything.
+=======
+    vector<people> printerPeople();
+    vector<computers> printerComputers();
+    void eraseChosenPeople(const vector<people>& p, const int& index);
+    void eraseChosenComputer(const vector<computers>& c, const int& index);
+    void eraseDB();
+>>>>>>> b22a89059de1264a70bf04ad415caa03523ec55a
 private:
     dataFetch theData;
     static bool sortPeopleName(const peopleWithComputers& a, const peopleWithComputers& b);
@@ -50,8 +58,6 @@ private:
     static bool sortComputersBuilt(const computersWithPeople& a, const computersWithPeople& b);
     bool checkIfpersonOnList(const people& person);
     bool checkIfcomputerOnList(const computers& computer);
-    void getInsertedInfo(string& name, string& gender, int& born, int& death)const;
-
 
 };
 

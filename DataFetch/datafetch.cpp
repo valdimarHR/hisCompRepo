@@ -7,7 +7,6 @@ dataFetch::dataFetch()
     if(!dbfile.exists(constants::NAME_OF_DATABASE)) createDatabase();
     QString dbName = constants::NAME_OF_DATABASE;
     db.setDatabaseName(dbName);
-
 }
 
 vector<peopleWithComputers> dataFetch::fetchPeople(string columnName, string seartchString)
