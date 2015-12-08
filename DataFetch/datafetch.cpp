@@ -12,7 +12,7 @@ dataFetch::dataFetch()
 
 }
 
-vector<peopleWithComputers> dataFetch::fetchPeople(string columnName, string seartchString)
+vector<peopleWithComputers> dataFetch::fetchPeople(string columnName, string searchString)
 {
     db.open();
     QSqlQuery query(db);
@@ -21,7 +21,7 @@ vector<peopleWithComputers> dataFetch::fetchPeople(string columnName, string sea
     command += "LEFT JOIN (SELECT * FROM Computers AS C ";
     command += "LEFT JOIN Invents AS I ";
     command += "ON I.cid = C.id) AS T ";
-    command += "ON T.sid = S.id WHERE S." + QString::fromStdString(columnName) + " LIKE '%" + QString::fromStdString(seartchString) + "%'";
+    command += "ON T.sid = S.id WHERE S." + QString::fromStdString(columnName) + " LIKE '%" + QString::fromStdString(searchString) + "%'";
 
     query.prepare(command);
     //query.bindValue(":columnName", columnName);

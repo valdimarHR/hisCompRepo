@@ -230,18 +230,14 @@ void ui::searchMenu()
 
 void ui::searchMenuPerson()
 {
-    //findBy föllin notar ekki lengur "listOfPeople" -> breyta yfir í SQL fyrirspurn í logic.cpp.
-    //findBy föllin notar ekki lengur "listOfPeople" -> breyta yfir í SQL fyrirspurn í logic.cpp.
-    //findBy föllin notar ekki lengur "listOfPeople" -> breyta yfir í SQL fyrirspurn í logic.cpp.
-
     int n;
 
     cout << "* SEARCH PERSON *" << endl;
     cout << "Would you like to search by" << endl
          << "1. Name" << endl
-         << "2. Gender (male or female)" << endl
+         << "2. Gender" << endl
          << "3. Year of birth" << endl
-         << "4. Year of death (write -1 for alive)" << endl
+         << "4. Year of death" << endl
          << "Enter your choice: ";
     cin >> n;
     inputIntCheck(cin.fail(), n, 1, 4);
@@ -256,7 +252,7 @@ void ui::searchMenuPerson()
             break;
         }
         case 2: {
-            question = "What would you like to search for (male or female)?";
+            question = "What would you like to search for (Male or Female)?";
             column = "gender";
             break;
         }
@@ -266,7 +262,7 @@ void ui::searchMenuPerson()
             break;
         }
         case 4: {
-            question = "Enter a year: ";
+            question = "Enter a year (write -1 for alive): ";
             column = "death";
             break;
         }
@@ -280,8 +276,6 @@ void ui::searchMenuPerson()
 
     if (foundPeople.size() == 0){
         cout << "No search results found!" << endl;
-        system("pause");
-        system("cls");
     } else {
         printPeopleVector(foundPeople);
     }
@@ -289,10 +283,6 @@ void ui::searchMenuPerson()
 
 void ui::searchMenuComputer()
 {
-    //IMPLEMENT....
-    //IMPLEMENT....
-    //IMPLEMENT....
-
     int n;
 
     cout << "* SEARCH COMPUTER *" << endl;
@@ -342,7 +332,8 @@ void ui::searchMenuComputer()
         cout << "No search results found!" << endl;
         system("pause");
         system("cls");
-    } else {
+    }
+    else {
         printComputersVector(foundComputer);
     }
 }
