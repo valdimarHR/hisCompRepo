@@ -8,11 +8,14 @@ using namespace std;
  * This file contains constants that this application uses
  */
 
-namespace constants {
+namespace constants
+{
     const string PEOPLE_DB = "";
     const string COMPUTER_DB = "";
     const string CONNECTION_DB = "";
     const int notDead = -1;
 }
+
+enum gender {female = "female", male = "male"};
 
 #endif // CONSTANTS_H

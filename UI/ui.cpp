@@ -115,6 +115,13 @@ void ui::insertMenuPerson()
     cout << "Year of death (-1 if still alive): ";
     cin >> death;
     inputIntCheck(cin.fail(), death);
+    while (death > born)
+    {
+        cout << "Person can't die before it is born, try again." << endl;
+        cout << "Year of death: ";
+        cin >> death;
+        inputIntCheck(cin.fail(), death);
+    }
 
     bool exists = theLogic.insertPerson(name, gender, born, death);
 
