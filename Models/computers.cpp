@@ -16,6 +16,15 @@ computers::computers(const string& n, const int& y, const string& t, const bool&
     wasBuilt = b;
 }
 
+computers::computers(const int& i,const string& n, const int& y, const string& t, const bool& b)
+{
+    id = i;
+    name = n;
+    yearCreated = y;
+    type = t;
+    wasBuilt = b;
+}
+
 void computers::setId(int fid)
 {
     id = fid;

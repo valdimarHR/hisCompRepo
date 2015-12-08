@@ -1,9 +1,12 @@
 #include "DataFetch/datafetch.h"
 #include <QVariant>
+#include <QFile>
 
 dataFetch::dataFetch()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
+    QFile dbfile;
+    if(!dbfile.exists("database.sqlite")) createDatabase();
     QString dbName = "database.sqlite";
     db.setDatabaseName(dbName);
 
@@ -19,10 +22,11 @@ vector<peopleWithComputers> dataFetch::fetchPeople(string columnName, string sea
     command += "LEFT JOIN Invents AS I ";
     command += "ON I.cid = C.id) AS T ";
     command += "ON T.sid = S.id WHERE S." + QString::fromStdString(columnName) + " LIKE '%" + QString::fromStdString(seartchString) + "%'";
+    //command += "ON T.sid = S.id WHERE S.:columnName LIKE '%'||:seartchString||'%'";
 
     query.prepare(command);
-    //query.bindValue(":columnName", columnName);
-    //query.bindValue(":seartchString", seartchString);
+    //query.bindValue(":columnName", QString::fromStdString(columnName));
+    //query.bindValue(":seartchString", QString::fromStdString(seartchString));
     query.exec();
 
     vector<peopleWithComputers> pepVector = convererPeopleTable(query);
@@ -173,16 +177,6 @@ vector<computersWithPeople> dataFetch::convererComputersTable(QSqlQuery& query)
 
 }
 
-vector<people> dataFetch::convererCombinedTable(QSqlQuery& query)
-{
-    //NEED TO IMPLEMENT
-    vector<people> peopleVector;
-    return peopleVector;
-    //Þurfum við nokkuð þetta fall?
-}
-
-
-
 void dataFetch::insertPersonToDatabase(const people& a)
 {
 
@@ -233,6 +227,109 @@ void dataFetch::insertConnectionToDatabase(const int& sid, const int& cid)
     query.prepare("INSERT INTO Invents (sid, cid) VALUES (:sid, :cid)");
     query.bindValue(":sid", sid);
     query.bindValue(":cid", cid);
+    query.exec();
+    db.close();
+}
+
+void dataFetch::fetchPeopleOnly(vector<people>& p)
+{
+    db.open();
+    QSqlQuery query(db);
+
+    query.prepare("SELECT * FROM Scientists");
+    query.exec();
+
+    while(query.next())
+    {
+        int id = query.value("id").toUInt();
+        string name = query.value("name").toString().toStdString();
+        string gender = query.value("gender").toString().toStdString();
+        int birth = query.value("birth").toUInt();
+        int death = query.value("death").toUInt();
+        people temp(id,name,gender,birth,death);
+        p.push_back(temp);
+    }
+    db.close();
+}
+
+void dataFetch::fetchComputersOnly(vector<computers>& c)
+{
+    db.open();
+    QSqlQuery query(db);
+
+    query.prepare("SELECT * FROM Computers");
+    query.exec();
+
+    while(query.next())
+    {
+        int id = query.value("id").toUInt();
+        string name = query.value("name").toString().toStdString();
+        int yearcreated = query.value("yearCreated").toUInt();
+        string type = query.value("type").toString().toStdString();
+        int wasBuilt = query.value("wasBuilt").toUInt();
+        computers temp(id,name,yearcreated,type,wasBuilt);
+        c.push_back(temp);
+    }
+    db.close();
+}
+
+void dataFetch::deletePeople(const int& id)
+{
+    db.open();
+    QSqlQuery query(db);
+
+    string comm = "DELETE FROM Scientists WHERE id = " + to_string(id);
+    QString command = QString::fromStdString(comm);
+    query.prepare(command);
+    query.exec();
+
+    string comm2 = "DELETE FROM Invents WHERE sid = " +to_string(id);
+    QString command2 = QString::fromStdString(comm2);
+    query.prepare(command2);
+    query.exec();
+
+    db.close();
+}
+
+void dataFetch::deleteComputer(const int& id)
+{
+    db.open();
+    QSqlQuery query(db);
+
+    string comm = "DELETE FROM Computers WHERE id = " + to_string(id);
+    QString command = QString::fromStdString(comm);
+    query.prepare(command);
+    query.exec();
+
+    string comm2 = "DELETE FROM Invents WHERE cid = " +to_string(id);
+    QString command2 = QString::fromStdString(comm2);
+    query.prepare(command2);
+    query.exec();
+
+    db.close();
+}
+
+void dataFetch::createDatabase()
+{
+    db.setDatabaseName("database.sqlite");
+    db.open();
+    QSqlQuery query(db);
+
+    query.prepare("CREATE TABLE 'Computers' ('id' INTEGER PRIMARY KEY  "
+                  "NOT NULL ,'name' VARCHAR NOT NULL ,'yearCreated' "
+                  "INTEGER NOT NULL ,'type' VARCHAR NOT NULL ,"
+                  "'wasBuilt' BOOL NOT NULL  DEFAULT (null) )");
+    query.exec();
+
+    query.prepare("CREATE TABLE 'Scientists' ('id' INTEGER PRIMARY KEY  AUTOINCREMENT  "
+                  "NOT NULL , 'name' VARCHAR NOT NULL , 'gender' VARCHAR NOT NULL , "
+                  "'birth' INTEGER NOT NULL , 'death' INTEGER)");
+    query.exec();
+
+    query.prepare("CREATE TABLE Invents(sid INTEGER,cid INTEGER,"
+                  "FOREIGN KEY (sid) REFERENCES Scientists(id),"
+                  "FOREIGN KEY (cid) REFERENCES Computers(id) "
+                  "PRIMARY KEY (sid, cid))");
     query.exec();
     db.close();
 }

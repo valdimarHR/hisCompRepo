@@ -16,6 +16,15 @@ people::people(const string& n, const string& g, const int& b, const int& d)
     yearOfDeath = d;
 }
 
+people::people(const int& i,const string& n, const string& g, const int& b, const int& d)
+{
+    id = i;
+    name = n;
+    gender = g;
+    yearOfBirth = b;
+    yearOfDeath = d;
+}
+
 void people::setId(int fid)
 {
     id = fid;

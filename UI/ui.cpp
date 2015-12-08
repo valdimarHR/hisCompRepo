@@ -253,40 +253,44 @@ void ui::searchMenuPerson()
     cin >> n;
     inputIntCheck(cin.fail(), n, 1, 4);
 
-    vector<people> foundPeople;
+    vector<peopleWithComputers> foundPeople;
+    string question;
+    string column;
     switch(n) {
         case 1: {
-            string searchValue = getStringSearchValue("What would you like to search for?");
-            foundPeople = theLogic.findByPeopleName(searchValue);
+            question = "What would you like to search for?";
+            column = "name";
             break;
         }
         case 2: {
-            string searchValue = getStringSearchValue("What would you like to search for? (male or female)");
-            foundPeople = theLogic.findByPeopleGender(searchValue);
+            question = "What would you like to search for (male or female)?";
+            column = "gender";
             break;
         }
         case 3: {
-            int searchValue = getIntSearchValue();
-            foundPeople = theLogic.findByPeopleBirth(searchValue);
+            question = "Enter a year: ";
+            column = "birth";
             break;
         }
         case 4: {
-            int searchValue = getIntSearchValue();
-            foundPeople = theLogic.findByPeopleDeath(searchValue);
+            question = "Enter a year: ";
+            column = "death";
             break;
         }
         default: {
             break;
         }
+    }
 
-        if (foundPeople.size() == 0){
-            cout << "No search results found!" << endl;
-            system("pause");
-            system("cls");
+    string searchValue = getStringSearchValue(question);
+    foundPeople = theLogic.findPeople(column, searchValue);
 
-        } else {
-//            printVector(foundPeople);
-        }
+    if (foundPeople.size() == 0){
+        cout << "No search results found!" << endl;
+        system("pause");
+        system("cls");
+    } else {
+        printPeopleVector(foundPeople);
     }
 }
 
@@ -308,7 +312,46 @@ void ui::searchMenuComputer()
     cin >> n;
     inputIntCheck(cin.fail(), n, 1, 4);
 
-    cout << " ... implement swith like in search people ... ";
+    vector<computersWithPeople> foundComputer;
+
+    string question;
+    string column;
+    switch(n) {
+        case 1: {
+            question = "What would you like to search for?";
+            column = "name";
+            break;
+        }
+        case 2: {
+            question = "Enter a year: ";
+            column = "yearCreated";
+            break;
+        }
+        case 3: {
+            question = "Enter a type of computer: ";
+            column = "type";
+            break;
+        }
+        case 4: {
+            question = "Was it built? (Y/N): ";
+            column = "wasBuilt";
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+
+    string searchValue = getStringSearchValue(question);
+    foundComputer = theLogic.findComputer(column, searchValue);
+
+    if (foundComputer.size() == 0){
+        cout << "No search results found!" << endl;
+        system("pause");
+        system("cls");
+    } else {
+        printComputersVector(foundComputer);
+    }
 }
 
 void ui::printerMenu()
@@ -406,13 +449,6 @@ void ui::printerMenuComputers()
     printComputersVector(sortedVector);
 }
 
-void ui::deleteMenu()
-{
-    //IMPLEMENT UI....
-    //IMPLEMENT UI....
-    //IMPLEMENT UI....
-}
-
 void ui::printVector(const vector<peopleWithComputers> &list) const
 {
     for(const peopleWithComputers person:list)
@@ -438,9 +474,9 @@ void ui::printVector(const vector<computersWithPeople> &list) const
 void ui::printPeopleVector(const vector<peopleWithComputers>& list) const
 {
     //clear();
-    cout << "+------------------------------------------------------------------------------------------+" << endl;
-    printf("|%35s|%10s|%8s|%8s|%25s|\n", "PEOPLE NAME", "GENDER", "BIRTH", "DEATH", "COMPUTERS");
-    cout << "+------------------------------------------------------------------------------------------+" << endl;
+    cout << "+==========================================================================================+" << endl;
+    printf("|%-35s|%-10s|%-8s|%-8s|%-25s|\n", "PEOPLE NAME", "GENDER", "BIRTH", "DEATH", "COMPUTERS");
+    cout << "+==========================================================================================+" << endl;
     for(const peopleWithComputers person:list)
     {
         string name = person.p.getName();
@@ -448,15 +484,14 @@ void ui::printPeopleVector(const vector<peopleWithComputers>& list) const
         int yearOfBirth = person.p.getBirth();
         string death = to_string(person.p.getDeath());
         if(person.p.getDeath() == constants::notDead) death = "Alive";
-        printf("|%35s|%10s|%8i|%8s|%25s|\n", name.c_str(), gender.c_str(), yearOfBirth, death.c_str(), "");
 
-        string computerName = person.creations[0].getName().c_str();
-        if(computerName != "default")
+        string computerName = person.creations[0].getName();
+        if(computerName == "default") computerName = "";
+        printf("|%-35.35s|%-10.10s|%-8.8s|%-8.8s|%-25.25s|\n", name.c_str(), gender.c_str(), to_string(yearOfBirth).c_str(), death.c_str(), computerName.c_str());
+
+        for(unsigned int i = 1; i < person.creations.size(); i++)
         {
-            for(unsigned int i = 0; i < person.creations.size(); i++)
-            {
-                printf("|%64s %25s|\n", "", person.creations[i].getName().c_str());
-            }
+            printf("|%-64.64s %-25.25s|\n", "", person.creations[i].getName().c_str());
         }
         cout << "+------------------------------------------------------------------------------------------+" << endl;
     }
@@ -468,24 +503,23 @@ void ui::printPeopleVector(const vector<peopleWithComputers>& list) const
 void ui::printComputersVector(const vector<computersWithPeople>& list) const
 {
     //clear();
-    cout << "+------------------------------------------------------------------------------------------+" << endl;
-    printf("|%22s|%15s|%8s|%8s|%33s|\n", "COMPUTER NAME", "TYPE", "YEAR", "BUILT", "CREATORS");
-    cout << "+------------------------------------------------------------------------------------------+" << endl;
+    cout << "+==========================================================================================+" << endl;
+    printf("|%-22s|%-15s|%-8s|%-8s|%-33s|\n", "COMPUTER NAME", "TYPE", "YEAR", "BUILT", "CREATORS");
+    cout << "+==========================================================================================+" << endl;
     for(const computersWithPeople comp:list){
         string name = comp.c.getName();
         string type = comp.c.getType();
         int year = comp.c.getYearCreated();
         string built = "No";
         if(comp.c.getWasBuilt()) built = "Yes";
-        printf("|%22s|%15s|%8i|%8s|%33s|\n", name.c_str(), type.c_str(), year, built.c_str(), "");
 
         string personName = comp.creators[0].getName().c_str();
-        if(personName != "default")
+        if(personName == "default") personName = "";
+        printf("|%-22.22s|%-15.15s|%-8.8s|%-8.8s|%-33.33s|\n", name.c_str(), type.c_str(), to_string(year).c_str(), built.c_str(), personName.c_str());
+
+        for(unsigned int i = 1; i < comp.creators.size(); i++)
         {
-            for(unsigned int i = 0; i < comp.creators.size(); i++)
-            {
-                printf("|%56s %33s|\n", "", comp.creators[i].getName().c_str());
-            }
+            printf("|%-56.56s %-33.33s|\n", "", comp.creators[i].getName().c_str());
         }
         cout << "+------------------------------------------------------------------------------------------+" << endl;
     }
@@ -504,16 +538,82 @@ string ui::getStringSearchValue(string question)
     return value;
 }
 
-int ui::getIntSearchValue()
+void ui::deleteMenu()
 {
-    int value;
+    clear();
+    int choice;
+    cout << "* DELETE MENU *" << endl << endl;
+    cout << "\t1: Remove Scientist." << endl
+         << "\t2: Remove Computer." << endl
+         << "\t3: Remove Whole Database." << endl
+         << "\t0: Back." << endl
+         << "Enter your choice ";
+    cout.flush();
+    cin >> choice;
+    inputIntCheck(cin.fail(), choice, 0, 3);
 
-    cout << "What would you like to search for?" << endl;
-    cin >> value;
+    if(choice == 1)
+    {
+        deletePeople();
+        cout << endl << "~~DELETING~~";
+        sleep(1);
+        clear();
+    }
+    else if(choice == 2)
+    {
+        deleteComputer();
+        cout << endl << "~~DELETING~~";
+        sleep(1);
+        clear();
+    }
+    else if(choice == 3)
+    {
 
-    inputIntCheck(cin.fail(), value);
+    }
+    clear();
 
-    return value;
+}
+
+void ui::deletePeople()
+{
+    clear();
+    cout << "* DELETE MENU *" << endl << endl;
+    vector<people> peep = theLogic.printerPeople();
+    int size = peep.size();
+    for(int i = 0; i<size; i++)
+    {
+        cout << "\t" << i+1 << ". " << peep[i].getName() << endl;
+    }
+    cout << "\t0. Exit";
+    cout << endl << "Choose which scientist to delete: ";
+    int index;
+    cin >> index;
+    inputIntCheck(cin.fail(), index, 0, size);
+    if(index == 0)
+        return;
+    theLogic.eraseChosenPeople(peep, index);
+    peep.clear();
+}
+
+void ui::deleteComputer()
+{
+    clear();
+    cout << "* DELETE MENU *" << endl << endl;
+    vector<computers> comp = theLogic.printerComputers();
+    int size = comp.size();
+    for(int i = 0; i<size; i++)
+    {
+        cout << "\t" << i+1 << ". " << comp[i].getName() << endl;
+    }
+    cout << "\t0. Exit";
+    cout << endl << "Choose which computer to delete: ";
+    int index;
+    cin >> index;
+    inputIntCheck(cin.fail(), index, 0, size);
+    if(index == 0)
+        return;
+    theLogic.eraseChosenComputer(comp, index);
+    comp.clear();
 }
 
 void ui::inputIntCheck(bool inputFail, int& var)

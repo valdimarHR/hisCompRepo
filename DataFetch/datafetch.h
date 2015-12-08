@@ -23,11 +23,17 @@ public:
     void insertPersonToDatabase(const people& a);
     void insertComputerToDatabase(const computers& c);
     void insertConnectionToDatabase(const int& sid, const int& cid);
+    void fetchPeopleOnly(vector<people>& p);
+    void fetchComputersOnly(vector<computers>& c);
     bool alreadyConnnected(const int sid, const int cid);
+    void deletePeople(const int& id);
+    void deleteComputer(const int& id);
 private:
     vector<peopleWithComputers> convererPeopleTable(QSqlQuery& query);
     vector<computersWithPeople> convererComputersTable(QSqlQuery& query);
     vector<people> convererCombinedTable(QSqlQuery& query);
+
+    void createDatabase();
     QSqlDatabase db;
 };
 

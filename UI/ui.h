@@ -4,6 +4,7 @@
 #include "Models/people.h"
 #include "Processor/logic.h"
 #include "Utilities/constants.h"
+#include "DataFetch/datafetch.h"
 #include <QtGlobal>
 
 
@@ -37,8 +38,9 @@ private:
     void deleteMenu();
     void inputIntCheck(bool inputFail, int& var);
     void inputIntCheck(bool inputFail, int& var, int low, int high);
+    void deletePeople();
+    void deleteComputer();
     string getStringSearchValue(string question);
-    int getIntSearchValue();
     bool inputStrToBool(string& built);
     void clear() const;
 };
