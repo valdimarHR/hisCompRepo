@@ -30,8 +30,9 @@ public:
     bool insertConnection(const int& sid, const int& cid);
     vector<peopleWithComputers> printerSortPeople(int orderBy, int ascending);
     vector<computersWithPeople> printerSortComputers(int orderBy, int ascending);
-    vector<peopleWithComputers> findPeople(string column, string searchValue);
-    vector<computersWithPeople> findComputer(string column, string searchValue);
+    vector<peopleWithComputers> findPeople(string column, string searchValue);//Finds person in the database
+    vector<computersWithPeople> findComputer(string column, string searchValue);//Finds computer in the database
+    bool eraseListOfVector();
     void searchPerson();
     vector<people> printerPeople();//Creates a vector of people and calls dataFetch for all the info.
     vector<computers> printerComputers();//Creates a vector of computers and calls dataFetch for all the info.

@@ -19,7 +19,7 @@ class dataFetch
 {
 public:
     dataFetch();
-    vector<peopleWithComputers> fetchPeople(string columnName, string seartchString);
+    vector<peopleWithComputers> fetchPeople(string columnName, string searchString);
     vector<computersWithPeople> fetchComputers(string columnName, string seartchString);
     void insertPersonToDatabase(const people& a);//Add all info to new person to SQL Database.
     void insertComputerToDatabase(const computers& c);//Add all info to new computer to SQL Database
