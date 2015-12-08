@@ -1,6 +1,8 @@
 #ifndef COMPUTERS_H
 #define COMPUTERS_H
 #include <iostream>
+#include <algorithm>
+#include <string>
 using namespace std;
 
 class computers

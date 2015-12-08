@@ -74,9 +74,9 @@ bool logic::sortPeopleBirth(const peopleWithComputers& a, const peopleWithComput
 
 bool logic::sortPeopleDeath(const peopleWithComputers& a, const peopleWithComputers& b)
 {
-    if(b.p.getDeath() == -1 && a.p.getDeath() != -1)
+    if(b.p.getDeath() == constants::notDead && a.p.getDeath() != constants::notDead)
         return true;
-    if(a.p.getDeath() == -1 && b.p.getDeath() != -1)
+    if(a.p.getDeath() == constants::notDead && b.p.getDeath() != constants::notDead)
         return false;
     return (a.p.getDeath() < b.p.getDeath());
 }
