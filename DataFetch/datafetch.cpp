@@ -1,13 +1,11 @@
 #include "DataFetch/datafetch.h"
-#include <QVariant>
-#include <QFile>
 
 dataFetch::dataFetch()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
     QFile dbfile;
-    if(!dbfile.exists("database.sqlite")) createDatabase();
-    QString dbName = "database.sqlite";
+    if(!dbfile.exists(constants::NAME_OF_DATABASE)) createDatabase();
+    QString dbName = constants::NAME_OF_DATABASE;
     db.setDatabaseName(dbName);
 
 }
@@ -378,7 +376,7 @@ void dataFetch::eraseEverything()
 
 void dataFetch::createDatabase()
 {
-    db.setDatabaseName("database.sqlite");
+    db.setDatabaseName(constants::NAME_OF_DATABASE);
     db.open();
     QSqlQuery query(db);
 

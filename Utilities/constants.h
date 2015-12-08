@@ -1,6 +1,6 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
-#include <string>
+#include <QString>
 
 using namespace std;
 
@@ -10,7 +10,7 @@ using namespace std;
 
 namespace constants
 {
-    const string NAME_OF_DATABASE = "database.sqlite";
+    const QString NAME_OF_DATABASE = "database.sqlite";
     const int notDead = -1;
 }
 
