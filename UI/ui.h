@@ -26,9 +26,25 @@ private:
     int choice;
     void mainMenu();
     void menuSwitch();
-    void insertMenu();//Asks for what you wish to insert(Scientist, computer, connection).
-    void insertMenuPerson();//Asks for info of the person that is to be added.
-    void insertMenuComputer();//Asks for info of the computer that is to be added.
+    /**
+     * @brief asks for what you wish to insert (Scientist,
+     * computer, connection)
+     */
+    void insertMenu();
+    /**
+     * @brief asks for info on the person that is
+     * to be added and sends it to the logic layer.
+     */
+    void insertMenuPerson();
+    /**
+     * @brief asks for info of the computer that is to
+     * be added and sends it to the logic layer.
+     */
+    void insertMenuComputer();
+    /**
+     * @brief displays possible person and computer to connect,
+     * makes user decide connection and sends to logic layer.
+     */
     void insertMenuConnection();
     /**
      * @brief asks the user whether it wants to search for a person or a computer and goes to
@@ -62,11 +78,13 @@ private:
     void printerMenuComputers();
     void printTree() const;
     /**
-     * @brief printPeopleVector() prints out the people and their computers as a table to the display.
+     * @brief printPeopleVector() prints out the people
+     * and their computers as a table to the display.
      */
     void printPeopleVector(const vector<peopleWithComputers>& list) const;
     /**
-     * @brief printComputersVector() prints out the computers and the people that created them as a table to the display.
+     * @brief printComputersVector() prints out the computers
+     * and the people that created them as a table to the display.
      */
     void printComputersVector(const vector<computersWithPeople>& list) const;
     void deleteMenu();//Asks the user what attribute they want to delete(Scientist, computer or all).
@@ -83,7 +101,17 @@ private:
     void deletePeople();//Asks the user what scientist they wish to remove.
     void deleteComputer();//Asks the user what computer they wish to remove.
     void deleteDB();//Asks the user if he is sure he wish to delete the entire SQL DB.
+    /**
+     * @brief printOnlyPeople() prints out the people,
+     * the computers they made are ignored in this print function.
+     * @param list is a vector with people to be printed,
+     */
     int printOnlyPeople(const vector<peopleWithComputers>& peep);//Simple print to screen only the list of people.
+    /**
+     * @brief printOnlyPeople() prints out the computers,
+     * the invertors are ignored in this print function.
+     * @param list is a vector with computers to be printed,
+     */
     int printOnlyComputers(const vector<computersWithPeople>& comp);//Simple print to screen only list of computers.
     string getStringSearchValue(string question);
     bool inputStrToBool(string& built);
