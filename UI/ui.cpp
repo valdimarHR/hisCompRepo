@@ -29,7 +29,7 @@ void ui::mainMenu()
          << "||     1: Insert           ||" << endl
          << "||     2: Search           ||" << endl
          << "||     3: Print            ||" << endl
-         << "||     4: Erase Database   ||" << endl
+         << "||     4: Delete from DB   ||" << endl
          << "||     5: Exit             ||" << endl
          << "||                         ||" << endl
          << "\\\\-------------------------//" << endl
