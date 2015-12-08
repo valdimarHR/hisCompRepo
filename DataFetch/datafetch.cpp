@@ -18,8 +18,15 @@ vector<peopleWithComputers> dataFetch::fetchPeople(string columnName, string sea
             "LEFT JOIN (SELECT * FROM Computers AS C "
             "LEFT JOIN Invents AS I "
             "ON I.cid = C.id) AS T "
-            "ON T.sid = S.id WHERE S." + QString::fromStdString(columnName) + " LIKE '%" + QString::fromStdString(seartchString) + "%'";
-            //"ON T.sid = S.id WHERE S.? LIKE '%'||:seartchString||'%'";
+            "ON T.sid = S.id WHERE S." + QString::fromStdString(columnName) + " LIKE ";
+    if(seartchString != "male" && seartchString != "Male")
+    {
+        command += "'%" + QString::fromStdString(seartchString) + "%'";
+    }
+    else
+    {
+        command += "'" + QString::fromStdString(seartchString) + "%'";
+    }
 
 
     query.prepare(command);
