@@ -397,7 +397,7 @@ void ui::printerMenu()
 
     if(printChoice == 1)printerMenuPeople();
     else if(printChoice == 2) printerMenuComputers();
-    else mainMenu();
+    else return;
 
 }
 
