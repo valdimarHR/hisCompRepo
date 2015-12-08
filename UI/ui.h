@@ -27,8 +27,6 @@ private:
     void insertMenuPerson();
     void insertMenuComputer();
     void insertMenuConnection();
-    void printVector(const vector<peopleWithComputers> &list) const;
-    void printVector(const vector<computersWithPeople> &list) const;
     void searchMenu();
     void searchMenuPerson();
     void searchMenuComputer();
