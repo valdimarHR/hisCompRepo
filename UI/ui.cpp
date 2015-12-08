@@ -389,22 +389,29 @@ void ui::printerMenuPeople()
     inputIntCheck(cin.fail(), orderBy, 1, 5);
     clear();
 
-    if(orderBy != 2){
+    if(orderBy != 2 && orderBy != 5)
+    {
         cout << "Do you want this list in descending or ascending order?" << endl
              << "\t0: Descending" << endl
              << "\t1: Ascending" << endl;
-    } else {
+    }
+    else if ( orderBy == 2)
+    {
         cout << "Do you want this list to be ordered by males or females first?" << endl
              << "\t0: Males" << endl
              << "\t1: Females" << endl;
     }
 
-    cout << "Enter your choice: ";
-    cout.flush();
-    cin >> ascending;
-    inputIntCheck(cin.fail(), ascending, 0, 1);
+    if (orderBy != 5)
+    {
+        cout << "Enter your choice: ";
+        cout.flush();
+        cin >> ascending;
+        inputIntCheck(cin.fail(), ascending, 0, 1);
+    }
+    else
+        orderBy = 1;
     clear();
-
 
     vector<peopleWithComputers> sortedVector = theLogic.printerSortPeople(orderBy, ascending);
     printPeopleVector(sortedVector);
@@ -427,22 +434,28 @@ void ui::printerMenuComputers()
     inputIntCheck(cin.fail(), orderBy, 1, 5);
     clear();
 
-    if (orderBy != 4) {
-        cout << "Do you this list in descending or ascending order?" << endl
+    if (orderBy != 4 && orderBy != 5)
+    {
+        cout << "Do you want this list in descending or ascending order?" << endl
              << "\t0: Descending" << endl
              << "\t1: Ascending" << endl;
     }
-    else
+    else if (orderBy == 4)
     {
         cout << "Do you want this list to be ordered by whether it was built or not built first" << endl
              << "\t0: Built" << endl
              << "\t1: Not built" << endl;
     }
 
-    cout << "Enter your choice: ";
-    cout.flush();
-    cin >> ascending;
-    inputIntCheck(cin.fail(), ascending, 0, 1);
+    if (orderBy != 5)
+    {
+        cout << "Enter your choice: ";
+        cout.flush();
+        cin >> ascending;
+        inputIntCheck(cin.fail(), ascending, 0, 1);
+    }
+    else
+        ascending = 1;
     clear();
 
     vector<computersWithPeople> sortedVector = theLogic.printerSortComputers(orderBy, ascending);

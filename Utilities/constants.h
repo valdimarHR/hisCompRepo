@@ -16,6 +16,4 @@ namespace constants
     const int notDead = -1;
 }
 
-enum gender {female = "female", male = "male"};
-
 #endif // CONSTANTS_H
