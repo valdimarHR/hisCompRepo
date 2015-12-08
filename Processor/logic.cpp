@@ -131,7 +131,10 @@ bool logic::checkIfcomputerOnList(const computers& computer)
 
 vector<peopleWithComputers> logic::findPeople(string column, string searchValue)
 {
-    return theData.fetchPeople(column, searchValue);
+    vector<peopleWithComputers> sortedVector = theData.fetchPeople(column, searchValue);
+    sort(sortedVector.begin(), sortedVector.end(), [](peopleWithComputers const &a, peopleWithComputers const &b)
+    {return (a.p.getName() < b.p.getName());});
+    return sortedVector;
 }
 
 vector<computersWithPeople> logic::findComputer(string column, string searchValue)
