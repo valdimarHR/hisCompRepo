@@ -22,10 +22,11 @@ vector<peopleWithComputers> dataFetch::fetchPeople(string columnName, string sea
     command += "LEFT JOIN Invents AS I ";
     command += "ON I.cid = C.id) AS T ";
     command += "ON T.sid = S.id WHERE S." + QString::fromStdString(columnName) + " LIKE '%" + QString::fromStdString(seartchString) + "%'";
+    //command += "ON T.sid = S.id WHERE S.:columnName LIKE '%'||:seartchString||'%'";
 
     query.prepare(command);
-    //query.bindValue(":columnName", columnName);
-    //query.bindValue(":seartchString", seartchString);
+    //query.bindValue(":columnName", QString::fromStdString(columnName));
+    //query.bindValue(":seartchString", QString::fromStdString(seartchString));
     query.exec();
 
     vector<peopleWithComputers> pepVector = convererPeopleTable(query);
@@ -175,16 +176,6 @@ vector<computersWithPeople> dataFetch::convererComputersTable(QSqlQuery& query)
     return computersVector;
 
 }
-
-vector<people> dataFetch::convererCombinedTable(QSqlQuery& query)
-{
-    //NEED TO IMPLEMENT
-    vector<people> peopleVector;
-    return peopleVector;
-    //Þurfum við nokkuð þetta fall?
-}
-
-
 
 void dataFetch::insertPersonToDatabase(const people& a)
 {
