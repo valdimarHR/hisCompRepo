@@ -9,7 +9,7 @@ ui::ui()
 bool ui::start()
 {
     cout << "Welcome to Computer Sciense DB." << endl;
-
+    printTree();
     do
     {
         mainMenu();
@@ -755,6 +755,9 @@ void ui::printTree()const
     }
 
     cout << endl;
+    sleep(3);
+    clear();
+
 }
 
 void ui::clear() const
