@@ -288,48 +288,6 @@ void dataFetch::insertConnectionToDatabase(const int& sid, const int& cid)
     db.close();
 }
 
-void dataFetch::fetchPeopleOnly(vector<people>& p)
-{
-    db.open();
-    QSqlQuery query(db);
-
-    query.prepare("SELECT * FROM Scientists");
-    query.exec();
-
-    while(query.next())
-    {
-        int id = query.value("id").toUInt();
-        string name = query.value("name").toString().toStdString();
-        string gender = query.value("gender").toString().toStdString();
-        int birth = query.value("birth").toUInt();
-        int death = query.value("death").toUInt();
-        people temp(id,name,gender,birth,death);
-        p.push_back(temp);
-    }
-    db.close();
-}
-
-void dataFetch::fetchComputersOnly(vector<computers>& c)
-{
-    db.open();
-    QSqlQuery query(db);
-
-    query.prepare("SELECT * FROM Computers");
-    query.exec();
-
-    while(query.next())
-    {
-        int id = query.value("id").toUInt();
-        string name = query.value("name").toString().toStdString();
-        int yearcreated = query.value("yearCreated").toUInt();
-        string type = query.value("type").toString().toStdString();
-        int wasBuilt = query.value("wasBuilt").toUInt();
-        computers temp(id,name,yearcreated,type,wasBuilt);
-        c.push_back(temp);
-    }
-    db.close();
-}
-
 void dataFetch::deletePeople(const int& id)
 {
     db.open();

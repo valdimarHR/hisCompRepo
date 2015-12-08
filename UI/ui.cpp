@@ -189,7 +189,7 @@ void ui::insertMenuConnection()
     cout << "* WHO INVENTED WHAT *" << endl << endl;
 
     cout << "First choose a scientist from this list:" << endl;
-    vector<people> peep = theLogic.printerPeople();
+    vector<peopleWithComputers> peep = theLogic.printerSortPeople(5, 1); //5 þá raðast ein og í DB og 1 fyrir að snúa ekki við
     int sizeP = printOnlyPeople(peep);
     cout << "Scientist number: ";
     int sid;
@@ -203,7 +203,7 @@ void ui::insertMenuConnection()
     clear();
     cout << "* WHO INVENTED WHAT *" << endl << endl;
     cout << "Now choose a computer from this list:" << endl;
-    vector<computers> comp = theLogic.printerComputers();
+    vector<computersWithPeople> comp = theLogic.printerSortComputers(5, 1); // 5 fyrir röðun og 1 fyrir asc
     int sizeC = printOnlyComputers(comp);
     int cid;
     cout << "Computer number: ";
@@ -214,8 +214,8 @@ void ui::insertMenuConnection()
         clear();
         return;
     }
-    cid = comp[cid-1].getId();
-    sid = peep[sid-1].getId();
+    cid = comp[cid-1].c.getId();
+    sid = peep[sid-1].p.getId();
     bool connected = theLogic.insertConnection(sid, cid);
     if (connected)
     {
@@ -600,7 +600,7 @@ void ui::deletePeople()
 {
     clear();
     cout << "* DELETE MENU *" << endl << endl;
-    vector<people> peep = theLogic.printerPeople();
+    vector<peopleWithComputers> peep = theLogic.printerSortPeople(5,1); //5 fyrir óraðað, 1 fyrir asc
     int size = printOnlyPeople(peep);
     cout << endl << "Choose which scientist to delete: ";
     int index;
@@ -619,7 +619,7 @@ void ui::deleteComputer()
 {
     clear();
     cout << "* DELETE MENU *" << endl << endl;
-    vector<computers> comp = theLogic.printerComputers();
+    vector<computersWithPeople> comp = theLogic.printerSortComputers(5,1); //5 fyrir enga röðun, 1 fyrir asc
     int size = printOnlyComputers(comp);
     cout << endl << "Choose which computer to delete: ";
     int index;
@@ -666,28 +666,28 @@ void ui::deleteDB()
 }
 
 
-int ui::printOnlyPeople(const vector<people>& peep)
+int ui::printOnlyPeople(const vector<peopleWithComputers>& peep)
 {
     int size = peep.size();
 
     for(int i = 0; i<size; i++)
     {
-        cout << "\t" << i+1 << ". " << peep[i].getName() << ", " << peep[i].getBirth() << "-";
-        if (peep[i].getDeath() == constants::notDead)
+        cout << "\t" << i+1 << ". " << peep[i].p.getName() << ", " << peep[i].p.getBirth() << "-";
+        if (peep[i].p.getDeath() == constants::notDead)
             cout << endl;
         else
-            cout << peep[i].getDeath()  << endl;
+            cout << peep[i].p.getDeath()  << endl;
     }
     cout << "\t0. Exit" << endl;
     return size;
 }
 
-int ui::printOnlyComputers(const vector<computers>& comp)
+int ui::printOnlyComputers(const vector<computersWithPeople>& comp)
 {
     int size = comp.size();
     for(int i = 0; i<size; i++)
     {
-        cout << "\t" << i+1 << ". " << comp[i].getName() << ", " << comp[i].getYearCreated() << endl;
+        cout << "\t" << i+1 << ". " << comp[i].c.getName() << ", " << comp[i].c.getYearCreated() << endl;
     }
     cout << "\t0. Exit" << endl;
     return size;

@@ -34,10 +34,8 @@ public:
     vector<computersWithPeople> findComputer(string column, string searchValue);//Finds computer in the database
     bool eraseListOfVector();
     void searchPerson();
-    vector<people> printerPeople();//Creates a vector of people and calls dataFetch for all the info.
-    vector<computers> printerComputers();//Creates a vector of computers and calls dataFetch for all the info.
-    void eraseChosenPeople(const vector<people>& p, const int& index);//Finds id of Scientist to delete and sends to datafetch.
-    void eraseChosenComputer(const vector<computers>& c, const int& index);//Finds id of computer to delete and sends to datafetch.
+    void eraseChosenPeople(const vector<peopleWithComputers>& p, const int& index);//Finds id of Scientist to delete and sends to datafetch.
+    void eraseChosenComputer(const vector<computersWithPeople>& c, const int& index);//Finds id of computer to delete and sends to datafetch.
     void eraseDB();//Calls datafetch to erase everything.
 private:
     dataFetch theData;

@@ -39,8 +39,8 @@ private:
     void deletePeople();//Asks the user what scientist they wish to remove.
     void deleteComputer();//Asks the user what computer they wish to remove.
     void deleteDB();//Asks the user if he is sure he wish to delete the entire SQL DB.
-    int printOnlyPeople(const vector<people>& peep);//Simple print to screen only the list of people.
-    int printOnlyComputers(const vector<computers>& comp);//Simple print to screen only list of computers.
+    int printOnlyPeople(const vector<peopleWithComputers>& peep);//Simple print to screen only the list of people.
+    int printOnlyComputers(const vector<computersWithPeople>& comp);//Simple print to screen only list of computers.
     string getStringSearchValue(string question);
     bool inputStrToBool(string& built);
     void clear() const;

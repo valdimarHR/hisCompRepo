@@ -4,6 +4,10 @@
 #include "Models/people.h"
 #include "Models/computers.h"
 
+/**
+ * @brief Combines computer with a vector of people to know who made it.
+ */
+
 class computersWithPeople
 {
 public:

@@ -14,6 +14,10 @@
 
 using namespace std;
 
+/**
+ * @brief The dataFetch reads to and from database, depending on the query what it returns.
+ * Also checks if something is already in database.
+ */
 
 class dataFetch
 {
@@ -24,8 +28,6 @@ public:
     void insertPersonToDatabase(const people& a);//Add all info to new person to SQL Database.
     void insertComputerToDatabase(const computers& c);//Add all info to new computer to SQL Database
     void insertConnectionToDatabase(const int& sid, const int& cid);
-    void fetchPeopleOnly(vector<people>& p);//Takes info of all people from SQL DB and pushes in the vector p.
-    void fetchComputersOnly(vector<computers>& c);//Takes info of all computer from SQL DB and pushes in the vector c.
     /**
      * @brief checks if connection between scientist and a computer is already in DB.
      * @return a bool that is true if the connection was already in DB.
