@@ -9,14 +9,14 @@ ui::ui()
 bool ui::start()
 {
     cout << "Welcome to Computer Sciense DB." << endl;
-
+    printTree();
     do
     {
         mainMenu();
         menuSwitch();
     }while(choice != 5);
 
-    system("cls");
+    clear();
     cout << "Thank you for your visit, hope to see you again soon." << endl << endl;
     return 0;
 }
@@ -29,13 +29,14 @@ void ui::mainMenu()
          << "||     1: Insert           ||" << endl
          << "||     2: Search           ||" << endl
          << "||     3: Print            ||" << endl
-         << "||     4: Erase Database   ||" << endl
+         << "||     4: Delete from DB   ||" << endl
          << "||     5: Exit             ||" << endl
          << "||                         ||" << endl
          << "\\\\-------------------------//" << endl
          << "Enter your choice: ";
 
     cout.flush();
+    cin.clear();
     cin >> choice;
     inputIntCheck(cin.fail(), choice, 1, 5);
     clear();
@@ -78,17 +79,39 @@ void ui::insertMenu()
 
     cout << "* INSERT *" << endl << endl;
     cout << "Would you like in insert a:" << endl
-         << "\t0. Person" << endl
-         << "\t1. Computer" << endl
-         << "\t2. Info who made which computer" << endl
+         << "\t1. Person" << endl
+         << "\t2. Computer" << endl
+         << "\t3. Info who made which computer" << endl
+         << "\t4. Back" << endl
          << "Enter your choice: ";
     cin >> n;
-    inputIntCheck(cin.fail(), n, 0, 2);
+    inputIntCheck(cin.fail(), n, 1, 4);
 
     clear();
-    if(n == 0) insertMenuPerson();
-    else if (n ==1) insertMenuComputer();
-    else insertMenuConnection();
+
+    switch(n)
+    {
+        case 1 :
+        {
+            insertMenuPerson();
+            break;
+        }
+        case 2 :
+        {
+            insertMenuComputer();
+            break;
+        }
+        case 3 :
+        {
+            insertMenuConnection();
+            break;
+        }
+
+        default:
+        {
+            break;
+        }
+    }
 
 }
 
@@ -101,9 +124,9 @@ void ui::insertMenuPerson()
     cout << "Name: ";
     cin.ignore();
     getline(cin, name);
-    cout << "Gender (please write male or female): ";
+    cout << "Gender (please write Male or Female): ";
     cin >> gender;
-    while(!((gender == "female")||(gender == "male")))
+    while(!((gender == "Male")||(gender == "Female")))
     {
         cout << "Invalid choice!" << endl << "Try again: ";
         cin >> gender;
@@ -115,6 +138,13 @@ void ui::insertMenuPerson()
     cout << "Year of death (-1 if still alive): ";
     cin >> death;
     inputIntCheck(cin.fail(), death);
+    while (death > born)
+    {
+        cout << "Person can't die before it is born, try again." << endl;
+        cout << "Year of death: ";
+        cin >> death;
+        inputIntCheck(cin.fail(), death);
+    }
 
     bool exists = theLogic.insertPerson(name, gender, born, death);
 
@@ -123,13 +153,13 @@ void ui::insertMenuPerson()
         cout << endl << "This person was already on the list and was therefore not added again."
              << endl << endl;
         sleep(3);
-        system("cls");
+        clear();
         return;
     }
 
     cout << endl << "Person was added to the list.";
     sleep(2);
-    system("cls");
+    clear();
 
 }
 
@@ -173,29 +203,39 @@ void ui::insertMenuComputer()
 void ui::insertMenuConnection()
 {
     cout << "* WHO INVENTED WHAT *" << endl << endl;
-    int orderBy = 5; //as in file
-    int ascending = 1; //1 for true
+
     cout << "First choose a scientist from this list:";
     sleep(2);
     clear();
-    vector<peopleWithComputers> sortedVector = theLogic.printerSortPeople(orderBy, ascending);
-    printVector(sortedVector);
+    vector<people> peep = theLogic.printerPeople();
+    int sizeP = printOnlyPeople(peep);
     cout << "Scientist number: ";
     int sid;
     cin >> sid;
-    inputIntCheck(cin.fail(), sid, 1, sortedVector.size());
+    inputIntCheck(cin.fail(), sid, 0, sizeP);
+    if(sid == 0)
+    {
+        clear();
+        return;
+    }
     clear();
 
     cout << "Now choose a computer from this list:";
     sleep(2);
     clear();
-    vector<computersWithPeople> sortVector = theLogic.printerSortComputers(orderBy, ascending);
-    printVector(sortVector);
+    vector<computers> comp = theLogic.printerComputers();
+    int sizeC = printOnlyComputers(comp);
     int cid;
     cout << "Computer number: ";
     cin >> cid;
-    inputIntCheck(cin.fail(), cid, 1, sortVector.size());
-
+    inputIntCheck(cin.fail(), cid, 0, sizeC);
+    if(cid == 0)
+    {
+        clear();
+        return;
+    }
+    cid = comp[cid-1].getId();
+    sid = peep[sid-1].getId();
     bool connected = theLogic.insertConnection(sid, cid);
     if (connected)
     {
@@ -214,34 +254,31 @@ void ui::searchMenu()
 {
     int n;
 
-    cout << "* SEARCH *" << endl;
+    cout << "* SEARCH *" << endl << endl;
     cout << "Would you like to search by" << endl
-         << "0. Person" << endl
-         << "1. Computer" << endl
+         << "\t1: Person" << endl
+         << "\t2: Computer" << endl
+         << "\t3: Back" << endl
          << "Enter your choice: ";
     cin >> n;
-    inputIntCheck(cin.fail(), n, 0, 1);
+    inputIntCheck(cin.fail(), n, 1, 3);
     clear();
 
-    if(n == 0) searchMenuPerson();
-    else searchMenuComputer();
+    if(n == 1) searchMenuPerson();
+    else if(n == 2) searchMenuComputer();
 
 }
 
 void ui::searchMenuPerson()
 {
-    //findBy föllin notar ekki lengur "listOfPeople" -> breyta yfir í SQL fyrirspurn í logic.cpp.
-    //findBy föllin notar ekki lengur "listOfPeople" -> breyta yfir í SQL fyrirspurn í logic.cpp.
-    //findBy föllin notar ekki lengur "listOfPeople" -> breyta yfir í SQL fyrirspurn í logic.cpp.
-
     int n;
 
-    cout << "* SEARCH PERSON *" << endl;
+    cout << "* SEARCH PERSON *" << endl << endl;
     cout << "Would you like to search by" << endl
-         << "1. Name" << endl
-         << "2. Gender (male or female)" << endl
-         << "3. Year of birth" << endl
-         << "4. Year of death (write -1 for alive)" << endl
+         << "\t1: Name" << endl
+         << "\t1: Gender (male or female)" << endl
+         << "\t1: Year of birth" << endl
+         << "\t1: Year of death (write -1 for alive)" << endl
          << "Enter your choice: ";
     cin >> n;
     inputIntCheck(cin.fail(), n, 1, 4);
@@ -281,7 +318,7 @@ void ui::searchMenuPerson()
     if (foundPeople.size() == 0){
         cout << "No search results found!" << endl;
         system("pause");
-        system("cls");
+        clear();
     } else {
         printPeopleVector(foundPeople);
     }
@@ -289,18 +326,14 @@ void ui::searchMenuPerson()
 
 void ui::searchMenuComputer()
 {
-    //IMPLEMENT....
-    //IMPLEMENT....
-    //IMPLEMENT....
-
-    int n;
+ int n;
 
     cout << "* SEARCH COMPUTER *" << endl;
     cout << "Would you like to search by" << endl
-         << "1. Name" << endl
-         << "2. Year created" << endl
-         << "3. Type" << endl
-         << "4. Ever built or not" << endl
+         << "\t1: Name" << endl
+         << "\t1: Year created" << endl
+         << "\t1: Type" << endl
+         << "\t1: Ever built or not" << endl
          << "Enter your choice: ";
     cin >> n;
     inputIntCheck(cin.fail(), n, 1, 4);
@@ -341,7 +374,7 @@ void ui::searchMenuComputer()
     if (foundComputer.size() == 0){
         cout << "No search results found!" << endl;
         system("pause");
-        system("cls");
+        clear();
     } else {
         printComputersVector(foundComputer);
     }
@@ -350,18 +383,21 @@ void ui::searchMenuComputer()
 void ui::printerMenu()
 {
     int printChoice;
-    cout << "* PRINTING *" << endl
+    cout << "* PRINTING *" << endl << endl
+         << "Please make the window bigger so the list will fit" << endl
          << "Do you want to print:" << endl
          << "\t1: People" << endl
          << "\t2: Computers" << endl
+         << "\t3: Back" << endl
          << "Enter your choice: ";
     cout.flush();
     cin >> printChoice;
-    inputIntCheck(cin.fail(), printChoice, 1, 2);
+    inputIntCheck(cin.fail(), printChoice, 1, 3);
     clear();
 
     if(printChoice == 1)printerMenuPeople();
-    else printerMenuComputers();
+    else if(printChoice == 2) printerMenuComputers();
+    else return;
 
 }
 
@@ -382,22 +418,29 @@ void ui::printerMenuPeople()
     inputIntCheck(cin.fail(), orderBy, 1, 5);
     clear();
 
-    if(orderBy != 2){
+    if(orderBy != 2 && orderBy != 5)
+    {
         cout << "Do you want this list in descending or ascending order?" << endl
              << "\t0: Descending" << endl
              << "\t1: Ascending" << endl;
-    } else {
+    }
+    else if ( orderBy == 2)
+    {
         cout << "Do you want this list to be ordered by males or females first?" << endl
              << "\t0: Males" << endl
              << "\t1: Females" << endl;
     }
 
-    cout << "Enter your choice: ";
-    cout.flush();
-    cin >> ascending;
-    inputIntCheck(cin.fail(), ascending, 0, 1);
+    if (orderBy != 5)
+    {
+        cout << "Enter your choice: ";
+        cout.flush();
+        cin >> ascending;
+        inputIntCheck(cin.fail(), ascending, 0, 1);
+    }
+    else
+        orderBy = 1;
     clear();
-
 
     vector<peopleWithComputers> sortedVector = theLogic.printerSortPeople(orderBy, ascending);
     printPeopleVector(sortedVector);
@@ -420,55 +463,32 @@ void ui::printerMenuComputers()
     inputIntCheck(cin.fail(), orderBy, 1, 5);
     clear();
 
-    if (orderBy != 4) {
-        cout << "Do you this list in descending or ascending order?" << endl
+    if (orderBy != 4 && orderBy != 5)
+    {
+        cout << "Do you want this list in descending or ascending order?" << endl
              << "\t0: Descending" << endl
              << "\t1: Ascending" << endl;
     }
-    else
+    else if (orderBy == 4)
     {
         cout << "Do you want this list to be ordered by whether it was built or not built first" << endl
              << "\t0: Built" << endl
              << "\t1: Not built" << endl;
     }
 
-    cout << "Enter your choice: ";
-    cout.flush();
-    cin >> ascending;
-    inputIntCheck(cin.fail(), ascending, 0, 1);
+    if (orderBy != 5)
+    {
+        cout << "Enter your choice: ";
+        cout.flush();
+        cin >> ascending;
+        inputIntCheck(cin.fail(), ascending, 0, 1);
+    }
+    else
+        ascending = 1;
     clear();
 
     vector<computersWithPeople> sortedVector = theLogic.printerSortComputers(orderBy, ascending);
     printComputersVector(sortedVector);
-}
-
-void ui::deleteMenu()
-{
-    //IMPLEMENT UI....
-    //IMPLEMENT UI....
-    //IMPLEMENT UI....
-}
-
-void ui::printVector(const vector<peopleWithComputers> &list) const
-{
-    for(const peopleWithComputers person:list)
-    {
-        cout << person.p.getId() << '\t' << person.p.getName()
-             << " " << person.p.getBirth() << "-";
-        if (person.p.getDeath() != -1)
-            cout << person.p.getDeath() << endl;
-        else
-            cout << endl;
-    }
-}
-
-void ui::printVector(const vector<computersWithPeople> &list) const
-{
-    for(const computersWithPeople computer:list)
-    {
-        cout << computer.c.getId() << '\t' << computer.c.getName()
-             << ", " << computer.c.getYearCreated() << endl;
-    }
 }
 
 void ui::printPeopleVector(const vector<peopleWithComputers>& list) const
@@ -536,6 +556,137 @@ string ui::getStringSearchValue(string question)
     cin >> value;
 
     return value;
+}
+
+void ui::deleteMenu()
+{
+    clear();
+    int choice;
+    cout << "* DELETE MENU *" << endl << endl;
+    cout << "\t1: Remove Scientist." << endl
+         << "\t2: Remove Computer." << endl
+         << "\t3: Remove Whole Database." << endl
+         << "\t4: Back." << endl
+         << "Enter your choice ";
+    cout.flush();
+    cin >> choice;
+    inputIntCheck(cin.fail(), choice, 1, 4);
+
+    if(choice == 1)
+    {
+        deletePeople();
+        clear();
+    }
+    else if(choice == 2)
+    {
+        deleteComputer();
+        clear();
+    }
+    else if(choice == 3)
+    {
+        deleteDB();
+        clear();
+    }
+    else
+        clear();
+
+}
+
+void ui::deletePeople()
+{
+    clear();
+    cout << "* DELETE MENU *" << endl << endl;
+    vector<people> peep = theLogic.printerPeople();
+    int size = printOnlyPeople(peep);
+    cout << endl << "Choose which scientist to delete: ";
+    int index;
+    cin >> index;
+    inputIntCheck(cin.fail(), index, 0, size);
+    if(index == 0)
+        return;
+    theLogic.eraseChosenPeople(peep, index);
+
+    cout << endl << "~~DELETING~~";
+    sleep(1);
+    peep.clear();
+}
+
+void ui::deleteComputer()
+{
+    clear();
+    cout << "* DELETE MENU *" << endl << endl;
+    vector<computers> comp = theLogic.printerComputers();
+    int size = printOnlyComputers(comp);
+    cout << endl << "Choose which computer to delete: ";
+    int index;
+    cin >> index;
+    inputIntCheck(cin.fail(), index, 0, size);
+    if(index == 0)
+        return;
+    theLogic.eraseChosenComputer(comp, index);
+    cout << endl << "~~DELETING~~";
+    sleep(1);
+    comp.clear();
+}
+
+void ui::deleteDB()
+{
+    string warning;
+    clear();
+    cout << "* DELETE MENU *" << endl << endl;
+    cout << "This will erase everything in the database permanently!!" << endl;
+    cout    << "Type the following to confirm \"continue\" (anything else to cancel)" << endl;
+    cin >> warning;
+
+    if(warning != "continue")
+    {
+        cout << "Good!";
+        sleep(1);
+        clear();
+        return;
+    }
+    else
+    {
+        theLogic.eraseDB();
+        clear();
+        cout << "Deleting";
+        sleep(1);
+        clear();
+        cout << "Deleting.";
+        sleep(1);
+        clear();
+        cout << "Deleting..";
+        sleep(1);
+        clear();
+    }
+}
+
+
+int ui::printOnlyPeople(const vector<people>& peep)
+{
+    int size = peep.size();
+
+    for(int i = 0; i<size; i++)
+    {
+        cout << "\t" << i+1 << ". " << peep[i].getName() << ", " << peep[i].getBirth() << "-";
+        if (peep[i].getDeath() == constants::notDead)
+            cout << endl;
+        else
+            cout << peep[i].getDeath()  << endl;
+    }
+    cout << "\t0. Exit" << endl;
+    return size;
+}
+
+int ui::printOnlyComputers(const vector<computers>& comp)
+{
+    int size = comp.size();
+    for(int i = 0; i<size; i++)
+    {
+        cout << "\t" << i+1 << ". " << comp[i].getName() << ", " << comp[i].getYearCreated() << endl;
+    }
+    cout << "\t0. Exit" << endl;
+    return size;
 }
 
 void ui::inputIntCheck(bool inputFail, int& var)
@@ -612,6 +763,9 @@ void ui::printTree()const
     }
 
     cout << endl;
+    sleep(3);
+    clear();
+
 }
 
 void ui::clear() const

@@ -5,6 +5,7 @@
 #include <vector>
 #include <iostream>
 #include <Utilities/constants.h>
+#include <algorithm>
 
 using namespace std;
 
@@ -13,6 +14,7 @@ class people
 public:
     people();
     people(const string& n, const string& g, const int& b, const int& d);
+    people(const int& i,const string& n, const string& g, const int& b, const int& d);
     void setId(int fid);
     void setName(string fname);
     void setGender(string fgender);

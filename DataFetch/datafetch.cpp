@@ -1,17 +1,12 @@
 #include "DataFetch/datafetch.h"
-#include <QVariant>
-#include <QFile>
-#include <QDebug>
-#include <QSqlError>
 
 dataFetch::dataFetch()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
     QFile dbfile;
-    if(!dbfile.exists("database.sqlite")) createDatabase();
-    QString dbName = "database.sqlite";
+    if(!dbfile.exists(constants::NAME_OF_DATABASE)) createDatabase();
+    QString dbName = constants::NAME_OF_DATABASE;
     db.setDatabaseName(dbName);
-
 }
 
 vector<peopleWithComputers> dataFetch::fetchPeople(string columnName, string seartchString)
@@ -84,6 +79,56 @@ bool dataFetch::alreadyConnnected(const int sid, const int cid)
     db.close();
 
     return connected;
+}
+
+bool dataFetch::personAlreadyOnList(const people& person)
+{
+    db.open();
+
+    QSqlQuery query(db);
+
+    query.exec("SELECT * FROM Scientists");
+
+    bool onList = false;
+
+    while(query.next())
+    {
+        string name = query.value("name").toString().toStdString();
+        string gender = query.value("gender").toString().toStdString();
+        int birth = query.value("birth").toUInt();
+        int death = query.value("death").toUInt();
+
+        people personCheck(name, gender, birth, death);
+        if (personCheck == person)
+            return onList = true;
+    }
+
+    return onList;
+}
+
+bool dataFetch::computerAlreadyOnList(const computers& computer)
+{
+    db.open();
+
+    QSqlQuery query(db);
+
+    query.exec("SELECT * FROM Computers");
+
+    bool onList = false;
+
+    while(query.next())
+    {
+        string name = query.value("name").toString().toStdString();
+        int yearCreated = query.value("yearCreated").toUInt();
+        string type = query.value("type").toString().toStdString();
+        bool wasBuilt = query.value("wasBuilt").toUInt();
+
+        computers computerCheck(name, yearCreated, type, wasBuilt);
+        if (computerCheck == computer)
+            return onList = true;
+    }
+
+    return onList;
 }
 
 vector<peopleWithComputers> dataFetch::convererPeopleTable(QSqlQuery& query)
@@ -235,9 +280,104 @@ void dataFetch::insertConnectionToDatabase(const int& sid, const int& cid)
     db.close();
 }
 
+void dataFetch::fetchPeopleOnly(vector<people>& p)
+{
+    db.open();
+    QSqlQuery query(db);
+
+    query.prepare("SELECT * FROM Scientists");
+    query.exec();
+
+    while(query.next())
+    {
+        int id = query.value("id").toUInt();
+        string name = query.value("name").toString().toStdString();
+        string gender = query.value("gender").toString().toStdString();
+        int birth = query.value("birth").toUInt();
+        int death = query.value("death").toUInt();
+        people temp(id,name,gender,birth,death);
+        p.push_back(temp);
+    }
+    db.close();
+}
+
+void dataFetch::fetchComputersOnly(vector<computers>& c)
+{
+    db.open();
+    QSqlQuery query(db);
+
+    query.prepare("SELECT * FROM Computers");
+    query.exec();
+
+    while(query.next())
+    {
+        int id = query.value("id").toUInt();
+        string name = query.value("name").toString().toStdString();
+        int yearcreated = query.value("yearCreated").toUInt();
+        string type = query.value("type").toString().toStdString();
+        int wasBuilt = query.value("wasBuilt").toUInt();
+        computers temp(id,name,yearcreated,type,wasBuilt);
+        c.push_back(temp);
+    }
+    db.close();
+}
+
+void dataFetch::deletePeople(const int& id)
+{
+    db.open();
+    QSqlQuery query(db);
+
+    string comm = "DELETE FROM Scientists WHERE id = " + to_string(id);
+    QString command = QString::fromStdString(comm);
+    query.prepare(command);
+    query.exec();
+
+    string comm2 = "DELETE FROM Invents WHERE sid = " +to_string(id);
+    QString command2 = QString::fromStdString(comm2);
+    query.prepare(command2);
+    query.exec();
+
+    db.close();
+}
+
+void dataFetch::deleteComputer(const int& id)
+{
+    db.open();
+    QSqlQuery query(db);
+
+    string comm = "DELETE FROM Computers WHERE id = " + to_string(id);
+    QString command = QString::fromStdString(comm);
+    query.prepare(command);
+    query.exec();
+
+    string comm2 = "DELETE FROM Invents WHERE cid = " + to_string(id);
+    QString command2 = QString::fromStdString(comm2);
+    query.prepare(command2);
+    query.exec();
+
+    db.close();
+}
+
+void dataFetch::eraseEverything()
+{
+    db.open();
+    QSqlQuery query(db);
+
+    query.prepare("DELETE FROM Scientists");
+    query.exec();
+
+    query.prepare("DELETE FROM Computers");
+    query.exec();
+
+    query.prepare("DELETE FROM Invents");
+    query.exec();
+
+    db.close();
+}
+
 void dataFetch::createDatabase()
 {
-    db.setDatabaseName("database.sqlite");
+    db.setDatabaseName(constants::NAME_OF_DATABASE);
     db.open();
     QSqlQuery query(db);
 
