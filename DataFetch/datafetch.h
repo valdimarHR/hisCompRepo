@@ -10,6 +10,7 @@
 #include <QSql>
 #include <QString>
 #include <QVariant>
+#include <QFile>
 
 using namespace std;
 
