@@ -396,10 +396,16 @@ void ui::printerMenu()
     inputIntCheck(cin.fail(), printChoice, 1, 3);
     clear();
 
+<<<<<<< HEAD
     if(printChoice == 1)
         printerMenuPeople();
     else if(printChoice == 2)
         printerMenuComputers();
+=======
+    if(printChoice == 1)printerMenuPeople();
+    else if(printChoice == 2) printerMenuComputers();
+    else return;
+>>>>>>> 034bda8b98d1f88790c331f11fd21e31d0e11696
 
 }
 
@@ -588,8 +594,10 @@ void ui::deleteMenu()
     else if(choice == 3)
     {
         deleteDB();
+        clear();
     }
-    clear();
+    else
+        clear();
 
 }
 
