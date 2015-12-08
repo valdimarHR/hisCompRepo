@@ -30,12 +30,14 @@ public:
     bool insertConnection(const int& sid, const int& cid);
     vector<peopleWithComputers> printerSortPeople(int orderBy, int ascending);
     vector<computersWithPeople> printerSortComputers(int orderBy, int ascending);
-    /*
-     * findPeople searches for a person in the database, user can search by name. gender, year of birth and year of death
+    /**
+     * @brief finds people in database using vector and sorts them as the user wants to sort them
+     * @return returns the found people in a sorted list
      */
     vector<peopleWithComputers> findPeople(string column, string searchValue);
-    /*
-     * findComputer searches for a computer in the database, user can search by name, type, year of creation and whether it was built
+    /**
+     * @brief find coumputers in database using vector and sorts them as the user wants to sort them
+     * @return returns the found computers in a sorted list
      */
     vector<computersWithPeople> findComputer(string column, string searchValue);
     bool eraseListOfVector();
