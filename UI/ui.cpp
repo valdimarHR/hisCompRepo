@@ -46,30 +46,20 @@ void ui::menuSwitch()
 {
     switch(choice)
     {
-        case 1 :
-        {
-            insertMenu();
-            break;
-        }
-        case 2 :
-        {
-            searchMenu();
-            break;
-        }
-        case 3 :
-        {
-            printerMenu();
-            break;
-        }
-        case 4 :
-        {
-            deleteMenu();
-            break;
-        }
-        default:
-        {
-            break;
-        }
+    case 1 :
+        insertMenu();
+        break;
+    case 2 :
+        searchMenu();
+        break;
+    case 3 :
+        printerMenu();
+        break;
+    case 4 :
+        deleteMenu();
+        break;
+    default:
+        break;
     }
 }
 
@@ -77,8 +67,8 @@ void ui::insertMenu()
 {
     int n;
 
-    cout << "* INSERT *" << endl << endl;
-    cout << "Would you like in insert a:" << endl
+    cout << "* INSERT *" << endl << endl
+         << "Would you like in insert a:" << endl
          << "\t1. Person" << endl
          << "\t2. Computer" << endl
          << "\t3. Info who made which computer" << endl
@@ -91,26 +81,17 @@ void ui::insertMenu()
 
     switch(n)
     {
-        case 1 :
-        {
-            insertMenuPerson();
-            break;
-        }
-        case 2 :
-        {
-            insertMenuComputer();
-            break;
-        }
-        case 3 :
-        {
-            insertMenuConnection();
-            break;
-        }
-
-        default:
-        {
-            break;
-        }
+    case 1 :
+        insertMenuPerson();
+        break;
+    case 2 :
+        insertMenuComputer();
+        break;
+    case 3 :
+        insertMenuConnection();
+        break;
+    default:
+        break;
     }
 
 }
@@ -126,11 +107,13 @@ void ui::insertMenuPerson()
     getline(cin, name);
     cout << "Gender (please write Male or Female): ";
     cin >> gender;
+
     while(!((gender == "Male")||(gender == "Female")))
     {
         cout << "Invalid choice!" << endl << "Try again: ";
         cin >> gender;
     }
+
     cout << "Year of birth: ";
     cin >> born;
     inputIntCheck(cin.fail(), born);
@@ -138,6 +121,7 @@ void ui::insertMenuPerson()
     cout << "Year of death (-1 if still alive): ";
     cin >> death;
     inputIntCheck(cin.fail(), death);
+
     while (death > born)
     {
         cout << "Person can't die before it is born, try again." << endl;
@@ -204,9 +188,7 @@ void ui::insertMenuConnection()
 {
     cout << "* WHO INVENTED WHAT *" << endl << endl;
 
-    cout << "First choose a scientist from this list:";
-    sleep(2);
-    clear();
+    cout << "First choose a scientist from this list:" << endl;
     vector<people> peep = theLogic.printerPeople();
     int sizeP = printOnlyPeople(peep);
     cout << "Scientist number: ";
@@ -219,10 +201,8 @@ void ui::insertMenuConnection()
         return;
     }
     clear();
-
-    cout << "Now choose a computer from this list:";
-    sleep(2);
-    clear();
+    cout << "* WHO INVENTED WHAT *" << endl << endl;
+    cout << "Now choose a computer from this list:" << endl;
     vector<computers> comp = theLogic.printerComputers();
     int sizeC = printOnlyComputers(comp);
     int cid;
@@ -254,8 +234,8 @@ void ui::searchMenu()
 {
     int n;
 
-    cout << "* SEARCH *" << endl << endl;
-    cout << "Would you like to search by" << endl
+    cout << "* SEARCH *" << endl << endl
+         << "Would you like to search by" << endl
          << "\t1: Person" << endl
          << "\t2: Computer" << endl
          << "\t3: Back" << endl
@@ -264,8 +244,10 @@ void ui::searchMenu()
     inputIntCheck(cin.fail(), n, 1, 3);
     clear();
 
-    if(n == 1) searchMenuPerson();
-    else if(n == 2) searchMenuComputer();
+    if(n == 1)
+        searchMenuPerson();
+    else if(n == 2)
+        searchMenuComputer();
 
 }
 
@@ -273,12 +255,12 @@ void ui::searchMenuPerson()
 {
     int n;
 
-    cout << "* SEARCH PERSON *" << endl << endl;
-    cout << "Would you like to search by" << endl
-         << "1. Name" << endl
-         << "2. Gender" << endl
-         << "3. Year of birth" << endl
-         << "4. Year of death" << endl
+    cout << "* SEARCH PERSON *" << endl << endl
+         << "Would you like to search by" << endl
+         << "\t1: Name" << endl
+         << "\t1: Gender (male or female)" << endl
+         << "\t1: Year of birth" << endl
+         << "\t1: Year of death (write -1 for alive)" << endl
          << "Enter your choice: ";
     cin >> n;
     inputIntCheck(cin.fail(), n, 1, 4);
@@ -286,40 +268,47 @@ void ui::searchMenuPerson()
     vector<peopleWithComputers> foundPeople;
     string question;
     string column;
-    switch(n) {
-        case 1: {
+    switch(n)
+    {
+    case 1:
+        {
             question = "What would you like to search for?";
             column = "name";
             break;
         }
-        case 2: {
-            question = "What would you like to search for (Male or Female)?";
+    case 2:
+        {
+            question = "What would you like to search for (male or female)?";
             column = "gender";
             break;
         }
-        case 3: {
+    case 3:
+        {
             question = "Enter a year: ";
             column = "birth";
             break;
         }
-        case 4: {
-            question = "Enter a year (write -1 for alive): ";
+    case 4:
+        {
+            question = "Enter a year: ";
             column = "death";
             break;
         }
-        default: {
-            break;
-        }
+    default:
+        break;
     }
 
     string searchValue = getStringSearchValue(question);
     foundPeople = theLogic.findPeople(column, searchValue);
 
-    if (foundPeople.size() == 0){
+    if (foundPeople.size() == 0)
+    {
         cout << "No search results found!" << endl;
         system("pause");
         clear();
-    } else {
+    }
+    else
+    {
         printPeopleVector(foundPeople);
     }
 }
@@ -327,8 +316,9 @@ void ui::searchMenuPerson()
 void ui::searchMenuComputer()
 {
     int n;
-    cout << "* SEARCH COMPUTER *" << endl;
-    cout << "Would you like to search by" << endl
+
+    cout << "* SEARCH COMPUTER *" << endl
+         << "Would you like to search by" << endl
          << "\t1: Name" << endl
          << "\t1: Year created" << endl
          << "\t1: Type" << endl
@@ -341,40 +331,48 @@ void ui::searchMenuComputer()
 
     string question;
     string column;
-    switch(n) {
-        case 1: {
+    switch(n)
+    {
+    case 1:
+        {
             question = "What would you like to search for?";
             column = "name";
             break;
         }
-        case 2: {
+    case 2:
+        {
             question = "Enter a year: ";
             column = "yearCreated";
             break;
         }
-        case 3: {
+    case 3:
+        {
             question = "Enter a type of computer: ";
             column = "type";
             break;
         }
-        case 4: {
+    case 4:
+        {
             question = "Was it built? (Y/N): ";
             column = "wasBuilt";
             break;
         }
-        default: {
+    default:
             break;
-        }
+
     }
 
     string searchValue = getStringSearchValue(question);
     foundComputer = theLogic.findComputer(column, searchValue);
 
-    if (foundComputer.size() == 0){
+    if (foundComputer.size() == 0)
+    {
         cout << "No search results found!" << endl;
         system("pause");
         clear();
-    } else {
+    }
+    else
+    {
         printComputersVector(foundComputer);
     }
 }
@@ -394,9 +392,10 @@ void ui::printerMenu()
     inputIntCheck(cin.fail(), printChoice, 1, 3);
     clear();
 
-    if(printChoice == 1)printerMenuPeople();
-    else if(printChoice == 2) printerMenuComputers();
-    else return;
+    if(printChoice == 1)
+        printerMenuPeople();
+    else if(printChoice == 2)
+        printerMenuComputers();
 
 }
 
@@ -525,7 +524,8 @@ void ui::printComputersVector(const vector<computersWithPeople>& list) const
     cout << "+==========================================================================================+" << endl;
     printf("|%-22s|%-15s|%-8s|%-8s|%-33s|\n", "COMPUTER NAME", "TYPE", "YEAR", "BUILT", "CREATORS");
     cout << "+==========================================================================================+" << endl;
-    for(const computersWithPeople comp:list){
+    for(const computersWithPeople comp:list)
+    {
         string name = comp.c.getName();
         string type = comp.c.getType();
         int year = comp.c.getYearCreated();
@@ -561,8 +561,8 @@ void ui::deleteMenu()
 {
     clear();
     int choice;
-    cout << "* DELETE MENU *" << endl << endl;
-    cout << "\t1: Remove Scientist." << endl
+    cout << "* DELETE MENU *" << endl << endl
+         << "\t1: Remove Scientist." << endl
          << "\t2: Remove Computer." << endl
          << "\t3: Remove Whole Database." << endl
          << "\t4: Back." << endl
@@ -718,13 +718,13 @@ bool ui::inputStrToBool(string& built)
 {
     do
     {
-    if (built == "Y" || built == "y" || built == "Yes" || built == "yes" )
-        return true;
-    else if (built == "N" || built == "n" || built == "No" || built == "no")
-        return false;
-    else
-        cout << "Invalid input!" << endl
-             << "Try again: ";
+        if (built == "Y" || built == "y" || built == "Yes" || built == "yes" )
+            return true;
+        else if (built == "N" || built == "n" || built == "No" || built == "no")
+            return false;
+        else
+            cout << "Invalid input!" << endl
+                 << "Try again: ";
         cin.clear();
         cin >> built;
     }while(true);

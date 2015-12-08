@@ -39,7 +39,9 @@ vector<peopleWithComputers> logic::printerSortPeople(int orderBy, int ascending)
        default :
           break;
        }
-    if(!ascending) reverse(sortedVector.begin(), sortedVector.end());
+
+    if(!ascending)
+        reverse(sortedVector.begin(), sortedVector.end());
 
     return sortedVector;
 }
@@ -72,7 +74,8 @@ vector<computersWithPeople> logic::printerSortComputers(int orderBy, int ascendi
        default :
           break;
        }
-    if(!ascending) reverse(sortedVector.begin(), sortedVector.end());
+    if(!ascending)
+        reverse(sortedVector.begin(), sortedVector.end());
 
     return sortedVector;
 }

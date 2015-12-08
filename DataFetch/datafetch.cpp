@@ -13,11 +13,31 @@ vector<peopleWithComputers> dataFetch::fetchPeople(string columnName, string sea
 {
     db.open();
     QSqlQuery query(db);
+<<<<<<< HEAD
     QString command = "SELECT * FROM Scientists AS S ";
     command += "LEFT JOIN (SELECT * FROM Computers AS C ";
     command += "LEFT JOIN Invents AS I ";
     command += "ON I.cid = C.id) AS T ";
     command += "ON T.sid = S.id WHERE S." + QString::fromStdString(columnName) + " LIKE '%" + QString::fromStdString(searchString) + "%'";
+=======
+
+    QString command = "SELECT * FROM Scientists AS S "
+            "LEFT JOIN (SELECT * FROM Computers AS C "
+            "LEFT JOIN Invents AS I "
+            "ON I.cid = C.id) AS T "
+            "ON T.sid = S.id WHERE S." + QString::fromStdString(columnName) + " LIKE ";
+    if(seartchString != "male" && seartchString != "Male")
+    {
+        command += "'%" + QString::fromStdString(seartchString) + "%'";
+    }
+    else
+    {
+        command += "'" + QString::fromStdString(seartchString) + "%'";
+    }
+
+
+    query.prepare(command);
+>>>>>>> 1f5c4454345138bf018fea25d525bd9b2d7e5780
     //query.bindValue(":columnName", QString::fromStdString(columnName));
     //query.bindValue(":seartchString", QString::fromStdString(seartchString));
     query.exec();
@@ -147,7 +167,8 @@ vector<peopleWithComputers> dataFetch::convererPeopleTable(QSqlQuery& query)
             comp.setType(Ctype);
             comp.setWasBuilt(CwasBuilt);
 
-            if(currentPersonId == lastId){
+            if(currentPersonId == lastId)
+            {
                 peopleVector.back().creations.push_back(comp);
                 continue;
             }
@@ -194,7 +215,8 @@ vector<computersWithPeople> dataFetch::convererComputersTable(QSqlQuery& query)
             per.setBirth(Pborn);
             per.setDeath(Pdeath);
 
-            if(currentComputerId == lastId){
+            if(currentComputerId == lastId)
+            {
                 computersVector.back().creators.push_back(per);
                 continue;
             }
@@ -218,7 +240,6 @@ vector<computersWithPeople> dataFetch::convererComputersTable(QSqlQuery& query)
         lastId = currentComputerId;
     }
     return computersVector;
-
 }
 
 void dataFetch::insertPersonToDatabase(const people& a)
