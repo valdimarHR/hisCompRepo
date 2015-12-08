@@ -86,6 +86,7 @@ private:
      * and the people that created them as a table to the display.
      */
     void printComputersVector(const vector<computersWithPeople>& list) const;
+    /**
     void deleteMenu();//Asks the user what attribute they want to delete(Scientist, computer or all).
     /*
      * inputIntCheck(bool, int&) checks if the input from the user was an integer. If not it will ask the user to
@@ -97,9 +98,19 @@ private:
      * If not it will ask the user to try again.
      */
     void inputIntCheck(bool inputFail, int& var, int low, int high);
-    void deletePeople();//Asks the user what scientist they wish to remove.
-    void deleteComputer();//Asks the user what computer they wish to remove.
-    void deleteDB();//Asks the user if he is sure he wish to delete the entire SQL DB.
+    /**
+      * @brief Asks the user what scientist they wish to remove and sends on to logic layer.
+      */
+    void deletePeople();
+    /**
+      * @brief Asks the user which computer they wish to remove and sends on to logic layer.
+      */
+    void deleteComputer();
+    /**
+      * @brief Asks the user if he is sure he wishes to delete the entire SQL DB and
+      * sends on to the logic layer.
+      */
+    void deleteDB();
     /**
      * @brief printOnlyPeople() prints out the people,
      * the computers they made are ignored in this print function.
