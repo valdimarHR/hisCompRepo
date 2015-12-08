@@ -1,6 +1,8 @@
 #ifndef COMPUTERS_H
 #define COMPUTERS_H
 #include <iostream>
+#include <algorithm>
+#include <string>
 using namespace std;
 
 class computers
@@ -19,6 +21,7 @@ public:
     int getYearCreated() const;
     string getType() const;
     bool getWasBuilt() const;
+    friend bool operator == (const computers& computer1, const computers& computer2);
 private:
     int id;
     string name;

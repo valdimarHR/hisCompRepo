@@ -5,6 +5,7 @@
 #include <vector>
 #include <iostream>
 #include <Utilities/constants.h>
+#include <algorithm>
 
 using namespace std;
 

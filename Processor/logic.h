@@ -48,7 +48,8 @@ private:
     static bool sortComputersType(const computersWithPeople& a, const computersWithPeople& b);
     static bool sortComputersYear(const computersWithPeople& a, const computersWithPeople& b);
     static bool sortComputersBuilt(const computersWithPeople& a, const computersWithPeople& b);
-    bool checkIfpersonOnList(const people& person) const;
+    bool checkIfpersonOnList(const people& person);
+    bool checkIfcomputerOnList(const computers& computer);
     void getInsertedInfo(string& name, string& gender, int& born, int& death)const;
 
 
