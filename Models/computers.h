@@ -5,6 +5,10 @@
 #include <string>
 using namespace std;
 
+/**
+ * @brief computers includes all information about a computer, but not who made it.
+ */
+
 class computers
 {
 public:
@@ -21,6 +25,10 @@ public:
     int getYearCreated() const;
     string getType() const;
     bool getWasBuilt() const;
+    /**
+     * @brief Overwrites the comparison operator.
+     * @returns a bool that is true if the computers have all information the same except id.
+     */
     friend bool operator == (const computers& computer1, const computers& computer2);
 private:
     int id;
