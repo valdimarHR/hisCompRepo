@@ -16,7 +16,7 @@ bool ui::start()
         menuSwitch();
     }while(choice != 5);
 
-    system("cls");
+    clear();
     cout << "Thank you for your visit, hope to see you again soon." << endl << endl;
     return 0;
 }
@@ -153,13 +153,13 @@ void ui::insertMenuPerson()
         cout << endl << "This person was already on the list and was therefore not added again."
              << endl << endl;
         sleep(3);
-        system("cls");
+        clear();
         return;
     }
 
     cout << endl << "Person was added to the list.";
     sleep(2);
-    system("cls");
+    clear();
 
 }
 
@@ -308,7 +308,7 @@ void ui::searchMenuPerson()
     if (foundPeople.size() == 0){
         cout << "No search results found!" << endl;
         system("pause");
-        system("cls");
+        clear();
     } else {
         printPeopleVector(foundPeople);
     }
@@ -364,7 +364,7 @@ void ui::searchMenuComputer()
     if (foundComputer.size() == 0){
         cout << "No search results found!" << endl;
         system("pause");
-        system("cls");
+        clear();
     } else {
         printComputersVector(foundComputer);
     }
@@ -662,22 +662,22 @@ void ui::deleteDB()
     {
         cout << "Good!";
         sleep(1);
-        system("cls");
+        clear();
         return;
     }
     else
     {
         theLogic.eraseDB();
-        system("cls");
+        clear();
         cout << "Deleting";
         sleep(1);
-        system("cls");
+        clear();
         cout << "Deleting.";
         sleep(1);
-        system("cls");
+        clear();
         cout << "Deleting..";
         sleep(1);
-        system("cls");
+        clear();
     }
 }
 
