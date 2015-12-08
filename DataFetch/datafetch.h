@@ -30,6 +30,7 @@ public:
     bool computerAlreadyOnList(const computers& computer);
     void deletePeople(const int& id);
     void deleteComputer(const int& id);
+    void eraseEverything();
 private:
     vector<peopleWithComputers> convererPeopleTable(QSqlQuery& query);
     vector<computersWithPeople> convererComputersTable(QSqlQuery& query);

@@ -568,20 +568,16 @@ void ui::deleteMenu()
     if(choice == 1)
     {
         deletePeople();
-        cout << endl << "~~DELETING~~";
-        sleep(1);
         clear();
     }
     else if(choice == 2)
     {
         deleteComputer();
-        cout << endl << "~~DELETING~~";
-        sleep(1);
         clear();
     }
     else if(choice == 3)
     {
-
+        deleteDB();
     }
     clear();
 
@@ -605,6 +601,9 @@ void ui::deletePeople()
     if(index == 0)
         return;
     theLogic.eraseChosenPeople(peep, index);
+
+    cout << endl << "~~DELETING~~";
+    sleep(1);
     peep.clear();
 }
 
@@ -626,7 +625,41 @@ void ui::deleteComputer()
     if(index == 0)
         return;
     theLogic.eraseChosenComputer(comp, index);
+    cout << endl << "~~DELETING~~";
+    sleep(1);
     comp.clear();
+}
+
+void ui::deleteDB()
+{
+    string warning;
+    clear();
+    cout << "* DELETE MENU *" << endl << endl;
+    cout << "This will erase everything in the database permanently!!" << endl;
+    cout    << "Type the following to confirm \"continue\" (anything else to cancel)" << endl;
+    cin >> warning;
+
+    if(warning != "continue")
+    {
+        cout << "Good!";
+        sleep(1);
+        system("cls");
+        return;
+    }
+    else
+    {
+        theLogic.eraseDB();
+        system("cls");
+        cout << "Deleting";
+        sleep(1);
+        system("cls");
+        cout << "Deleting.";
+        sleep(1);
+        system("cls");
+        cout << "Deleting..";
+        sleep(1);
+        system("cls");
+    }
 }
 
 void ui::inputIntCheck(bool inputFail, int& var)

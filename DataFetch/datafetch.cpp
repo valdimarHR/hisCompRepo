@@ -351,9 +351,26 @@ void dataFetch::deleteComputer(const int& id)
     query.prepare(command);
     query.exec();
 
-    string comm2 = "DELETE FROM Invents WHERE cid = " +to_string(id);
+    string comm2 = "DELETE FROM Invents WHERE cid = " + to_string(id);
     QString command2 = QString::fromStdString(comm2);
     query.prepare(command2);
+    query.exec();
+
+    db.close();
+}
+
+void dataFetch::eraseEverything()
+{
+    db.open();
+    QSqlQuery query(db);
+
+    query.prepare("DELETE FROM Scientists");
+    query.exec();
+
+    query.prepare("DELETE FROM Computers");
+    query.exec();
+
+    query.prepare("DELETE FROM Invents");
     query.exec();
 
     db.close();

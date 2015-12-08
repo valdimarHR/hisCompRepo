@@ -188,3 +188,8 @@ void logic::eraseChosenComputer(const vector<computers>& c, const int& index)
     int id = c[index-1].getId();
     theData.deleteComputer(id);
 }
+
+void logic::eraseDB()
+{
+    theData.eraseEverything();
+}

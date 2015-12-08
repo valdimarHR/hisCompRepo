@@ -40,6 +40,7 @@ private:
     void inputIntCheck(bool inputFail, int& var, int low, int high);
     void deletePeople();
     void deleteComputer();
+    void deleteDB();
     string getStringSearchValue(string question);
     bool inputStrToBool(string& built);
     void clear() const;
