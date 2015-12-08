@@ -14,12 +14,20 @@ vector<peopleWithComputers> dataFetch::fetchPeople(string columnName, string sea
     db.open();
     QSqlQuery query(db);
 
-    QString command = "SELECT * FROM Scientists AS S ";
-    command += "LEFT JOIN (SELECT * FROM Computers AS C ";
-    command += "LEFT JOIN Invents AS I ";
-    command += "ON I.cid = C.id) AS T ";
-    command += "ON T.sid = S.id WHERE S." + QString::fromStdString(columnName) + " LIKE '%" + QString::fromStdString(seartchString) + "%'";
-    //command += "ON T.sid = S.id WHERE S.:columnName LIKE '%'||:seartchString||'%'";
+    QString command = "SELECT * FROM Scientists AS S "
+            "LEFT JOIN (SELECT * FROM Computers AS C "
+            "LEFT JOIN Invents AS I "
+            "ON I.cid = C.id) AS T "
+            "ON T.sid = S.id WHERE S." + QString::fromStdString(columnName) + " LIKE ";
+    if(seartchString != "male" && seartchString != "Male")
+    {
+        command += "'%" + QString::fromStdString(seartchString) + "%'";
+    }
+    else
+    {
+        command += "'" + QString::fromStdString(seartchString) + "%'";
+    }
+
 
     query.prepare(command);
     //query.bindValue(":columnName", QString::fromStdString(columnName));
@@ -75,6 +83,7 @@ bool dataFetch::alreadyConnnected(const int sid, const int cid)
         if ((sid == tableSid)&&(cid == tableCid))
             connected = true;
     }
+    db.close();
 
     return connected;
 }

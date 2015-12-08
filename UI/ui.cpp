@@ -188,9 +188,7 @@ void ui::insertMenuConnection()
 {
     cout << "* WHO INVENTED WHAT *" << endl << endl;
 
-    cout << "First choose a scientist from this list:";
-    sleep(2);
-    clear();
+    cout << "First choose a scientist from this list:" << endl;
     vector<people> peep = theLogic.printerPeople();
     int sizeP = printOnlyPeople(peep);
     cout << "Scientist number: ";
@@ -203,10 +201,8 @@ void ui::insertMenuConnection()
         return;
     }
     clear();
-
-    cout << "Now choose a computer from this list:";
-    sleep(2);
-    clear();
+    cout << "* WHO INVENTED WHAT *" << endl << endl;
+    cout << "Now choose a computer from this list:" << endl;
     vector<computers> comp = theLogic.printerComputers();
     int sizeC = printOnlyComputers(comp);
     int cid;
@@ -396,16 +392,10 @@ void ui::printerMenu()
     inputIntCheck(cin.fail(), printChoice, 1, 3);
     clear();
 
-<<<<<<< HEAD
     if(printChoice == 1)
         printerMenuPeople();
     else if(printChoice == 2)
         printerMenuComputers();
-=======
-    if(printChoice == 1)printerMenuPeople();
-    else if(printChoice == 2) printerMenuComputers();
-    else return;
->>>>>>> 034bda8b98d1f88790c331f11fd21e31d0e11696
 
 }
 
@@ -457,7 +447,7 @@ void ui::printerMenuPeople()
 void ui::printerMenuComputers()
 {
     int orderBy, ascending;
-    cout << "* PRINTING COMPUTERS *" << endl
+    cout << "* PRINTING COMPUTERS *" << endl << endl
          << "Order  by:" << endl
          << "\t1: Name" << endl
          << "\t2: Type" << endl
