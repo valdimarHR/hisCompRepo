@@ -57,7 +57,7 @@ private:
      */
     void searchMenuPerson();
     /**
-     * @brief asks the user in which way it wants to search for a computer and gices the options of name,
+     * @brief asks the user in which way it wants to search for a computer and gives the options of name,
      * type, year of creation and whether or not it was built and prints the computers matching the user's
      * input to standard output
      */

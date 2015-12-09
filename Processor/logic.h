@@ -20,12 +20,32 @@
 
 using namespace std;
 
+/**
+ * @brief The Logic connects the interface to the database, sorts vectors and makes
+ * quaries for the dataFetch.
+ */
+
 class logic
 {
 public:
     logic();
-    bool insertPerson(string& name, string& gender, int& born, int& death);//Prepares to insert person to SQL DB.(already excisting etc.)
-    bool insertComputer(string& name, int& created, string& type, bool& built);//Prepares to insert computer to SQL DB.
+    /**
+     * @brief Prepares to insert person to SQL DB.(already excisting etc.)
+     * @param the information needed to make an object of people.
+     * @return a bool, true if the person was already in database.
+     */
+    bool insertPerson(string& name, string& gender, int& born, int& death);
+    /**
+     * @brief Prepares to insert computer to SQL DB.(already excisting etc.)
+     * @param the information needed to make an object of computers.
+     * @return a bool, true if the computer was already in database.
+     */
+    bool insertComputer(string& name, int& created, string& type, bool& built);
+    /**
+     * @brief Prepares to insert connection to SQL DB.(already excisting etc.)
+     * @param the id for the scientist and the id for the computer that will be connected.
+     * @return a bool, true if the connection was already in database.
+     */
     bool insertConnection(const int& sid, const int& cid);
     /**
      * @brief sends a request for a people vector from data and then sorts that vector as the
