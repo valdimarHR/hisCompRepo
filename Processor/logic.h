@@ -18,10 +18,6 @@
 #include <QString>
 #include <QVariant>
 
-/**
- * @brief The logic is the link between
- */
-
 using namespace std;
 
 /**
@@ -69,7 +65,8 @@ public:
      */
     vector<peopleWithComputers> findPeople(string column, string searchValue);
     /**
-     * @brief find coumputers in database using vector and sorts them as the user wants to sort them
+     * @brief find coumputers in database using vector and sorts them
+     * as the user wants to sort them
      * @return returns the found computers in a sorted list
      */
     vector<computersWithPeople> findComputer(string column, string searchValue);
@@ -80,7 +77,17 @@ public:
     void eraseDB();//Calls datafetch to erase everything.
 private:
     dataFetch theData;
+    /**
+     * @brief person is sent on to database to check if is already on list.
+     * @param the person that is to be checked if is on list.
+     * @return returns bool, true if person was on list.
+     */
     bool checkIfpersonOnList(const people& person);
+    /**
+     * @brief computer is sent on to database to check if is already on list.
+     * @param the computer that is to be checked if is on list.
+     * @return returns bool, true if computer was on list.
+     */
     bool checkIfcomputerOnList(const computers& computer);
 
 };

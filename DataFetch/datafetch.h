@@ -33,16 +33,19 @@ public:
     void insertConnectionToDatabase(const int& sid, const int& cid);
     /**
      * @brief checks if connection between scientist and a computer is already in DB.
+     * @param the id from the scientist and the computer.
      * @return a bool that is true if the connection was already in DB.
      */
     bool alreadyConnnected(const int sid, const int cid);
     /**
      * @brief checks if person is already in DB.
+     * @param the person that is being checked.
      * @return a bool that is true if the person was already in DB.
      */
     bool personAlreadyOnList(const people& person); //Checks if person sent from logic is already in DB.
     /**
      * @brief checks if computer is already in DB.
+     * @param the computer that is being checked.
      * @return a bool that is true if the computer was already in DB.
      */
     bool computerAlreadyOnList(const computers& computer);
