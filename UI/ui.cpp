@@ -509,7 +509,8 @@ void ui::printPeopleVector(const vector<peopleWithComputers>& list) const
 
         string computerName = person.creations[0].getName();
         if(computerName == "default") computerName = "";
-        printf("|%-35.35s|%-10.10s|%-8.8s|%-8.8s|%-25.25s|\n", name.c_str(), gender.c_str(), to_string(yearOfBirth).c_str(), death.c_str(), computerName.c_str());
+        printf("|%-35.35s|%-10.10s|%-8.8s|%-8.8s|%-25.25s|\n", name.c_str(), gender.c_str(),
+               to_string(yearOfBirth).c_str(), death.c_str(), computerName.c_str());
 
         for(unsigned int i = 1; i < person.creations.size(); i++)
         {
@@ -517,6 +518,7 @@ void ui::printPeopleVector(const vector<peopleWithComputers>& list) const
         }
         cout << "+------------------------------------------------------------------------------------------+" << endl;
     }
+    system("pause");
     clear();
 }
 
@@ -535,7 +537,8 @@ void ui::printComputersVector(const vector<computersWithPeople>& list) const
 
         string personName = comp.creators[0].getName().c_str();
         if(personName == "default") personName = "";
-        printf("|%-22.22s|%-15.15s|%-8.8s|%-8.8s|%-33.33s|\n", name.c_str(), type.c_str(), to_string(year).c_str(), built.c_str(), personName.c_str());
+        printf("|%-22.22s|%-15.15s|%-8.8s|%-8.8s|%-33.33s|\n", name.c_str(), type.c_str(), to_string(year).c_str(),
+               built.c_str(), personName.c_str());
 
         for(unsigned int i = 1; i < comp.creators.size(); i++)
         {

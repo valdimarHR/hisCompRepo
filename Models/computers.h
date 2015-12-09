@@ -6,7 +6,7 @@
 using namespace std;
 
 /**
- * @brief computers includes all information about a computer, but not who made it.
+ * @brief computers includes information about a computer, but not who made it.
  */
 
 class computers

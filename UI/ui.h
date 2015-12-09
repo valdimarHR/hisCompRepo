@@ -60,7 +60,7 @@ private:
      */
     void searchMenuPerson();
     /**
-     * @brief asks the user in which way it wants to search for a computer and gices the options of name,
+     * @brief asks the user in which way it wants to search for a computer and gives the options of name,
      * type, year of creation and whether or not it was built and prints the computers matching the user's
      * input to standard output
      */
@@ -85,18 +85,18 @@ private:
      */
     void printPeopleVector(const vector<peopleWithComputers>& list) const;
     /**
-     * @brief printComputersVector() prints out the computers and the people that created them as a table to the display.
+     * @brief printComputersVector() prints out the computers and the
+     * people that created them as a table to the display.
      * @param list is the vector that will be printed.
      */
     void printComputersVector(const vector<computersWithPeople>& list) const;
-
     /**
      * @brief Asks the user what attribute they want to delete(Scientist, computer or all).
      */
     void deleteMenu();
     /**
-     * @brief inputIntCheck(bool, int&) checks if the input from the user was an integer. If not it will ask the user to
-     * try again.
+     * @brief inputIntCheck(bool, int&) checks if the input from the user was an integer.
+     * If not it will ask the user to tru again.
      * @param inputFail is a bool value for if the stream failed when inputing to type int var.
      * @param var is the current value from the user.
      */
