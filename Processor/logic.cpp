@@ -41,7 +41,7 @@ vector<peopleWithComputers> logic::printerSortPeople(int orderBy, int ascending)
          break;
     default :
          break;
-       }
+    }
 
     if(!ascending)
         reverse(sortedVector.begin(), sortedVector.end());
@@ -62,24 +62,24 @@ vector<computersWithPeople> logic::printerSortComputers(int orderBy, int ascendi
         {return (a.c.getName() < b.c.getName());});
     }
     switch(orderBy)
-       {
-       case 1 :
-          break;
-       case 2 :
-          sort(sortedVector.begin(), sortedVector.end(), [](computersWithPeople const &a, computersWithPeople const &b)
-          {return (a.c.getType() < b.c.getType());});
-          break;
-       case 3 :
-          sort(sortedVector.begin(), sortedVector.end(), [](computersWithPeople const &a, computersWithPeople const &b)
-          {return (a.c.getYearCreated() < b.c.getYearCreated());});
-          break;
-       case 4 :
-          sort(sortedVector.begin(), sortedVector.end(), [](computersWithPeople const &a, computersWithPeople const &b)
-          {return (a.c.getWasBuilt() < b.c.getWasBuilt());});
-          break;
-       default :
-          break;
-       }
+    {
+    case 1 :
+        break;
+    case 2 :
+        sort(sortedVector.begin(), sortedVector.end(), [](computersWithPeople const &a, computersWithPeople const &b)
+        {return (a.c.getType() < b.c.getType());});
+        break;
+    case 3 :
+        sort(sortedVector.begin(), sortedVector.end(), [](computersWithPeople const &a, computersWithPeople const &b)
+        {return (a.c.getYearCreated() < b.c.getYearCreated());});
+        break;
+    case 4 :
+        sort(sortedVector.begin(), sortedVector.end(), [](computersWithPeople const &a, computersWithPeople const &b)
+        {return (a.c.getWasBuilt() < b.c.getWasBuilt());});
+        break;
+    default :
+        break;
+    }
     if(!ascending)
         reverse(sortedVector.begin(), sortedVector.end());
 

@@ -360,7 +360,7 @@ void ui::searchMenuComputer()
             break;
         }
     default:
-            break;
+        break;
 
     }
 
@@ -388,7 +388,6 @@ void ui::printerMenu()
 {
     int printChoice;
     cout << "* PRINTING *" << endl << endl
-         << "Please make the window bigger so the list will fit" << endl
          << "Do you want to print:" << endl
          << "\t1: People" << endl
          << "\t2: Computers" << endl
@@ -729,8 +728,7 @@ bool ui::inputStrToBool(string& built)
         else if (built == "N" || built == "n" || built == "No" || built == "no")
             return false;
         else
-            cout << "Invalid input!" << endl
-                 << "Try again: ";
+            cout << "Invalid input!" << endl << "Try again: ";
         cin.clear();
         cin >> built;
     }while(true);

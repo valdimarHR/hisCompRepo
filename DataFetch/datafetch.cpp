@@ -105,7 +105,7 @@ bool dataFetch::personAlreadyOnList(const people& person)
         if (personCheck == person)
             return onList = true;
     }
-
+    db.close();
     return onList;
 }
 
@@ -130,7 +130,7 @@ bool dataFetch::computerAlreadyOnList(const computers& computer)
         if (computerCheck == computer)
             return onList = true;
     }
-
+    db.close();
     return onList;
 }
 

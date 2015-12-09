@@ -65,13 +65,17 @@ public:
      */
     vector<computersWithPeople> printerSortComputers(int orderBy, int ascending);
     /**
-     * @brief finds people in database using vector and sorts them as the user wants to sort them
+     * @brief finds people in database using vector and sorts them as the
+     * user wants to sort them
+     * @param column is to know in field in the Scientist table to look for (name, birth etc)
+     * @param searchValue is a string which content will be looked for.
      * @return returns the found people in a sorted list
      */
     vector<peopleWithComputers> findPeople(string column, string searchValue);
     /**
      * @brief find coumputers in database using vector and sorts them
      * as the user wants to sort them
+     * @param the same as in the function on top of this except for computer
      * @return returns the found computers in a sorted list
      */
     vector<computersWithPeople> findComputer(string column, string searchValue);

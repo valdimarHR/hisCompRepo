@@ -10,7 +10,7 @@
 using namespace std;
 
 /**
- * @brief people includes all information about a person, but not what computer they have made.
+ * @brief people includes information about a person, but not what computer they have made.
  */
 
 class people
