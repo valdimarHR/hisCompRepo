@@ -18,6 +18,10 @@
 #include <QString>
 #include <QVariant>
 
+/**
+ * @brief The logic is the link between
+ */
+
 using namespace std;
 
 /**

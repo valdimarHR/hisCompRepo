@@ -62,40 +62,46 @@ private:
      * input to standard output
      */
     void searchMenuComputer();
-    /*
-     * printerMenu() is the main UI for printing the entire data in the database without any search requirements.
+    /**
+     * @brief printerMenu() is the main UI for printing the entire data in the database without any search requirements.
      * Print also offers sorting of the data as the user likes.
      */
     void printerMenu();
-    /*
-     * printerMenuPeople() is the UI for printing all the people in the database.
+    /**
+     * @brief printerMenuPeople() is the UI for printing all the people in the database.
      */
     void printerMenuPeople();
-    /*
-     * printerMenuComputers() is the UI for printing all the computers in the database.
+    /**
+     * @brief printerMenuComputers() is the UI for printing all the computers in the database.
      */
     void printerMenuComputers();
     void printTree() const;
     /**
-     * @brief printPeopleVector() prints out the people
-     * and their computers as a table to the display.
+     * @brief printPeopleVector() prints out the people and their computers as a table to the display.
+     * @param list is the vector that will be printed.
      */
     void printPeopleVector(const vector<peopleWithComputers>& list) const;
     /**
-     * @brief printComputersVector() prints out the computers
-     * and the people that created them as a table to the display.
+     * @brief printComputersVector() prints out the computers and the people that created them as a table to the display.
+     * @param list is the vector that will be printed.
      */
     void printComputersVector(const vector<computersWithPeople>& list) const;
 
     void deleteMenu();//Asks the user what attribute they want to delete(Scientist, computer or all).
-    /*
-     * inputIntCheck(bool, int&) checks if the input from the user was an integer. If not it will ask the user to
+    /**
+     * @brief inputIntCheck(bool, int&) checks if the input from the user was an integer. If not it will ask the user to
      * try again.
+     * @param inputFail is a bool value for if the stream failed when inputing to type int var.
+     * @param var is the current value from the user.
      */
     void inputIntCheck(bool inputFail, int& var);
-    /*
-     * inputIntCheck(bool, int&, int, int) checks if the input from the user was an integer and within the right range.
+    /**
+     * @brief inputIntCheck(bool, int&, int, int) checks if the input from the user was an integer and within the right range.
      * If not it will ask the user to try again.
+     * @param inputFail is a bool value for if the stream failed when inputing to type int var.
+     * @param var is the current value from the user.
+     * @param low is the low value of the range that int needs to be in.
+     * @param high is the high value of the range that int needs to be in.
      */
     void inputIntCheck(bool inputFail, int& var, int low, int high);
     /**
@@ -125,8 +131,8 @@ private:
     int printOnlyComputers(const vector<computersWithPeople>& comp);
     string getStringSearchValue(string question);
     bool inputStrToBool(string& built);
-    /*
-     * clear() sents a clear command to the console dependant on the user OS.
+    /**
+     * @brief clear() sents a clear command to the console dependant on the user OS.
      */
     void clear() const;
 };
