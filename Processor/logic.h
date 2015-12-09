@@ -21,14 +21,9 @@
 using namespace std;
 
 /**
-<<<<<<< HEAD
- * @brief The logic is the link between the UI and the data.
+ * @brief The logic is the link between the UI layer and the data layer.
  * The logic also manipulates the data e.g. sorts it as the
  * user wants before returning it to the UI.
-=======
- * @brief The Logic connects the interface to the database, sorts vectors and makes
- * quaries for the dataFetch.
->>>>>>> ad56a29da1d3f61f00871d9efc619c6e06154dbe
  */
 
 class logic
@@ -54,14 +49,18 @@ public:
      */
     bool insertConnection(const int& sid, const int& cid);
     /**
-     * @brief sends a request for a people vector from data and then sorts that vector as the
+     * @brief printerSortPeople sends a request for a people vector from data and then sorts that vector as the
      * user has requested.
+     * @param orderBy is to what column should the table be ordered by.
+     * @param ascending order or not.
      * @return returns a sorted vector with people to the ui for it to display.
      */
     vector<peopleWithComputers> printerSortPeople(int orderBy, int ascending);
     /**
-     * @brief sends a request for a computer vector from data and then sorts that vector as the
+     * @brief printerSortComputers sends a request for a computer vector from data and then sorts that vector as the
      * user has requested.
+     * @param orderBy is to what column should the table be ordered by.
+     * @param ascending order or not.
      * @return returns a sorted vector with computers to the ui for it to display.
      */
     vector<computersWithPeople> printerSortComputers(int orderBy, int ascending);
@@ -76,11 +75,22 @@ public:
      * @return returns the found computers in a sorted list
      */
     vector<computersWithPeople> findComputer(string column, string searchValue);
-    bool eraseListOfVector();
-    void searchPerson();
-    void eraseChosenPeople(const vector<peopleWithComputers>& p, const int& index);//Finds id of Scientist to delete and sends to datafetch.
-    void eraseChosenComputer(const vector<computersWithPeople>& c, const int& index);//Finds id of computer to delete and sends to datafetch.
-    void eraseDB();//Calls datafetch to erase everything.
+    /**
+     * @brief eraseChosenPeople finds id of Scientist to delete and sends to datafetch.
+     * @param p is a pass by reference vector that will be filled with all the people in the database.
+     * @param index is the index of the person to be deleted.
+     */
+    void eraseChosenPeople(const vector<peopleWithComputers>& p, const int& index);
+    /**
+     * @brief eraseChosenComputer finds id of computer to delete and sends to datafetch.
+     * @param c is the pass by reference vector that will be filled with all the computers in the database.
+     * @param index is teh index of the computer to be deleted.
+     */
+    void eraseChosenComputer(const vector<computersWithPeople>& c, const int& index);
+    /**
+     * @brief eraseDB calls datafetch to erase everything.
+     */
+    void eraseDB();
 private:
     dataFetch theData;
     /**

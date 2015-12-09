@@ -9,6 +9,9 @@ vector<peopleWithComputers> logic::printerSortPeople(int orderBy, int ascending)
 {
     vector<peopleWithComputers> sortedVector = theData.fetchPeople("name", "");
 
+    // Here is a sorting switch dependant on the user input "orderBy" and "ascending".
+    // The switch uses sort() with 3 inputs. Start of sort, end of sort,
+    // and sort methood using lambda.
     if (orderBy < 5)
     {
         sort(sortedVector.begin(), sortedVector.end(), [](peopleWithComputers const &a, peopleWithComputers const &b)
@@ -50,6 +53,9 @@ vector<computersWithPeople> logic::printerSortComputers(int orderBy, int ascendi
 {
     vector<computersWithPeople> sortedVector = theData.fetchComputers("name", "");
 
+    // Here is a sorting switch dependant on the user input "orderBy" and "ascending".
+    // The switch uses sort() with 3 inputs. Start of sort, end of sort,
+    // and sort methood using lambda.
     if (orderBy < 5)
     {
         sort(sortedVector.begin(), sortedVector.end(), [](computersWithPeople const &a, computersWithPeople const &b)

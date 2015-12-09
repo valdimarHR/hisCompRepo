@@ -38,12 +38,13 @@ void ui::mainMenu()
     cout.flush();
     cin.clear();
     cin >> choice;
-    inputIntCheck(cin.fail(), choice, 1, 5);
+    inputIntCheck(cin.fail(), choice, 1, 5); // Checks for input error.
     clear();
 }
 
 void ui::menuSwitch()
 {
+    // This swith calls the next menu UI dependant on the user "choice".
     switch(choice)
     {
     case 1 :
@@ -79,6 +80,7 @@ void ui::insertMenu()
 
     clear();
 
+    // This swith calls the next menu UI dependant on the user input "n".
     switch(n)
     {
     case 1 :

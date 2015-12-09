@@ -32,7 +32,7 @@ vector<peopleWithComputers> dataFetch::fetchPeople(string columnName, string sea
     query.prepare(command);
     query.exec();
 
-    vector<peopleWithComputers> pepVector = convererPeopleTable(query);
+    vector<peopleWithComputers> pepVector = convertPeopleTable(query);
 
     db.close();
 
@@ -45,16 +45,16 @@ vector<computersWithPeople> dataFetch::fetchComputers(string columnName, string 
     db.open();
     QSqlQuery query(db);
 
-    QString command = "SELECT * FROM Computers AS C ";
-    command += "LEFT JOIN (SELECT * FROM Scientists AS S ";
-    command += "LEFT JOIN Invents AS I ";
-    command += "ON I.sid = S.id) AS T ";
-    command += "ON T.cid = C.id WHERE C." + QString::fromStdString(columnName) + " LIKE '%" + QString::fromStdString(seartchString) + "%'";
+    QString command = "SELECT * FROM Computers AS C "
+            "LEFT JOIN (SELECT * FROM Scientists AS S "
+            "LEFT JOIN Invents AS I "
+            "ON I.sid = S.id) AS T "
+            "ON T.cid = C.id WHERE C." + QString::fromStdString(columnName) + " LIKE '%" + QString::fromStdString(seartchString) + "%'";
 
     query.prepare(command);
     query.exec();
 
-    vector<computersWithPeople> comVector = convererComputersTable(query);
+    vector<computersWithPeople> comVector = convertComputersTable(query);
 
     db.close();
 
@@ -134,7 +134,7 @@ bool dataFetch::computerAlreadyOnList(const computers& computer)
     return onList;
 }
 
-vector<peopleWithComputers> dataFetch::convererPeopleTable(QSqlQuery& query)
+vector<peopleWithComputers> dataFetch::convertPeopleTable(QSqlQuery& query)
 {
     vector<peopleWithComputers> peopleVector;
     int lastId = -1;
@@ -182,7 +182,7 @@ vector<peopleWithComputers> dataFetch::convererPeopleTable(QSqlQuery& query)
     return peopleVector;
 }
 
-vector<computersWithPeople> dataFetch::convererComputersTable(QSqlQuery& query)
+vector<computersWithPeople> dataFetch::convertComputersTable(QSqlQuery& query)
 {
     vector<computersWithPeople> computersVector;
     int lastId = -1;
