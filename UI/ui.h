@@ -25,6 +25,9 @@ private:
     logic theLogic;
     int choice;
     void mainMenu();
+    /**
+     * @brief menuSwitch switches between different manues depending on the users input.
+     */
     void menuSwitch();
     /**
      * @brief asks for what you wish to insert (Scientist,
@@ -87,7 +90,10 @@ private:
      */
     void printComputersVector(const vector<computersWithPeople>& list) const;
 
-    void deleteMenu();//Asks the user what attribute they want to delete(Scientist, computer or all).
+    /**
+     * @brief Asks the user what attribute they want to delete(Scientist, computer or all).
+     */
+    void deleteMenu();
     /**
      * @brief inputIntCheck(bool, int&) checks if the input from the user was an integer. If not it will ask the user to
      * try again.
@@ -118,18 +124,28 @@ private:
       */
     void deleteDB();
     /**
-     * @brief printOnlyPeople() prints out the people,
+     * @brief printOnlyPeople prints out the people,
      * the computers they made are ignored in this print function.
      * @param list is a vector with people to be printed,
      */
     int printOnlyPeople(const vector<peopleWithComputers>& peep);
     /**
-     * @brief printOnlyPeople() prints out the computers,
+     * @brief printOnlyPeople prints out the computers,
      * the invertors are ignored in this print function.
      * @param list is a vector with computers to be printed,
      */
     int printOnlyComputers(const vector<computersWithPeople>& comp);
+    /**
+     * @brief getStringSearchValue
+     * @param question
+     * @return
+     */
     string getStringSearchValue(string question);
+    /**
+     * @brief inputStrToBool turnes "yes" and "no" into bool values.
+     * @param built is the current string input from user.
+     * @return true if input was Y/y/Yes/yes but false if it was N/n/No/no.
+     */
     bool inputStrToBool(string& built);
     /**
      * @brief clear() sents a clear command to the console dependant on the user OS.

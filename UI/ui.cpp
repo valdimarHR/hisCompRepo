@@ -763,7 +763,8 @@ void ui::printTree()const
     }
 
     cout << endl;
-    sleep(3);
+    cout << "Please fullscreen your" << endl << "   console window" << endl << endl;
+    system("pause");
     clear();
 
 }

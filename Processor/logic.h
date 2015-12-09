@@ -19,7 +19,9 @@
 #include <QVariant>
 
 /**
- * @brief The logic is the link between
+ * @brief The logic is the link between the UI and the data.
+ * The logic also manipulates the data e.g. sorts it as the
+ * user wants before returning it to the UI.
  */
 
 using namespace std;
