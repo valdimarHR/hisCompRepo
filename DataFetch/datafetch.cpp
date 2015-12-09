@@ -30,8 +30,6 @@ vector<peopleWithComputers> dataFetch::fetchPeople(string columnName, string sea
 
 
     query.prepare(command);
-    //query.bindValue(":columnName", QString::fromStdString(columnName));
-    //query.bindValue(":seartchString", QString::fromStdString(seartchString));
     query.exec();
 
     vector<peopleWithComputers> pepVector = convererPeopleTable(query);
@@ -54,8 +52,6 @@ vector<computersWithPeople> dataFetch::fetchComputers(string columnName, string 
     command += "ON T.cid = C.id WHERE C." + QString::fromStdString(columnName) + " LIKE '%" + QString::fromStdString(seartchString) + "%'";
 
     query.prepare(command);
-    //query.bindValue(":columnName", columnName);
-    //query.bindValue(":seartchString", seartchString);
     query.exec();
 
     vector<computersWithPeople> comVector = convererComputersTable(query);

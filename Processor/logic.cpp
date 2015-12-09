@@ -88,7 +88,7 @@ bool logic::insertPerson(string& name, string& gender, int& born, int& death)
     if (checkIfpersonOnList(per))
         return dataExisted = true;
     else
-        theData.insertPersonToDatabase(per);//Adds the people item to the database.
+        theData.insertPersonToDatabase(per);
 
     return dataExisted;//Returns true if person is already on the list.
 }

@@ -2,7 +2,6 @@
 #define LIST_H
 
 #include <iostream>
-#include <fstream>
 #include "Models/people.h"
 #include "Models/computers.h"
 #include "Models/peoplewithcomputers.h"
