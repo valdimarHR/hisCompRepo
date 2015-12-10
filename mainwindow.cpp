@@ -23,15 +23,15 @@ void MainWindow::displayAllPeople()
 
 void MainWindow::displayPeople(vector<peopleWithComputers> people)
 {
-    ui->listPeople->clear();
+    //ui->listPeople->clear();
     for(unsigned int i = 0; i < people.size(); i++)
     {
         peopleWithComputers currPerson = people[i];
-        ui->listPeople->addItem(QString::fromStdString(currPerson.p.getName()));
+        //ui->tablePeople->setItem(i,0,new QTableWidgetItem(QString::fromStdString(currPerson.p.getName())));
     }
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_buttonAdd_clicked()
 {
     displayAllPeople();
 }
