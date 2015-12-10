@@ -120,6 +120,12 @@
               <height>0</height>
              </size>
             </property>
+            <property name="maximumSize">
+             <size>
+              <width>150</width>
+              <height>16777215</height>
+             </size>
+            </property>
             <property name="baseSize">
              <size>
               <width>0</width>
@@ -133,6 +139,12 @@
           </item>
           <item>
            <widget class="QLineEdit" name="lineEditPeopleDeath">
+            <property name="maximumSize">
+             <size>
+              <width>150</width>
+              <height>16777215</height>
+             </size>
+            </property>
             <property name="placeholderText">
              <string>Year of death</string>
             </property>
@@ -235,8 +247,14 @@
            <widget class="QLineEdit" name="lineEditComputerType">
             <property name="minimumSize">
              <size>
-              <width>0</width>
+              <width>130</width>
               <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>250</width>
+              <height>16777215</height>
              </size>
             </property>
             <property name="baseSize">
@@ -252,6 +270,12 @@
           </item>
           <item>
            <widget class="QLineEdit" name="lineEditComputerCreated">
+            <property name="maximumSize">
+             <size>
+              <width>150</width>
+              <height>16777215</height>
+             </size>
+            </property>
             <property name="placeholderText">
              <string>Year created</string>
             </property>
