@@ -8,7 +8,7 @@ QT       += core gui
 QT       += core sql
 
 QT       -= gui
-QMAKE_CXXFLAGS += -std=c++0x
+QMAKE_CXXFLAGS += c++0x
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
