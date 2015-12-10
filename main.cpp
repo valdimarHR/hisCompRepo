@@ -1,13 +1,11 @@
-#include <QCoreApplication>
-#include <iostream>
-#include <QtSql>
-#include "UI/ui.h"
+#include "mainwindow.h"
+#include <QApplication>
 
-using namespace std;
-
-int main()
+int main(int argc, char *argv[])
 {
-    ui appUI;
-    return appUI.start();
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
 
+    return a.exec();
 }
