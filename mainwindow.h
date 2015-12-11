@@ -38,6 +38,10 @@ private slots:
 
     void on_tabWidget_tabBarClicked(int index);
 
+    void on_tableComputer_clicked(const QModelIndex &index);
+
+    void on_buttonComputerDelete_clicked();
+
 private:
     void displayAllPeople();
     void displayAllComputers();

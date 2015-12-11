@@ -156,9 +156,8 @@ void logic::eraseChosenPeople(const int& id)
     theData.deletePeople(id);
 }
 
-void logic::eraseChosenComputer(const vector<computersWithPeople> &c, const int& index)
+void logic::eraseChosenComputer(const int& id)
 {
-    int id = c[index-1].c.getId();
     theData.deleteComputer(id);
 }
 

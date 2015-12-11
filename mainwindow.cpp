@@ -163,3 +163,19 @@ void MainWindow::on_buttonPeopleDelete_clicked()
     displayAllPeople();
     ui->buttonPeopleDelete->setEnabled(false);
 }
+
+void MainWindow::on_tableComputer_clicked(const QModelIndex &index)
+{
+    ui->buttonComputerDelete->setEnabled(true);
+}
+
+void MainWindow::on_buttonComputerDelete_clicked()
+{
+    int selectedRow = ui->tableComputer->currentRow();
+    int id = ui->tableComputer->item(selectedRow, 0)->text().toInt();
+
+    theLogic.eraseChosenComputer(id);
+
+    displayAllComputers();
+    ui->buttonComputerDelete->setEnabled(false);
+}
