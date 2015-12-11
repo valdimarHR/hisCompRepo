@@ -73,6 +73,13 @@
          <widget class="QTableWidget" name="tablePeople"/>
         </item>
         <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#f00e00;&quot;&gt;*label for error messages later&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
            <widget class="QLineEdit" name="lineEditPeopleName">
@@ -173,13 +180,6 @@
           </item>
          </layout>
         </item>
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>//label for error messages later</string>
-          </property>
-         </widget>
-        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_2">
@@ -227,6 +227,13 @@
         </item>
         <item>
          <widget class="QTableWidget" name="tableComputer"/>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelComputerError">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#f00e00;&quot;&gt;*label for error messages later&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -328,13 +335,6 @@
            </widget>
           </item>
          </layout>
-        </item>
-        <item>
-         <widget class="QLabel" name="labelComputerError">
-          <property name="text">
-           <string>//label for error messages later</string>
-          </property>
-         </widget>
         </item>
        </layout>
       </widget>
