@@ -31,9 +31,13 @@ private slots:
 
     void on_dropDownPeopleGender_activated(const QString &arg1);
 
+    void on_tabWidget_tabBarClicked(int index);
+
 private:
     void displayAllPeople();
+    void displayAllComputers();
     void displayPeople(vector<peopleWithComputers>);
+    void displayComputers(vector<computersWithPeople>);
     Ui::MainWindow *ui;
     logic theLogic;
 };
