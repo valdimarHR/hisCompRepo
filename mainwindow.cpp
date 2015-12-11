@@ -210,8 +210,8 @@ void MainWindow::on_buttonComputerAdd_clicked()
     }
     else
     {
-        ui->lineEditPeopleFilter->setText("");
-        displayAllPeople();
+        ui->lineEditComputersFilter->setText("");
+        displayAllComputers();
         clearComputerInsert();
     }
 }
