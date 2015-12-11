@@ -70,7 +70,45 @@
          </layout>
         </item>
         <item>
-         <widget class="QTableWidget" name="tablePeople"/>
+         <widget class="QTableWidget" name="tablePeople">
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <attribute name="horizontalHeaderCascadingSectionResizes">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>Id</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Name</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Gender</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Year of birth</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Year of death</string>
+           </property>
+          </column>
+         </widget>
         </item>
         <item>
          <widget class="QLabel" name="label">
@@ -226,7 +264,39 @@
          </layout>
         </item>
         <item>
-         <widget class="QTableWidget" name="tableComputer"/>
+         <widget class="QTableWidget" name="tableComputer">
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>Id</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Name</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Type</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Year created</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Built</string>
+           </property>
+          </column>
+         </widget>
         </item>
         <item>
          <widget class="QLabel" name="labelComputerError">
