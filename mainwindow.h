@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include "Models/peoplewithcomputers.h"
 #include "Processor/logic.h"
+#include "Utilities/constants.h"
+#include <QMessageBox>
 
 namespace Ui {
 class MainWindow;
@@ -18,7 +20,16 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_buttonAdd_clicked();
+
+    void on_buttonPeopleAdd_clicked();
+
+    void on_lineEditPeopleName_textEdited(const QString &arg1);
+
+    void on_lineEditPeopleBirth_textEdited(const QString &arg1);
+
+    void on_lineEditPeopleDeath_textEdited(const QString &arg1);
+
+    void on_dropDownPeopleGender_activated(const QString &arg1);
 
 private:
     void displayAllPeople();
