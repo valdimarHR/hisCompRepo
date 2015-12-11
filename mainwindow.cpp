@@ -11,6 +11,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->tablePeople->hideColumn(0);
     ui->tableComputer->hideColumn(0);
+    ui->tablePeople->setColumnWidth(1,250);
+    ui->tableComputer->setColumnWidth(1,250);
+    ui->tableComputer->setColumnWidth(2,150);
     displayAllPeople();
     displayAllComputers();
 }
