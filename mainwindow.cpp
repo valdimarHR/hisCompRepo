@@ -69,7 +69,7 @@ void MainWindow::on_buttonPeopleAdd_clicked()
     else
         death = qDeath.toUInt();
 
-    if (death > birth)
+    if (death < birth)
     {
         ui->labelPeopleError->setText("Person can't die before they are born!");
         ui->lineEditPeopleDeath->setText("");
