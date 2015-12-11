@@ -345,7 +345,7 @@
         <item>
          <widget class="QLabel" name="labelComputerError">
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#f00e00;&quot;&gt;*label for error messages later&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -360,7 +360,7 @@
              </size>
             </property>
             <property name="placeholderText">
-             <string>Name</string>
+             <string>*Name</string>
             </property>
            </widget>
           </item>
@@ -385,7 +385,7 @@
              </size>
             </property>
             <property name="placeholderText">
-             <string>Type</string>
+             <string>*Type</string>
             </property>
            </widget>
           </item>
@@ -398,7 +398,7 @@
              </size>
             </property>
             <property name="placeholderText">
-             <string>Year created</string>
+             <string>*Year created</string>
             </property>
            </widget>
           </item>
@@ -408,11 +408,11 @@
              <bool>false</bool>
             </property>
             <property name="currentText">
-             <string>Built?</string>
+             <string>*Built?</string>
             </property>
             <item>
              <property name="text">
-              <string>Built?</string>
+              <string>*Built?</string>
              </property>
             </item>
             <item>

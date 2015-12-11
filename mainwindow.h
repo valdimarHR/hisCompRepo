@@ -38,11 +38,23 @@ private slots:
 
     void on_tabWidget_tabBarClicked(int index);
 
+    void on_buttonComputerAdd_clicked();
+
+    void on_lineEditComputerName_textEdited(const QString &arg1);
+
+    void on_lineEditComputerType_textEdited(const QString &arg1);
+
+    void on_lineEditComputerCreated_textEdited(const QString &arg1);
+
+    void on_dropDownComputerBuilt_activated(const QString &arg1);
+
 private:
     void displayAllPeople();
     void displayAllComputers();
     void displayPeople(vector<peopleWithComputers>);
     void displayComputers(vector<computersWithPeople>);
+    void clearPeopleInsert();
+    void clearComputerInsert();
     Ui::MainWindow *ui;
     logic theLogic;
 

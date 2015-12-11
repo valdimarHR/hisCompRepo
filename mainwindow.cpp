@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tableComputer->hideColumn(0);
     displayAllPeople();
     displayAllComputers();
+    ui->tabWidget->setCurrentIndex(0);
 }
 
 MainWindow::~MainWindow()
@@ -81,20 +82,14 @@ void MainWindow::on_buttonPeopleAdd_clicked()
     if(onList)
     {
         ui->labelPeopleError->setText("Person was already on the list.");
-        ui->lineEditPeopleName->setText("");
-        ui->dropDownPeopleGender->setCurrentIndex(0);
-        ui->lineEditPeopleBirth->setText("");
-        ui->lineEditPeopleDeath->setText("");
+        clearPeopleInsert();
         return;
     }
     else
     {
         ui->lineEditPeopleFilter->setText("");
         displayAllPeople();
-        ui->lineEditPeopleName->setText("");
-        ui->dropDownPeopleGender->setCurrentIndex(0);
-        ui->lineEditPeopleBirth->setText("");
-        ui->lineEditPeopleDeath->setText("");
+        clearPeopleInsert();
     }
 }
 
@@ -133,6 +128,22 @@ void MainWindow::displayComputers(vector<computersWithPeople> computers)
     }
 }
 
+void MainWindow::clearPeopleInsert()
+{
+    ui->lineEditPeopleName->setText("");
+    ui->dropDownPeopleGender->setCurrentIndex(0);
+    ui->lineEditPeopleBirth->setText("");
+    ui->lineEditPeopleDeath->setText("");
+}
+
+void MainWindow::clearComputerInsert()
+{
+    ui->lineEditComputerName->setText("");
+    ui->lineEditComputerType->setText("");
+    ui->lineEditComputerCreated->setText("");
+    ui->dropDownComputerBuilt->setCurrentIndex(0);
+}
+
 void MainWindow::on_tabWidget_tabBarClicked(int index)
 {
     if(index == 0)
@@ -162,4 +173,62 @@ void MainWindow::on_buttonPeopleDelete_clicked()
 
     displayAllPeople();
     ui->buttonPeopleDelete->setEnabled(false);
+}
+
+void MainWindow::on_buttonComputerAdd_clicked()
+{
+    QString qName = ui ->lineEditComputerName ->text();
+    QString qType = ui ->lineEditComputerType ->text();
+    QString qYearCreated = ui->lineEditComputerCreated->text();
+    QString qWasBuilt = ui->dropDownComputerBuilt->currentText();
+
+    if (qName.isEmpty()||qType.isEmpty()||qYearCreated.isEmpty()||qWasBuilt=="*Built?")
+    {
+        ui->labelComputerError->setText("Everything with a * needs to be filled!");
+        return;
+    }
+
+    string name = qName.toStdString();
+    string type = qType.toStdString();
+    int yearCreated = qYearCreated.toUInt();
+    bool wasBuilt;
+
+    if (qWasBuilt == "Yes")
+        wasBuilt = true;
+    else
+        wasBuilt = false;
+
+    bool onList = theLogic.insertComputer(name, yearCreated, type, wasBuilt);
+    if(onList)
+    {
+        ui->labelComputerError->setText("Computer was already on the list.");
+        clearComputerInsert();
+        return;
+    }
+    else
+    {
+        ui->lineEditPeopleFilter->setText("");
+        displayAllPeople();
+        clearComputerInsert();
+    }
+}
+
+void MainWindow::on_lineEditComputerName_textEdited(const QString &arg1)
+{
+    ui->labelComputerError->setText("");
+}
+
+void MainWindow::on_lineEditComputerType_textEdited(const QString &arg1)
+{
+    ui->labelComputerError->setText("");
+}
+
+void MainWindow::on_lineEditComputerCreated_textEdited(const QString &arg1)
+{
+    ui->labelComputerError->setText("");
+}
+
+void MainWindow::on_dropDownComputerBuilt_activated(const QString &arg1)
+{
+    ui->labelComputerError->setText("");
 }
