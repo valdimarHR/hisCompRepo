@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
 using namespace std;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -41,7 +42,7 @@ void MainWindow::displayPeople(vector<peopleWithComputers> people)
         ui->tablePeople->setItem(row,0,new QTableWidgetItem(QString::number(currPerson.p.getId())));
         ui->tablePeople->setItem(row,1,new QTableWidgetItem(QString::fromStdString(currPerson.p.getName())));
         ui->tablePeople->setItem(row,2,new QTableWidgetItem(QString::fromStdString(currPerson.p.getGender())));
-        ui->tablePeople->setItem(row,3,new QTableWidgetItem(QString::number(currPerson.p.getDeath())));
+        ui->tablePeople->setItem(row,3,new QTableWidgetItem(QString::number(currPerson.p.getBirth())));
         ui->tablePeople->setItem(row,4,new QTableWidgetItem(QString::number(currPerson.p.getDeath())));
     }
 }
@@ -79,4 +80,21 @@ void MainWindow::on_tabWidget_tabBarClicked(int index)
 void MainWindow::on_buttonPeopleAdd_clicked()
 {
 
+}
+
+void MainWindow::on_tablePeople_clicked(const QModelIndex &index)
+{
+    ui->buttonPeopleDelete->setEnabled(true);
+}
+
+void MainWindow::on_buttonPeopleDelete_clicked()
+{
+    int selectedRow = ui->tablePeople->currentRow();
+    int id = ui->tablePeople->item(selectedRow, 0)->text().toInt();
+    qDebug() << endl << "id : " << id;
+
+    theLogic.eraseChosenPeople(id);
+
+    displayAllPeople();
+    ui->buttonPeopleDelete->setEnabled(false);
 }

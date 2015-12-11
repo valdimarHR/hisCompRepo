@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "Models/peoplewithcomputers.h"
 #include "Processor/logic.h"
+#include <QtDebug>
 
 namespace Ui {
 class MainWindow;
@@ -23,6 +24,10 @@ private slots:
 
     void on_buttonPeopleAdd_clicked();
 
+    void on_tablePeople_clicked(const QModelIndex &index);
+
+    void on_buttonPeopleDelete_clicked();
+
 private:
     void displayAllPeople();
     void displayAllComputers();
@@ -30,6 +35,7 @@ private:
     void displayComputers(vector<computersWithPeople>);
     Ui::MainWindow *ui;
     logic theLogic;
+
 };
 
 #endif // MAINWINDOW_H

@@ -24,7 +24,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -71,6 +71,9 @@
         </item>
         <item>
          <widget class="QTableWidget" name="tablePeople">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
           <property name="alternatingRowColors">
            <bool>true</bool>
           </property>
@@ -277,6 +280,9 @@
         </item>
         <item>
          <widget class="QTableWidget" name="tableComputer">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
           <property name="alternatingRowColors">
            <bool>true</bool>
           </property>
@@ -442,7 +448,7 @@
      <x>0</x>
      <y>0</y>
      <width>637</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
