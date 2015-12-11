@@ -26,7 +26,7 @@
       <property name="currentIndex">
        <number>0</number>
       </property>
-      <widget class="QWidget" name="tab">
+      <widget class="QWidget" name="tabPeople">
        <attribute name="title">
         <string>People</string>
        </attribute>
@@ -65,7 +65,14 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEditPeopleFilter"/>
+           <widget class="QLineEdit" name="lineEditPeopleFilter">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="placeholderText">
+             <string>Insert text here</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -126,11 +133,15 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#f00e00;&quot;&gt;*label for error messages later&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayoutErrorLabels">
+          <item>
+           <widget class="QLabel" name="labelPeopleError">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
@@ -142,8 +153,11 @@
               <height>0</height>
              </size>
             </property>
+            <property name="text">
+             <string/>
+            </property>
             <property name="placeholderText">
-             <string>Name</string>
+             <string>*Name</string>
             </property>
            </widget>
           </item>
@@ -153,21 +167,21 @@
              <bool>false</bool>
             </property>
             <property name="currentText">
-             <string>select</string>
+             <string>*Select</string>
             </property>
             <item>
              <property name="text">
-              <string>select</string>
+              <string>*Select</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>female</string>
+              <string>Female</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>male</string>
+              <string>Male</string>
              </property>
             </item>
            </widget>
@@ -193,7 +207,7 @@
              </size>
             </property>
             <property name="placeholderText">
-             <string>Year of birth</string>
+             <string>*Year of birth</string>
             </property>
            </widget>
           </item>
@@ -213,7 +227,7 @@
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <layout class="QHBoxLayout" name="horizontalLayoutAddDelete">
           <item>
            <widget class="QPushButton" name="buttonPeopleAdd">
             <property name="text">
@@ -235,7 +249,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_2">
+      <widget class="QWidget" name="tabComputers">
        <attribute name="title">
         <string>Computers</string>
        </attribute>
@@ -280,6 +294,9 @@
         </item>
         <item>
          <widget class="QTableWidget" name="tableComputer">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
           <property name="alternatingRowColors">
            <bool>true</bool>
           </property>

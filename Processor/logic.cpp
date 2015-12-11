@@ -151,9 +151,8 @@ vector<computersWithPeople> logic::findComputer(string column, string searchValu
     return sortedVector;
 }
 
-void logic::eraseChosenPeople(const vector<peopleWithComputers> &p, const int& index)
+void logic::eraseChosenPeople(const int& id)
 {
-    int id = p[index-1].p.getId();
     theData.deletePeople(id);
 }
 

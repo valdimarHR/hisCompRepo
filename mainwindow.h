@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include "Models/peoplewithcomputers.h"
 #include "Processor/logic.h"
+#include <QtDebug>
+#include "Utilities/constants.h"
+#include <QMessageBox>
 
 namespace Ui {
 class MainWindow;
@@ -19,9 +22,21 @@ public:
 
 private slots:
 
-    void on_tabWidget_tabBarClicked(int index);
-
     void on_buttonPeopleAdd_clicked();
+
+    void on_tablePeople_clicked(const QModelIndex &index);
+
+    void on_buttonPeopleDelete_clicked();
+
+    void on_lineEditPeopleName_textEdited(const QString &arg1);
+
+    void on_lineEditPeopleBirth_textEdited(const QString &arg1);
+
+    void on_lineEditPeopleDeath_textEdited(const QString &arg1);
+
+    void on_dropDownPeopleGender_activated(const QString &arg1);
+
+    void on_tabWidget_tabBarClicked(int index);
 
 private:
     void displayAllPeople();
@@ -30,6 +45,7 @@ private:
     void displayComputers(vector<computersWithPeople>);
     Ui::MainWindow *ui;
     logic theLogic;
+
 };
 
 #endif // MAINWINDOW_H

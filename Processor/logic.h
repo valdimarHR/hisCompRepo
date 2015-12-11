@@ -17,6 +17,7 @@
 #include <QSql>
 #include <QString>
 #include <QVariant>
+#include <QDebug>
 
 using namespace std;
 
@@ -84,11 +85,10 @@ public:
      * @param p is a pass by reference vector that will be filled with all the people in the database.
      * @param index is the index of the person to be deleted.
      */
-    void eraseChosenPeople(const vector<peopleWithComputers>& p, const int& index);
+    void eraseChosenPeople(const int& id);
     /**
      * @brief eraseChosenComputer finds id of computer to delete and sends to datafetch.
-     * @param c is the pass by reference vector that will be filled with all the computers in the database.
-     * @param index is teh index of the computer to be deleted.
+     * @param id of the computer to be deleted.
      */
     void eraseChosenComputer(const vector<computersWithPeople>& c, const int& index);
     /**
