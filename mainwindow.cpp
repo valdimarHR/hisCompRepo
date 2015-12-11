@@ -11,6 +11,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->tablePeople->hideColumn(0);
     ui->tableComputer->hideColumn(0);
+    ui->tablePeople->setColumnWidth(1,250);
+    ui->tableComputer->setColumnWidth(1,250);
+    ui->tableComputer->setColumnWidth(2,150);
     displayAllPeople();
     displayAllComputers();
     ui->tabWidget->setCurrentIndex(0);
@@ -71,7 +74,7 @@ void MainWindow::on_buttonPeopleAdd_clicked()
     else
         death = qDeath.toUInt();
 
-    if (death < birth)
+    if (death < birth && death!= -1)
     {
         ui->labelPeopleError->setText("Person can't die before they are born!");
         ui->lineEditPeopleDeath->setText("");
@@ -231,4 +234,19 @@ void MainWindow::on_lineEditComputerCreated_textEdited(const QString &arg1)
 void MainWindow::on_dropDownComputerBuilt_activated(const QString &arg1)
 {
     ui->labelComputerError->setText("");
+}
+void MainWindow::on_tableComputer_clicked(const QModelIndex &index)
+{
+    ui->buttonComputerDelete->setEnabled(true);
+}
+
+void MainWindow::on_buttonComputerDelete_clicked()
+{
+    int selectedRow = ui->tableComputer->currentRow();
+    int id = ui->tableComputer->item(selectedRow, 0)->text().toInt();
+
+    theLogic.eraseChosenComputer(id);
+
+    displayAllComputers();
+    ui->buttonComputerDelete->setEnabled(false);
 }

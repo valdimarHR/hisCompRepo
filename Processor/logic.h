@@ -90,7 +90,7 @@ public:
      * @brief eraseChosenComputer finds id of computer to delete and sends to datafetch.
      * @param id of the computer to be deleted.
      */
-    void eraseChosenComputer(const vector<computersWithPeople>& c, const int& index);
+    void eraseChosenComputer(const int& index);
     /**
      * @brief eraseDB calls datafetch to erase everything.
      */
