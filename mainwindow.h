@@ -18,11 +18,16 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_buttonAdd_clicked();
+
+    void on_tabWidget_tabBarClicked(int index);
+
+    void on_buttonPeopleAdd_clicked();
 
 private:
     void displayAllPeople();
+    void displayAllComputers();
     void displayPeople(vector<peopleWithComputers>);
+    void displayComputers(vector<computersWithPeople>);
     Ui::MainWindow *ui;
     logic theLogic;
 };
