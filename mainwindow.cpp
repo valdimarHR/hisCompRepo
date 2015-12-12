@@ -75,7 +75,15 @@ void MainWindow::on_buttonPeopleAdd_clicked()
     else
         death = qDeath.toUInt();
 
-    if (death < birth && death!= -1)
+    if(birth == 0 || death == 0) //If qBirth or qDeath is not a number, toUInt converts it to 0. So this is an error when text is applied where number is expected.
+    {
+        QMessageBox::warning(this, "Warning","Error!\nYou have to enter a number for\nyear of birth and year of death.");
+        ui->lineEditPeopleBirth->setText("");
+        ui->lineEditPeopleDeath->setText("");
+        return;
+    }
+
+    if (death < birth && death!= constants::notDead) //Error ef dánarár er á undan fæðingarári
     {
         ui->labelPeopleError->setText("Person can't die before they are born!");
         ui->lineEditPeopleDeath->setText("");
@@ -153,6 +161,34 @@ void MainWindow::clearComputerInsert()
     ui->dropDownComputerBuilt->setCurrentIndex(0);
 }
 
+int MainWindow::getSelectedIdPeople()
+{
+    int selectedRow = ui->tablePeople->currentRow();
+    int id = ui->tablePeople->item(selectedRow, 0)->text().toInt();
+    return id;
+}
+
+int MainWindow::getSelectedIdComputer()
+{
+    int selectedRow = ui->tableComputer->currentRow();
+    int id = ui->tableComputer->item(selectedRow, 0)->text().toInt();
+    return id;
+}
+
+peopleWithComputers MainWindow::getSelectedPerson()
+{
+    int id = getSelectedIdPeople();
+    peopleWithComputers temp = theLogic.getPerson(id);
+    return temp;
+}
+
+computersWithPeople MainWindow::getSelectedComputer()
+{
+    int id = getSelectedIdComputer();
+    computersWithPeople temp = theLogic.getComputer(id);
+    return temp;
+}
+
 void MainWindow::on_tabWidget_tabBarClicked(int index)
 {
     if(index == 0)
@@ -174,8 +210,8 @@ void MainWindow::on_tablePeople_clicked(const QModelIndex &index)
 
 void MainWindow::on_buttonPeopleDelete_clicked()
 {
-    int selectedRow = ui->tablePeople->currentRow();
-    int id = ui->tablePeople->item(selectedRow, 0)->text().toInt();
+
+    int id = getSelectedIdPeople();
 
     theLogic.eraseChosenPeople(id);
     ui->tablePeople->setSortingEnabled(false);
@@ -201,6 +237,13 @@ void MainWindow::on_buttonComputerAdd_clicked()
     string type = qType.toStdString();
     int yearCreated = qYearCreated.toUInt();
     bool wasBuilt;
+
+    if(yearCreated == 0) //If yearCreated is not a number, toUInt converts it to 0. So this is an error when text is applied where number is expected.
+    {
+        QMessageBox::warning(this, "Warning","Error!\nYou have to enter a number for\nYear created!");
+        ui->lineEditComputerCreated->setText("");
+        return;
+    }
 
     if (qWasBuilt == "Yes")
         wasBuilt = true;
@@ -250,9 +293,7 @@ void MainWindow::on_tableComputer_clicked(const QModelIndex &index)
 
 void MainWindow::on_buttonComputerDelete_clicked()
 {
-    int selectedRow = ui->tableComputer->currentRow();
-    int id = ui->tableComputer->item(selectedRow, 0)->text().toInt();
-
+    int id = getSelectedIdComputer();
     theLogic.eraseChosenComputer(id);
     ui->tableComputer->setSortingEnabled(false);
     displayAllComputers();

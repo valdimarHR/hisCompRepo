@@ -76,6 +76,19 @@ public:
      */
     bool computerAlreadyOnList(const computers& computer);
     /**
+     * @brief deletePeople sets isDeleted on the person to true with matching id.
+     * @brief editPersonDb
+     * @param
+     * @return
+     */
+    bool editPersonDb(const int &id, const string &name, const string &gender, const int &birth, const int &death, const string &info);
+    /**
+     * @brief editComputerDB
+     * @param
+     * @return
+     */
+    bool editComputerDb(const int &id, const string &name, const int &year, const string &type, const bool &wasBuilt);
+    /**
      * @brief deletePeople hides the person in the SQL DB with matching id.
      * @param id of the person.
      */
@@ -85,6 +98,13 @@ public:
      * @param id of the computer.
      */
     void deleteComputer(const int& id);
+    /**
+     * @brief deleteConnectionDb
+     * @param sid
+     * @param cid
+     * @return
+     */
+    bool deleteConnectionDb(const int &sid, const int &cid);
     /**
      * @brief eraseEverything deletes all the data in the DB (scientists, computers and connections).
      */
