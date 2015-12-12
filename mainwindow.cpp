@@ -92,7 +92,9 @@ void MainWindow::on_buttonPeopleAdd_clicked()
     else
     {
         ui->lineEditPeopleFilter->setText("");
+        ui->tablePeople->setSortingEnabled(false);
         displayAllPeople();
+        ui->tablePeople->setSortingEnabled(true);
         clearPeopleInsert();
     }
 }
@@ -174,12 +176,12 @@ void MainWindow::on_buttonPeopleDelete_clicked()
 {
     int selectedRow = ui->tablePeople->currentRow();
     int id = ui->tablePeople->item(selectedRow, 0)->text().toInt();
-    qDebug() << endl << "id : " << id;
 
     theLogic.eraseChosenPeople(id);
-
+    ui->tablePeople->setSortingEnabled(false);
     displayAllPeople();
     ui->buttonPeopleDelete->setEnabled(false);
+    ui->tablePeople->setSortingEnabled(true);
 }
 
 void MainWindow::on_buttonComputerAdd_clicked()
@@ -215,7 +217,9 @@ void MainWindow::on_buttonComputerAdd_clicked()
     else
     {
         ui->lineEditComputersFilter->setText("");
+        ui->tableComputer->setSortingEnabled(false);
         displayAllComputers();
+        ui->tableComputer->setSortingEnabled(true);
         clearComputerInsert();
     }
 }
@@ -250,9 +254,10 @@ void MainWindow::on_buttonComputerDelete_clicked()
     int id = ui->tableComputer->item(selectedRow, 0)->text().toInt();
 
     theLogic.eraseChosenComputer(id);
-
+    ui->tableComputer->setSortingEnabled(false);
     displayAllComputers();
     ui->buttonComputerDelete->setEnabled(false);
+    ui->tableComputer->setSortingEnabled(true);
 }
 
 void MainWindow::on_lineEditPeopleFilter_textChanged(const QString &inputText)
