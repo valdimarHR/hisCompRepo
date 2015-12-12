@@ -48,6 +48,7 @@ void MainWindow::displayPeople(vector<peopleWithComputers> people)
         ui->tablePeople->setItem(row,2,new QTableWidgetItem(QString::fromStdString(currPerson.p.getGender())));
         ui->tablePeople->setItem(row,3,new QTableWidgetItem(QString::number(currPerson.p.getBirth())));
         ui->tablePeople->setItem(row,4,new QTableWidgetItem(QString::number(currPerson.p.getDeath())));
+        ui->tablePeople->showRow(row);
     }
 }
 
@@ -249,4 +250,36 @@ void MainWindow::on_buttonComputerDelete_clicked()
 
     displayAllComputers();
     ui->buttonComputerDelete->setEnabled(false);
+}
+
+void MainWindow::on_lineEditPeopleFilter_textChanged(const QString &inputText)
+{
+    int rowCount = ui->tablePeople->rowCount();
+    if(inputText == "")
+    {
+        displayAllPeople();
+    }
+    else
+    {
+        //QString columnName = ui->dropDownPeopleFilter->itemText();
+        int columnNum = ui->dropDownPeopleFilter->currentIndex() + 1;
+        for(int row = 0; row < rowCount; row++)
+        {
+            bool genderFind = columnNum == 2;
+            QString columnText = ui->tablePeople->item(row,columnNum)->text();
+            if(!genderFind && !columnText.contains(inputText, Qt::CaseInsensitive))
+            {
+                ui->tablePeople->hideRow(row);
+            }
+            else if(genderFind && !columnText.contains(inputText))
+            {
+                ui->tablePeople->hideRow(row);
+            }
+            else
+            {
+                ui->tablePeople->showRow(row);
+            }
+        }
+
+    }
 }

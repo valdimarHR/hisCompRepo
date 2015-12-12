@@ -52,6 +52,8 @@ private slots:
 
     void on_buttonComputerDelete_clicked();
 
+    void on_lineEditPeopleFilter_textChanged(const QString &arg1);
+
 private:
     void displayAllPeople();
     void displayAllComputers();
