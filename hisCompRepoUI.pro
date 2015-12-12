@@ -23,7 +23,8 @@ SOURCES += main.cpp\
         Models/people.cpp\
         Models/peoplewithcomputers.cpp\
         Processor/logic.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    UI/edit.cpp
 
 HEADERS  += mainwindow.h\
         Utilities/constants.h\
@@ -32,6 +33,8 @@ HEADERS  += mainwindow.h\
         Models/computerswithpeople.h\
         Models/people.h\
         Models/peoplewithcomputers.h\
-        Processor/logic.h
+        Processor/logic.h \
+    UI/edit.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    UI/edit.ui

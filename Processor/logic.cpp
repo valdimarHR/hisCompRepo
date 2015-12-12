@@ -123,6 +123,45 @@ bool logic::insertConnection(const int& sid, const int& cid)
     return dataExisted;//Returns true if computer is already on the list.
 }
 
+peopleWithComputers logic::getPerson(const int &id)
+{
+    vector<peopleWithComputers> p = findPeople("id",to_string(id));
+    return p[0];
+}
+
+computersWithPeople logic::getComputer(const int &id)
+{
+    vector<computersWithPeople> c = findComputer("id",to_string(id));
+    return c[0];
+}
+
+bool logic::deleteConnection(const int &sid, const int &cid)
+{
+    bool success = theData.deleteConnectionDb(sid, cid);
+    if(success)
+        return true;
+    else
+        return false;
+}
+
+bool logic::editPerson(const int &id, const string &name, const string &gender, const int &birth, const int &death, const string &info)
+{
+    bool success = theData.editPersonDb(id,name,gender,birth,death,info);
+    if (success)
+        return true;
+    else
+        return false;
+}
+
+bool logic::editComputer(const int &id, const string &name, const int &year, const string &type, const bool &wasBuilt)
+{
+    bool success = theData.editComputerDb(id,name,year,type,wasBuilt);
+    if (success)
+        return true;
+    else
+        return false;
+}
+
 bool logic::checkIfpersonOnList(const people& person)
 {
    bool alreadyOnList = theData.personAlreadyOnList(person);
