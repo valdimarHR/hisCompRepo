@@ -175,10 +175,17 @@ int MainWindow::getSelectedIdComputer()
     return id;
 }
 
-peopleWithComputers MainWindow::getSelectedPerson()//------------------------------------------------------------------------
+peopleWithComputers MainWindow::getSelectedPerson()
 {
     int id = getSelectedIdPeople();
     peopleWithComputers temp = theLogic.getPerson(id);
+    return temp;
+}
+
+computersWithPeople MainWindow::getSelectedComputer()
+{
+    int id = getSelectedIdComputer();
+    computersWithPeople temp = theLogic.getComputer(id);
     return temp;
 }
 

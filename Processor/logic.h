@@ -55,6 +55,12 @@ public:
      */
     peopleWithComputers getPerson(const int& id);
     /**
+     * @brief getComputer
+     * @param id
+     * @return
+     */
+    computersWithPeople getComputer(const int& id);
+    /**
      * @brief deleteConnection
      * @param sid
      * @param cid

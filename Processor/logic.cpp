@@ -125,7 +125,14 @@ bool logic::insertConnection(const int& sid, const int& cid)
 
 peopleWithComputers logic::getPerson(const int &id)
 {
+    vector<peopleWithComputers> p = findPeople("id",to_string(id));
+    return p[0];
+}
 
+computersWithPeople logic::getComputer(const int &id)
+{
+    vector<computersWithPeople> c = findComputer("id",to_string(id));
+    return c[0];
 }
 
 bool logic::deleteConnection(const int &sid, const int &cid)
