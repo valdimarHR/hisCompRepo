@@ -50,6 +50,29 @@ public:
      */
     bool insertConnection(const int& sid, const int& cid);
     /**
+     * @brief Gets the info of the person and all computers connected to him
+     * @param id of person
+     */
+    peopleWithComputers getPerson(const int& id);
+    /**
+     * @brief deleteConnection
+     * @param sid
+     * @param cid
+     * @return
+     */
+    bool deleteConnection(const int& sid, const int& cid);
+    /**
+     * @brief
+     *
+     */
+    bool editPerson(const int &id, const string &name, const string &gender, const int &birth, const int &death, const string &info);
+    /**
+     * @brief editComputer
+     * @param
+     * @return
+     */
+    bool editComputer(const int &id, const string & name, const int &year, const string &type, const bool & wasBuilt);
+    /**
      * @brief printerSortPeople sends a request for a people vector from data and then sorts that vector as the
      * user has requested.
      * @param orderBy is to what column should the table be ordered by.

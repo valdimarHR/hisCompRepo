@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>637</width>
+    <width>645</width>
     <height>653</height>
    </rect>
   </property>
@@ -17,6 +17,9 @@
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QTabWidget" name="tabWidget">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -27,7 +30,7 @@
        <enum>Qt::DefaultContextMenu</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabPeople">
        <attribute name="title">
@@ -239,6 +242,16 @@
            </widget>
           </item>
           <item>
+           <widget class="QPushButton" name="pushButton">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Edit selected</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="buttonPeopleDelete">
             <property name="enabled">
              <bool>false</bool>
@@ -291,7 +304,26 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEditComputersFilter"/>
+           <widget class="QLineEdit" name="lineEditComputersFilter">
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="dragEnabled">
+             <bool>false</bool>
+            </property>
+            <property name="readOnly">
+             <bool>false</bool>
+            </property>
+            <property name="placeholderText">
+             <string>Insert text here</string>
+            </property>
+            <property name="clearButtonEnabled">
+             <bool>false</bool>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -442,6 +474,16 @@
            </widget>
           </item>
           <item>
+           <widget class="QPushButton" name="pushButton_2">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Edit selection</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="buttonComputerDelete">
             <property name="enabled">
              <bool>false</bool>
@@ -464,8 +506,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>637</width>
-     <height>26</height>
+     <width>645</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>
@@ -480,6 +522,29 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>lineEditPeopleDeath</tabstop>
+  <tabstop>lineEditPeopleFilter</tabstop>
+  <tabstop>lineEditPeopleName</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>dropDownPeopleGender</tabstop>
+  <tabstop>lineEditPeopleBirth</tabstop>
+  <tabstop>buttonPeopleAdd</tabstop>
+  <tabstop>dropDownPeopleFilter</tabstop>
+  <tabstop>buttonPeopleDelete</tabstop>
+  <tabstop>tablePeople</tabstop>
+  <tabstop>dropDownComputersFilter</tabstop>
+  <tabstop>lineEditComputersFilter</tabstop>
+  <tabstop>tableComputer</tabstop>
+  <tabstop>lineEditComputerName</tabstop>
+  <tabstop>lineEditComputerType</tabstop>
+  <tabstop>lineEditComputerCreated</tabstop>
+  <tabstop>dropDownComputerBuilt</tabstop>
+  <tabstop>buttonComputerAdd</tabstop>
+  <tabstop>buttonComputerDelete</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>pushButton_2</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

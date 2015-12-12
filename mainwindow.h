@@ -63,6 +63,9 @@ private:
     void displayComputers(vector<computersWithPeople>);
     void clearPeopleInsert();
     void clearComputerInsert();
+    int getSelectedIdPeople();
+    int getSelectedIdComputer();
+    peopleWithComputers getSelectedPerson();
     Ui::MainWindow *ui;
     logic theLogic;
 
