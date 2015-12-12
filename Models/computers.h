@@ -36,6 +36,7 @@ private:
     int yearCreated;
     string type;
     bool wasBuilt;
+    string info;
 };
 
 #endif // COMPUTERS_H

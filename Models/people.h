@@ -40,6 +40,7 @@ private:
     string gender;
     int yearOfBirth;
     int yearOfDeath;
+    string info;
 };
 
 #endif // PEOPLE_H
