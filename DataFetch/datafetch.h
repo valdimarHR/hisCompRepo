@@ -76,6 +76,18 @@ public:
      */
     bool computerAlreadyOnList(const computers& computer);
     /**
+     * @brief editPersonDb
+     * @param
+     * @return
+     */
+    bool editPersonDb(const int &id, const string &name, const string &gender, const int &birth, const int &death, const string &info);
+    /**
+     * @brief editComputerDB
+     * @param
+     * @return
+     */
+    bool editComputerDb(const int &id, const string &name, const int &year, const string &type, const bool &wasBuilt);
+    /**
      * @brief deletePeople deletes the person in the SQL DB with matching id.
      * @param id of the person.
      */
