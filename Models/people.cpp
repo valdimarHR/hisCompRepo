@@ -50,6 +50,11 @@ void people::setDeath(int fdeath)
     yearOfDeath = fdeath;
 }
 
+void people::setInfo(string finfo)
+{
+    info = finfo;
+}
+
 int people::getId() const
 {
     return id;
@@ -73,6 +78,11 @@ int people::getBirth() const
 int people::getDeath() const
 {
     return yearOfDeath;
+}
+
+string people::getInfo() const
+{
+    return info;
 }
 
 bool operator == (const people& person1, const people& person2)

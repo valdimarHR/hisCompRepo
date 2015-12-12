@@ -164,6 +164,13 @@ vector<peopleWithComputers> dataFetch::convertPeopleTable(QSqlQuery& query)
     int lastId = -1;
     while(query.next())
     {
+        bool isDeleted = query.value("isDeleted").toBool();
+        
+        if (isDeleted) 
+        {
+            continue;
+        }
+        
         int currentPersonId = query.value(0).toUInt();
 
         computers comp;
@@ -190,12 +197,14 @@ vector<peopleWithComputers> dataFetch::convertPeopleTable(QSqlQuery& query)
         string Pgender = query.value("gender").toString().toStdString();
         int Pborn = query.value("birth").toUInt();
         int Pdeath = query.value("death").toUInt();
+        string Pinfo = query.value("info").toString().toStdString();
 
         peopleWithComputers per;
         per.p.setName(Pname);
         per.p.setGender(Pgender);
         per.p.setBirth(Pborn);
         per.p.setDeath(Pdeath);
+        per.p.setInfo(Pinfo);
         per.p.setId(currentPersonId);
         per.creations.push_back(comp);
 
@@ -212,6 +221,13 @@ vector<computersWithPeople> dataFetch::convertComputersTable(QSqlQuery& query)
     int lastId = -1;
     while(query.next())
     {
+        bool isDeleted = query.value("isDeleted").toBool();
+
+        if (isDeleted)
+        {
+            continue;
+        }
+
         int currentComputerId = query.value(0).toUInt();
 
         people per;
@@ -245,6 +261,7 @@ vector<computersWithPeople> dataFetch::convertComputersTable(QSqlQuery& query)
         comp.c.setYearCreated(CyearCreated);
         comp.c.setType(Ctype);
         comp.c.setWasBuilt(CwasBuilt);
+        comp.c.setInfo(Cinfo);
         comp.creators.push_back(per);
 
         computersVector.push_back(comp);
@@ -313,15 +330,17 @@ void dataFetch::deletePeople(const int& id)
     db.open();
     QSqlQuery query(db);
 
-    string comm = "DELETE FROM Scientists WHERE id = " + to_string(id);
+    string comm = "UPDATE Scientists SET isDeleted = 1 WHERE id = " + to_string(id);
     QString command = QString::fromStdString(comm);
     query.prepare(command);
     query.exec();
+    
+    
 
-    string comm2 = "DELETE FROM Invents WHERE sid = " +to_string(id);
-    QString command2 = QString::fromStdString(comm2);
-    query.prepare(command2);
-    query.exec();
+//    string comm2 = "DELETE FROM Invents WHERE sid = " +to_string(id);
+//    QString command2 = QString::fromStdString(comm2);
+//    query.prepare(command2);
+//    query.exec();
 
     db.close();
 }
@@ -331,15 +350,15 @@ void dataFetch::deleteComputer(const int& id)
     db.open();
     QSqlQuery query(db);
 
-    string comm = "DELETE FROM Computers WHERE id = " + to_string(id);
+    string comm = "UPDATE Computers SET isDeleted = 1 WHERE id = " + to_string(id);
     QString command = QString::fromStdString(comm);
     query.prepare(command);
     query.exec();
 
-    string comm2 = "DELETE FROM Invents WHERE cid = " + to_string(id);
-    QString command2 = QString::fromStdString(comm2);
-    query.prepare(command2);
-    query.exec();
+//    string comm2 = "DELETE FROM Invents WHERE cid = " + to_string(id);
+//    QString command2 = QString::fromStdString(comm2);
+//    query.prepare(command2);
+//    query.exec();
 
     db.close();
 }
