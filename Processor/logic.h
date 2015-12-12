@@ -50,6 +50,18 @@ public:
      */
     bool insertConnection(const int& sid, const int& cid);
     /**
+     * @brief Gets the info of the person and all computers connected to him
+     * @param id of person
+     */
+    peopleWithComputers getPerson(const int& id);
+    /**
+     * @brief deleteConnection
+     * @param sid
+     * @param cid
+     * @return
+     */
+    bool deleteConnection(const int& sid, const int& cid);
+    /**
      * @brief
      *
      */

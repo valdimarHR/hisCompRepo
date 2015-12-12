@@ -123,6 +123,20 @@ bool logic::insertConnection(const int& sid, const int& cid)
     return dataExisted;//Returns true if computer is already on the list.
 }
 
+peopleWithComputers logic::getPerson(const int &id)
+{
+
+}
+
+bool logic::deleteConnection(const int &sid, const int &cid)
+{
+    bool success = theData.deleteConnectionDb(sid, cid);
+    if(success)
+        return true;
+    else
+        return false;
+}
+
 bool logic::editPerson(const int &id, const string &name, const string &gender, const int &birth, const int &death, const string &info)
 {
     bool success = theData.editPersonDb(id,name,gender,birth,death,info);
@@ -130,7 +144,6 @@ bool logic::editPerson(const int &id, const string &name, const string &gender, 
         return true;
     else
         return false;
-
 }
 
 bool logic::editComputer(const int &id, const string &name, const int &year, const string &type, const bool &wasBuilt)

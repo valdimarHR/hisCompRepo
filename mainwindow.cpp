@@ -175,6 +175,13 @@ int MainWindow::getSelectedIdComputer()
     return id;
 }
 
+peopleWithComputers MainWindow::getSelectedPerson()//------------------------------------------------------------------------
+{
+    int id = getSelectedIdPeople();
+    peopleWithComputers temp = theLogic.getPerson(id);
+    return temp;
+}
+
 void MainWindow::on_tabWidget_tabBarClicked(int index)
 {
     if(index == 0)

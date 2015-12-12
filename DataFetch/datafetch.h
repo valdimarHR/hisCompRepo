@@ -98,6 +98,13 @@ public:
      */
     void deleteComputer(const int& id);
     /**
+     * @brief deleteConnectionDb
+     * @param sid
+     * @param cid
+     * @return
+     */
+    bool deleteConnectionDb(const int &sid, const int &cid);
+    /**
      * @brief eraseEverything deletes all the data in the DB (scientists, computers and connections).
      */
     void eraseEverything();

@@ -65,6 +65,7 @@ private:
     void clearComputerInsert();
     int getSelectedIdPeople();
     int getSelectedIdComputer();
+    peopleWithComputers getSelectedPerson();
     Ui::MainWindow *ui;
     logic theLogic;
 

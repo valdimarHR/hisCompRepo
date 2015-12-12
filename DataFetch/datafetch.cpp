@@ -344,6 +344,19 @@ void dataFetch::deleteComputer(const int& id)
     db.close();
 }
 
+bool dataFetch::deleteConnectionDb(const int &sid, const int &cid)
+{
+    db.open();
+    QSqlQuery query(db);
+
+    string comm = "DELETE FROM Invents WHERE sid = " + to_string(sid) + " AND cid = " + to_string(cid);
+    QString command = QString::fromStdString(comm);
+    query.prepare(command);
+    query.exec();
+    db.close();
+    return true;
+}
+
 void dataFetch::eraseEverything()
 {
     db.open();
