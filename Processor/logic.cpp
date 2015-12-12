@@ -133,6 +133,15 @@ bool logic::editPerson(const int &id, const string &name, const string &gender, 
 
 }
 
+bool logic::editComputer(const int &id, const string &name, const int &year, const string &type, const bool &wasBuilt)
+{
+    bool success = theData.editComputerDb(id,name,year,type,wasBuilt);
+    if (success)
+        return true;
+    else
+        return false;
+}
+
 bool logic::checkIfpersonOnList(const people& person)
 {
    bool alreadyOnList = theData.personAlreadyOnList(person);

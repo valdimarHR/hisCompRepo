@@ -146,6 +146,18 @@ bool dataFetch::editPersonDb(const int &id, const string &name, const string &ge
     return true;
 }
 
+bool dataFetch::editComputerDb(const int &id, const string &name, const int &year, const string &type, const bool &wasBuilt)
+{
+    db.open();
+    QSqlQuery query(db);
+    string comm = "UPDATE Computers SET name=\"" + name + "\", yearCreated=" + to_string(year) + ", type=\"" + type + ", wasbuilt=" + to_string(wasBuilt) + " WHERE id = " + to_string(id);
+    QString command = QString::fromStdString(comm);
+    query.prepare(command);
+    query.exec();
+    db.close();
+    return true;
+}
+
 vector<peopleWithComputers> dataFetch::convertPeopleTable(QSqlQuery& query)
 {
     vector<peopleWithComputers> peopleVector;

@@ -50,10 +50,16 @@ public:
      */
     bool insertConnection(const int& sid, const int& cid);
     /**
-     *
+     * @brief
      *
      */
     bool editPerson(const int &id, const string &name, const string &gender, const int &birth, const int &death, const string &info);
+    /**
+     * @brief editComputer
+     * @param
+     * @return
+     */
+    bool editComputer(const int &id, const string & name, const int &year, const string &type, const bool & wasBuilt);
     /**
      * @brief printerSortPeople sends a request for a people vector from data and then sorts that vector as the
      * user has requested.
