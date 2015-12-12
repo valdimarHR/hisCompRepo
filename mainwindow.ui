@@ -291,7 +291,26 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEditComputersFilter"/>
+           <widget class="QLineEdit" name="lineEditComputersFilter">
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="dragEnabled">
+             <bool>false</bool>
+            </property>
+            <property name="readOnly">
+             <bool>false</bool>
+            </property>
+            <property name="placeholderText">
+             <string>Insert text here</string>
+            </property>
+            <property name="clearButtonEnabled">
+             <bool>false</bool>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -465,7 +484,7 @@
      <x>0</x>
      <y>0</y>
      <width>637</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
