@@ -49,6 +49,11 @@ void computers::setWasBuilt(bool built)
     wasBuilt = built;
 }
 
+void computers::setInfo(string finfo)
+{
+    info = finfo;
+}
+
  int computers::getId() const
  {
      return id;
@@ -69,6 +74,11 @@ string computers::getType() const
 bool computers::getWasBuilt() const
 {
     return wasBuilt;
+}
+
+string computers::getInfo() const
+{
+    return info;
 }
 
 bool operator == (const computers& computer1, const computers& computer2)

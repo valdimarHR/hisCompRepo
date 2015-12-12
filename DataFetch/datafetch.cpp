@@ -180,9 +180,9 @@ vector<peopleWithComputers> dataFetch::convertPeopleTable(QSqlQuery& query)
         per.p.setGender(Pgender);
         per.p.setBirth(Pborn);
         per.p.setDeath(Pdeath);
+        per.p.setInfo(Pinfo);
         per.p.setId(currentPersonId);
         per.creations.push_back(comp);
-        per.p.setInfo(Pinfo);
 
         peopleVector.push_back(per);
 
@@ -237,6 +237,7 @@ vector<computersWithPeople> dataFetch::convertComputersTable(QSqlQuery& query)
         comp.c.setYearCreated(CyearCreated);
         comp.c.setType(Ctype);
         comp.c.setWasBuilt(CwasBuilt);
+        comp.c.setInfo(Cinfo);
         comp.creators.push_back(per);
 
         computersVector.push_back(comp);
