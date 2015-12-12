@@ -50,6 +50,11 @@ public:
      */
     bool insertConnection(const int& sid, const int& cid);
     /**
+     *
+     *
+     */
+    bool editPerson(const int &id, const string &name, const string &gender, const int &birth, const int &death, const string &info);
+    /**
      * @brief printerSortPeople sends a request for a people vector from data and then sorts that vector as the
      * user has requested.
      * @param orderBy is to what column should the table be ordered by.
