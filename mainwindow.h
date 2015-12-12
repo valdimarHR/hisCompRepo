@@ -54,6 +54,8 @@ private slots:
 
     void on_lineEditPeopleFilter_textChanged(const QString &arg1);
 
+    void on_lineEditComputersFilter_textChanged(const QString &arg1);
+
 private:
     void displayAllPeople();
     void displayAllComputers();

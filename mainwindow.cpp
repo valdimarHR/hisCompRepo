@@ -119,6 +119,8 @@ void MainWindow::on_dropDownPeopleGender_activated(const QString &arg1)
 
 void MainWindow::displayComputers(vector<computersWithPeople> computers)
 {
+//    ui->tableComputer->setSortingEnabled(false);
+//    ui->tableComputer->setSortingEnabled(true);
     ui->tableComputer->clearContents();
     ui->tableComputer->setRowCount(computers.size());
     for(unsigned int row = 0; row < computers.size(); row++)
@@ -129,6 +131,7 @@ void MainWindow::displayComputers(vector<computersWithPeople> computers)
         ui->tableComputer->setItem(row,2,new QTableWidgetItem(QString::fromStdString(currComputer.c.getType())));
         ui->tableComputer->setItem(row,3,new QTableWidgetItem(QString::number(currComputer.c.getYearCreated())));
         ui->tableComputer->setItem(row,4,new QTableWidgetItem(QString::number(currComputer.c.getWasBuilt())));
+        ui->tableComputer->showRow(row);
     }
 }
 
@@ -261,7 +264,6 @@ void MainWindow::on_lineEditPeopleFilter_textChanged(const QString &inputText)
     }
     else
     {
-        //QString columnName = ui->dropDownPeopleFilter->itemText();
         int columnNum = ui->dropDownPeopleFilter->currentIndex() + 1;
         for(int row = 0; row < rowCount; row++)
         {
@@ -278,6 +280,32 @@ void MainWindow::on_lineEditPeopleFilter_textChanged(const QString &inputText)
             else
             {
                 ui->tablePeople->showRow(row);
+            }
+        }
+
+    }
+}
+
+void MainWindow::on_lineEditComputersFilter_textChanged(const QString &inputText)
+{
+    int rowCount = ui->tableComputer->rowCount();
+    if(inputText == "")
+    {
+        displayAllComputers();
+    }
+    else
+    {
+        int columnNum = ui->dropDownComputersFilter->currentIndex() + 1;
+        for(int row = 0; row < rowCount; row++)
+        {
+            QString columnText = ui->tableComputer->item(row,columnNum)->text();
+            if(!columnText.contains(inputText, Qt::CaseInsensitive))
+            {
+                ui->tableComputer->hideRow(row);
+            }
+            else
+            {
+                ui->tableComputer->showRow(row);
             }
         }
 
