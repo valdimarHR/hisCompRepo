@@ -161,6 +161,20 @@ void MainWindow::clearComputerInsert()
     ui->dropDownComputerBuilt->setCurrentIndex(0);
 }
 
+int MainWindow::getSelectedIdPeople()
+{
+    int selectedRow = ui->tablePeople->currentRow();
+    int id = ui->tablePeople->item(selectedRow, 0)->text().toInt();
+    return id;
+}
+
+int MainWindow::getSelectedIdComputer()
+{
+    int selectedRow = ui->tableComputer->currentRow();
+    int id = ui->tableComputer->item(selectedRow, 0)->text().toInt();
+    return id;
+}
+
 void MainWindow::on_tabWidget_tabBarClicked(int index)
 {
     if(index == 0)
@@ -182,8 +196,8 @@ void MainWindow::on_tablePeople_clicked(const QModelIndex &index)
 
 void MainWindow::on_buttonPeopleDelete_clicked()
 {
-    int selectedRow = ui->tablePeople->currentRow();
-    int id = ui->tablePeople->item(selectedRow, 0)->text().toInt();
+
+    int id = getSelectedIdPeople();
 
     theLogic.eraseChosenPeople(id);
     ui->tablePeople->setSortingEnabled(false);
@@ -265,9 +279,7 @@ void MainWindow::on_tableComputer_clicked(const QModelIndex &index)
 
 void MainWindow::on_buttonComputerDelete_clicked()
 {
-    int selectedRow = ui->tableComputer->currentRow();
-    int id = ui->tableComputer->item(selectedRow, 0)->text().toInt();
-
+    int id = getSelectedIdComputer();
     theLogic.eraseChosenComputer(id);
     ui->tableComputer->setSortingEnabled(false);
     displayAllComputers();
