@@ -75,7 +75,15 @@ void MainWindow::on_buttonPeopleAdd_clicked()
     else
         death = qDeath.toUInt();
 
-    if (death < birth && death!= -1)
+    if(birth == 0 || death == 0) //If qBirth or qDeath is not a number, toUInt converts it to 0. So this is an error when text is applied where number is expected.
+    {
+        QMessageBox::warning(this, "Warning","Error!\nYou have to enter a number for\nyear of birth and year of death.");
+        ui->lineEditPeopleBirth->setText("");
+        ui->lineEditPeopleDeath->setText("");
+        return;
+    }
+
+    if (death < birth && death!= constants::notDead) //Error ef dánarár er á undan fæðingarári
     {
         ui->labelPeopleError->setText("Person can't die before they are born!");
         ui->lineEditPeopleDeath->setText("");
@@ -201,6 +209,13 @@ void MainWindow::on_buttonComputerAdd_clicked()
     string type = qType.toStdString();
     int yearCreated = qYearCreated.toUInt();
     bool wasBuilt;
+
+    if(yearCreated == 0) //If yearCreated is not a number, toUInt converts it to 0. So this is an error when text is applied where number is expected.
+    {
+        QMessageBox::warning(this, "Warning","Error!\nYou have to enter a number for\nYear created!");
+        ui->lineEditComputerCreated->setText("");
+        return;
+    }
 
     if (qWasBuilt == "Yes")
         wasBuilt = true;
