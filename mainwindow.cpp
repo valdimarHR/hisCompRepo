@@ -54,7 +54,7 @@ void MainWindow::displayPeople(vector<peopleWithComputers> people)
 
 void MainWindow::on_buttonPeopleAdd_clicked()
 {
-    QString qName = ui ->lineEditPeopleName ->text();
+    QString qName = ui ->lineEditPeopleName->text();
     QString qGender = ui->dropDownPeopleGender->currentText();
     QString qBirth = ui->lineEditPeopleBirth->text();
     QString qDeath = ui->lineEditPeopleDeath->text();
@@ -175,7 +175,7 @@ int MainWindow::getSelectedIdComputer()
     return id;
 }
 
-peopleWithComputers MainWindow::getSelectedPerson()//------------------------------------------------------------------------
+peopleWithComputers MainWindow::getSelectedPerson()//----------------------------------------------------
 {
     int id = getSelectedIdPeople();
     peopleWithComputers temp = theLogic.getPerson(id);
@@ -199,6 +199,7 @@ void MainWindow::on_tabWidget_tabBarClicked(int index)
 void MainWindow::on_tablePeople_clicked(const QModelIndex &index)
 {
     ui->buttonPeopleDelete->setEnabled(true);
+    ui->ButtonPeopleEdit->setEnabled(true);
 }
 
 void MainWindow::on_buttonPeopleDelete_clicked()
@@ -349,4 +350,15 @@ void MainWindow::on_lineEditComputersFilter_textChanged(const QString &inputText
         }
 
     }
+}
+
+void MainWindow::on_ButtonPeopleEdit_clicked()
+{
+    Edit edit(getSelectedPerson());
+    edit.exec();
+    ui->lineEditPeopleFilter->setText("");
+    ui->tablePeople->setSortingEnabled(false);
+    displayAllPeople();
+    ui->tablePeople->setSortingEnabled(true);
+    ui->ButtonPeopleEdit->setEnabled(false);
 }

@@ -6,6 +6,7 @@ people::people()
     gender = "default";
     yearOfBirth = 0;
     yearOfDeath = 0;
+    info = "";
 }
 
 people::people(const string& n, const string& g, const int& b, const int& d)
@@ -73,6 +74,11 @@ int people::getBirth() const
 int people::getDeath() const
 {
     return yearOfDeath;
+}
+
+string people::getInfo() const
+{
+    return info;
 }
 
 bool operator == (const people& person1, const people& person2)

@@ -1,11 +1,12 @@
 #include "edit.h"
 #include "ui_edit.h"
 
-Edit::Edit(QWidget *parent) :
+Edit::Edit(peopleWithComputers selectedPersonFromMain, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Edit)
 {
     ui->setupUi(this);
+    selectedPerson = selectedPersonFromMain;
     displayPerson();
 }
 
@@ -14,18 +15,16 @@ Edit::~Edit()
     delete ui;
 }
 
-Edit::displayPerson()
+void Edit::displayPerson()
 {
-    peopleWithComputers selectedPerson;
-    //selectedPerson = mainwindow.getSelectedPerson();
-    //ui->lineEditName->setText(selectedPerson.p.getName());
+    ui->lineEditName->setText(QString::fromStdString(selectedPerson.p.getName()));
     if(selectedPerson.p.getGender() == "Female")
         ui->comboBoxGender->setCurrentIndex(0);
     else
         ui->comboBoxGender->setCurrentIndex(1);
-    //ui->lineEditBirth->setText(selectedPerson.p.getBirth());
-    //ui->lineEditBirth->setText(selectedPerson.p.getDeath());
-    //ui->textEditInfo->setText(selectedPerson.p.getInfo());
+    ui->lineEditBirth->setText(QString::number(selectedPerson.p.getBirth()));
+    ui->lineEditDeath->setText(QString::number(selectedPerson.p.getDeath()));
+    ui->textEditInfo->setText(QString::fromStdString(selectedPerson.p.getInfo()));
 }
 
 void Edit::on_pushButtonSubmit_clicked()
@@ -34,6 +33,7 @@ void Edit::on_pushButtonSubmit_clicked()
     string gender = ui->comboBoxGender->currentText().toStdString();
     int birth = ui->lineEditBirth->text().toUInt();
     int death = ui->lineEditDeath->text().toUInt();
+    string info = ui->textEditInfo->toPlainText().toStdString();
 
     //bæta við að geti ekki verið tómir reitir
 
@@ -45,8 +45,8 @@ void Edit::on_pushButtonSubmit_clicked()
         return;
     }
 
-    //int currentId = mainwindow.getSelectedId();
-    //TheLogic.editPerson(currentId, name, gender, birth, death);
+    int currentId = selectedPerson.p.getId();
+    TheLogic.editPerson(currentId, name, gender, birth, death, info);
 
-    //this -> done;
+    this->close();
 }

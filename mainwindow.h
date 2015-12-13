@@ -7,6 +7,7 @@
 #include <QtDebug>
 #include "Utilities/constants.h"
 #include <QMessageBox>
+#include "UI/edit.h"
 
 namespace Ui {
 class MainWindow;
@@ -55,6 +56,11 @@ private slots:
     void on_lineEditPeopleFilter_textChanged(const QString &arg1);
 
     void on_lineEditComputersFilter_textChanged(const QString &arg1);
+
+
+    void on_pushButtonPeopleEdit_clicked();
+
+    void on_ButtonPeopleEdit_clicked();
 
 private:
     void displayAllPeople();

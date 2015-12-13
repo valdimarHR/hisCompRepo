@@ -29,6 +29,7 @@ public:
     string getGender() const;
     int getBirth() const;
     int getDeath() const;
+    string getInfo()const;
     /**
      * @brief Overwrites the comparison operator.
      * @returns a bool that is true if the persons have all information the same except id.
@@ -40,6 +41,7 @@ private:
     string gender;
     int yearOfBirth;
     int yearOfDeath;
+    string info;
 };
 
 #endif // PEOPLE_H

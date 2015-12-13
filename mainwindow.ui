@@ -30,7 +30,7 @@
        <enum>Qt::DefaultContextMenu</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tabPeople">
        <attribute name="title">
@@ -242,7 +242,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="ButtonPeopleEdit">
             <property name="enabled">
              <bool>false</bool>
             </property>
@@ -474,7 +474,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_2">
+           <widget class="QPushButton" name="ButtonComputersEdit">
             <property name="enabled">
              <bool>false</bool>
             </property>
@@ -542,8 +542,8 @@
   <tabstop>dropDownComputerBuilt</tabstop>
   <tabstop>buttonComputerAdd</tabstop>
   <tabstop>buttonComputerDelete</tabstop>
-  <tabstop>pushButton</tabstop>
-  <tabstop>pushButton_2</tabstop>
+  <tabstop>ButtonPeopleEdit</tabstop>
+  <tabstop>ButtonComputersEdit</tabstop>
  </tabstops>
  <resources/>
  <connections/>
