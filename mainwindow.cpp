@@ -364,7 +364,8 @@ void MainWindow::on_lineEditComputersFilter_textChanged(const QString &inputText
 
 void MainWindow::on_ButtonPeopleEdit_clicked()
 {
-    Edit edit(getSelectedPerson());
+    peopleWithComputers personToEdit = getSelectedPerson();
+    Edit edit(personToEdit);
     edit.exec();
     ui->lineEditPeopleFilter->setText("");
     ui->tablePeople->setSortingEnabled(false);
@@ -375,6 +376,7 @@ void MainWindow::on_ButtonPeopleEdit_clicked()
 
 void MainWindow::on_ButtonComputersEdit_clicked()
 {
-    editComputers editcomputers;
+    computersWithPeople selectedComputer = getSelectedComputer();
+    editComputers editcomputers(selectedComputer);
     editcomputers.exec();
 }

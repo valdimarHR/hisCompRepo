@@ -31,7 +31,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QComboBox" name="comboBoxGender_2">
+     <widget class="QComboBox" name="comboBoxBuilt">
       <item>
        <property name="text">
         <string>Yes</string>
@@ -72,12 +72,12 @@
     <item>
      <widget class="QLabel" name="labelDeath_2">
       <property name="text">
-       <string>Year Built:</string>
+       <string>Year Created:</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEditDeath_2"/>
+     <widget class="QLineEdit" name="lineEditYearCreated"/>
     </item>
    </layout>
   </widget>
@@ -99,7 +99,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEditBirth_2"/>
+     <widget class="QLineEdit" name="lineEditType"/>
     </item>
    </layout>
   </widget>
@@ -134,7 +134,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEditName_2"/>
+     <widget class="QLineEdit" name="lineEditName"/>
     </item>
    </layout>
   </widget>

@@ -1,7 +1,7 @@
-#include "edit.h"
+﻿#include "edit.h"
 #include "ui_edit.h"
 
-Edit::Edit(peopleWithComputers selectedPersonFromMain, QWidget *parent) :
+Edit::Edit(const peopleWithComputers& selectedPersonFromMain, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Edit)
 {
@@ -46,7 +46,9 @@ void Edit::on_pushButtonSubmit_clicked()
     }
 
     int currentId = selectedPerson.p.getId();
-    TheLogic.editPerson(currentId, name, gender, birth, death, info);
+
+    //logic TheLogic;
+    //TheLogic.editPerson(currentId, name, gender, birth, death, info);
 
     this->close();
 }

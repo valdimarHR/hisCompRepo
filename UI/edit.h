@@ -17,7 +17,7 @@ class Edit : public QDialog
     Q_OBJECT
 
 public:
-    explicit Edit(peopleWithComputers selectedPersonFromMain, QWidget *parent = 0);
+    explicit Edit(const peopleWithComputers &selectedPersonFromMain, QWidget *parent = 0);
     ~Edit();
 
 private slots:
@@ -29,7 +29,6 @@ private slots:
 private:
     Ui::Edit *ui;
     peopleWithComputers selectedPerson;
-    logic TheLogic;
     void displayPerson();
 };
 
