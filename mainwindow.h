@@ -57,9 +57,6 @@ private slots:
 
     void on_lineEditComputersFilter_textChanged(const QString &arg1);
 
-
-    void on_pushButtonPeopleEdit_clicked();
-
     void on_ButtonPeopleEdit_clicked();
 
 private:
