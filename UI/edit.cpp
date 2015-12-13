@@ -50,3 +50,8 @@ void Edit::on_pushButtonSubmit_clicked()
 
     this->close();
 }
+
+void Edit::on_ButtonCancel_clicked()
+{
+    this->close();
+}

@@ -1,73 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Edit</class>
- <widget class="QDialog" name="Edit">
+ <class>editComputers</class>
+ <widget class="QDialog" name="editComputers">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>491</width>
-    <height>329</height>
+    <width>484</width>
+    <height>325</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Edit a scientist</string>
+   <string>Edit a computer</string>
   </property>
-  <widget class="QWidget" name="horizontalLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>231</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayoutName">
-    <item>
-     <widget class="QLabel" name="labelName">
-      <property name="text">
-       <string>Name:</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="lineEditName"/>
-    </item>
-   </layout>
-  </widget>
   <widget class="QWidget" name="horizontalLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>20</y>
+     <x>250</x>
+     <y>60</y>
      <width>211</width>
      <height>31</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="HorizontalLayoutGender">
+   <layout class="QHBoxLayout" name="HorizontalLayoutGender_2">
     <item>
-     <widget class="QLabel" name="labelGender">
+     <widget class="QLabel" name="labelGender_2">
       <property name="text">
-       <string>Gender:</string>
+       <string>Was it built? </string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QComboBox" name="comboBoxGender">
+     <widget class="QComboBox" name="comboBoxGender_2">
       <item>
        <property name="text">
-        <string>Female</string>
+        <string>Yes</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Male</string>
+        <string>No</string>
        </property>
       </item>
      </widget>
     </item>
     <item>
-     <spacer name="horizontalSpacerGender">
+     <spacer name="horizontalSpacerGender_2">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -81,65 +59,55 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="horizontalLayoutWidget_3">
+  <widget class="QWidget" name="horizontalLayoutWidget_4">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>80</y>
+     <x>10</x>
+     <y>60</y>
      <width>231</width>
      <height>31</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayoutBirth">
+   <layout class="QHBoxLayout" name="horizontalLayoutDeath_2">
     <item>
-     <widget class="QLabel" name="labelBirth">
+     <widget class="QLabel" name="labelDeath_2">
       <property name="text">
-       <string>Birth:</string>
+       <string>Year Built:</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEditBirth"/>
+     <widget class="QLineEdit" name="lineEditDeath_2"/>
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="horizontalLayoutWidget_4">
+  <widget class="QWidget" name="horizontalLayoutWidget_3">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>80</y>
-     <width>211</width>
+     <x>240</x>
+     <y>10</y>
+     <width>231</width>
      <height>31</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayoutDeath">
+   <layout class="QHBoxLayout" name="horizontalLayoutBirth_2">
     <item>
-     <widget class="QLabel" name="labelDeath">
+     <widget class="QLabel" name="labelBirth_2">
       <property name="text">
-       <string>Death:</string>
+       <string>Type:</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEditDeath"/>
+     <widget class="QLineEdit" name="lineEditBirth_2"/>
     </item>
    </layout>
-  </widget>
-  <widget class="QTextEdit" name="textEditInfo">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>150</y>
-     <width>451</width>
-     <height>121</height>
-    </rect>
-   </property>
   </widget>
   <widget class="QLabel" name="labelInfo">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>130</y>
+     <x>10</x>
+     <y>120</y>
      <width>47</width>
      <height>13</height>
     </rect>
@@ -148,11 +116,43 @@
     <string>Info:</string>
    </property>
   </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>231</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayoutName_2">
+    <item>
+     <widget class="QLabel" name="labelName_2">
+      <property name="text">
+       <string>Name:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="lineEditName_2"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QTextEdit" name="textEditInfo">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>140</y>
+     <width>451</width>
+     <height>121</height>
+    </rect>
+   </property>
+  </widget>
   <widget class="QPushButton" name="pushButtonSubmit">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>280</y>
+     <x>280</x>
+     <y>270</y>
      <width>91</width>
      <height>31</height>
     </rect>
@@ -164,8 +164,8 @@
   <widget class="QPushButton" name="ButtonCancel">
    <property name="geometry">
     <rect>
-     <x>390</x>
-     <y>290</y>
+     <x>380</x>
+     <y>280</y>
      <width>75</width>
      <height>23</height>
     </rect>

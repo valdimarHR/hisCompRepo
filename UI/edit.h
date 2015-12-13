@@ -24,6 +24,8 @@ private slots:
     void on_pushButtonSubmit_clicked();
 
 
+    void on_ButtonCancel_clicked();
+
 private:
     Ui::Edit *ui;
     peopleWithComputers selectedPerson;

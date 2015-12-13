@@ -292,6 +292,7 @@ void MainWindow::on_dropDownComputerBuilt_activated(const QString &arg1)
 void MainWindow::on_tableComputer_clicked(const QModelIndex &index)
 {
     ui->buttonComputerDelete->setEnabled(true);
+    ui->ButtonComputersEdit->setEnabled(true);
 }
 
 void MainWindow::on_buttonComputerDelete_clicked()
@@ -370,4 +371,10 @@ void MainWindow::on_ButtonPeopleEdit_clicked()
     displayAllPeople();
     ui->tablePeople->setSortingEnabled(true);
     ui->ButtonPeopleEdit->setEnabled(false);
+}
+
+void MainWindow::on_ButtonComputersEdit_clicked()
+{
+    editComputers editcomputers;
+    editcomputers.exec();
 }

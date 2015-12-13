@@ -8,6 +8,7 @@
 #include "Utilities/constants.h"
 #include <QMessageBox>
 #include "UI/edit.h"
+#include "UI/editcomputers.h"
 
 namespace Ui {
 class MainWindow;
@@ -61,6 +62,8 @@ private slots:
     void on_pushButtonPeopleEdit_clicked();
 
     void on_ButtonPeopleEdit_clicked();
+
+    void on_ButtonComputersEdit_clicked();
 
 private:
     void displayAllPeople();
