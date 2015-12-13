@@ -24,12 +24,14 @@ public:
     void setGender(string fgender);
     void setBirth(int fbirth);
     void setDeath(int fdeath);
+    void setInfo(string finfo);
     int getId() const;
     string getName() const;
     string getGender() const;
     int getBirth() const;
     int getDeath() const;
     string getInfo()const;
+
     /**
      * @brief Overwrites the comparison operator.
      * @returns a bool that is true if the persons have all information the same except id.

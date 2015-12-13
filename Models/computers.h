@@ -20,11 +20,13 @@ public:
     void setYearCreated(int year);
     void setType(string ftype);
     void setWasBuilt(bool built);
+    void setInfo(string finfo);
     int getId() const;
     string getName() const;
     int getYearCreated() const;
     string getType() const;
     bool getWasBuilt() const;
+    string getInfo() const;
     /**
      * @brief Overwrites the comparison operator.
      * @returns a bool that is true if the computers have all information the same except id.
@@ -36,6 +38,7 @@ private:
     int yearCreated;
     string type;
     bool wasBuilt;
+    string info;
 };
 
 #endif // COMPUTERS_H

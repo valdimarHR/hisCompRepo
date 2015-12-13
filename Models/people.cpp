@@ -51,6 +51,11 @@ void people::setDeath(int fdeath)
     yearOfDeath = fdeath;
 }
 
+void people::setInfo(string finfo)
+{
+    info = finfo;
+}
+
 int people::getId() const
 {
     return id;

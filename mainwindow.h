@@ -72,6 +72,7 @@ private:
     int getSelectedIdPeople();
     int getSelectedIdComputer();
     peopleWithComputers getSelectedPerson();
+    computersWithPeople getSelectedComputer();
     Ui::MainWindow *ui;
     logic theLogic;
 

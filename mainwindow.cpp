@@ -38,6 +38,7 @@ void MainWindow::displayAllComputers()
 
 void MainWindow::displayPeople(vector<peopleWithComputers> people)
 {
+    ui->tablePeople->setSortingEnabled(false);
     ui->tablePeople->clearContents();
     ui->tablePeople->setRowCount(people.size());
     for(unsigned int row = 0; row < people.size(); row++)
@@ -50,6 +51,7 @@ void MainWindow::displayPeople(vector<peopleWithComputers> people)
         ui->tablePeople->setItem(row,4,new QTableWidgetItem(QString::number(currPerson.p.getDeath())));
         ui->tablePeople->showRow(row);
     }
+    ui->tablePeople->setSortingEnabled(true);
 }
 
 void MainWindow::on_buttonPeopleAdd_clicked()
@@ -129,8 +131,7 @@ void MainWindow::on_dropDownPeopleGender_activated(const QString &arg1)
 
 void MainWindow::displayComputers(vector<computersWithPeople> computers)
 {
-//    ui->tableComputer->setSortingEnabled(false);
-//    ui->tableComputer->setSortingEnabled(true);
+    ui->tableComputer->setSortingEnabled(false);
     ui->tableComputer->clearContents();
     ui->tableComputer->setRowCount(computers.size());
     for(unsigned int row = 0; row < computers.size(); row++)
@@ -143,6 +144,7 @@ void MainWindow::displayComputers(vector<computersWithPeople> computers)
         ui->tableComputer->setItem(row,4,new QTableWidgetItem(QString::number(currComputer.c.getWasBuilt())));
         ui->tableComputer->showRow(row);
     }
+    ui->tableComputer->setSortingEnabled(true);
 }
 
 void MainWindow::clearPeopleInsert()
@@ -179,6 +181,13 @@ peopleWithComputers MainWindow::getSelectedPerson()//---------------------------
 {
     int id = getSelectedIdPeople();
     peopleWithComputers temp = theLogic.getPerson(id);
+    return temp;
+}
+
+computersWithPeople MainWindow::getSelectedComputer()
+{
+    int id = getSelectedIdComputer();
+    computersWithPeople temp = theLogic.getComputer(id);
     return temp;
 }
 

@@ -76,6 +76,7 @@ public:
      */
     bool computerAlreadyOnList(const computers& computer);
     /**
+     * @brief deletePeople sets isDeleted on the person to true with matching id.
      * @brief editPersonDb
      * @param
      * @return
@@ -88,12 +89,12 @@ public:
      */
     bool editComputerDb(const int &id, const string &name, const int &year, const string &type, const bool &wasBuilt);
     /**
-     * @brief deletePeople deletes the person in the SQL DB with matching id.
+     * @brief deletePeople hides the person in the SQL DB with matching id.
      * @param id of the person.
      */
     void deletePeople(const int& id);
     /**
-     * @brief deleteComputer deletes the computer in SQL DB with matching id.
+     * @brief deleteComputer hides the computer in SQL DB with matching id.
      * @param id of the computer.
      */
     void deleteComputer(const int& id);
