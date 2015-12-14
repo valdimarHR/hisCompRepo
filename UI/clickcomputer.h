@@ -15,11 +15,13 @@ class ClickComputer : public QDialog
     Q_OBJECT
 
 public:
-    explicit ClickComputer(const computersWithPeople& selectedComputer, QWidget *parent = 0);
+    explicit ClickComputer(QWidget *parent = 0);
     ~ClickComputer();
 
 private slots:
     //void on_ClickComputer_accepted();
+
+    void on_pushButton_clicked();
 
 private:
     Ui::ClickComputer *ui;

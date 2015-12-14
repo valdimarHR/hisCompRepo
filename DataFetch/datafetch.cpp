@@ -136,11 +136,15 @@ bool dataFetch::computerAlreadyOnList(const computers& computer)
 
 bool dataFetch::editPersonDb(const int &id, const string &name, const string &gender, const int &birth, const int &death, const string &info)
 {
-    QSqlQuery query(db);
-    string comm = "UPDATE Scientists SET name=\"" + name + "\", gender=\"" + gender + "\", birth=" + to_string(birth) + ", death=" + to_string(death) + ", info=\""+ info + "\" WHERE id = " + to_string(id);
-    QString command = QString::fromStdString(comm);
-    query.prepare(command);
-    query.exec();
+//    people person(id, name, gender, birth, death, info);
+//    bool alreadyOnList = personAlreadyOnList(person);
+//    if(alreadyOnList)
+//        return false;
+//    QSqlQuery query(db);
+//    string comm = "UPDATE Scientists SET name=\"" + name + "\", gender=\"" + gender + "\", birth=" + to_string(birth) + ", death=" + to_string(death) + ", info=\""+ info + "\" WHERE id = " + to_string(id);
+//    QString command = QString::fromStdString(comm);
+//    query.prepare(command);
+//    query.exec();
     return true;
 }
 

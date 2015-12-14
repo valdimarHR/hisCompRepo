@@ -5,6 +5,8 @@
 #include <string>
 #include <QMessageBox>
 #include "Processor/logic.h"
+#include <Utilities/constants.h>
+#include <QDate>
 
 #include <QDialog>
 
@@ -17,7 +19,9 @@ class Edit : public QDialog
     Q_OBJECT
 
 public:
-    explicit Edit(const peopleWithComputers &selectedPersonFromMain, QWidget *parent = 0);
+    explicit Edit(QWidget *parent = 0);
+    void setSelectedPerson(peopleWithComputers MSelectedPerson);
+    people getPersonChanged();
     ~Edit();
 
 private slots:
@@ -29,6 +33,7 @@ private slots:
 private:
     Ui::Edit *ui;
     peopleWithComputers selectedPerson;
+    peopleWithComputers personToReturn;
     void displayPerson();
 };
 

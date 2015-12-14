@@ -13,7 +13,7 @@ ClickScientist::~ClickScientist()
     delete ui;
 }
 
-//void ClickScientist::displaySci()
-//{
-
-//}
+void ClickScientist::on_pushButton_clicked()
+{
+    this->close();
+}

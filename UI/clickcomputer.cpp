@@ -1,7 +1,7 @@
 #include "clickcomputer.h"
 #include "ui_clickcomputer.h"
 
-ClickComputer::ClickComputer(const computersWithPeople& selectedComputer, QWidget *parent) :
+ClickComputer::ClickComputer(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ClickComputer)
 {
@@ -11,4 +11,9 @@ ClickComputer::ClickComputer(const computersWithPeople& selectedComputer, QWidge
 ClickComputer::~ClickComputer()
 {
     delete ui;
+}
+
+void ClickComputer::on_pushButton_clicked()
+{
+    this->close();
 }

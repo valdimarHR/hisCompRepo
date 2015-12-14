@@ -31,7 +31,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEditName"/>
+     <widget class="QLineEdit" name="lineEditPeopleName"/>
     </item>
    </layout>
   </widget>
@@ -99,7 +99,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEditBirth"/>
+     <widget class="QLineEdit" name="lineEditPeopleBirth"/>
     </item>
    </layout>
   </widget>
@@ -121,15 +121,11 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEditDeath">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-     </widget>
+     <widget class="QLineEdit" name="lineEditPeopleDeath"/>
     </item>
    </layout>
   </widget>
-  <widget class="QTextEdit" name="textEditInfo">
+  <widget class="QTextEdit" name="textEditPeopleInfo">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -176,6 +172,19 @@
    </property>
    <property name="text">
     <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelEditPeopleError">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>290</y>
+     <width>261</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

@@ -1,7 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDate>
-
+#include "UI/clickscientist.h"
+#include "UI/clickcomputer.h"
 
 using namespace std;
 
@@ -67,7 +68,7 @@ void MainWindow::on_buttonPeopleAdd_clicked()
 
     if (qName.isEmpty()||qGender=="*Select"||qBirth.isEmpty())
     {
-        ui->labelPeopleError->setText("Everything with a * needs to be filled!");
+        ui->labelPeopleError->setText("<span style='color: #FF0000'>Everything with a * needs to be filled!</span");
         return;
     }
 
@@ -81,17 +82,37 @@ void MainWindow::on_buttonPeopleAdd_clicked()
     else
         death = qDeath.toUInt();
 
-    if(birth == 0 || death == 0) //If qBirth or qDeath is not a number, toUInt converts it to 0. So this is an error when text is applied where number is expected.
+    if(birth == 0) //If qBirth or qDeath is not a number, toUInt converts it to 0. So this is an error when text is applied where number is expected.
     {
-        QMessageBox::warning(this, "Warning","Error!\nYou have to enter a number for\nyear of birth and year of death.");
+        QMessageBox::warning(this, "Warning","Error!\nYou have to enter a number for\nyear of birth.");
         ui->lineEditPeopleBirth->setText("");
+        return;
+    }
+
+    if(death == 0) //If qBirth or qDeath is not a number, toUInt converts it to 0. So this is an error when text is applied where number is expected.
+    {
+        QMessageBox::warning(this, "Warning","Error!\nYou have to enter a number for\nyear of death.");
+        ui->lineEditPeopleDeath->setText("");
+        return;
+    }
+
+    if(QDate::currentDate().year() < birth)
+    {
+        QMessageBox::warning(this, "Warning","Error!\nPlease don't put birt in the future!");
+        ui->lineEditPeopleBirth->setText("");
+        return;
+    }
+
+    if(QDate::currentDate().year() < death)
+    {
+        QMessageBox::warning(this, "Warning","Error!\nPlease don't put death in the future!");
         ui->lineEditPeopleDeath->setText("");
         return;
     }
 
     if (death < birth && death!= constants::notDead) //Error ef dánarár er á undan fæðingarári
     {
-        ui->labelPeopleError->setText("Person can't die before they are born!");
+        ui->labelPeopleError->setText("<span style='color: #FF0000'>Person can't die before they are born!</span>");
         ui->lineEditPeopleDeath->setText("");
         return;
     }
@@ -99,7 +120,7 @@ void MainWindow::on_buttonPeopleAdd_clicked()
     bool onList = theLogic.insertPerson(name, gender, birth, death);
     if(onList)
     {
-        ui->labelPeopleError->setText("Person was already on the list.");
+        ui->labelPeopleError->setText("<span style='color: #FF0000'>Person was already on the list.</span>");
         clearPeopleInsert();
         return;
     }
@@ -243,7 +264,7 @@ void MainWindow::on_buttonComputerAdd_clicked()
 
     if (qName.isEmpty()||qType.isEmpty()||qYearCreated.isEmpty()||qWasBuilt=="*Built?")
     {
-        ui->labelComputerError->setText("Everything with a * needs to be filled!");
+        ui->labelComputerError->setText("<span style='color: #FF0000'>Everything with a * needs to be filled!</span>");
         return;
     }
 
@@ -259,6 +280,13 @@ void MainWindow::on_buttonComputerAdd_clicked()
         return;
     }
 
+    if(QDate::currentDate().year() < yearCreated)
+    {
+        QMessageBox::warning(this, "Warning","Error!\nComputer cannot be created in the future!");
+        ui->lineEditComputerCreated->setText("");
+        return;
+    }
+
     if (qWasBuilt == "Yes")
         wasBuilt = true;
     else
@@ -267,7 +295,7 @@ void MainWindow::on_buttonComputerAdd_clicked()
     bool onList = theLogic.insertComputer(name, yearCreated, type, wasBuilt);
     if(onList)
     {
-        ui->labelComputerError->setText("Computer was already on the list.");
+        ui->labelComputerError->setText("<span style='color: #FF0000'>Computer was already on the list.</span>");
         clearComputerInsert();
         return;
     }
@@ -375,14 +403,24 @@ void MainWindow::on_lineEditComputersFilter_textChanged(const QString &inputText
 
 void MainWindow::on_ButtonPeopleEdit_clicked()
 {
-    peopleWithComputers personToEdit = getSelectedPerson();
-    Edit edit(personToEdit);
-    edit.exec();
-    ui->lineEditPeopleFilter->setText("");
-    ui->tablePeople->setSortingEnabled(false);
-    displayAllPeople();
-    ui->tablePeople->setSortingEnabled(true);
-    ui->ButtonPeopleEdit->setEnabled(false);
+    Edit edit;
+    peopleWithComputers personToDisplay = getSelectedPerson();
+    edit.setSelectedPerson(personToDisplay);
+    bool edited = edit.exec();
+    if(edited)
+    {
+        bool success = theLogic.editPerson(edit.getPersonChanged());
+        if(!success)
+        {
+            ui->labelPeopleError->setText("This person was already in the database!");
+            return;
+        }
+        ui->lineEditPeopleFilter->setText("");
+        ui->tablePeople->setSortingEnabled(false);
+        displayAllPeople();
+        ui->tablePeople->setSortingEnabled(true);
+        ui->ButtonPeopleEdit->setEnabled(false);
+    }
 }
 
 void MainWindow::on_ButtonComputersEdit_clicked()
@@ -394,11 +432,15 @@ void MainWindow::on_ButtonComputersEdit_clicked()
 
 void MainWindow::on_tableComputer_doubleClicked(const QModelIndex &index)
 {
-    computersWithPeople selectComputer = getSelectedComputer();
+    //computersWithPeople selectComputer = getSelectedComputer();
+    ClickComputer cc;
+    cc.exec();
     //ClickComputer ClickComputer(selectedComputer);
 }
 
 void MainWindow::on_tablePeople_doubleClicked(const QModelIndex &index)
 {
-
+    peopleWithComputers personInfo = getSelectedPerson();
+    ClickScientist cs;
+    cs.exec();
 }
