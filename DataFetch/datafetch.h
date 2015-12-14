@@ -27,6 +27,7 @@ public:
      * @brief Creates a connection to the database.
      */
     dataFetch();
+    ~dataFetch();
     /**
      * @brief fetchPeople queries the database for people dependant on the search input.
      * @param columnName is column that should be searched in if there is a search requirement.
