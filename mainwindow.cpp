@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QDate>
 
 
 using namespace std;
@@ -48,7 +49,10 @@ void MainWindow::displayPeople(vector<peopleWithComputers> people)
         ui->tablePeople->setItem(row,1,new QTableWidgetItem(QString::fromStdString(currPerson.p.getName())));
         ui->tablePeople->setItem(row,2,new QTableWidgetItem(QString::fromStdString(currPerson.p.getGender())));
         ui->tablePeople->setItem(row,3,new QTableWidgetItem(QString::number(currPerson.p.getBirth())));
-        ui->tablePeople->setItem(row,4,new QTableWidgetItem(QString::number(currPerson.p.getDeath())));
+        if(currPerson.p.getDeath() > 0)
+        {
+            ui->tablePeople->setItem(row,4,new QTableWidgetItem(QString::number(currPerson.p.getDeath())));
+        }
         ui->tablePeople->showRow(row);
     }
     ui->tablePeople->setSortingEnabled(true);
@@ -141,7 +145,14 @@ void MainWindow::displayComputers(vector<computersWithPeople> computers)
         ui->tableComputer->setItem(row,1,new QTableWidgetItem(QString::fromStdString(currComputer.c.getName())));
         ui->tableComputer->setItem(row,2,new QTableWidgetItem(QString::fromStdString(currComputer.c.getType())));
         ui->tableComputer->setItem(row,3,new QTableWidgetItem(QString::number(currComputer.c.getYearCreated())));
-        ui->tableComputer->setItem(row,4,new QTableWidgetItem(QString::number(currComputer.c.getWasBuilt())));
+        if(currComputer.c.getWasBuilt() > 0)
+        {
+            ui->tableComputer->setItem(row,4,new QTableWidgetItem("Yes"));
+        }
+        else
+        {
+            ui->tableComputer->setItem(row,4,new QTableWidgetItem("No"));
+        }
         ui->tableComputer->showRow(row);
     }
     ui->tableComputer->setSortingEnabled(true);
