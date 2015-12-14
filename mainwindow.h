@@ -10,6 +10,8 @@
 #include "UI/edit.h"
 #include "UI/editcomputers.h"
 #include <QDate>
+#include "UI/clickcomputer.h"
+#include "UI/clickscientist.h"
 
 namespace Ui {
 class MainWindow;
@@ -62,6 +64,10 @@ private slots:
     void on_ButtonPeopleEdit_clicked();
 
     void on_ButtonComputersEdit_clicked();
+
+    void on_tableComputer_doubleClicked(const QModelIndex &index);
+
+    void on_tablePeople_doubleClicked(const QModelIndex &index);
 
 private:
     void displayAllPeople();
