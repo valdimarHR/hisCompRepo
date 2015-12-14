@@ -82,10 +82,16 @@ void MainWindow::on_buttonPeopleAdd_clicked()
     else
         death = qDeath.toUInt();
 
-    if(birth == 0 || death == 0) //If qBirth or qDeath is not a number, toUInt converts it to 0. So this is an error when text is applied where number is expected.
+    if(birth == 0) //If qBirth or qDeath is not a number, toUInt converts it to 0. So this is an error when text is applied where number is expected.
     {
-        QMessageBox::warning(this, "Warning","Error!\nYou have to enter a number for\nyear of birth and year of death.");
+        QMessageBox::warning(this, "Warning","Error!\nYou have to enter a number for\nyear of birth.");
         ui->lineEditPeopleBirth->setText("");
+        return;
+    }
+
+    if(death == 0) //If qBirth or qDeath is not a number, toUInt converts it to 0. So this is an error when text is applied where number is expected.
+    {
+        QMessageBox::warning(this, "Warning","Error!\nYou have to enter a number for\nyear of death.");
         ui->lineEditPeopleDeath->setText("");
         return;
     }
