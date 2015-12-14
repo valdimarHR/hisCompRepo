@@ -1,7 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDate>
-
+#include "UI/clickscientist.h"
+#include "UI/clickcomputer.h"
 
 using namespace std;
 
@@ -394,11 +395,15 @@ void MainWindow::on_ButtonComputersEdit_clicked()
 
 void MainWindow::on_tableComputer_doubleClicked(const QModelIndex &index)
 {
-    computersWithPeople selectComputer = getSelectedComputer();
+    //computersWithPeople selectComputer = getSelectedComputer();
+    ClickComputer cc;
+    cc.exec();
     //ClickComputer ClickComputer(selectedComputer);
 }
 
 void MainWindow::on_tablePeople_doubleClicked(const QModelIndex &index)
 {
-
+    peopleWithComputers personInfo = getSelectedPerson();
+    ClickScientist cs;
+    cs.exec();
 }

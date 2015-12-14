@@ -24,6 +24,8 @@ private slots:
     //void on_ClickScientist_accepted();
 
 
+    void on_pushButton_clicked();
+
 private:
     Ui::ClickScientist *ui;
 };
