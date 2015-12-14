@@ -125,13 +125,13 @@ bool logic::insertConnection(const int& sid, const int& cid)
 
 peopleWithComputers logic::getPerson(const int &id)
 {
-    vector<peopleWithComputers> p = findPeople("s_id",to_string(id));
+    vector<peopleWithComputers> p = theData.fetchPeople("s_id",to_string(id));
     return p[0];
 }
 
 computersWithPeople logic::getComputer(const int &id)
 {
-    vector<computersWithPeople> c = findComputer("c_id",to_string(id));
+    vector<computersWithPeople> c = theData.fetchComputers("c_id",to_string(id));
     return c[0];
 }
 

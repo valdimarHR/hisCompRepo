@@ -213,6 +213,7 @@ peopleWithComputers MainWindow::getSelectedPerson()//---------------------------
 {
     int id = getSelectedIdPeople();
     peopleWithComputers temp = theLogic.getPerson(id);
+    qDebug() << temp.p.getId() << endl;
     return temp;
 }
 
