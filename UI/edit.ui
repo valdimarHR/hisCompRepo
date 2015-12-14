@@ -121,7 +121,11 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEditDeath"/>
+     <widget class="QLineEdit" name="lineEditDeath">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

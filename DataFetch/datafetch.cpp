@@ -4,14 +4,23 @@ dataFetch::dataFetch()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
     QFile dbfile;
-    if(!dbfile.exists(constants::NAME_OF_DATABASE)) createDatabase();
+    if(!dbfile.exists(constants::NAME_OF_DATABASE))
+    {
+        createDatabase();
+        return;
+    }
     QString dbName = constants::NAME_OF_DATABASE;
     db.setDatabaseName(dbName);
+    db.open();
+}
+
+dataFetch::~dataFetch()
+{
+    db.close();
 }
 
 vector<peopleWithComputers> dataFetch::fetchPeople(string columnName, string searchString)
 {
-    db.open();
     QSqlQuery query(db);
 
     QString command = "SELECT * FROM Scientists AS S "
@@ -34,7 +43,6 @@ vector<peopleWithComputers> dataFetch::fetchPeople(string columnName, string sea
 
     vector<peopleWithComputers> pepVector = convertPeopleTable(query);
 
-    db.close();
 
     return pepVector;
 
@@ -42,7 +50,6 @@ vector<peopleWithComputers> dataFetch::fetchPeople(string columnName, string sea
 
 vector<computersWithPeople> dataFetch::fetchComputers(string columnName, string seartchString)
 {
-    db.open();
     QSqlQuery query(db);
 
     QString command = "SELECT * FROM Computers AS C "
@@ -56,7 +63,6 @@ vector<computersWithPeople> dataFetch::fetchComputers(string columnName, string 
 
     vector<computersWithPeople> comVector = convertComputersTable(query);
 
-    db.close();
 
     return comVector;
 
@@ -64,7 +70,6 @@ vector<computersWithPeople> dataFetch::fetchComputers(string columnName, string 
 
 bool dataFetch::alreadyConnnected(const int sid, const int cid)
 {
-    db.open();
 
     QSqlQuery query(db);
 
@@ -79,14 +84,12 @@ bool dataFetch::alreadyConnnected(const int sid, const int cid)
         if ((sid == tableSid)&&(cid == tableCid))
             connected = true;
     }
-    db.close();
 
     return connected;
 }
 
 bool dataFetch::personAlreadyOnList(const people& person)
 {
-    db.open();
 
     QSqlQuery query(db);
 
@@ -105,13 +108,11 @@ bool dataFetch::personAlreadyOnList(const people& person)
         if (personCheck == person)
             return onList = true;
     }
-    db.close();
     return onList;
 }
 
 bool dataFetch::computerAlreadyOnList(const computers& computer)
 {
-    db.open();
 
     QSqlQuery query(db);
 
@@ -130,31 +131,26 @@ bool dataFetch::computerAlreadyOnList(const computers& computer)
         if (computerCheck == computer)
             return onList = true;
     }
-    db.close();
     return onList;
 }
 
 bool dataFetch::editPersonDb(const int &id, const string &name, const string &gender, const int &birth, const int &death, const string &info)
 {
-    db.open();
     QSqlQuery query(db);
     string comm = "UPDATE Scientists SET name=\"" + name + "\", gender=\"" + gender + "\", birth=" + to_string(birth) + ", death=" + to_string(death) + ", info=\""+ info + "\" WHERE id = " + to_string(id);
     QString command = QString::fromStdString(comm);
     query.prepare(command);
     query.exec();
-    db.close();
     return true;
 }
 
 bool dataFetch::editComputerDb(const int &id, const string &name, const int &year, const string &type, const bool &wasBuilt)
 {
-    db.open();
     QSqlQuery query(db);
     string comm = "UPDATE Computers SET name=\"" + name + "\", yearCreated=" + to_string(year) + ", type=\"" + type + ", wasbuilt=" + to_string(wasBuilt) + " WHERE id = " + to_string(id);
     QString command = QString::fromStdString(comm);
     query.prepare(command);
     query.exec();
-    db.close();
     return true;
 }
 
@@ -275,7 +271,6 @@ vector<computersWithPeople> dataFetch::convertComputersTable(QSqlQuery& query)
 void dataFetch::insertPersonToDatabase(const people& a)
 {
 
-    db.open();
     QSqlQuery query(db);
 
     int birth = a.getBirth();
@@ -289,14 +284,12 @@ void dataFetch::insertPersonToDatabase(const people& a)
     query.bindValue(":birth", birth);
     query.bindValue(":death", death );
     query.exec();
-    db.close();
 }
 
 
 void dataFetch::insertComputerToDatabase(const computers& c)
 {
 
-    db.open();
     QSqlQuery query(db);
 
     string name = c.getName();
@@ -311,24 +304,20 @@ void dataFetch::insertComputerToDatabase(const computers& c)
     query.bindValue(":type", QString::fromStdString(type));
     query.bindValue(":wasBuilt", wasBuilt );
     query.exec();
-    db.close();
 }
 
 void dataFetch::insertConnectionToDatabase(const int& sid, const int& cid)
 {
-    db.open();
     QSqlQuery query(db);
 
     query.prepare("INSERT INTO Invents (sid, cid) VALUES (:sid, :cid)");
     query.bindValue(":sid", sid);
     query.bindValue(":cid", cid);
     query.exec();
-    db.close();
 }
 
 void dataFetch::deletePeople(const int& id)
 {
-    db.open();
     QSqlQuery query(db);
 
     string comm = "UPDATE Scientists SET isDeleted = 1 WHERE id = " + to_string(id);
@@ -343,12 +332,10 @@ void dataFetch::deletePeople(const int& id)
 //    query.prepare(command2);
 //    query.exec();
 
-    db.close();
 }
 
 void dataFetch::deleteComputer(const int& id)
 {
-    db.open();
     QSqlQuery query(db);
 
     string comm = "UPDATE Computers SET isDeleted = 1 WHERE id = " + to_string(id);
@@ -361,25 +348,21 @@ void dataFetch::deleteComputer(const int& id)
 //    query.prepare(command2);
 //    query.exec();
 
-    db.close();
 }
 
 bool dataFetch::deleteConnectionDb(const int &sid, const int &cid)
 {
-    db.open();
     QSqlQuery query(db);
 
-    string comm = "DELETE FROM Invents WHERE sid = " + to_string(sid) + " AND cid = " + to_string(cid);
+    string comm = "UPDATE Invents SET isDeleted = 1 WHERE sid = " + to_string(sid) + " AND cid = " + to_string(cid);
     QString command = QString::fromStdString(comm);
     query.prepare(command);
     query.exec();
-    db.close();
     return true;
 }
 
 void dataFetch::eraseEverything()
 {
-    db.open();
     QSqlQuery query(db);
 
     query.prepare("DELETE FROM Scientists");
@@ -391,7 +374,6 @@ void dataFetch::eraseEverything()
     query.prepare("DELETE FROM Invents");
     query.exec();
 
-    db.close();
 }
 
 void dataFetch::createDatabase()
@@ -403,18 +385,18 @@ void dataFetch::createDatabase()
     query.prepare("CREATE TABLE 'Computers' ('id' INTEGER PRIMARY KEY  "
                   "NOT NULL ,'name' VARCHAR NOT NULL ,'yearCreated' "
                   "INTEGER NOT NULL ,'type' VARCHAR NOT NULL ,"
-                  "'wasBuilt' BOOL NOT NULL  DEFAULT (null) )");
+                  "'wasBuilt' BOOL NOT NULL  DEFAULT (null), 'info' TEXT, 'isDeleted' BOOL NOT NULL DEFAULT 0)");
     query.exec();
 
     query.prepare("CREATE TABLE 'Scientists' ('id' INTEGER PRIMARY KEY  AUTOINCREMENT  "
                   "NOT NULL , 'name' VARCHAR NOT NULL , 'gender' VARCHAR NOT NULL , "
-                  "'birth' INTEGER NOT NULL , 'death' INTEGER)");
+                  "'birth' INTEGER NOT NULL , 'death' INTEGER, 'info' TEXT, 'isDeleted' BOOL NOT NULL  DEFAULT 0)");
     query.exec();
 
-    query.prepare("CREATE TABLE Invents(sid INTEGER,cid INTEGER,"
+    query.prepare("CREATE TABLE Invents(sid INTEGER,cid INTEGER, "
+                  "'isDeleted' BOOL NOT NULL  DEFAULT 0, "
                   "FOREIGN KEY (sid) REFERENCES Scientists(id),"
                   "FOREIGN KEY (cid) REFERENCES Computers(id) "
                   "PRIMARY KEY (sid, cid))");
     query.exec();
-    db.close();
 }
