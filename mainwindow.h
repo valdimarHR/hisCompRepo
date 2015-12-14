@@ -9,6 +9,7 @@
 #include <QMessageBox>
 #include "UI/edit.h"
 #include "UI/editcomputers.h"
+#include <QDate>
 
 namespace Ui {
 class MainWindow;

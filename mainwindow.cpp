@@ -85,6 +85,15 @@ void MainWindow::on_buttonPeopleAdd_clicked()
         return;
     }
 
+    if(QDate::currentDate().year() < birth || QDate::currentDate().year() < death)
+    {
+        QMessageBox::warning(this, "Warning","Error!\nPlease don't put birt or death in the future!");
+        ui->lineEditComputerCreated->setText("");
+        ui->lineEditPeopleBirth->setText("");
+        ui->lineEditPeopleDeath->setText("");
+        return;
+    }
+
     if (death < birth && death!= constants::notDead) //Error ef dánarár er á undan fæðingarári
     {
         ui->labelPeopleError->setText("Person can't die before they are born!");
@@ -248,6 +257,13 @@ void MainWindow::on_buttonComputerAdd_clicked()
         return;
     }
 
+    if(QDate::currentDate().year() < yearCreated)
+    {
+        QMessageBox::warning(this, "Warning","Error!\nComputer cannot be created in the future!");
+        ui->lineEditComputerCreated->setText("");
+        return;
+    }
+
     if (qWasBuilt == "Yes")
         wasBuilt = true;
     else
@@ -364,14 +380,24 @@ void MainWindow::on_lineEditComputersFilter_textChanged(const QString &inputText
 
 void MainWindow::on_ButtonPeopleEdit_clicked()
 {
-    peopleWithComputers personToEdit = getSelectedPerson();
-    Edit edit(personToEdit);
-    edit.exec();
-    ui->lineEditPeopleFilter->setText("");
-    ui->tablePeople->setSortingEnabled(false);
-    displayAllPeople();
-    ui->tablePeople->setSortingEnabled(true);
-    ui->ButtonPeopleEdit->setEnabled(false);
+    Edit edit;
+    peopleWithComputers personToDisplay = getSelectedPerson();
+    edit.setSelectedPerson(personToDisplay);
+    bool edited = edit.exec();
+    if(edited)
+    {
+        bool success = theLogic.editPerson(edit.getPersonChanged());
+        if(!success)
+        {
+            ui->labelPeopleError->setText("This person was already in the database!");
+            return;
+        }
+        ui->lineEditPeopleFilter->setText("");
+        ui->tablePeople->setSortingEnabled(false);
+        displayAllPeople();
+        ui->tablePeople->setSortingEnabled(true);
+        ui->ButtonPeopleEdit->setEnabled(false);
+    }
 }
 
 void MainWindow::on_ButtonComputersEdit_clicked()
