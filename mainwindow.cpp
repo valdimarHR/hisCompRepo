@@ -67,7 +67,7 @@ void MainWindow::on_buttonPeopleAdd_clicked()
 
     if (qName.isEmpty()||qGender=="*Select"||qBirth.isEmpty())
     {
-        ui->labelPeopleError->setText("Everything with a * needs to be filled!");
+        ui->labelPeopleError->setText("<span style='color: #FF0000'>Everything with a * needs to be filled!</span");
         return;
     }
 
@@ -91,7 +91,7 @@ void MainWindow::on_buttonPeopleAdd_clicked()
 
     if (death < birth && death!= constants::notDead) //Error ef dánarár er á undan fæðingarári
     {
-        ui->labelPeopleError->setText("Person can't die before they are born!");
+        ui->labelPeopleError->setText("<span style='color: #FF0000'>Person can't die before they are born!</span>");
         ui->lineEditPeopleDeath->setText("");
         return;
     }
@@ -99,7 +99,7 @@ void MainWindow::on_buttonPeopleAdd_clicked()
     bool onList = theLogic.insertPerson(name, gender, birth, death);
     if(onList)
     {
-        ui->labelPeopleError->setText("Person was already on the list.");
+        ui->labelPeopleError->setText("<span style='color: #FF0000'>Person was already on the list.</span>");
         clearPeopleInsert();
         return;
     }
@@ -243,7 +243,7 @@ void MainWindow::on_buttonComputerAdd_clicked()
 
     if (qName.isEmpty()||qType.isEmpty()||qYearCreated.isEmpty()||qWasBuilt=="*Built?")
     {
-        ui->labelComputerError->setText("Everything with a * needs to be filled!");
+        ui->labelComputerError->setText("<span style='color: #FF0000'>Everything with a * needs to be filled!</span>");
         return;
     }
 
@@ -267,7 +267,7 @@ void MainWindow::on_buttonComputerAdd_clicked()
     bool onList = theLogic.insertComputer(name, yearCreated, type, wasBuilt);
     if(onList)
     {
-        ui->labelComputerError->setText("Computer was already on the list.");
+        ui->labelComputerError->setText("<span style='color: #FF0000'>Computer was already on the list.</span>");
         clearComputerInsert();
         return;
     }
