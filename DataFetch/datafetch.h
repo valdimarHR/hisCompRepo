@@ -41,7 +41,7 @@ public:
      * @param seartchString is the string that is beeing looked for in the search column.
      * @return a vector with computers that matched the search requirements.
      */
-    vector<computersWithPeople> fetchComputers(string columnName, string seartchString);
+    vector<computersWithPeople> fetchComputers(string columnName, string searchString);
     /**
      * @brief insertPersonToDatabase inserts a person into the database.
      * @param a is the people object that holds the information that will be added to the database.
@@ -88,7 +88,7 @@ public:
      * @param
      * @return
      */
-    bool editComputerDb(const int &id, const string &name, const int &year, const string &type, const bool &wasBuilt);
+    bool editComputerDb(const int &id, const string &name, const int &year, const string &type, const bool &wasBuilt, const string &info);
     /**
      * @brief deletePeople hides the person in the SQL DB with matching id.
      * @param id of the person.

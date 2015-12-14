@@ -7,7 +7,7 @@ logic::logic()
 
 vector<peopleWithComputers> logic::printerSortPeople(int orderBy, int ascending)
 {
-    vector<peopleWithComputers> sortedVector = theData.fetchPeople("name", "");
+    vector<peopleWithComputers> sortedVector = theData.fetchPeople("sName", "");
 
     // Here is a sorting switch dependant on the user input "orderBy" and "ascending".
     // The switch uses sort() with 3 inputs. Start of sort, end of sort,
@@ -51,7 +51,7 @@ vector<peopleWithComputers> logic::printerSortPeople(int orderBy, int ascending)
 
 vector<computersWithPeople> logic::printerSortComputers(int orderBy, int ascending)
 {
-    vector<computersWithPeople> sortedVector = theData.fetchComputers("name", "");
+    vector<computersWithPeople> sortedVector = theData.fetchComputers("cName", "");
 
     // Here is a sorting switch dependant on the user input "orderBy" and "ascending".
     // The switch uses sort() with 3 inputs. Start of sort, end of sort,
@@ -125,13 +125,13 @@ bool logic::insertConnection(const int& sid, const int& cid)
 
 peopleWithComputers logic::getPerson(const int &id)
 {
-    vector<peopleWithComputers> p = findPeople("id",to_string(id));
+    vector<peopleWithComputers> p = findPeople("s_id",to_string(id));
     return p[0];
 }
 
 computersWithPeople logic::getComputer(const int &id)
 {
-    vector<computersWithPeople> c = findComputer("id",to_string(id));
+    vector<computersWithPeople> c = findComputer("c_id",to_string(id));
     return c[0];
 }
 
@@ -160,9 +160,9 @@ bool logic::editPerson(const people& personCanged)
         return false;
 }
 
-bool logic::editComputer(const int &id, const string &name, const int &year, const string &type, const bool &wasBuilt)
+bool logic::editComputer(const int &id, const string &name, const int &year, const string &type, const bool &wasBuilt, const string &info)
 {
-    bool success = theData.editComputerDb(id,name,year,type,wasBuilt);
+    bool success = theData.editComputerDb(id,name,year,type,wasBuilt, info);
     if (success)
         return true;
     else

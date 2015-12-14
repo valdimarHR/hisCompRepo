@@ -26,8 +26,8 @@ vector<peopleWithComputers> dataFetch::fetchPeople(string columnName, string sea
     QString command = "SELECT * FROM Scientists AS S "
             "LEFT JOIN (SELECT * FROM Computers AS C "
             "LEFT JOIN Invents AS I "
-            "ON I.cid = C.id) AS T "
-            "ON T.sid = S.id WHERE S." + QString::fromStdString(columnName) + " LIKE ";
+            "ON I.cid = C.c_id) AS T "
+            "ON T.sid = S.s_id WHERE S." + QString::fromStdString(columnName) + " LIKE ";
     if(searchString != "male" && searchString != "Male")
     {
         command += "'%" + QString::fromStdString(searchString) + "%'";
@@ -55,8 +55,8 @@ vector<computersWithPeople> dataFetch::fetchComputers(string columnName, string 
     QString command = "SELECT * FROM Computers AS C "
             "LEFT JOIN (SELECT * FROM Scientists AS S "
             "LEFT JOIN Invents AS I "
-            "ON I.sid = S.id) AS T "
-            "ON T.cid = C.id WHERE C." + QString::fromStdString(columnName) + " LIKE '%" + QString::fromStdString(seartchString) + "%'";
+            "ON I.sid = S.s_id) AS T "
+            "ON T.cid = C.c_id WHERE C." + QString::fromStdString(columnName) + " LIKE '%" + QString::fromStdString(seartchString) + "%'";
 
     query.prepare(command);
     query.exec();
@@ -99,7 +99,7 @@ bool dataFetch::personAlreadyOnList(const people& person)
 
     while(query.next())
     {
-        string name = query.value("name").toString().toStdString();
+        string name = query.value("sName").toString().toStdString();
         string gender = query.value("gender").toString().toStdString();
         int birth = query.value("birth").toUInt();
         int death = query.value("death").toUInt();
@@ -122,7 +122,7 @@ bool dataFetch::computerAlreadyOnList(const computers& computer)
 
     while(query.next())
     {
-        string name = query.value("name").toString().toStdString();
+        string name = query.value("cName").toString().toStdString();
         int yearCreated = query.value("yearCreated").toUInt();
         string type = query.value("type").toString().toStdString();
         bool wasBuilt = query.value("wasBuilt").toUInt();
@@ -136,22 +136,22 @@ bool dataFetch::computerAlreadyOnList(const computers& computer)
 
 bool dataFetch::editPersonDb(const int &id, const string &name, const string &gender, const int &birth, const int &death, const string &info)
 {
-//    people person(id, name, gender, birth, death, info);
-//    bool alreadyOnList = personAlreadyOnList(person);
-//    if(alreadyOnList)
-//        return false;
-//    QSqlQuery query(db);
-//    string comm = "UPDATE Scientists SET name=\"" + name + "\", gender=\"" + gender + "\", birth=" + to_string(birth) + ", death=" + to_string(death) + ", info=\""+ info + "\" WHERE id = " + to_string(id);
-//    QString command = QString::fromStdString(comm);
-//    query.prepare(command);
-//    query.exec();
+    people person(id, name, gender, birth, death, info);
+    bool alreadyOnList = personAlreadyOnList(person);
+    if(alreadyOnList)
+        return false;
+    QSqlQuery query(db);
+    string comm = "UPDATE Scientists SET sName=\"" + name + "\", gender=\"" + gender + "\", birth=" + to_string(birth) + ", death=" + to_string(death) + ", sInfo=\""+ info + "\" WHERE s_id = " + to_string(id);
+    QString command = QString::fromStdString(comm);
+    query.prepare(command);
+    query.exec();
     return true;
 }
 
-bool dataFetch::editComputerDb(const int &id, const string &name, const int &year, const string &type, const bool &wasBuilt)
+bool dataFetch::editComputerDb(const int &id, const string &name, const int &year, const string &type, const bool &wasBuilt, const string &info)
 {
     QSqlQuery query(db);
-    string comm = "UPDATE Computers SET name=\"" + name + "\", yearCreated=" + to_string(year) + ", type=\"" + type + ", wasbuilt=" + to_string(wasBuilt) + " WHERE id = " + to_string(id);
+    string comm = "UPDATE Computers SET cName=\"" + name + "\", yearCreated=" + to_string(year) + ", type=\"" + type + ", wasbuilt=" + to_string(wasBuilt) + ", cInfo=\""+ info + "\" WHERE c_id = " + to_string(id);
     QString command = QString::fromStdString(comm);
     query.prepare(command);
     query.exec();
@@ -164,27 +164,33 @@ vector<peopleWithComputers> dataFetch::convertPeopleTable(QSqlQuery& query)
     int lastId = -1;
     while(query.next())
     {
-        bool isDeleted = query.value("isDeleted").toBool();
+        bool isDeleted = query.value("sIsDeleted").toBool();
         
         if (isDeleted) 
         {
             continue;
         }
         
-        int currentPersonId = query.value(0).toUInt();
+        int currentPersonId = query.value("s_id").toUInt();
 
         computers comp;
-        if(query.value(5).toUInt() != 0)
+        if(query.value("c_id").toUInt() != 0)
         {
-            string Cname = query.value(6).toString().toStdString();
+            bool connectionDeleted = query.value("isDeleted").toBool();
+            if(connectionDeleted) continue;
+            int Cid = query.value("c_id").toUInt();
+            string Cname = query.value("cName").toString().toStdString();
             int CyearCreated = query.value("yearCreated").toUInt();
             string Ctype = query.value("type").toString().toStdString();
             bool CwasBuilt = query.value("wasBuilt").toUInt();
+            string Cinfo = query.value("cInfo").toString().toStdString();
 
+            comp.setId(Cid);
             comp.setName(Cname);
             comp.setYearCreated(CyearCreated);
             comp.setType(Ctype);
             comp.setWasBuilt(CwasBuilt);
+            comp.setInfo(Cinfo);
 
             if(currentPersonId == lastId)
             {
@@ -193,11 +199,11 @@ vector<peopleWithComputers> dataFetch::convertPeopleTable(QSqlQuery& query)
             }
         }
 
-        string Pname = query.value(1).toString().toStdString();
+        string Pname = query.value("sName").toString().toStdString();
         string Pgender = query.value("gender").toString().toStdString();
         int Pborn = query.value("birth").toUInt();
         int Pdeath = query.value("death").toUInt();
-        string Pinfo = query.value("info").toString().toStdString();
+        string Pinfo = query.value("sInfo").toString().toStdString();
 
         peopleWithComputers per;
         per.p.setName(Pname);
@@ -221,27 +227,33 @@ vector<computersWithPeople> dataFetch::convertComputersTable(QSqlQuery& query)
     int lastId = -1;
     while(query.next())
     {
-        bool isDeleted = query.value("isDeleted").toBool();
+        bool isDeleted = query.value("cIsDeleted").toBool();
 
         if (isDeleted)
         {
             continue;
         }
 
-        int currentComputerId = query.value(0).toUInt();
+        int currentComputerId = query.value("c_id").toUInt();
 
         people per;
-        if(query.value(5).toUInt() != 0)
+        if(query.value("s_id").toUInt() != 0)
         {
-            string Pname = query.value(6).toString().toStdString();
+            bool connectionDeleted = query.value("isDeleted").toBool();
+            if(connectionDeleted) continue;
+            int Pid = query.value("s_id").toUInt();
+            string Pname = query.value("sName").toString().toStdString();
             string Pgender = query.value("gender").toString().toStdString();
             int Pborn = query.value("birth").toUInt();
             int Pdeath = query.value("death").toUInt();
+            string Pinfo = query.value("sInfo").toString().toStdString();
 
+            per.setId(Pid);
             per.setName(Pname);
             per.setGender(Pgender);
             per.setBirth(Pborn);
             per.setDeath(Pdeath);
+            per.setInfo(Pinfo);
 
             if(currentComputerId == lastId)
             {
@@ -251,11 +263,11 @@ vector<computersWithPeople> dataFetch::convertComputersTable(QSqlQuery& query)
         }
 
         computersWithPeople comp;
-        string Cname = query.value(1).toString().toStdString();
+        string Cname = query.value("cName").toString().toStdString();
         int CyearCreated = query.value("yearCreated").toUInt();
         string Ctype = query.value("type").toString().toStdString();
         bool CwasBuilt = query.value("wasBuilt").toUInt();
-        string Cinfo = query.value("info").toString().toStdString();
+        string Cinfo = query.value("cInfo").toString().toStdString();
 
         comp.c.setId(currentComputerId);
         comp.c.setName(Cname);
@@ -282,7 +294,7 @@ void dataFetch::insertPersonToDatabase(const people& a)
     string gender = a.getGender();
     string name = a.getName();
 
-    query.prepare("INSERT INTO Scientists (name, gender, death, birth) VALUES (:name, :gender, :death, :birth)");
+    query.prepare("INSERT INTO Scientists (sName, gender, death, birth) VALUES (:name, :gender, :death, :birth)");
     query.bindValue(":name", QString::fromStdString(name));
     query.bindValue(":gender", QString::fromStdString(gender));
     query.bindValue(":birth", birth);
@@ -302,7 +314,7 @@ void dataFetch::insertComputerToDatabase(const computers& c)
     bool wasBuilt = c.getWasBuilt();
 
 
-    query.prepare("INSERT INTO Computers (name, yearCreated, type, wasBuilt) VALUES (:name, :yearCreated, :type, :wasBuilt)");
+    query.prepare("INSERT INTO Computers (cName, yearCreated, type, wasBuilt) VALUES (:name, :yearCreated, :type, :wasBuilt)");
     query.bindValue(":name", QString::fromStdString(name));
     query.bindValue(":yearCreated", yearCreated);
     query.bindValue(":type", QString::fromStdString(type));
@@ -324,17 +336,10 @@ void dataFetch::deletePeople(const int& id)
 {
     QSqlQuery query(db);
 
-    string comm = "UPDATE Scientists SET isDeleted = 1 WHERE id = " + to_string(id);
+    string comm = "UPDATE Scientists SET sIsDeleted = 1 WHERE s_id = " + to_string(id);
     QString command = QString::fromStdString(comm);
     query.prepare(command);
     query.exec();
-    
-    
-
-//    string comm2 = "DELETE FROM Invents WHERE sid = " +to_string(id);
-//    QString command2 = QString::fromStdString(comm2);
-//    query.prepare(command2);
-//    query.exec();
 
 }
 
@@ -342,15 +347,10 @@ void dataFetch::deleteComputer(const int& id)
 {
     QSqlQuery query(db);
 
-    string comm = "UPDATE Computers SET isDeleted = 1 WHERE id = " + to_string(id);
+    string comm = "UPDATE Computers SET cIsDeleted = 1 WHERE c_id = " + to_string(id);
     QString command = QString::fromStdString(comm);
     query.prepare(command);
     query.exec();
-
-//    string comm2 = "DELETE FROM Invents WHERE cid = " + to_string(id);
-//    QString command2 = QString::fromStdString(comm2);
-//    query.prepare(command2);
-//    query.exec();
 
 }
 
@@ -386,15 +386,15 @@ void dataFetch::createDatabase()
     db.open();
     QSqlQuery query(db);
 
-    query.prepare("CREATE TABLE 'Computers' ('id' INTEGER PRIMARY KEY  "
-                  "NOT NULL ,'name' VARCHAR NOT NULL ,'yearCreated' "
+    query.prepare("CREATE TABLE 'Computers' ('c_id' INTEGER PRIMARY KEY  "
+                  "NOT NULL ,'cName' VARCHAR NOT NULL ,'yearCreated' "
                   "INTEGER NOT NULL ,'type' VARCHAR NOT NULL ,"
-                  "'wasBuilt' BOOL NOT NULL  DEFAULT (null), 'info' TEXT, 'isDeleted' BOOL NOT NULL DEFAULT 0)");
+                  "'wasBuilt' BOOL NOT NULL  DEFAULT (null), 'cInfo' TEXT, 'cIsDeleted' BOOL NOT NULL DEFAULT 0)");
     query.exec();
 
-    query.prepare("CREATE TABLE 'Scientists' ('id' INTEGER PRIMARY KEY  AUTOINCREMENT  "
-                  "NOT NULL , 'name' VARCHAR NOT NULL , 'gender' VARCHAR NOT NULL , "
-                  "'birth' INTEGER NOT NULL , 'death' INTEGER, 'info' TEXT, 'isDeleted' BOOL NOT NULL  DEFAULT 0)");
+    query.prepare("CREATE TABLE 'Scientists' ('s_id' INTEGER PRIMARY KEY  AUTOINCREMENT  "
+                  "NOT NULL , 'sName' VARCHAR NOT NULL , 'gender' VARCHAR NOT NULL , "
+                  "'birth' INTEGER NOT NULL , 'death' INTEGER, 'sInfo' TEXT, 'sIsDeleted' BOOL NOT NULL  DEFAULT 0)");
     query.exec();
 
     query.prepare("CREATE TABLE Invents(sid INTEGER,cid INTEGER, "
