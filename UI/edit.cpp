@@ -37,6 +37,14 @@ void Edit::displayPerson()
     else
         ui->lineEditPeopleDeath->setText(QString::number(selectedPerson.p.getDeath()));
     ui->textEditPeopleInfo->setText(QString::fromStdString(selectedPerson.p.getInfo()));
+
+    ui->listPeopleCreations->clear();
+    for(unsigned int i=0; i<selectedPerson.creations.size(); i++)
+    {
+        string computerdisplay;
+        computerdisplay = selectedPerson.creations[i].getName() + " " + to_string(selectedPerson.creations[i].getYearCreated());
+        ui->listPeopleCreations->addItem(QString::fromStdString(computerdisplay));
+    }
 }
 
 void Edit::on_pushButtonSubmit_clicked()
