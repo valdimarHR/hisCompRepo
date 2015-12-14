@@ -25,7 +25,9 @@ SOURCES += main.cpp\
         Processor/logic.cpp\
         mainwindow.cpp \
     UI/edit.cpp \
-    UI/editcomputers.cpp
+    UI/editcomputers.cpp \
+    UI/clickscientist.cpp \
+    UI/clickcomputer.cpp
 
 HEADERS  += mainwindow.h\
         Utilities/constants.h\
@@ -36,8 +38,12 @@ HEADERS  += mainwindow.h\
         Models/peoplewithcomputers.h\
         Processor/logic.h \
     UI/edit.h \
-    UI/editcomputers.h
+    UI/editcomputers.h \
+    UI/clickscientist.h \
+    UI/clickcomputer.h
 
 FORMS    += mainwindow.ui \
     UI/edit.ui \
-    UI/editcomputers.ui
+    UI/editcomputers.ui \
+    UI/clickscientist.ui \
+    UI/clickcomputer.ui
