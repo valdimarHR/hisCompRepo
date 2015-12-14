@@ -32,7 +32,10 @@ void Edit::displayPerson()
     else
         ui->comboBoxGender->setCurrentIndex(1);
     ui->lineEditPeopleBirth->setText(QString::number(selectedPerson.p.getBirth()));
-    ui->lineEditPeopleDeath->setText(QString::number(selectedPerson.p.getDeath()));
+    if(selectedPerson.p.getDeath() == constants::notDead)
+        ui->lineEditPeopleDeath->setText("");
+    else
+        ui->lineEditPeopleDeath->setText(QString::number(selectedPerson.p.getDeath()));
     ui->textEditPeopleInfo->setText(QString::fromStdString(selectedPerson.p.getInfo()));
 }
 
@@ -48,10 +51,23 @@ void Edit::on_pushButtonSubmit_clicked()
         death = ui->lineEditPeopleDeath->text().toUInt();
     string info = ui->textEditPeopleInfo->toPlainText().toStdString();
 
-    //bæta við að geti ekki verið tómir reitir, framtíðartékki
+    if(name.length()==0 || ui->lineEditPeopleBirth->text().isEmpty())
+    {
+        ui->labelEditPeopleError->setText("Everything needs to be filled before submition!");
+        return;
+    }
+
     if(birth == 0 || death == 0) //því ef toUnt convertar texta í 0;
     {
         QMessageBox::warning(this, "Warning", "Don't put a text for year\nof birth or year of death!");
+        ui->lineEditPeopleBirth->setText("");
+        ui->lineEditPeopleDeath->setText("");
+        return;
+    }
+
+    if(QDate::currentDate().year() < birth || QDate::currentDate().year() < death)
+    {
+        QMessageBox::warning(this, "Warning","Error!\nPlease don't put birt or death in the future!");
         ui->lineEditPeopleBirth->setText("");
         ui->lineEditPeopleDeath->setText("");
         return;

@@ -89,11 +89,16 @@ void MainWindow::on_buttonPeopleAdd_clicked()
         return;
     }
 
-    if(QDate::currentDate().year() < birth || QDate::currentDate().year() < death)
+    if(QDate::currentDate().year() < birth)
     {
-        QMessageBox::warning(this, "Warning","Error!\nPlease don't put birt or death in the future!");
-        ui->lineEditComputerCreated->setText("");
+        QMessageBox::warning(this, "Warning","Error!\nPlease don't put birt in the future!");
         ui->lineEditPeopleBirth->setText("");
+        return;
+    }
+
+    if(QDate::currentDate().year() < death)
+    {
+        QMessageBox::warning(this, "Warning","Error!\nPlease don't put death in the future!");
         ui->lineEditPeopleDeath->setText("");
         return;
     }

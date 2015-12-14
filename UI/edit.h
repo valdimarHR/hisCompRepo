@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include "Processor/logic.h"
 #include <Utilities/constants.h>
+#include <QDate>
 
 #include <QDialog>
 
