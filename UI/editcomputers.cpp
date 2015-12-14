@@ -1,13 +1,22 @@
 #include "editcomputers.h"
 #include "ui_editcomputers.h"
 
-editComputers::editComputers(const computersWithPeople& selectedComputer, QWidget *parent) :
+editComputers::editComputers(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::editComputers)
 {
     ui->setupUi(this);
-    computerToEdit = selectedComputer;
+}
+
+void editComputers::setSelectedComputer(const computersWithPeople &MSelectedComputer)
+{
+    selectedComputer = MSelectedComputer;
     displayComputer();
+}
+
+computers editComputers::getComputerChanged()
+{
+    return computerToReturn;
 }
 
 editComputers::~editComputers()
@@ -29,35 +38,42 @@ void editComputers::on_pushButtonSubmit_clicked()
 
     string info = ui->textComputerEditInfo->toPlainText().toStdString();
 
-    //bæta við að geti ekki verið tómir reitir
+    if (name.length() == 0 || type.length() == 0 || ui->lineEditComputerYearCreated->text().isEmpty())
+    {
+        //error í label, verður að vera útfyllt
+        return;
+    }
 
     if(yearCreated == 0) //því ef toUnt convertar texta í 0;
     {
-        QMessageBox::warning(this, "Warning", "Don't put a text for year\nof birth or year of death!");
+        QMessageBox::warning(this, "Warning", "Don't put a text for year created!");
         ui->lineEditComputerYearCreated->setText("");
         return;
     }
 
-    int currentId = computerToEdit.c.getId();
+    computerToReturn.setId(selectedComputer.c.getId());
+    computerToReturn.setName(name);
+    computerToReturn.setType(type);
+    computerToReturn.setYearCreated(yearCreated);
+    computerToReturn.setWasBuilt(wasCreated);
+    computerToReturn.setInfo(info);
 
-    //senda allar upplýsingarnar einhvern veginn til DB.
-
-    this->close();
+    this->done(1);
 }
 
 void editComputers::displayComputer()
 {
-    ui->lineEditComputerName->setText((QString::fromStdString(computerToEdit.c.getName())));
-    ui->lineEditComputerType->setText((QString::fromStdString(computerToEdit.c.getType())));
-    ui->lineEditComputerYearCreated->setText(QString::number(computerToEdit.c.getYearCreated()));
-    if(computerToEdit.c.getWasBuilt() == true)
+    ui->lineEditComputerName->setText((QString::fromStdString(selectedComputer.c.getName())));
+    ui->lineEditComputerType->setText((QString::fromStdString(selectedComputer.c.getType())));
+    ui->lineEditComputerYearCreated->setText(QString::number(selectedComputer.c.getYearCreated()));
+    if(selectedComputer.c.getWasBuilt() == true)
         ui->comboBoxBuilt->setCurrentIndex(0);
     else
         ui->comboBoxBuilt->setCurrentIndex(1);
-    ui->textComputerEditInfo->setText((QString::fromStdString(computerToEdit.c.getInfo())));
+    ui->textComputerEditInfo->setText((QString::fromStdString(selectedComputer.c.getInfo())));
 }
 
 void editComputers::on_ButtonCancel_clicked()
 {
-    this->close();
+    this->done(0);
 }

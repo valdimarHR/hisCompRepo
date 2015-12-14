@@ -107,7 +107,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>120</y>
+     <y>100</y>
      <width>47</width>
      <height>13</height>
     </rect>
@@ -142,7 +142,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>140</y>
+     <y>120</y>
      <width>451</width>
      <height>91</height>
     </rect>
@@ -174,7 +174,7 @@
     <string>Cancel</string>
    </property>
   </widget>
-  <widget class="QListWidget" name="listWidget">
+  <widget class="QListWidget" name="listComputersCreators">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -184,7 +184,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QListWidget" name="listWidget_2">
+  <widget class="QListWidget" name="listComputersPeopleRest">
    <property name="geometry">
     <rect>
      <x>240</x>
