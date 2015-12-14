@@ -144,9 +144,16 @@ bool logic::deleteConnection(const int &sid, const int &cid)
         return false;
 }
 
-bool logic::editPerson(const int &id, const string &name, const string &gender, const int &birth, const int &death, const string &info)
+bool logic::editPerson(const people& personCanged)
 {
-    bool success = theData.editPersonDb(id,name,gender,birth,death,info);
+    int id = personCanged.getId();
+    string name = personCanged.getName();
+    string gender = personCanged.getGender();
+    int birth = personCanged.getBirth();
+    int death = personCanged.getDeath();
+    string info = personCanged.getInfo();
+
+    bool success = theData.editPersonDb(id, name, gender, birth, death, info);
     if (success)
         return true;
     else

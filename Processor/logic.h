@@ -71,7 +71,7 @@ public:
      * @brief
      *
      */
-    bool editPerson(const int &id, const string &name, const string &gender, const int &birth, const int &death, const string &info);
+    bool editPerson(const people& personCanged);
     /**
      * @brief editComputer
      * @param
