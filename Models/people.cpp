@@ -5,7 +5,7 @@ people::people()
     name = "default";
     gender = "default";
     yearOfBirth = 0;
-    yearOfDeath = 0;
+    yearOfDeath = NULL;
     info = "";
 }
 

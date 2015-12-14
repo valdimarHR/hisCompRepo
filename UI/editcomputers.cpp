@@ -71,6 +71,15 @@ void editComputers::displayComputer()
     else
         ui->comboBoxBuilt->setCurrentIndex(1);
     ui->textComputerEditInfo->setText((QString::fromStdString(selectedComputer.c.getInfo())));
+
+    ui->listComputersCreators->clear();
+    for(unsigned int i=0; i<selectedComputer.creators.size(); i++)
+    {
+        string peopledisplay;
+        peopledisplay = selectedComputer.creators[i].getName() + " " + to_string(selectedComputer.creators[i].getBirth()) + " - ";
+        peopledisplay += to_string(selectedComputer.creators[i].getDeath());
+        ui->listComputersCreators->addItem(QString::fromStdString(peopledisplay));
+    }
 }
 
 void editComputers::on_ButtonCancel_clicked()

@@ -213,7 +213,6 @@ peopleWithComputers MainWindow::getSelectedPerson()//---------------------------
 {
     int id = getSelectedIdPeople();
     peopleWithComputers temp = theLogic.getPerson(id);
-    qDebug() << temp.p.getId() << endl;
     return temp;
 }
 
@@ -408,6 +407,7 @@ void MainWindow::on_ButtonPeopleEdit_clicked()
     peopleWithComputers personToDisplay = getSelectedPerson();
     edit.setSelectedPerson(personToDisplay);
     bool edited = edit.exec();
+    //people editedPerson = edit.getPersonChanged();
     if(edited)
     {
         bool success = theLogic.editPerson(edit.getPersonChanged());

@@ -61,6 +61,16 @@ public:
      */
     computersWithPeople getComputer(const int& id);
     /**
+     * @brief getAllPeople calls datafetch::fetchPeople and gets rid of all unneeded info.
+     * @return a vector of all the scientists.
+     */
+    vector<people>getAllPeople();
+    /**
+     * @brief getAllComputers calls datafetch::fetchComputers and gets rid of all unneeded info.
+     * @return a vector of all the computers
+     */
+    vector<computers>getAllComputers();
+    /**
      * @brief deleteConnection
      * @param sid
      * @param cid

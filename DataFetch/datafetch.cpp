@@ -136,10 +136,6 @@ bool dataFetch::computerAlreadyOnList(const computers& computer)
 
 bool dataFetch::editPersonDb(const int &id, const string &name, const string &gender, const int &birth, const int &death, const string &info)
 {
-    people person(id, name, gender, birth, death, info);
-    bool alreadyOnList = personAlreadyOnList(person);
-    if(alreadyOnList)
-        return false;
     QSqlQuery query(db);
     string comm = "UPDATE Scientists SET sName=\"" + name + "\", gender=\"" + gender + "\", birth=" + to_string(birth) + ", death=" + to_string(death) + ", sInfo=\""+ info + "\" WHERE s_id = " + to_string(id);
     QString command = QString::fromStdString(comm);
@@ -150,12 +146,8 @@ bool dataFetch::editPersonDb(const int &id, const string &name, const string &ge
 
 bool dataFetch::editComputerDb(const int &id, const string &name, const int &year, const string &type, const bool &wasBuilt, const string &info)
 {
-    computers computer(name, year, type, wasBuilt);
-    bool alreadyOnList = computerAlreadyOnList(computer);
-    if(alreadyOnList)
-        return false;
     QSqlQuery query(db);
-    string comm = "UPDATE Computers SET cName=\"" + name + "\", yearCreated=" + to_string(year) + ", type=\"" + type + ", wasbuilt=" + to_string(wasBuilt) + ", cInfo=\""+ info + "\" WHERE c_id = " + to_string(id);
+    string comm = "UPDATE Computers SET cName=\"" + name + "\", yearCreated=" + to_string(year) + ", type=\"" + type + "\", wasbuilt=" + to_string(wasBuilt) + ", cInfo=\""+ info + "\" WHERE c_id = " + to_string(id);
     QString command = QString::fromStdString(comm);
     query.prepare(command);
     query.exec();
