@@ -391,3 +391,14 @@ void MainWindow::on_ButtonComputersEdit_clicked()
     editComputers editcomputers(selectedComputer);
     editcomputers.exec();
 }
+
+void MainWindow::on_tableComputer_doubleClicked(const QModelIndex &index)
+{
+    computersWithPeople selectComputer = getSelectedComputer();
+    //ClickComputer ClickComputer(selectedComputer);
+}
+
+void MainWindow::on_tablePeople_doubleClicked(const QModelIndex &index)
+{
+
+}
