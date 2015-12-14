@@ -160,8 +160,14 @@ bool logic::editPerson(const people& personCanged)
         return false;
 }
 
-bool logic::editComputer(const int &id, const string &name, const int &year, const string &type, const bool &wasBuilt)
+bool logic::editComputer(const computers& computer)
 {
+    int id = computer.getId();
+    string name = computer.getName();
+    int year = computer.getYearCreated();
+    string type = computer.getType();
+    bool wasBuilt = computer.getWasBuilt();
+
     bool success = theData.editComputerDb(id,name,year,type,wasBuilt);
     if (success)
         return true;

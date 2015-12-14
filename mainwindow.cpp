@@ -425,9 +425,24 @@ void MainWindow::on_ButtonPeopleEdit_clicked()
 
 void MainWindow::on_ButtonComputersEdit_clicked()
 {
+    editComputers editcomputers;
     computersWithPeople selectedComputer = getSelectedComputer();
-    editComputers editcomputers(selectedComputer);
-    editcomputers.exec();
+    editcomputers.setSelectedComputer(selectedComputer);
+    bool edited = editcomputers.exec();
+    if(edited)
+    {
+        bool success = theLogic.editComputer(editcomputers.getComputerChanged());
+        if(!success)
+        {
+            ui->labelPeopleError->setText("This computer was already in the database!");
+            return;
+        }
+        ui->lineEditComputersFilter->setText("");
+        ui->tableComputer->setSortingEnabled(false);
+        displayAllComputers();
+        ui->tableComputer->setSortingEnabled(true);
+        ui->ButtonComputersEdit->setEnabled(false);
+    }
 }
 
 void MainWindow::on_tableComputer_doubleClicked(const QModelIndex &index)

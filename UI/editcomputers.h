@@ -14,7 +14,9 @@ class editComputers : public QDialog
     Q_OBJECT
 
 public:
-    explicit editComputers(const computersWithPeople& selectedComputer, QWidget *parent = 0);
+    explicit editComputers(QWidget *parent = 0);
+    void setSelectedComputer(const computersWithPeople& MSelectedComputer);
+    computers getComputerChanged();
     ~editComputers();
 
 private slots:
@@ -24,7 +26,8 @@ private slots:
 
 private:
     Ui::editComputers *ui;
-    computersWithPeople computerToEdit;
+    computersWithPeople selectedComputer;
+    computers computerToReturn;
     void displayComputer();
 };
 

@@ -77,7 +77,7 @@ public:
      * @param
      * @return
      */
-    bool editComputer(const int &id, const string & name, const int &year, const string &type, const bool & wasBuilt);
+    bool editComputer(const computers &computer);
     /**
      * @brief printerSortPeople sends a request for a people vector from data and then sorts that vector as the
      * user has requested.
