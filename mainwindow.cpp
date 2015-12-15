@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QDate>
 #include "UI/clickscientist.h"
 #include "UI/clickcomputer.h"
 
@@ -119,7 +118,7 @@ void MainWindow::on_buttonPeopleAdd_clicked()
         return;
     }
 
-    if (death < birth && death!= constants::notDead) //Error ef dánarár er á undan fæðingarári
+    if (death < birth && death!= constants::notDead) //Error if deathyear is before birthyear.
     {
         ui->labelPeopleError->setText("<span style='color: #FF0000'>Person can't die before they are born!</span>");
         ui->lineEditPeopleDeath->setText("");
@@ -219,7 +218,7 @@ int MainWindow::getSelectedIdComputer()
     return id;
 }
 
-peopleWithComputers MainWindow::getSelectedPerson()//----------------------------------------------------
+peopleWithComputers MainWindow::getSelectedPerson()
 {
     int id = getSelectedIdPeople();
     peopleWithComputers temp = theLogic.getPerson(id);
@@ -436,38 +435,9 @@ void MainWindow::on_ButtonComputersEdit_clicked()
     editSelectedComputer();
 }
 
-void MainWindow::on_tableComputer_doubleClicked(const QModelIndex &index)
-{
-    //computersWithPeople selectComputer = getSelectedComputer();
-    ClickComputer cc;
-    cc.exec();
-    //ClickComputer ClickComputer(selectedComputer);
-}
-
-void MainWindow::on_tablePeople_doubleClicked(const QModelIndex &index)
-{
-    peopleWithComputers personInfo = getSelectedPerson();
-    ClickScientist cs;
-    cs.exec();
-}
-
-void MainWindow::on_tablePeople_customContextMenuRequested(const QPoint & pos)
-{
-    QMenu *menu=new QMenu(this);
-    menu->addAction(ui->actionRightClicked);
-    menu->exec(ui->tablePeople->viewport()->mapToGlobal(pos));
-}
-
 void MainWindow::on_actionRightClicked_triggered()
 {
     editSelectedPerson();
-}
-
-void MainWindow::on_tableComputer_customContextMenuRequested(const QPoint &pos)
-{
-    QMenu *menu=new QMenu(this);
-    menu->addAction(ui->actionComputerRightClicked);
-    menu->exec(ui->tableComputer->viewport()->mapToGlobal(pos));
 }
 
 void MainWindow::on_actionComputerRightClicked_triggered()
@@ -488,7 +458,6 @@ void MainWindow::editSelectedPerson()
         foreach (int comID, checkedComputers)
         {
             theLogic.insertConnection(personToDisplay.p.getId(), comID);
-            cout << "inserting: " << comID << endl;
         }
         foreach (computers com, personToDisplay.creations)
         {
@@ -496,7 +465,6 @@ void MainWindow::editSelectedPerson()
             if ( std::find(checkedComputers.begin(), checkedComputers.end(), comID) == checkedComputers.end() )
             {
                 theLogic.deleteConnection(personToDisplay.p.getId(),comID);
-                cout << "deleting: " << comID << endl;
             }
 
         }
@@ -568,4 +536,35 @@ void MainWindow::on_tableComputer_entered(const QModelIndex &index)
 void MainWindow::on_tablePeople_entered(const QModelIndex &index)
 {
     ui->tablePeople->setToolTip("To display more information double click.");
+}
+
+void MainWindow::on_tableComputer_doubleClicked(const QModelIndex &index)
+{
+    //computersWithPeople selectComputer = getSelectedComputer();
+    ClickComputer cc;
+    computersWithPeople selectedComputer = getSelectedComputer();
+    cc.setSelectedComputer(selectedComputer);
+    cc.exec();
+    //ClickComputer ClickComputer(selectedComputer);
+}
+
+void MainWindow::on_tablePeople_doubleClicked(const QModelIndex &index)
+{
+    peopleWithComputers personInfo = getSelectedPerson();
+    ClickScientist cs;
+    cs.exec();
+}
+
+void MainWindow::on_tablePeople_customContextMenuRequested(const QPoint & pos)
+{
+    QMenu *menu=new QMenu(this);
+    menu->addAction(ui->actionRightClicked);
+    menu->exec(ui->tablePeople->viewport()->mapToGlobal(pos));
+}
+
+void MainWindow::on_tableComputer_customContextMenuRequested(const QPoint &pos)
+{
+    QMenu *menu=new QMenu(this);
+    menu->addAction(ui->actionComputerRightClicked);
+    menu->exec(ui->tableComputer->viewport()->mapToGlobal(pos));
 }

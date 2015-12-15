@@ -3,6 +3,7 @@
 #include <QMovie>
 
 #include <QDialog>
+#include <QPixmap>
 
 namespace Ui {
 class secretSanta;

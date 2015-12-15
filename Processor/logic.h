@@ -17,7 +17,6 @@
 #include <QSql>
 #include <QString>
 #include <QVariant>
-#include <QDebug>
 
 using namespace std;
 
@@ -121,10 +120,6 @@ public:
      * @param id of the computer to be hidden.
      */
     void eraseChosenComputer(const int& index);
-    /**
-     * @brief eraseDB calls datafetch to erase everything.
-     */
-    void eraseDB();
 private:
     dataFetch theData;
     /**
