@@ -40,7 +40,7 @@ void editComputers::on_pushButtonSubmit_clicked()
 
     if (name.length() == 0 || type.length() == 0 || ui->lineEditComputerYearCreated->text().isEmpty())
     {
-        //error í label, verður að vera útfyllt
+        ui->labelComputerEditError->setText("<span style='color: #FF0000'>Everything needs to be filled before submition.</span>");
         return;
     }
 
