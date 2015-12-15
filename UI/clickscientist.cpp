@@ -23,7 +23,10 @@ void ClickScientist::displayPerson()
 {
     ui->labelNameValue->setText(QString::fromStdString(selectedPerson.p.getName()));
     ui->labelBirthValue->setText(QString::number(selectedPerson.p.getBirth()));
-    ui->labelDeathValue->setText(QString::number(selectedPerson.p.getDeath()));
+    if(selectedPerson.p.getDeath() != -1)
+    {
+        ui->labelDeathValue->setText(QString::number(selectedPerson.p.getDeath()));
+    }
     ui->labelGenderValue->setText(QString::fromStdString(selectedPerson.p.getGender()));
     string computerString = "";
     for(int i = 0; i < selectedPerson.creations.size(); i++)

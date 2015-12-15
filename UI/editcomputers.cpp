@@ -104,7 +104,7 @@ void editComputers::displayPeople(vector<peopleWithComputers> people)
         for(int i = 0; i < selectedComputer.creators.size(); i++)
         {
 
-            if(currPerson.p.getId() == selectedComputer.creators[i].getId())
+            if(currPerson.p.getId() == selectedComputer.creators[i].getId()&& selectedComputer.creators[i].getName() != "default")
             {
                 checkbox->setCheckState(Qt::Checked);
                 break;
