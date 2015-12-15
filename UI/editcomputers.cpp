@@ -40,13 +40,20 @@ void editComputers::on_pushButtonSubmit_clicked()
 
     if (name.length() == 0 || type.length() == 0 || ui->lineEditComputerYearCreated->text().isEmpty())
     {
-        //error í label, verður að vera útfyllt
+        ui->labelComputerEditError->setText("<span style='color: #FF0000'>Everything needs to be filled before submition.</span>");
         return;
     }
 
     if(yearCreated == 0) //því ef toUnt convertar texta í 0;
     {
         QMessageBox::warning(this, "Warning", "Don't put a text for year created!");
+        ui->lineEditComputerYearCreated->setText("");
+        return;
+    }
+
+    if(QDate::currentDate().year() < yearCreated)
+    {
+        QMessageBox::warning(this, "Warning","Error!\nComputer cannot be made in the future!");
         ui->lineEditComputerYearCreated->setText("");
         return;
     }
