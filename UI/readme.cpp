@@ -6,7 +6,9 @@ readMe::readMe(QWidget *parent) :
     ui(new Ui::readMe)
 {
     ui->setupUi(this);
-    QFile file("/files/README.txt");
+    QFile file("README.txt");
+    if( !file.open( QIODevice::ReadOnly | QIODevice::Text ) )
+        qFatal( "Could not open the file" );
     QTextStream in(&file);
     ui->textBrowser->setText(in.readAll());
 }
