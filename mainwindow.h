@@ -14,7 +14,7 @@
 #include "UI/clickscientist.h"
 #include <QMenu>
 #include "UI/secretsanta.h"
-#include <QDate>
+#include "UI/readme.h"
 
 namespace Ui {
 class MainWindow;
@@ -120,6 +120,12 @@ private slots:
     void editSelectedPerson();
 
     void editSelectedComputer();
+
+    void on_actionOpen_readme_file_triggered();
+
+    void on_tableComputer_entered(const QModelIndex &index);
+
+    void on_tablePeople_entered(const QModelIndex &index);
 
 private:
     /**

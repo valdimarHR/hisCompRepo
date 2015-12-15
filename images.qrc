@@ -1,6 +1,16 @@
 <RCC>
     <qresource prefix="/images">
         <file>images/secretsanta.gif</file>
-        <file>images/santa.jpg</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>icons/display computer.png</file>
+        <file>icons/display person.jpg</file>
+        <file>icons/edit computer.png</file>
+        <file>icons/edit person.png</file>
+        <file>icons/edit.png</file>
+        <file>icons/PersonWIthComp.png</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>icons/images.png</file>
     </qresource>
 </RCC>
