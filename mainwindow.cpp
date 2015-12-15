@@ -540,18 +540,17 @@ void MainWindow::on_tablePeople_entered(const QModelIndex &index)
 
 void MainWindow::on_tableComputer_doubleClicked(const QModelIndex &index)
 {
-    //computersWithPeople selectComputer = getSelectedComputer();
     ClickComputer cc;
     computersWithPeople selectedComputer = getSelectedComputer();
     cc.setSelectedComputer(selectedComputer);
     cc.exec();
-    //ClickComputer ClickComputer(selectedComputer);
 }
 
 void MainWindow::on_tablePeople_doubleClicked(const QModelIndex &index)
 {
-    peopleWithComputers personInfo = getSelectedPerson();
+    peopleWithComputers selectedPerson = getSelectedPerson();
     ClickScientist cs;
+    cs.setSelectedPerson(selectedPerson);
     cs.exec();
 }
 

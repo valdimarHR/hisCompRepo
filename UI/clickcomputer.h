@@ -28,7 +28,6 @@ private slots:
 private:
     Ui::ClickComputer *ui;
     computersWithPeople selectedComputer;
-    void displayPerson();
 };
 
 #endif // CLICKCOMPUTER_H

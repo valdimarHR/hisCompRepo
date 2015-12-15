@@ -17,6 +17,8 @@ class ClickScientist : public QDialog
 
 public:
     explicit ClickScientist(QWidget *parent = 0);
+    void setSelectedPerson(peopleWithComputers MSelectedPerson);
+    void displayPerson();
     ~ClickScientist();
 
 
@@ -28,6 +30,7 @@ private slots:
 
 private:
     Ui::ClickScientist *ui;
+    peopleWithComputers selectedPerson;
 };
 
 #endif // CLICKSCIENTIST_H
