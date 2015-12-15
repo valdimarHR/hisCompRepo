@@ -77,18 +77,24 @@ public:
      */
     bool computerAlreadyOnList(const computers& computer);
     /**
-     * @brief deletePeople sets isDeleted on the person to true with matching id.
-     * @brief editPersonDb
-     * @param
-     * @return
+     * @brief editPersonDb finds an already existing scientist from the db and updates its info.
+     * @param , this is the info of the updated scientist.
+     * @return true when progress is complete.
      */
     bool editPersonDb(const int &id, const string &name, const string &gender, const int &birth, const int &death, const string &info);
     /**
-     * @brief editComputerDB
-     * @param
-     * @return
+     * @brief editComputerDB finds an already existing computer from db and updates its info.
+     * @param , the new info.
+     * @return true when progress is complete.
      */
     bool editComputerDb(const int &id, const string &name, const int &year, const string &type, const bool &wasBuilt, const string &info);
+    /**
+     * @brief editConnectionDb can hide or unhide info from the connection db.
+     * @param sid, the scientist id to effect.
+     * @param cid, the computer id.
+     * @param isDeleted, set to 1 or 0, 1 for hidden and 0 for not hidden.
+     * @return true when finished.
+     */
     bool editConnectionDb(const int &sid, const int &cid, const bool &isDeleted);
     /**
      * @brief deletePeople hides the person in the SQL DB with matching id.
@@ -101,10 +107,10 @@ public:
      */
     void deleteComputer(const int& id);
     /**
-     * @brief deleteConnectionDb
-     * @param sid
-     * @param cid
-     * @return
+     * @brief deleteConnectionDb finds and hides the connection in the SQL DB.
+     * @param sid, scientist id find.
+     * @param cid, computer id find.
+     * @return true when done.
      */
     bool deleteConnectionDb(const int &sid, const int &cid);
     /**
