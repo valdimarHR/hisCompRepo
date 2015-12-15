@@ -108,15 +108,22 @@ private slots:
      * @brief When a scientist is double clicked then a new window opens with info of that scientist.
      */
     void on_tablePeople_doubleClicked(const QModelIndex &index);
-
+    /**
+     * @brief the action slot when table is right clicked
+     */
     void on_tablePeople_customContextMenuRequested(const QPoint & pos);
-
+    /**
+     * @brief open editSelected when Edit is clicked after right clicking.+
+     * Nex two are the same except for computer table.
+     */
     void on_actionRightClicked_triggered();
 
     void on_tableComputer_customContextMenuRequested(const QPoint &pos);
 
     void on_actionComputerRightClicked_triggered();
-
+    /**
+     * @brief
+     */
     void editSelectedPerson();
 
     void editSelectedComputer();
