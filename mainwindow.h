@@ -93,14 +93,20 @@ private slots:
 
     void on_lineEditComputersFilter_textChanged(const QString &arg1);
     /**
-     * @brief
+     * @brief When edit button is clicked then editSelectedPerson is called.
      */
     void on_ButtonPeopleEdit_clicked();
-
+    /**
+     * @brief When edit button is clicked then editSelectedComputer is called.
+     */
     void on_ButtonComputersEdit_clicked();
-
+    /**
+     * @brief When a computer is double clicked then a new window opens with info of that computer.
+     */
     void on_tableComputer_doubleClicked(const QModelIndex &index);
-
+    /**
+     * @brief When a scientist is double clicked then a new window opens with info of that scientist.
+     */
     void on_tablePeople_doubleClicked(const QModelIndex &index);
 
     void on_tablePeople_customContextMenuRequested(const QPoint & pos);
