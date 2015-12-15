@@ -110,7 +110,7 @@ void Edit::displayComputers(vector<computersWithPeople> computers)
         QTableWidgetItem *checkbox = new QTableWidgetItem();
         for(int i = 0; i < selectedPerson.creations.size(); i++)
         {
-            if(currComputer.c.getId() == selectedPerson.creations[i].getId())
+            if(currComputer.c.getId() == selectedPerson.creations[i].getId() && selectedPerson.creations[i].getName() != "default")
             {
                 checkbox->setCheckState(Qt::Checked);
                 break;
