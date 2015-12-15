@@ -498,6 +498,8 @@ void MainWindow::on_tableComputer_doubleClicked(const QModelIndex &index)
 {
     //computersWithPeople selectComputer = getSelectedComputer();
     ClickComputer cc;
+    computersWithPeople selectedComputer = getSelectedComputer();
+    cc.setSelectedComputer(selectedComputer);
     cc.exec();
     //ClickComputer ClickComputer(selectedComputer);
 }
@@ -529,7 +531,6 @@ void MainWindow::on_actionRightClicked_triggered()
         foreach (int comID, checkedComputers)
         {
             theLogic.insertConnection(personToDisplay.p.getId(), comID);
-            cout << "inserting: " << comID << endl;
         }
         foreach (computers com, personToDisplay.creations)
         {
@@ -537,7 +538,6 @@ void MainWindow::on_actionRightClicked_triggered()
             if ( std::find(checkedComputers.begin(), checkedComputers.end(), comID) == checkedComputers.end() )
             {
                 theLogic.deleteConnection(personToDisplay.p.getId(),comID);
-                cout << "deleting: " << comID << endl;
             }
 
         }
