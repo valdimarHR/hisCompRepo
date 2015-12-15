@@ -426,79 +426,12 @@ void MainWindow::on_lineEditComputersFilter_textChanged(const QString &inputText
 
 void MainWindow::on_ButtonPeopleEdit_clicked()
 {
-    Edit edit;
-    peopleWithComputers personToDisplay = getSelectedPerson();
-    edit.setSelectedPerson(personToDisplay);
-    edit.displayComputers(theLogic.printerSortComputers(1,1));
-    bool edited = edit.exec();
-    if(edited)
-    {
-        vector<int> checkedComputers = edit.getCheckedComputers();
-        foreach (int comID, checkedComputers)
-        {
-            theLogic.insertConnection(personToDisplay.p.getId(), comID);
-        }
-        foreach (computers com, personToDisplay.creations)
-        {
-            int comID = com.getId();
-            if ( std::find(checkedComputers.begin(), checkedComputers.end(), comID) == checkedComputers.end() )
-            {
-                theLogic.deleteConnection(personToDisplay.p.getId(),comID);
-            }
-
-        }
-
-        bool success = theLogic.editPerson(edit.getPersonChanged());
-        if(!success)
-        {
-            ui->statusBar->showMessage("This person was already in the database!", 2000);
-            return;
-        }
-        ui->statusBar->showMessage("Changes were successfully submitted", 2000);
-        ui->lineEditPeopleFilter->setText("");
-        ui->tablePeople->setSortingEnabled(false);
-        displayAllPeople();
-        ui->tablePeople->setSortingEnabled(true);
-        ui->ButtonPeopleEdit->setEnabled(false);
-    }
+    editSelectedPerson();
 }
 
 void MainWindow::on_ButtonComputersEdit_clicked()
 {
-    editComputers editcomputers;
-    computersWithPeople selectedComputer = getSelectedComputer();
-    editcomputers.setSelectedComputer(selectedComputer);
-    editcomputers.displayPeople(theLogic.printerSortPeople(1,1));
-    bool edited = editcomputers.exec();
-    if(edited)
-    {
-        vector<int> checkedPeople = editcomputers.getCheckedPeople();
-        foreach (int pepID, checkedPeople)
-        {
-            theLogic.insertConnection(pepID, selectedComputer.c.getId());
-        }
-        foreach (people pep, selectedComputer.creators)
-        {
-            int pepID = pep.getId();
-            if ( std::find(checkedPeople.begin(), checkedPeople.end(), pepID) == checkedPeople.end() )
-            {
-                theLogic.deleteConnection(pepID, selectedComputer.c.getId());
-            }
-
-        }
-        bool success = theLogic.editComputer(editcomputers.getComputerChanged());
-        if(!success)
-        {
-            ui->statusBar->showMessage("This computer was already in the database!", 2000);
-            return;
-        }
-        ui->statusBar->showMessage("Changes were successfully submitted", 2000);
-        ui->lineEditComputersFilter->setText("");
-        ui->tableComputer->setSortingEnabled(false);
-        displayAllComputers();
-        ui->tableComputer->setSortingEnabled(true);
-        ui->ButtonComputersEdit->setEnabled(false);
-    }
+    editSelectedComputer();
 }
 
 void MainWindow::on_tableComputer_doubleClicked(const QModelIndex &index)
@@ -524,6 +457,23 @@ void MainWindow::on_tablePeople_customContextMenuRequested(const QPoint & pos)
 }
 
 void MainWindow::on_actionRightClicked_triggered()
+{
+    editSelectedPerson();
+}
+
+void MainWindow::on_tableComputer_customContextMenuRequested(const QPoint &pos)
+{
+    QMenu *menu=new QMenu(this);
+    menu->addAction(ui->actionComputerRightClicked);
+    menu->exec(ui->tableComputer->viewport()->mapToGlobal(pos));
+}
+
+void MainWindow::on_actionComputerRightClicked_triggered()
+{
+    editSelectedComputer();
+}
+
+void MainWindow::editSelectedPerson()
 {
     Edit edit;
     peopleWithComputers personToDisplay = getSelectedPerson();
@@ -564,14 +514,40 @@ void MainWindow::on_actionRightClicked_triggered()
     }
 }
 
-void MainWindow::on_tableComputer_customContextMenuRequested(const QPoint &pos)
+void MainWindow::editSelectedComputer()
 {
-    QMenu *menu=new QMenu(this);
-    menu->addAction(ui->actionComputerRightClicked);
-    menu->exec(ui->tableComputer->viewport()->mapToGlobal(pos));
-}
+    editComputers editcomputers;
+    computersWithPeople selectedComputer = getSelectedComputer();
+    editcomputers.setSelectedComputer(selectedComputer);
+    editcomputers.displayPeople(theLogic.printerSortPeople(1,1));
+    bool edited = editcomputers.exec();
+    if(edited)
+    {
+        vector<int> checkedPeople = editcomputers.getCheckedPeople();
+        foreach (int pepID, checkedPeople)
+        {
+            theLogic.insertConnection(pepID, selectedComputer.c.getId());
+        }
+        foreach (people pep, selectedComputer.creators)
+        {
+            int pepID = pep.getId();
+            if ( std::find(checkedPeople.begin(), checkedPeople.end(), pepID) == checkedPeople.end() )
+            {
+                theLogic.deleteConnection(pepID, selectedComputer.c.getId());
+            }
 
-void MainWindow::on_actionComputerRightClicked_triggered()
-{
-    //bæti við seinna
+        }
+        bool success = theLogic.editComputer(editcomputers.getComputerChanged());
+        if(!success)
+        {
+            ui->statusBar->showMessage("This computer was already in the database!", 2000);
+            return;
+        }
+        ui->statusBar->showMessage("Changes were successfully submitted", 2000);
+        ui->lineEditComputersFilter->setText("");
+        ui->tableComputer->setSortingEnabled(false);
+        displayAllComputers();
+        ui->tableComputer->setSortingEnabled(true);
+        ui->ButtonComputersEdit->setEnabled(false);
+    }
 }
