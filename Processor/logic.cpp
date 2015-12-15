@@ -92,7 +92,7 @@ bool logic::insertPerson(string& name, string& gender, int& born, int& death)
     people per(name,gender,born,death);
 
     if (checkIfpersonOnList(per))
-        return dataExisted = true;
+        dataExisted = true;
     else
         theData.insertPersonToDatabase(per);
 
@@ -105,7 +105,7 @@ bool logic::insertComputer(string& name, int& created, string& type, bool& built
     computers comp(name,created,type,built);
 
     if (checkIfcomputerOnList(comp))
-        return dataExisted = true;
+        dataExisted = true;
     else
         theData.insertComputerToDatabase(comp);
 
@@ -154,10 +154,7 @@ bool logic::editPerson(const people& personCanged)
     string info = personCanged.getInfo();
 
     bool success = theData.editPersonDb(id, name, gender, birth, death, info);
-    if (success)
-        return true;
-    else
-        return false;
+    return success;
 }
 
 
@@ -171,10 +168,7 @@ bool logic::editComputer(const computers& computer)
     string info = computer.getInfo();
 
     bool success = theData.editComputerDb(id,name,year,type,wasBuilt, info);
-    if (success)
-        return true;
-    else
-        return false;
+    return success;
 }
 
 bool logic::checkIfpersonOnList(const people& person)
