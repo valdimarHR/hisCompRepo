@@ -17,7 +17,6 @@
 #include <QSql>
 #include <QString>
 #include <QVariant>
-#include <QDebug>
 
 using namespace std;
 
@@ -52,40 +51,32 @@ public:
     /**
      * @brief Gets the info of the person and all computers connected to him
      * @param id of person
+     * @return the info.
      */
     peopleWithComputers getPerson(const int& id);
     /**
-     * @brief getComputer
-     * @param id
-     * @return
+     * @brief Gets the info of the computer and all people involved in that computer.
+     * @param id of the computer to get.
+     * @return the info.
      */
     computersWithPeople getComputer(const int& id);
     /**
-     * @brief getAllPeople calls datafetch::fetchPeople and gets rid of all unneeded info.
-     * @return a vector of all the scientists.
-     */
-    vector<people>getAllPeople();
-    /**
-     * @brief getAllComputers calls datafetch::fetchComputers and gets rid of all unneeded info.
-     * @return a vector of all the computers
-     */
-    vector<computers>getAllComputers();
-    /**
-     * @brief deleteConnection
-     * @param sid
-     * @param cid
-     * @return
+     * @brief deleteConnection calls dataFetch.deleteConnectionDb for removing a connection.
+     * @param sid, the scientist id.
+     * @param cid, the computer id.
+     * @return true if success, else false.
      */
     bool deleteConnection(const int& sid, const int& cid);
     /**
-     * @brief
-     *
+     * @brief editPerson takes new info of a person and gets it ready for theData.editPersonDb.
+     * @param personCanged is the new info of the scientist.
+     * @return true if success.
      */
     bool editPerson(const people& personCanged);
     /**
-     * @brief editComputer
-     * @param
-     * @return
+     * @brief editComputer takes new info of a computer and gets it ready for theData.editComputerDb.
+     * @param computer is the new info of the computer.
+     * @return true if success.
      */
     bool editComputer(const computers &computer);
     /**
@@ -120,20 +111,15 @@ public:
      */
     vector<computersWithPeople> findComputer(string column, string searchValue);
     /**
-     * @brief eraseChosenPeople finds id of Scientist to delete and sends to datafetch.
-     * @param p is a pass by reference vector that will be filled with all the people in the database.
-     * @param index is the index of the person to be deleted.
+     * @brief eraseChosenPeople calls theData.deletePeople to hide the scientist with the matching id.
+     * @param id of the person to be hidden.
      */
     void eraseChosenPeople(const int& id);
     /**
-     * @brief eraseChosenComputer finds id of computer to delete and sends to datafetch.
-     * @param id of the computer to be deleted.
+     * @brief eraseChosenComputer calls theData.deletePeople to hide the computer with the matching id.
+     * @param id of the computer to be hidden.
      */
     void eraseChosenComputer(const int& index);
-    /**
-     * @brief eraseDB calls datafetch to erase everything.
-     */
-    void eraseDB();
 private:
     dataFetch theData;
     /**

@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QDate>
 #include "UI/clickscientist.h"
 #include "UI/clickcomputer.h"
 
@@ -66,6 +65,13 @@ void MainWindow::on_buttonPeopleAdd_clicked()
     QString qBirth = ui->lineEditPeopleBirth->text();
     QString qDeath = ui->lineEditPeopleDeath->text();
 
+    if(qName == "Secret Santa")
+    {
+        secretSanta secretsanta;
+        secretsanta.exec();
+        return;
+    }
+
     if (qName.isEmpty()||qGender=="*Select"||qBirth.isEmpty())
     {
         ui->labelPeopleError->setText("<span style='color: #FF0000'>Everything with a * needs to be filled!</span");
@@ -110,7 +116,7 @@ void MainWindow::on_buttonPeopleAdd_clicked()
         return;
     }
 
-    if (death < birth && death!= constants::notDead) //Error ef dánarár er á undan fæðingarári
+    if (death < birth && death!= constants::notDead) //Error if deathyear is before birthyear.
     {
         ui->labelPeopleError->setText("<span style='color: #FF0000'>Person can't die before they are born!</span>");
         ui->lineEditPeopleDeath->setText("");
@@ -210,7 +216,7 @@ int MainWindow::getSelectedIdComputer()
     return id;
 }
 
-peopleWithComputers MainWindow::getSelectedPerson()//----------------------------------------------------
+peopleWithComputers MainWindow::getSelectedPerson()
 {
     int id = getSelectedIdPeople();
     peopleWithComputers temp = theLogic.getPerson(id);
@@ -419,6 +425,26 @@ void MainWindow::on_lineEditComputersFilter_textChanged(const QString &inputText
 
 void MainWindow::on_ButtonPeopleEdit_clicked()
 {
+    editSelectedPerson();
+}
+
+void MainWindow::on_ButtonComputersEdit_clicked()
+{
+    editSelectedComputer();
+}
+
+void MainWindow::on_actionRightClicked_triggered()
+{
+    editSelectedPerson();
+}
+
+void MainWindow::on_actionComputerRightClicked_triggered()
+{
+    editSelectedComputer();
+}
+
+void MainWindow::editSelectedPerson()
+{
     Edit edit;
     peopleWithComputers personToDisplay = getSelectedPerson();
     edit.setSelectedPerson(personToDisplay);
@@ -430,6 +456,7 @@ void MainWindow::on_ButtonPeopleEdit_clicked()
         foreach (int comID, checkedComputers)
         {
             theLogic.insertConnection(personToDisplay.p.getId(), comID);
+            cout << "inserting: " << comID << endl;
         }
         foreach (computers com, personToDisplay.creations)
         {
@@ -437,6 +464,7 @@ void MainWindow::on_ButtonPeopleEdit_clicked()
             if ( std::find(checkedComputers.begin(), checkedComputers.end(), comID) == checkedComputers.end() )
             {
                 theLogic.deleteConnection(personToDisplay.p.getId(),comID);
+                cout << "deleting: " << comID << endl;
             }
 
         }
@@ -456,7 +484,7 @@ void MainWindow::on_ButtonPeopleEdit_clicked()
     }
 }
 
-void MainWindow::on_ButtonComputersEdit_clicked()
+void MainWindow::editSelectedComputer()
 {
     editComputers editcomputers;
     computersWithPeople selectedComputer = getSelectedComputer();
@@ -518,53 +546,9 @@ void MainWindow::on_tablePeople_customContextMenuRequested(const QPoint & pos)
     menu->exec(ui->tablePeople->viewport()->mapToGlobal(pos));
 }
 
-void MainWindow::on_actionRightClicked_triggered()
-{
-    Edit edit;
-    peopleWithComputers personToDisplay = getSelectedPerson();
-    edit.setSelectedPerson(personToDisplay);
-    edit.displayComputers(theLogic.printerSortComputers(1,1));
-    bool edited = edit.exec();
-    if(edited)
-    {
-        vector<int> checkedComputers = edit.getCheckedComputers();
-        foreach (int comID, checkedComputers)
-        {
-            theLogic.insertConnection(personToDisplay.p.getId(), comID);
-        }
-        foreach (computers com, personToDisplay.creations)
-        {
-            int comID = com.getId();
-            if ( std::find(checkedComputers.begin(), checkedComputers.end(), comID) == checkedComputers.end() )
-            {
-                theLogic.deleteConnection(personToDisplay.p.getId(),comID);
-            }
-
-        }
-
-        bool success = theLogic.editPerson(edit.getPersonChanged());
-        if(!success)
-        {
-            ui->statusBar->showMessage("This person was already in the database!", 2000);
-            return;
-        }
-        ui->statusBar->showMessage("Changes were successfully submitted", 2000);
-        ui->lineEditPeopleFilter->setText("");
-        ui->tablePeople->setSortingEnabled(false);
-        displayAllPeople();
-        ui->tablePeople->setSortingEnabled(true);
-        ui->ButtonPeopleEdit->setEnabled(false);
-    }
-}
-
 void MainWindow::on_tableComputer_customContextMenuRequested(const QPoint &pos)
 {
     QMenu *menu=new QMenu(this);
     menu->addAction(ui->actionComputerRightClicked);
     menu->exec(ui->tableComputer->viewport()->mapToGlobal(pos));
-}
-
-void MainWindow::on_actionComputerRightClicked_triggered()
-{
-    //bæti við seinna
 }

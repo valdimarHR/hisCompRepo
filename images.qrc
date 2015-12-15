@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>images/secretsanta.gif</file>
+        <file>images/santa.jpg</file>
+    </qresource>
+</RCC>

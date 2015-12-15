@@ -92,7 +92,7 @@ bool logic::insertPerson(string& name, string& gender, int& born, int& death)
     people per(name,gender,born,death);
 
     if (checkIfpersonOnList(per))
-        return dataExisted = true;
+        dataExisted = true;
     else
         theData.insertPersonToDatabase(per);
 
@@ -105,7 +105,7 @@ bool logic::insertComputer(string& name, int& created, string& type, bool& built
     computers comp(name,created,type,built);
 
     if (checkIfcomputerOnList(comp))
-        return dataExisted = true;
+        dataExisted = true;
     else
         theData.insertComputerToDatabase(comp);
 
@@ -135,46 +135,6 @@ computersWithPeople logic::getComputer(const int &id)
     return c[0];
 }
 
-vector<people> logic::getAllPeople()
-{
-    vector<peopleWithComputers> theList = theData.fetchPeople("sName", "");
-    vector<people> temp;
-
-    //This loop goes through the info of all the people and stores them in a people vector called temp.
-    for(unsigned int i = 0; i < theList.size(); i++)
-    {
-        people peep;
-        peep.setId(theList.at(i).p.getId());
-        peep.setName(theList.at(i).p.getName());
-        peep.setGender(theList.at(i).p.getGender());
-        peep.setBirth(theList.at(i).p.getBirth());
-        peep.setDeath(theList.at(i).p.getDeath());
-        peep.setInfo(theList.at(i).p.getInfo());
-        temp.push_back(peep);
-    }
-    return temp;
-}
-
-vector<computers> logic::getAllComputers()
-{
-    vector<computersWithPeople> theList = theData.fetchComputers("cName", "");
-    vector<computers> temp;
-
-    //This loop goes through the info of all the computers and stores them in a computers vector called temp.
-    for(unsigned int i = 0; i < theList.size(); i++)
-    {
-        computers comp;
-        comp.setId(theList.at(i).c.getId());
-        comp.setName(theList.at(i).c.getName());
-        comp.setType(theList.at(i).c.getType());
-        comp.setWasBuilt(theList.at(i).c.getWasBuilt());
-        comp.setYearCreated(theList.at(i).c.getYearCreated());
-        comp.setInfo(theList.at(i).c.getInfo());
-        temp.push_back(comp);
-    }
-    return temp;
-}
-
 bool logic::deleteConnection(const int &sid, const int &cid)
 {
     bool success = theData.deleteConnectionDb(sid, cid);
@@ -194,10 +154,7 @@ bool logic::editPerson(const people& personCanged)
     string info = personCanged.getInfo();
 
     bool success = theData.editPersonDb(id, name, gender, birth, death, info);
-    if (success)
-        return true;
-    else
-        return false;
+    return success;
 }
 
 
@@ -211,10 +168,7 @@ bool logic::editComputer(const computers& computer)
     string info = computer.getInfo();
 
     bool success = theData.editComputerDb(id,name,year,type,wasBuilt, info);
-    if (success)
-        return true;
-    else
-        return false;
+    return success;
 }
 
 bool logic::checkIfpersonOnList(const people& person)
@@ -253,9 +207,4 @@ void logic::eraseChosenPeople(const int& id)
 void logic::eraseChosenComputer(const int& id)
 {
     theData.deleteComputer(id);
-}
-
-void logic::eraseDB()
-{
-    theData.eraseEverything();
 }

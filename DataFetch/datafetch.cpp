@@ -63,7 +63,6 @@ vector<computersWithPeople> dataFetch::fetchComputers(string columnName, string 
 
     vector<computersWithPeople> comVector = convertComputersTable(query);
 
-
     return comVector;
 
 }
@@ -77,6 +76,7 @@ bool dataFetch::alreadyConnnected(const int sid, const int cid)
 
     bool connected = false;
 
+    //Checks the whole query if connection already exists if it does sets connected = true.
     while(query.next())
     {
         int tableSid = query.value("sid").toUInt();
@@ -101,6 +101,7 @@ bool dataFetch::personAlreadyOnList(const people& person)
 
     bool onList = false;
 
+    //Checks the whole query if a person is already in the DB, sets onList = true if so.
     while(query.next())
     {
         string name = query.value("sName").toString().toStdString();
@@ -124,6 +125,7 @@ bool dataFetch::computerAlreadyOnList(const computers& computer)
 
     bool onList = false;
 
+    //Checks if computer is already in the DB, sets onList = true if it is.
     while(query.next())
     {
         string name = query.value("cName").toString().toStdString();
@@ -373,21 +375,6 @@ bool dataFetch::deleteConnectionDb(const int &sid, const int &cid)
     query.prepare(command);
     query.exec();
     return true;
-}
-
-void dataFetch::eraseEverything()
-{
-    QSqlQuery query(db);
-
-    query.prepare("DELETE FROM Scientists");
-    query.exec();
-
-    query.prepare("DELETE FROM Computers");
-    query.exec();
-
-    query.prepare("DELETE FROM Invents");
-    query.exec();
-
 }
 
 void dataFetch::createDatabase()

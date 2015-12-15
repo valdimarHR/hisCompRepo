@@ -27,7 +27,8 @@ SOURCES += main.cpp\
     UI/edit.cpp \
     UI/editcomputers.cpp \
     UI/clickscientist.cpp \
-    UI/clickcomputer.cpp
+    UI/clickcomputer.cpp \
+    UI/secretsanta.cpp
 
 HEADERS  += mainwindow.h\
         Utilities/constants.h\
@@ -40,13 +41,16 @@ HEADERS  += mainwindow.h\
     UI/edit.h \
     UI/editcomputers.h \
     UI/clickscientist.h \
-    UI/clickcomputer.h
+    UI/clickcomputer.h \
+    UI/secretsanta.h
 
 FORMS    += mainwindow.ui \
     UI/edit.ui \
     UI/editcomputers.ui \
     UI/clickscientist.ui \
-    UI/clickcomputer.ui
+    UI/clickcomputer.ui \
+    UI/secretsanta.ui
 
 RESOURCES += \
-    resources.qrc
+    resources.qrc \
+    images.qrc
