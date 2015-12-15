@@ -24,6 +24,7 @@ public:
     void setSelectedComputer(const computersWithPeople& MSelectedComputer);
     computers getComputerChanged();
     void displayPeople(vector<peopleWithComputers> people);
+    vector<int> getCheckedPeople();
     ~editComputers();
 
 private slots:

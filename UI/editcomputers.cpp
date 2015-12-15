@@ -122,6 +122,20 @@ void editComputers::displayPeople(vector<peopleWithComputers> people)
     ui->tableComputerCreators->setSortingEnabled(true);
 }
 
+vector<int> editComputers::getCheckedPeople()
+{
+    vector<int> checkedPeopleId;
+    int rows = ui->tableComputerCreators->rowCount();
+    for(int i = 0; i < rows; i++)
+    {
+        if(ui->tableComputerCreators->item(i,1)->data(Qt::CheckStateRole) == Qt::Checked)
+        {
+            checkedPeopleId.push_back(ui->tableComputerCreators->item(i,0)->text().toInt());
+        }
+    }
+    return checkedPeopleId;
+}
+
 void editComputers::on_ButtonCancel_clicked()
 {
     this->done(0);
