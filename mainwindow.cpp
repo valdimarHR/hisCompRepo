@@ -468,9 +468,24 @@ void MainWindow::on_ButtonComputersEdit_clicked()
     editComputers editcomputers;
     computersWithPeople selectedComputer = getSelectedComputer();
     editcomputers.setSelectedComputer(selectedComputer);
+    editcomputers.displayPeople(theLogic.printerSortPeople(1,1));
     bool edited = editcomputers.exec();
     if(edited)
     {
+        vector<int> checkedPeople = editcomputers.getCheckedPeople();
+        foreach (int pepID, checkedPeople)
+        {
+            theLogic.insertConnection(pepID, selectedComputer.c.getId());
+        }
+        foreach (people pep, selectedComputer.creators)
+        {
+            int pepID = pep.getId();
+            if ( std::find(checkedPeople.begin(), checkedPeople.end(), pepID) == checkedPeople.end() )
+            {
+                theLogic.deleteConnection(pepID, selectedComputer.c.getId());
+            }
+
+        }
         bool success = theLogic.editComputer(editcomputers.getComputerChanged());
         if(!success)
         {
