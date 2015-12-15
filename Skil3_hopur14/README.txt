@@ -1,7 +1,8 @@
 HisCompRepoUI
 
 HisComp stands for History of Computers Science.
-UI stands for the newest version which contains a better user interface.
+UI stands for the newest version which contains a better user interface, 
+this is the 3rd edition.
 
 GitHub repository: https://github.com/valdimarHR/hisCompRepo
 Qt project files in: "hisCompProject" folder
@@ -30,6 +31,7 @@ New features from last release:
 - Person or computer double clicked to see more information.
 - Extra information added to every person or computer (column in database)
 - Right click on a list to edit.
+- Resources to images and icons.
 
 
 Secret trick:
