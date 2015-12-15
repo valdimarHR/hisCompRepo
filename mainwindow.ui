@@ -34,7 +34,7 @@
        <enum>Qt::DefaultContextMenu</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tabPeople">
        <attribute name="title">
@@ -543,27 +543,27 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
-  <tabstop>dropDownPeopleFilter</tabstop>
-  <tabstop>lineEditPeopleFilter</tabstop>
-  <tabstop>tablePeople</tabstop>
-  <tabstop>ButtonPeopleEdit</tabstop>
-  <tabstop>buttonPeopleDelete</tabstop>
-  <tabstop>lineEditPeopleName</tabstop>
-  <tabstop>dropDownPeopleGender</tabstop>
-  <tabstop>lineEditPeopleBirth</tabstop>
-  <tabstop>lineEditPeopleDeath</tabstop>
-  <tabstop>buttonPeopleAdd</tabstop>
-  <tabstop>tabWidget</tabstop>
+  <tabstop>dropDownComputersFilter</tabstop>
   <tabstop>lineEditComputersFilter</tabstop>
-  <tabstop>tableComputer</tabstop>
   <tabstop>lineEditComputerName</tabstop>
   <tabstop>lineEditComputerType</tabstop>
   <tabstop>lineEditComputerCreated</tabstop>
   <tabstop>dropDownComputerBuilt</tabstop>
   <tabstop>buttonComputerAdd</tabstop>
-  <tabstop>buttonComputerDelete</tabstop>
-  <tabstop>dropDownComputersFilter</tabstop>
+  <tabstop>tableComputer</tabstop>
   <tabstop>ButtonComputersEdit</tabstop>
+  <tabstop>buttonComputerDelete</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>dropDownPeopleFilter</tabstop>
+  <tabstop>lineEditPeopleBirth</tabstop>
+  <tabstop>tablePeople</tabstop>
+  <tabstop>ButtonPeopleEdit</tabstop>
+  <tabstop>buttonPeopleDelete</tabstop>
+  <tabstop>lineEditPeopleName</tabstop>
+  <tabstop>dropDownPeopleGender</tabstop>
+  <tabstop>buttonPeopleAdd</tabstop>
+  <tabstop>lineEditPeopleFilter</tabstop>
+  <tabstop>lineEditPeopleDeath</tabstop>
  </tabstops>
  <resources>
   <include location="resources.qrc"/>
