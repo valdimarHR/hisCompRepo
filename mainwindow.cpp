@@ -116,7 +116,7 @@ void MainWindow::on_buttonPeopleAdd_clicked()
         return;
     }
 
-    if (death < birth && death!= constants::notDead) //Error ef dánarár er á undan fæðingarári
+    if (death < birth && death!= constants::notDead) //Error if deathyear is before birthyear.
     {
         ui->labelPeopleError->setText("<span style='color: #FF0000'>Person can't die before they are born!</span>");
         ui->lineEditPeopleDeath->setText("");
@@ -216,7 +216,7 @@ int MainWindow::getSelectedIdComputer()
     return id;
 }
 
-peopleWithComputers MainWindow::getSelectedPerson()//----------------------------------------------------
+peopleWithComputers MainWindow::getSelectedPerson()
 {
     int id = getSelectedIdPeople();
     peopleWithComputers temp = theLogic.getPerson(id);
