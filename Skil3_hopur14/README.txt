@@ -32,6 +32,7 @@ New features from last release:
 - Extra information added to every person or computer (column in database)
 - Right click on a list to edit.
 - Resources to images and icons.
+- Nýr database búinn til ef ekki til með nýjum dálkum.
 
 
 Secret trick:
