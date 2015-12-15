@@ -17,7 +17,6 @@
 #include <QSql>
 #include <QString>
 #include <QVariant>
-#include <QDebug>
 
 using namespace std;
 

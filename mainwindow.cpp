@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QDate>
 #include "UI/clickscientist.h"
 #include "UI/clickcomputer.h"
 

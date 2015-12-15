@@ -4,8 +4,8 @@
 #include <QMainWindow>
 #include "Models/peoplewithcomputers.h"
 #include "Processor/logic.h"
-#include <QtDebug>
 #include "Utilities/constants.h"
+#include <QApplication>
 #include <QMessageBox>
 #include "UI/edit.h"
 #include "UI/editcomputers.h"
@@ -14,6 +14,7 @@
 #include "UI/clickscientist.h"
 #include <QMenu>
 #include "UI/secretsanta.h"
+#include <QDate>
 
 namespace Ui {
 class MainWindow;

@@ -1,6 +1,5 @@
 #include "secretsanta.h"
 #include "ui_secretsanta.h"
-#include <QPixmap>
 
 secretSanta::secretSanta(QWidget *parent) :
     QDialog(parent),
