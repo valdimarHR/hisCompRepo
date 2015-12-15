@@ -36,6 +36,7 @@ void ClickComputer::displayComputer()
     string personString = "";
     for(int i = 0; i < selectedComputer.creators.size(); i++)
     {
+        if(selectedComputer.creators[i].getName() == "default") break;
         personString += selectedComputer.creators[i].getName();
         personString += "\n";
     }
