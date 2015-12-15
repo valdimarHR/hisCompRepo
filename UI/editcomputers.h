@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "Models/computerswithpeople.h"
 #include <QMessageBox>
+#include <QDate>
 
 namespace Ui {
 class editComputers;

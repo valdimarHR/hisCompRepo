@@ -51,6 +51,13 @@ void editComputers::on_pushButtonSubmit_clicked()
         return;
     }
 
+    if(QDate::currentDate().year() < yearCreated)
+    {
+        QMessageBox::warning(this, "Warning","Error!\nComputer cannot be made in the future!");
+        ui->lineEditComputerYearCreated->setText("");
+        return;
+    }
+
     computerToReturn.setId(selectedComputer.c.getId());
     computerToReturn.setName(name);
     computerToReturn.setType(type);
