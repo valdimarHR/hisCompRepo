@@ -8,12 +8,12 @@ GitHub repository: https://github.com/valdimarHR/hisCompRepo
 Qt project files in: "hisCompProject" folder
 Executable program in: "executableProgram" folder
 
-Open the folder executableProgram and there is a applcatioin with the name 
+Open the folder executableProgram and there is a application with the name 
 hisCompProjectUI which will run the program.
 
-Note: in the code, comments are made about a function on top of the decleration.
+Note: in the code, comments are made about a function on top of the declaration.
 
-How to announce a bug or request a feauture:
+How to announce a bug or request a feature:
 The best way is through Myschool, under the project Skil 3.
 We do hope though that there are no bugs and all user
 will be happy with the program.
@@ -37,17 +37,16 @@ New features from last release:
 - Good tap order in main window.
 
 Secret trick:
-- Type the name Secret Santa in the name field in People,
-put something in all required fields and push Add.
-Merry Christas!
+- Type the name Secret Santa in the name field in People and press Add.
+Merry Christmas!
 
 Bugs fixed:
-- Not possibe to put dates in the future, pop up window with error.
+- Not possible to put dates in the future, pop up window with error.
 - Data is not permanently deleted, only not shown.
-  Still in database but flagged deleted.
+  Still in database but flagged as deleted.
 - Database not opened in every function in dataFetch class.
   Only in constructor and deconstructor.
 
 ©2015 Hulda Lilja Hannesdóttir, Valdimar Baldvinsson, Victor Jakob Gressier, 
 Embla Ýr Teitsdóttir and Tryggvi Þór Júlíusson
-All rigths reserved
+All rights reserved
