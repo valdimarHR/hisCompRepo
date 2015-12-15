@@ -138,10 +138,7 @@ computersWithPeople logic::getComputer(const int &id)
 bool logic::deleteConnection(const int &sid, const int &cid)
 {
     bool success = theData.deleteConnectionDb(sid, cid);
-    if(success)
-        return true;
-    else
-        return false;
+    return success;
 }
 
 bool logic::editPerson(const people& personCanged)
