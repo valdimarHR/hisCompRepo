@@ -543,3 +543,15 @@ void MainWindow::on_actionRightClicked_triggered()
         ui->ButtonPeopleEdit->setEnabled(false);
     }
 }
+
+void MainWindow::on_tableComputer_customContextMenuRequested(const QPoint &pos)
+{
+    QMenu *menu=new QMenu(this);
+    menu->addAction(ui->actionComputerRightClicked);
+    menu->exec(ui->tableComputer->viewport()->mapToGlobal(pos));
+}
+
+void MainWindow::on_actionComputerRightClicked_triggered()
+{
+    //bæti við seinna
+}

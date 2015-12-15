@@ -70,13 +70,13 @@ private slots:
 
     void on_tablePeople_doubleClicked(const QModelIndex &index);
 
-    void on_tablePeople_activated(const QModelIndex &index);
-
-    void on_tablePeople_entered(const QModelIndex &index);
-
     void on_tablePeople_customContextMenuRequested(const QPoint & pos);
 
     void on_actionRightClicked_triggered();
+
+    void on_tableComputer_customContextMenuRequested(const QPoint &pos);
+
+    void on_actionComputerRightClicked_triggered();
 
 private:
     void displayAllPeople();
