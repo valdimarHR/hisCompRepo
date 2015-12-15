@@ -35,7 +35,6 @@ New features from last release:
 - Resources to images and icons.
 - New database created if needed, with all new columns.
 - Good tap order in main window.
-- Not able to edit text in display window but higlight is possible.
 
 Secret trick:
 - Type the name Secret Santa in the name field in People,

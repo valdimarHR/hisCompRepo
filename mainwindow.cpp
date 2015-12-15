@@ -16,6 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tablePeople->setColumnWidth(1,250);
     ui->tableComputer->setColumnWidth(1,250);
     ui->tableComputer->setColumnWidth(2,150);
+    ui->tablePeople->setMouseTracking(true);
+    ui->tableComputer->setMouseTracking(true);
     displayAllPeople();
     displayAllComputers();
     ui->tabWidget->setCurrentIndex(0);
@@ -550,4 +552,20 @@ void MainWindow::editSelectedComputer()
         ui->tableComputer->setSortingEnabled(true);
         ui->ButtonComputersEdit->setEnabled(false);
     }
+}
+
+void MainWindow::on_actionOpen_readme_file_triggered()
+{
+    readMe readme;
+    readme.exec();
+}
+
+void MainWindow::on_tableComputer_entered(const QModelIndex &index)
+{
+    ui->tableComputer->setToolTip("To display more information double click.");
+}
+
+void MainWindow::on_tablePeople_entered(const QModelIndex &index)
+{
+    ui->tablePeople->setToolTip("To display more information double click.");
 }
