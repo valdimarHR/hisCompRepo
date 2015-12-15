@@ -496,10 +496,8 @@ void MainWindow::on_tablePeople_doubleClicked(const QModelIndex &index)
     cs.exec();
 }
 
-void MainWindow::on_tablePeople_customContextMenuRequested(const QPoint &pos)
+void MainWindow::on_tablePeople_customContextMenuRequested(const QPoint & pos)
 {
-    QModelIndex index = ui->tablePeople->indexAt(pos);
-
     QMenu *menu=new QMenu(this);
     menu->addAction(ui->actionRightClicked);
     menu->exec(ui->tablePeople->viewport()->mapToGlobal(pos));

@@ -74,7 +74,7 @@ private slots:
 
     void on_tablePeople_entered(const QModelIndex &index);
 
-    void on_tablePeople_customContextMenuRequested(const QPoint &pos);
+    void on_tablePeople_customContextMenuRequested(const QPoint & pos);
 
     void on_actionRightClicked_triggered();
 
