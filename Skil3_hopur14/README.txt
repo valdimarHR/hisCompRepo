@@ -18,10 +18,7 @@ will be happy with the program.
 
 New features from last release:
 - New stunning and easy to use user interface.
-- Not possibe to put dates in the future, pop up window with error.
-- Data is not permanently deleted, only not shown.
-  Still in database but flagged deleted.
-- Possible to edit connections between Scientists and computers in a easy way.
+- Possible to edit connections between Scientists and computers in an easy way.
 - Pop up windows when text is put where number is expected.
 - Pop up windows if person dies before they are born.
 - Message in status bar after an edit is submitted.
@@ -34,14 +31,15 @@ New features from last release:
 - Resources to images and icons.
 - Nýr database búinn til ef ekki til með nýjum dálkum.
 
-
 Secret trick:
 - Type the name Secret Santa in the name field in People,
 put something in all required fields and push Add.
 Merry Christas!
 
 Bugs fixed:
--
+- Not possibe to put dates in the future, pop up window with error.
+- Data is not permanently deleted, only not shown.
+  Still in database but flagged deleted.
 
 ©2015 Hulda Lilja Hannesdóttir, Valdimar Baldvinsson, Victor Jakob Gressier, 
 Embla Ýr Teitsdóttir and Tryggvi Þór Júlíusson
