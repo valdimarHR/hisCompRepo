@@ -112,11 +112,7 @@ public:
      * @param cid, computer id find.
      * @return true when done.
      */
-    bool deleteConnectionDb(const int &sid, const int &cid);
-    /**
-     * @brief eraseEverything deletes all the data in the DB (scientists, computers and connections).
-     */
-    void eraseEverything();
+    bool deleteConnectionDb(const int &sid, const int &cid);  
 private:
     /**
      * @brief convertPeopleTable converts the query data from the database to a vector of people.

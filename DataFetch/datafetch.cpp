@@ -377,21 +377,6 @@ bool dataFetch::deleteConnectionDb(const int &sid, const int &cid)
     return true;
 }
 
-void dataFetch::eraseEverything()
-{
-    QSqlQuery query(db);
-
-    query.prepare("DELETE FROM Scientists");
-    query.exec();
-
-    query.prepare("DELETE FROM Computers");
-    query.exec();
-
-    query.prepare("DELETE FROM Invents");
-    query.exec();
-
-}
-
 void dataFetch::createDatabase()
 {
     db.setDatabaseName(constants::NAME_OF_DATABASE);

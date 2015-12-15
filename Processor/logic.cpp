@@ -208,8 +208,3 @@ void logic::eraseChosenComputer(const int& id)
 {
     theData.deleteComputer(id);
 }
-
-void logic::eraseDB()
-{
-    theData.eraseEverything();
-}
