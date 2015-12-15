@@ -69,6 +69,10 @@ private slots:
 
     void on_tablePeople_doubleClicked(const QModelIndex &index);
 
+    void on_tablePeople_activated(const QModelIndex &index);
+
+    void on_tablePeople_entered(const QModelIndex &index);
+
 private:
     void displayAllPeople();
     void displayAllComputers();

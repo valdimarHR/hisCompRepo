@@ -126,6 +126,7 @@ void MainWindow::on_buttonPeopleAdd_clicked()
     }
     else
     {
+        ui->statusBar->showMessage("Person was successfully added", 3000);
         ui->lineEditPeopleFilter->setText("");
         ui->tablePeople->setSortingEnabled(false);
         displayAllPeople();
@@ -228,7 +229,7 @@ void MainWindow::on_tabWidget_tabBarClicked(int index)
     if(index == 0)
     {
         ui->tableComputer->clearContents();
-        displayAllPeople()
+        displayAllPeople();
     }
     else if(index == 1)
     {
@@ -308,6 +309,7 @@ void MainWindow::on_buttonComputerAdd_clicked()
     }
     else
     {
+        ui->statusBar->showMessage("Computer was successfully added", 3000);
         ui->lineEditComputersFilter->setText("");
         ui->tableComputer->setSortingEnabled(false);
         displayAllComputers();
@@ -444,9 +446,10 @@ void MainWindow::on_ButtonPeopleEdit_clicked()
         bool success = theLogic.editPerson(edit.getPersonChanged());
         if(!success)
         {
-            ui->labelPeopleError->setText("This person was already in the database!");
+            ui->statusBar->showMessage("This person was already in the database!", 2000);
             return;
         }
+        ui->statusBar->showMessage("Changes were successfully submitted", 2000);
         ui->lineEditPeopleFilter->setText("");
         ui->tablePeople->setSortingEnabled(false);
         displayAllPeople();
@@ -466,9 +469,10 @@ void MainWindow::on_ButtonComputersEdit_clicked()
         bool success = theLogic.editComputer(editcomputers.getComputerChanged());
         if(!success)
         {
-            ui->labelPeopleError->setText("This computer was already in the database!");
+            ui->statusBar->showMessage("This computer was already in the database!", 2000);
             return;
         }
+        ui->statusBar->showMessage("Changes were successfully submitted", 2000);
         ui->lineEditComputersFilter->setText("");
         ui->tableComputer->setSortingEnabled(false);
         displayAllComputers();
