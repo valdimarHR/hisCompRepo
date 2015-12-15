@@ -63,7 +63,6 @@ vector<computersWithPeople> dataFetch::fetchComputers(string columnName, string 
 
     vector<computersWithPeople> comVector = convertComputersTable(query);
 
-
     return comVector;
 
 }
