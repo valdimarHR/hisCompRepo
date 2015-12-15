@@ -433,38 +433,9 @@ void MainWindow::on_ButtonComputersEdit_clicked()
     editSelectedComputer();
 }
 
-void MainWindow::on_tableComputer_doubleClicked(const QModelIndex &index)
-{
-    //computersWithPeople selectComputer = getSelectedComputer();
-    ClickComputer cc;
-    cc.exec();
-    //ClickComputer ClickComputer(selectedComputer);
-}
-
-void MainWindow::on_tablePeople_doubleClicked(const QModelIndex &index)
-{
-    peopleWithComputers personInfo = getSelectedPerson();
-    ClickScientist cs;
-    cs.exec();
-}
-
-void MainWindow::on_tablePeople_customContextMenuRequested(const QPoint & pos)
-{
-    QMenu *menu=new QMenu(this);
-    menu->addAction(ui->actionRightClicked);
-    menu->exec(ui->tablePeople->viewport()->mapToGlobal(pos));
-}
-
 void MainWindow::on_actionRightClicked_triggered()
 {
     editSelectedPerson();
-}
-
-void MainWindow::on_tableComputer_customContextMenuRequested(const QPoint &pos)
-{
-    QMenu *menu=new QMenu(this);
-    menu->addAction(ui->actionComputerRightClicked);
-    menu->exec(ui->tableComputer->viewport()->mapToGlobal(pos));
 }
 
 void MainWindow::on_actionComputerRightClicked_triggered()
@@ -549,4 +520,35 @@ void MainWindow::editSelectedComputer()
         ui->tableComputer->setSortingEnabled(true);
         ui->ButtonComputersEdit->setEnabled(false);
     }
+}
+
+void MainWindow::on_tableComputer_doubleClicked(const QModelIndex &index)
+{
+    //computersWithPeople selectComputer = getSelectedComputer();
+    ClickComputer cc;
+    computersWithPeople selectedComputer = getSelectedComputer();
+    cc.setSelectedComputer(selectedComputer);
+    cc.exec();
+    //ClickComputer ClickComputer(selectedComputer);
+}
+
+void MainWindow::on_tablePeople_doubleClicked(const QModelIndex &index)
+{
+    peopleWithComputers personInfo = getSelectedPerson();
+    ClickScientist cs;
+    cs.exec();
+}
+
+void MainWindow::on_tablePeople_customContextMenuRequested(const QPoint & pos)
+{
+    QMenu *menu=new QMenu(this);
+    menu->addAction(ui->actionRightClicked);
+    menu->exec(ui->tablePeople->viewport()->mapToGlobal(pos));
+}
+
+void MainWindow::on_tableComputer_customContextMenuRequested(const QPoint &pos)
+{
+    QMenu *menu=new QMenu(this);
+    menu->addAction(ui->actionComputerRightClicked);
+    menu->exec(ui->tableComputer->viewport()->mapToGlobal(pos));
 }

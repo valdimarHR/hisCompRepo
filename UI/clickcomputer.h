@@ -16,6 +16,8 @@ class ClickComputer : public QDialog
 
 public:
     explicit ClickComputer(QWidget *parent = 0);
+    void displayComputer();
+    void setSelectedComputer(computersWithPeople MSelectedComputer);
     ~ClickComputer();
 
 private slots:
@@ -25,7 +27,7 @@ private slots:
 
 private:
     Ui::ClickComputer *ui;
-    peopleWithComputers selectedPerson;
+    computersWithPeople selectedComputer;
     void displayPerson();
 };
 
