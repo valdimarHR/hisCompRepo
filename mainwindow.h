@@ -12,6 +12,7 @@
 #include <QDate>
 #include "UI/clickcomputer.h"
 #include "UI/clickscientist.h"
+#include <QMenu>
 
 namespace Ui {
 class MainWindow;
@@ -72,6 +73,10 @@ private slots:
     void on_tablePeople_activated(const QModelIndex &index);
 
     void on_tablePeople_entered(const QModelIndex &index);
+
+    void on_tablePeople_customContextMenuRequested(const QPoint &pos);
+
+    void on_actionRightClicked_triggered();
 
 private:
     void displayAllPeople();

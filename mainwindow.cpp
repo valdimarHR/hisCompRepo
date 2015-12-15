@@ -495,3 +495,53 @@ void MainWindow::on_tablePeople_doubleClicked(const QModelIndex &index)
     ClickScientist cs;
     cs.exec();
 }
+
+void MainWindow::on_tablePeople_customContextMenuRequested(const QPoint &pos)
+{
+    QModelIndex index = ui->tablePeople->indexAt(pos);
+
+    QMenu *menu=new QMenu(this);
+    menu->addAction(ui->actionRightClicked);
+    menu->exec(ui->tablePeople->viewport()->mapToGlobal(pos));
+}
+
+void MainWindow::on_actionRightClicked_triggered()
+{
+    Edit edit;
+    peopleWithComputers personToDisplay = getSelectedPerson();
+    edit.setSelectedPerson(personToDisplay);
+    edit.displayComputers(theLogic.printerSortComputers(1,1));
+    bool edited = edit.exec();
+    if(edited)
+    {
+        vector<int> checkedComputers = edit.getCheckedComputers();
+        foreach (int comID, checkedComputers)
+        {
+            theLogic.insertConnection(personToDisplay.p.getId(), comID);
+            cout << "inserting: " << comID << endl;
+        }
+        foreach (computers com, personToDisplay.creations)
+        {
+            int comID = com.getId();
+            if ( std::find(checkedComputers.begin(), checkedComputers.end(), comID) == checkedComputers.end() )
+            {
+                theLogic.deleteConnection(personToDisplay.p.getId(),comID);
+                cout << "deleting: " << comID << endl;
+            }
+
+        }
+
+        bool success = theLogic.editPerson(edit.getPersonChanged());
+        if(!success)
+        {
+            ui->statusBar->showMessage("This person was already in the database!", 2000);
+            return;
+        }
+        ui->statusBar->showMessage("Changes were successfully submitted", 2000);
+        ui->lineEditPeopleFilter->setText("");
+        ui->tablePeople->setSortingEnabled(false);
+        displayAllPeople();
+        ui->tablePeople->setSortingEnabled(true);
+        ui->ButtonPeopleEdit->setEnabled(false);
+    }
+}
