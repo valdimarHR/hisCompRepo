@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Info</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../resources.qrc">
+    <normaloff>:/icons/icons/display computer.png</normaloff>:/icons/icons/display computer.png</iconset>
+  </property>
   <property name="sizeGripEnabled">
    <bool>false</bool>
   </property>
@@ -219,6 +223,8 @@
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

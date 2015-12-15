@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>The Computer Scientist DB</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/icons/icons/PersonWIthComp.png</normaloff>:/icons/icons/PersonWIthComp.png</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
@@ -507,7 +511,7 @@
      <x>0</x>
      <y>0</y>
      <width>645</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
@@ -523,17 +527,17 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
-  <tabstop>lineEditPeopleDeath</tabstop>
+  <tabstop>dropDownPeopleFilter</tabstop>
   <tabstop>lineEditPeopleFilter</tabstop>
+  <tabstop>tablePeople</tabstop>
+  <tabstop>ButtonPeopleEdit</tabstop>
+  <tabstop>buttonPeopleDelete</tabstop>
   <tabstop>lineEditPeopleName</tabstop>
-  <tabstop>tabWidget</tabstop>
   <tabstop>dropDownPeopleGender</tabstop>
   <tabstop>lineEditPeopleBirth</tabstop>
+  <tabstop>lineEditPeopleDeath</tabstop>
   <tabstop>buttonPeopleAdd</tabstop>
-  <tabstop>dropDownPeopleFilter</tabstop>
-  <tabstop>buttonPeopleDelete</tabstop>
-  <tabstop>tablePeople</tabstop>
-  <tabstop>dropDownComputersFilter</tabstop>
+  <tabstop>tabWidget</tabstop>
   <tabstop>lineEditComputersFilter</tabstop>
   <tabstop>tableComputer</tabstop>
   <tabstop>lineEditComputerName</tabstop>
@@ -542,9 +546,11 @@
   <tabstop>dropDownComputerBuilt</tabstop>
   <tabstop>buttonComputerAdd</tabstop>
   <tabstop>buttonComputerDelete</tabstop>
-  <tabstop>ButtonPeopleEdit</tabstop>
+  <tabstop>dropDownComputersFilter</tabstop>
   <tabstop>ButtonComputersEdit</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

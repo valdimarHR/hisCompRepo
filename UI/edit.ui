@@ -16,6 +16,10 @@
   <property name="windowTitle">
    <string>Edit a scientist</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../resources.qrc">
+    <normaloff>:/icons/icons/edit.png</normaloff>:/icons/icons/edit.png</iconset>
+  </property>
   <property name="sizeGripEnabled">
    <bool>false</bool>
   </property>
@@ -179,6 +183,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

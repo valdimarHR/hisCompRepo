@@ -47,3 +47,6 @@ FORMS    += mainwindow.ui \
     UI/editcomputers.ui \
     UI/clickscientist.ui \
     UI/clickcomputer.ui
+
+RESOURCES += \
+    resources.qrc

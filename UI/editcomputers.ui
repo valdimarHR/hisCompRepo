@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Edit a computer</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../resources.qrc">
+    <normaloff>:/icons/icons/edit computer.png</normaloff>:/icons/icons/edit computer.png</iconset>
+  </property>
   <widget class="QWidget" name="horizontalLayoutWidget_2">
    <property name="geometry">
     <rect>
@@ -221,6 +225,8 @@
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

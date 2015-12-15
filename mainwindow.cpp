@@ -228,7 +228,7 @@ void MainWindow::on_tabWidget_tabBarClicked(int index)
     if(index == 0)
     {
         ui->tableComputer->clearContents();
-        displayAllPeople();
+        displayAllPeople()
     }
     else if(index == 1)
     {
@@ -245,6 +245,13 @@ void MainWindow::on_tablePeople_clicked(const QModelIndex &index)
 
 void MainWindow::on_buttonPeopleDelete_clicked()
 {
+
+    int answer = QMessageBox::question(this, "Confirm", "Are you sure you want to delete this person?");
+    if(answer == QMessageBox::No)
+    {
+        ui->buttonPeopleDelete->setEnabled(false);
+        return;
+    }
 
     int id = getSelectedIdPeople();
 
@@ -336,6 +343,13 @@ void MainWindow::on_tableComputer_clicked(const QModelIndex &index)
 
 void MainWindow::on_buttonComputerDelete_clicked()
 {
+    int answer = QMessageBox::question(this, "Confirm", "Are you sure you want to delete this computer?");
+    if(answer == QMessageBox::No)
+    {
+        ui->buttonComputerDelete->setEnabled(false);
+        return;
+    }
+
     int id = getSelectedIdComputer();
     theLogic.eraseChosenComputer(id);
     ui->tableComputer->setSortingEnabled(false);
