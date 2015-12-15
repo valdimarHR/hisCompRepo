@@ -430,7 +430,6 @@ void MainWindow::on_ButtonPeopleEdit_clicked()
         foreach (int comID, checkedComputers)
         {
             theLogic.insertConnection(personToDisplay.p.getId(), comID);
-            cout << "inserting: " << comID << endl;
         }
         foreach (computers com, personToDisplay.creations)
         {
@@ -438,7 +437,6 @@ void MainWindow::on_ButtonPeopleEdit_clicked()
             if ( std::find(checkedComputers.begin(), checkedComputers.end(), comID) == checkedComputers.end() )
             {
                 theLogic.deleteConnection(personToDisplay.p.getId(),comID);
-                cout << "deleting: " << comID << endl;
             }
 
         }
