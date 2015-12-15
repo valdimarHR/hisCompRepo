@@ -66,6 +66,13 @@ void MainWindow::on_buttonPeopleAdd_clicked()
     QString qBirth = ui->lineEditPeopleBirth->text();
     QString qDeath = ui->lineEditPeopleDeath->text();
 
+    if(qName == "Secret Santa")
+    {
+        secretSanta secretsanta;
+        secretsanta.exec();
+        return;
+    }
+
     if (qName.isEmpty()||qGender=="*Select"||qBirth.isEmpty())
     {
         ui->labelPeopleError->setText("<span style='color: #FF0000'>Everything with a * needs to be filled!</span");

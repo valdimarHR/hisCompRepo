@@ -13,6 +13,7 @@
 #include "UI/clickcomputer.h"
 #include "UI/clickscientist.h"
 #include <QMenu>
+#include "UI/secretsanta.h"
 
 namespace Ui {
 class MainWindow;
