@@ -4,6 +4,11 @@
 #include <QDialog>
 #include "Models/computerswithpeople.h"
 #include <QMessageBox>
+#include <mainwindow.h>
+#include <Models/peoplewithcomputers.h>
+#include <string>
+#include <Utilities/constants.h>
+#include <QDate>
 
 namespace Ui {
 class editComputers;
@@ -17,6 +22,7 @@ public:
     explicit editComputers(QWidget *parent = 0);
     void setSelectedComputer(const computersWithPeople& MSelectedComputer);
     computers getComputerChanged();
+    void displayPeople(vector<peopleWithComputers> people);
     ~editComputers();
 
 private slots:

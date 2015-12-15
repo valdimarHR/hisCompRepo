@@ -82,6 +82,39 @@ void editComputers::displayComputer()
 //    }
 }
 
+void editComputers::displayPeople(vector<peopleWithComputers> people)
+{
+    ui->tableComputerCreators->setSortingEnabled(false);
+    ui->tableComputerCreators->hideColumn(0);
+    ui->tableComputerCreators->setColumnWidth(2,330);
+    ui->tableComputerCreators->setColumnWidth(1,70);
+    ui->tableComputerCreators->clearContents();
+    ui->tableComputerCreators->setRowCount(people.size());
+    for(unsigned int row = 0; row < people.size(); row++)
+    {
+        peopleWithComputers currPerson = people[row];
+        QTableWidgetItem *checkbox = new QTableWidgetItem();
+        for(int i = 0; i < selectedComputer.creators.size(); i++)
+        {
+
+            if(currPerson.p.getId() == selectedComputer.creators[i].getId())
+            {
+                checkbox->setCheckState(Qt::Checked);
+                break;
+            }
+            else
+            {
+                checkbox->setCheckState(Qt::Unchecked);
+            }
+        }
+        ui->tableComputerCreators->setItem(row,0,new QTableWidgetItem(QString::number(currPerson.p.getId())));
+        ui->tableComputerCreators->setItem(row,1,checkbox);
+        ui->tableComputerCreators->setItem(row,2,new QTableWidgetItem(QString::fromStdString(currPerson.p.getName())));
+        ui->tableComputerCreators->setItem(row,3,new QTableWidgetItem(QString::number(currPerson.p.getBirth())));
+    }
+    ui->tableComputerCreators->setSortingEnabled(true);
+}
+
 void editComputers::on_ButtonCancel_clicked()
 {
     this->done(0);

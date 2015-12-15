@@ -461,6 +461,7 @@ void MainWindow::on_ButtonComputersEdit_clicked()
     editComputers editcomputers;
     computersWithPeople selectedComputer = getSelectedComputer();
     editcomputers.setSelectedComputer(selectedComputer);
+    editcomputers.displayPeople(theLogic.printerSortPeople(1,1));
     bool edited = editcomputers.exec();
     if(edited)
     {
