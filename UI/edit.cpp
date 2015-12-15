@@ -37,14 +37,6 @@ void Edit::displayPerson()
     else
         ui->lineEditPeopleDeath->setText(QString::number(selectedPerson.p.getDeath()));
     ui->textEditPeopleInfo->setText(QString::fromStdString(selectedPerson.p.getInfo()));
-
-    ui->listPeopleCreations->clear();
-    for(unsigned int i=0; i<selectedPerson.creations.size(); i++)
-    {
-        string computerdisplay;
-        computerdisplay = selectedPerson.creations[i].getName() + " " + to_string(selectedPerson.creations[i].getYearCreated());
-        ui->listPeopleCreations->addItem(QString::fromStdString(computerdisplay));
-    }
 }
 
 void Edit::on_pushButtonSubmit_clicked()
@@ -102,6 +94,53 @@ void Edit::on_pushButtonSubmit_clicked()
     personToReturn.p.setInfo(info);
 
     this->done(1);
+}
+
+void Edit::displayComputers(vector<computersWithPeople> computers)
+{
+    ui->tablePeopleCreations->setSortingEnabled(false);
+    ui->tablePeopleCreations->hideColumn(0);
+    ui->tablePeopleCreations->setColumnWidth(2,330);
+    ui->tablePeopleCreations->setColumnWidth(1,70);
+    ui->tablePeopleCreations->clearContents();
+    ui->tablePeopleCreations->setRowCount(computers.size());
+    for(unsigned int row = 0; row < computers.size(); row++)
+    {
+        computersWithPeople currComputer = computers[row];
+        QTableWidgetItem *checkbox = new QTableWidgetItem();
+        for(int i = 0; i < selectedPerson.creations.size(); i++)
+        {
+            if(currComputer.c.getId() == selectedPerson.creations[i].getId())
+            {
+                checkbox->setCheckState(Qt::Checked);
+                break;
+            }
+            else
+            {
+                checkbox->setCheckState(Qt::Unchecked);
+            }
+        }
+        ui->tablePeopleCreations->setItem(row,0,new QTableWidgetItem(QString::number(currComputer.c.getId())));
+        ui->tablePeopleCreations->setItem(row,1,checkbox);
+        ui->tablePeopleCreations->setItem(row,2,new QTableWidgetItem(QString::fromStdString(currComputer.c.getName())));
+        ui->tablePeopleCreations->setItem(row,3,new QTableWidgetItem(QString::number(currComputer.c.getYearCreated())));
+    }
+    ui->tablePeopleCreations->setSortingEnabled(true);
+}
+
+vector<int> Edit::getCheckedComputers()
+{
+    vector<int> checkedComputersId;
+    int rows = ui->tablePeopleCreations->rowCount();
+    for(int i = 0; i < rows; i++)
+    {
+        if(ui->tablePeopleCreations->item(i,1)->data(Qt::CheckStateRole) == Qt::Checked)
+        {
+            checkedComputersId.push_back(ui->tablePeopleCreations->item(i,0)->text().toInt());
+        }
+    }
+    return checkedComputersId;
+
 }
 
 void Edit::on_ButtonCancel_clicked()

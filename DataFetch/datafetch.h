@@ -89,6 +89,7 @@ public:
      * @return
      */
     bool editComputerDb(const int &id, const string &name, const int &year, const string &type, const bool &wasBuilt, const string &info);
+    bool editConnectionDb(const int &sid, const int &cid, const bool &isDeleted);
     /**
      * @brief deletePeople hides the person in the SQL DB with matching id.
      * @param id of the person.

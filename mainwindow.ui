@@ -30,7 +30,7 @@
        <enum>Qt::DefaultContextMenu</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabPeople">
        <attribute name="title">
@@ -507,7 +507,7 @@
      <x>0</x>
      <y>0</y>
      <width>645</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

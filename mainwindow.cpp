@@ -406,10 +406,27 @@ void MainWindow::on_ButtonPeopleEdit_clicked()
     Edit edit;
     peopleWithComputers personToDisplay = getSelectedPerson();
     edit.setSelectedPerson(personToDisplay);
+    edit.displayComputers(theLogic.printerSortComputers(1,1));
     bool edited = edit.exec();
-    //people editedPerson = edit.getPersonChanged();
     if(edited)
     {
+        vector<int> checkedComputers = edit.getCheckedComputers();
+        foreach (int comID, checkedComputers)
+        {
+            theLogic.insertConnection(personToDisplay.p.getId(), comID);
+            cout << "inserting: " << comID << endl;
+        }
+        foreach (computers com, personToDisplay.creations)
+        {
+            int comID = com.getId();
+            if ( std::find(checkedComputers.begin(), checkedComputers.end(), comID) == checkedComputers.end() )
+            {
+                theLogic.deleteConnection(personToDisplay.p.getId(),comID);
+                cout << "deleting: " << comID << endl;
+            }
+
+        }
+
         bool success = theLogic.editPerson(edit.getPersonChanged());
         if(!success)
         {

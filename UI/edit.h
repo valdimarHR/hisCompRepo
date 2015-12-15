@@ -22,6 +22,8 @@ public:
     explicit Edit(QWidget *parent = 0);
     void setSelectedPerson(peopleWithComputers MSelectedPerson);
     people getPersonChanged();
+    void displayComputers(vector<computersWithPeople> computers);
+    vector<int> getCheckedComputers();
     ~Edit();
 
 private slots:

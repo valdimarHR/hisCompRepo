@@ -26,7 +26,7 @@ vector<peopleWithComputers> dataFetch::fetchPeople(string columnName, string sea
     QString command = "SELECT * FROM Scientists AS S "
             "LEFT JOIN (SELECT * FROM Computers AS C "
             "LEFT JOIN Invents AS I "
-            "ON I.cid = C.c_id) AS T "
+            "ON I.cid = C.c_id AND I.isDeleted != 1) AS T "
             "ON T.sid = S.s_id WHERE S." + QString::fromStdString(columnName) + " LIKE ";
     if(searchString != "male" && searchString != "Male")
     {
@@ -55,7 +55,7 @@ vector<computersWithPeople> dataFetch::fetchComputers(string columnName, string 
     QString command = "SELECT * FROM Computers AS C "
             "LEFT JOIN (SELECT * FROM Scientists AS S "
             "LEFT JOIN Invents AS I "
-            "ON I.sid = S.s_id) AS T "
+            "ON I.sid = S.s_id AND I.isDeleted != 1) AS T "
             "ON T.cid = C.c_id WHERE C." + QString::fromStdString(columnName) + " LIKE '%" + QString::fromStdString(seartchString) + "%'";
 
     query.prepare(command);
@@ -82,7 +82,11 @@ bool dataFetch::alreadyConnnected(const int sid, const int cid)
         int tableSid = query.value("sid").toUInt();
         int tableCid = query.value("cid").toUInt();
         if ((sid == tableSid)&&(cid == tableCid))
+        {
             connected = true;
+            editConnectionDb(sid, cid, 0);
+            break;
+        }
     }
 
     return connected;
@@ -148,6 +152,16 @@ bool dataFetch::editComputerDb(const int &id, const string &name, const int &yea
 {
     QSqlQuery query(db);
     string comm = "UPDATE Computers SET cName=\"" + name + "\", yearCreated=" + to_string(year) + ", type=\"" + type + "\", wasbuilt=" + to_string(wasBuilt) + ", cInfo=\""+ info + "\" WHERE c_id = " + to_string(id);
+    QString command = QString::fromStdString(comm);
+    query.prepare(command);
+    query.exec();
+    return true;
+}
+
+bool dataFetch::editConnectionDb(const int &sid, const int &cid, const bool &isDeleted)
+{
+    QSqlQuery query(db);
+    string comm = "UPDATE Invents SET isDeleted=" + to_string(isDeleted) + " WHERE sid=" + to_string(sid) + " AND cid=" + to_string(cid);
     QString command = QString::fromStdString(comm);
     query.prepare(command);
     query.exec();
