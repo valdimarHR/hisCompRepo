@@ -6,7 +6,7 @@ readMe::readMe(QWidget *parent) :
     ui(new Ui::readMe)
 {
     ui->setupUi(this);
-    QFile file(":/files/README.txt");
+    QFile file("/files/README.txt");
     QTextStream in(&file);
     ui->textBrowser->setText(in.readAll());
 }
