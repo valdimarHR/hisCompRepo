@@ -10,11 +10,14 @@
     <height>653</height>
    </rect>
   </property>
+  <property name="mouseTracking">
+   <bool>true</bool>
+  </property>
   <property name="windowTitle">
    <string>The Computer Scientist DB</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="resources.qrc">
+   <iconset resource="images.qrc">
     <normaloff>:/icons/icons/PersonWIthComp.png</normaloff>:/icons/icons/PersonWIthComp.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -29,6 +32,9 @@
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
+      </property>
+      <property name="mouseTracking">
+       <bool>true</bool>
       </property>
       <property name="contextMenuPolicy">
        <enum>Qt::DefaultContextMenu</enum>
@@ -88,6 +94,9 @@
         </item>
         <item>
          <widget class="QTableWidget" name="tablePeople">
+          <property name="mouseTracking">
+           <bool>true</bool>
+          </property>
           <property name="contextMenuPolicy">
            <enum>Qt::CustomContextMenu</enum>
           </property>
@@ -336,6 +345,9 @@
         </item>
         <item>
          <widget class="QTableWidget" name="tableComputer">
+          <property name="mouseTracking">
+           <bool>true</bool>
+          </property>
           <property name="contextMenuPolicy">
            <enum>Qt::CustomContextMenu</enum>
           </property>
@@ -520,6 +532,13 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuRead_Me">
+    <property name="title">
+     <string>Read Me</string>
+    </property>
+    <addaction name="actionOpen_readme_file"/>
+   </widget>
+   <addaction name="menuRead_Me"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -538,6 +557,11 @@
   <action name="actionComputerRightClicked">
    <property name="text">
     <string>Edit</string>
+   </property>
+  </action>
+  <action name="actionOpen_readme_file">
+   <property name="text">
+    <string>Open README file</string>
    </property>
   </action>
  </widget>
@@ -566,7 +590,7 @@
   <tabstop>lineEditPeopleDeath</tabstop>
  </tabstops>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="images.qrc"/>
  </resources>
  <connections/>
 </ui>

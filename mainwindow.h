@@ -14,7 +14,7 @@
 #include "UI/clickscientist.h"
 #include <QMenu>
 #include "UI/secretsanta.h"
-#include <QDate>
+#include "UI/readme.h"
 
 namespace Ui {
 class MainWindow;
@@ -93,14 +93,20 @@ private slots:
 
     void on_lineEditComputersFilter_textChanged(const QString &arg1);
     /**
-     * @brief
+     * @brief When edit button is clicked then editSelectedPerson is called.
      */
     void on_ButtonPeopleEdit_clicked();
-
+    /**
+     * @brief When edit button is clicked then editSelectedComputer is called.
+     */
     void on_ButtonComputersEdit_clicked();
-
+    /**
+     * @brief When a computer is double clicked then a new window opens with info of that computer.
+     */
     void on_tableComputer_doubleClicked(const QModelIndex &index);
-
+    /**
+     * @brief When a scientist is double clicked then a new window opens with info of that scientist.
+     */
     void on_tablePeople_doubleClicked(const QModelIndex &index);
 
     void on_tablePeople_customContextMenuRequested(const QPoint & pos);
@@ -115,16 +121,56 @@ private slots:
 
     void editSelectedComputer();
 
+    void on_actionOpen_readme_file_triggered();
+
+    void on_tableComputer_entered(const QModelIndex &index);
+
+    void on_tablePeople_entered(const QModelIndex &index);
+
 private:
+    /**
+     * @brief displayAllPeople prepares a list of all the people so it can be printed with displaypeople.
+     */
     void displayAllPeople();
+    /**
+     * @brief displayAllComputers prepares a list of all computers so it can be printed with displayComputers.
+     */
     void displayAllComputers();
+    /**
+     * @brief displayPeople, displays the peopleWithComputers vector to the table in the program.
+     */
     void displayPeople(vector<peopleWithComputers>);
+    /**
+     * @brief displayComputers, displays the computersWithPeople vector to the table in the program.
+     */
     void displayComputers(vector<computersWithPeople>);
+    /**
+     * @brief clearPeopleInsert clears the fields where users write info of a person to be added.
+     */
     void clearPeopleInsert();
+    /**
+     * @brief clearComputerInsert clears the fields where users write info of a computer.
+     */
     void clearComputerInsert();
+    /**
+     * @brief getSelectedIdPeople checks where user has selected on the table and gets the id of that scientist.
+     * @return the id of the selected scientist.
+     */
     int getSelectedIdPeople();
+    /**
+     * @brief getSelectedIdComputer checks where user has selected on the table and gets the id of that computer.
+     * @return the id of the selected computer.
+     */
     int getSelectedIdComputer();
+    /**
+     * @brief getSelectedPerson calls getSelectedIdPeople and then fetches from the db all info of that scientist.
+     * @return all the info of the selected person.
+     */
     peopleWithComputers getSelectedPerson();
+    /**
+     * @brief getSelectedComputer calls getSelectedIdComputer() and then fetches from the db all info of that computer.
+     * @return all the info of the selected computer.
+     */
     computersWithPeople getSelectedComputer();
     Ui::MainWindow *ui;
     logic theLogic;
