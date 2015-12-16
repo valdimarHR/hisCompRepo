@@ -6,8 +6,7 @@ this is the 3rd edition.
 
 GitHub repository: https://github.com/valdimarHR/hisCompRepo
 
-Open the folder executableProgram and there is a applcatioin with the name 
-hisCompProjectUI which will run the program.
+If program is run in Qt move database and readme file to build map for proper function.
 
 Note: in the code, comments are made about a function on top of the decleration.
 
@@ -33,12 +32,11 @@ New features from last release:
 - Resources to images and icons.
 - New database created if needed, with all new columns.
 - Good tap order in main window.
-- Messages shown when mouse is over table, to let user know of the double click posability.
+- Messages shown when mouse is over table, to let user know of the double click possability.
 
 Secret trick:
-- Type the name Secret Santa in the name field in People,
-put something in all required fields and push Add.
-Merry Christas!
+- Type the name Secret Santa in the name field in People and push Add.
+  Merry Christmas!
 
 Bugs fixed:
 - Not possibe to put dates in the future, pop up window with error.

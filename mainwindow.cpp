@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    //First column is id and is not to be displayed, only for us to use.
     ui->tablePeople->hideColumn(0);
     ui->tableComputer->hideColumn(0);
     ui->tablePeople->setColumnWidth(1,250);
@@ -19,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tableComputer->setMouseTracking(true);
     displayAllPeople();
     displayAllComputers();
+    //Make program always open with people selected.
     ui->tabWidget->setCurrentIndex(0);
 }
 
@@ -67,6 +69,7 @@ void MainWindow::on_buttonPeopleAdd_clicked()
     QString qBirth = ui->lineEditPeopleBirth->text();
     QString qDeath = ui->lineEditPeopleDeath->text();
 
+    //smá jólagleði auka
     if(qName == "Secret Santa")
     {
         secretSanta secretsanta;
@@ -89,8 +92,9 @@ void MainWindow::on_buttonPeopleAdd_clicked()
         death = constants::notDead;
     else
         death = qDeath.toUInt();
-
-    if(birth == 0) //If qBirth or qDeath is not a number, toUInt converts it to 0. So this is an error when text is applied where number is expected.
+    //If qBirth or qDeath is not a number, toUInt converts it to 0.
+    //So this is an error when text is applied where number is expected.
+    if(birth == 0)
     {
         QMessageBox::warning(this, "Warning","Error!\nYou have to enter a number for\nyear of birth.");
         ui->lineEditPeopleBirth->setText("");
@@ -139,10 +143,11 @@ void MainWindow::on_buttonPeopleAdd_clicked()
         ui->tablePeople->setSortingEnabled(false);
         displayAllPeople();
         ui->tablePeople->setSortingEnabled(true);
+        //Clears all the fields that user filled out to add.
         clearPeopleInsert();
     }
 }
-
+//Next functions are to clear old error messages.
 void MainWindow::on_lineEditPeopleName_textEdited(const QString &arg1)
 {
     ui->labelPeopleError->setText("");
@@ -234,6 +239,8 @@ computersWithPeople MainWindow::getSelectedComputer()
 
 void MainWindow::on_tabWidget_tabBarClicked(int index)
 {
+    //This is done so new changes will be displayed.
+    //Even though done on the other tab.
     if(index == 0)
     {
         ui->tableComputer->clearContents();
@@ -268,15 +275,15 @@ void MainWindow::on_buttonPeopleDelete_clicked()
     theLogic.eraseChosenPeople(id);
     ui->tablePeople->setSortingEnabled(false);
     displayAllPeople();
+    ui->tablePeople->setSortingEnabled(true);
     ui->ButtonPeopleEdit->setEnabled(false);
     ui->buttonPeopleDelete->setEnabled(false);
-    ui->tablePeople->setSortingEnabled(true);
 }
 
 void MainWindow::on_buttonComputerAdd_clicked()
 {
-    QString qName = ui ->lineEditComputerName ->text();
-    QString qType = ui ->lineEditComputerType ->text();
+    QString qName = ui->lineEditComputerName->text();
+    QString qType = ui->lineEditComputerType->text();
     QString qYearCreated = ui->lineEditComputerCreated->text();
     QString qWasBuilt = ui->dropDownComputerBuilt->currentText();
 
@@ -324,10 +331,13 @@ void MainWindow::on_buttonComputerAdd_clicked()
         ui->tableComputer->setSortingEnabled(false);
         displayAllComputers();
         ui->tableComputer->setSortingEnabled(true);
+        ui->ButtonComputersEdit->setEnabled(false);
+        ui->buttonComputerDelete->setEnabled(false);
         clearComputerInsert();
     }
 }
 
+//Next functions are to clear old error message.
 void MainWindow::on_lineEditComputerName_textEdited(const QString &arg1)
 {
     ui->labelComputerError->setText("");
@@ -347,6 +357,7 @@ void MainWindow::on_dropDownComputerBuilt_activated(const QString &arg1)
 {
     ui->labelComputerError->setText("");
 }
+
 void MainWindow::on_tableComputer_clicked(const QModelIndex &index)
 {
     ui->buttonComputerDelete->setEnabled(true);
@@ -367,9 +378,9 @@ void MainWindow::on_buttonComputerDelete_clicked()
     theLogic.eraseChosenComputer(id);
     ui->tableComputer->setSortingEnabled(false);
     displayAllComputers();
+    ui->tableComputer->setSortingEnabled(true);
     ui->buttonComputerDelete->setEnabled(false);
     ui->ButtonComputersEdit->setEnabled(false);
-    ui->tableComputer->setSortingEnabled(true);
 }
 
 void MainWindow::on_lineEditPeopleFilter_textChanged(const QString &inputText)
@@ -531,7 +542,11 @@ void MainWindow::editSelectedComputer()
 void MainWindow::on_actionOpen_readme_file_triggered()
 {
     readMe readme;
-    readme.exec();
+    bool success = readme.connectoToFile();
+    if (success)
+        readme.exec();
+    else
+        return;
 }
 
 void MainWindow::on_tableComputer_entered(const QModelIndex &index)
@@ -562,6 +577,8 @@ void MainWindow::on_tablePeople_doubleClicked(const QModelIndex &index)
 
 void MainWindow::on_tablePeople_customContextMenuRequested(const QPoint & pos)
 {
+//    Adds the action actionRightClicked to the menu that pops up when
+//            right clicked.
     QMenu *menu=new QMenu(this);
     menu->addAction(ui->actionRightClicked);
     menu->exec(ui->tablePeople->viewport()->mapToGlobal(pos));

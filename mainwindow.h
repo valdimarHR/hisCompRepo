@@ -122,14 +122,22 @@ private slots:
 
     void on_actionComputerRightClicked_triggered();
     /**
-     * @brief
+     * @brief opens the edit window and when if changed are submitted there
+     * the information is taken and sent to logic and user is told how it went.
+     * Same for next one only for computers.
      */
     void editSelectedPerson();
 
     void editSelectedComputer();
-
+    /**
+     * @brief When open read me file is clicked in the left corner a window is opened
+     * that shows the file.
+     */
     void on_actionOpen_readme_file_triggered();
-
+    /**
+     * @brief slot for when mouse enters a table, to display a message about
+     * the possibility of double clicking the list. Same for next function.
+     */
     void on_tableComputer_entered(const QModelIndex &index);
 
     void on_tablePeople_entered(const QModelIndex &index);

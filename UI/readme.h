@@ -15,6 +15,11 @@ class readMe : public QDialog
 
 public:
     explicit readMe(QWidget *parent = 0);
+    /**
+     * @brief Checks if file was opened and displays an error if not. Else it puts the
+     * file in a textBrowser.
+     */
+    bool connectoToFile();
     ~readMe();
 
 private slots:

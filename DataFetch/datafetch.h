@@ -79,13 +79,13 @@ public:
     /**
      * @brief editPersonDb finds an already existing scientist from the db and updates its info.
      * @param , this is the info of the updated scientist.
-     * @return true when progress is complete.
+     * @return true when progress is complete, false if person was already in DB.
      */
     bool editPersonDb(const int &id, const string &name, const string &gender, const int &birth, const int &death, const string &info);
     /**
      * @brief editComputerDB finds an already existing computer from db and updates its info.
      * @param , the new info.
-     * @return true when progress is complete.
+     * @return true when progress is complete, false if computer was already in DB.
      */
     bool editComputerDb(const int &id, const string &name, const int &year, const string &type, const bool &wasBuilt, const string &info);
     /**

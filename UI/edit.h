@@ -14,6 +14,10 @@ namespace Ui {
 class Edit;
 }
 
+/**
+ * @brief very similar to editComputers.
+ */
+
 class Edit : public QDialog
 {
     Q_OBJECT
