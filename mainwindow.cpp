@@ -258,6 +258,7 @@ void MainWindow::on_buttonPeopleDelete_clicked()
     int answer = QMessageBox::question(this, "Confirm", "Are you sure you want to delete this person?");
     if(answer == QMessageBox::No)
     {
+        ui->ButtonPeopleEdit->setEnabled(false);
         ui->buttonPeopleDelete->setEnabled(false);
         return;
     }
@@ -267,6 +268,7 @@ void MainWindow::on_buttonPeopleDelete_clicked()
     theLogic.eraseChosenPeople(id);
     ui->tablePeople->setSortingEnabled(false);
     displayAllPeople();
+    ui->ButtonPeopleEdit->setEnabled(false);
     ui->buttonPeopleDelete->setEnabled(false);
     ui->tablePeople->setSortingEnabled(true);
 }
@@ -356,6 +358,7 @@ void MainWindow::on_buttonComputerDelete_clicked()
     int answer = QMessageBox::question(this, "Confirm", "Are you sure you want to delete this computer?");
     if(answer == QMessageBox::No)
     {
+        ui->ButtonComputersEdit->setEnabled(false);
         ui->buttonComputerDelete->setEnabled(false);
         return;
     }
@@ -365,6 +368,7 @@ void MainWindow::on_buttonComputerDelete_clicked()
     ui->tableComputer->setSortingEnabled(false);
     displayAllComputers();
     ui->buttonComputerDelete->setEnabled(false);
+    ui->ButtonComputersEdit->setEnabled(false);
     ui->tableComputer->setSortingEnabled(true);
 }
 
@@ -481,6 +485,7 @@ void MainWindow::editSelectedPerson()
         displayAllPeople();
         ui->tablePeople->setSortingEnabled(true);
         ui->ButtonPeopleEdit->setEnabled(false);
+        ui->buttonPeopleDelete->setEnabled(false);
     }
 }
 
@@ -519,6 +524,7 @@ void MainWindow::editSelectedComputer()
         displayAllComputers();
         ui->tableComputer->setSortingEnabled(true);
         ui->ButtonComputersEdit->setEnabled(false);
+        ui->buttonComputerDelete->setEnabled(false);
     }
 }
 

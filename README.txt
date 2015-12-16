@@ -5,8 +5,6 @@ UI stands for the newest version which contains a better user interface,
 this is the 3rd edition.
 
 GitHub repository: https://github.com/valdimarHR/hisCompRepo
-Qt project files in: "hisCompProject" folder
-Executable program in: "executableProgram" folder
 
 Open the folder executableProgram and there is a applcatioin with the name 
 hisCompProjectUI which will run the program.
@@ -35,6 +33,7 @@ New features from last release:
 - Resources to images and icons.
 - New database created if needed, with all new columns.
 - Good tap order in main window.
+- Messages shown when mouse is over table, to let user know of the double click posability.
 
 Secret trick:
 - Type the name Secret Santa in the name field in People,
