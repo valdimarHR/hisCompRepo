@@ -180,22 +180,6 @@ bool logic::checkIfcomputerOnList(const computers& computer)
    return alreadyOnList;
 }
 
-vector<peopleWithComputers> logic::findPeople(string column, string searchValue)
-{
-    vector<peopleWithComputers> sortedVector = theData.fetchPeople(column, searchValue);
-    sort(sortedVector.begin(), sortedVector.end(), [](peopleWithComputers const &a, peopleWithComputers const &b)
-    {return (a.p.getName() < b.p.getName());});
-    return sortedVector;
-}
-
-vector<computersWithPeople> logic::findComputer(string column, string searchValue)
-{
-    vector<computersWithPeople> sortedVector = theData.fetchComputers(column, searchValue);
-    sort(sortedVector.begin(), sortedVector.end(), [](computersWithPeople const &a, computersWithPeople const &b)
-    {return (a.c.getName() < b.c.getName());});
-    return sortedVector;
-}
-
 void logic::eraseChosenPeople(const int& id)
 {
     theData.deletePeople(id);

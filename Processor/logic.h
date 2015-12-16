@@ -31,6 +31,22 @@ class logic
 public:
     logic();
     /**
+     * @brief allPeopleSorted sends a request for a people vector from data and then sorts that vector as the
+     * user has requested.
+     * @param orderBy is to what column should the table be ordered by.
+     * @param ascending order or not.
+     * @return returns a sorted vector with people to the ui for it to display.
+     */
+    vector<peopleWithComputers> allPeopleSorted(int orderBy, int ascending);
+    /**
+     * @brief allComputersSorted sends a request for a computer vector from data and then sorts that vector as the
+     * user has requested.
+     * @param orderBy is to what column should the table be ordered by.
+     * @param ascending order or not.
+     * @return returns a sorted vector with computers to the ui for it to display.
+     */
+    vector<computersWithPeople> allComputersSorted(int orderBy, int ascending);
+    /**
      * @brief Prepares to insert person to SQL DB.(already excisting etc.)
      * @param the information needed to make an object of people.
      * @return a bool, true if the person was already in database.
@@ -79,37 +95,6 @@ public:
      * @return true if success.
      */
     bool editComputer(const computers &computer);
-    /**
-     * @brief printerSortPeople sends a request for a people vector from data and then sorts that vector as the
-     * user has requested.
-     * @param orderBy is to what column should the table be ordered by.
-     * @param ascending order or not.
-     * @return returns a sorted vector with people to the ui for it to display.
-     */
-    vector<peopleWithComputers> allPeopleSorted(int orderBy, int ascending);
-    /**
-     * @brief printerSortComputers sends a request for a computer vector from data and then sorts that vector as the
-     * user has requested.
-     * @param orderBy is to what column should the table be ordered by.
-     * @param ascending order or not.
-     * @return returns a sorted vector with computers to the ui for it to display.
-     */
-    vector<computersWithPeople> allComputersSorted(int orderBy, int ascending);
-    /**
-     * @brief finds people in database using vector and sorts them as the
-     * user wants to sort them
-     * @param column is to know in field in the Scientist table to look for (name, birth etc)
-     * @param searchValue is a string which content will be looked for.
-     * @return returns the found people in a sorted list
-     */
-    vector<peopleWithComputers> findPeople(string column, string searchValue);
-    /**
-     * @brief find coumputers in database using vector and sorts them
-     * as the user wants to sort them
-     * @param the same as in the function on top of this except for computer
-     * @return returns the found computers in a sorted list
-     */
-    vector<computersWithPeople> findComputer(string column, string searchValue);
     /**
      * @brief eraseChosenPeople calls theData.deletePeople to hide the scientist with the matching id.
      * @param id of the person to be hidden.
