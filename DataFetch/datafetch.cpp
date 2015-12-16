@@ -81,7 +81,7 @@ bool dataFetch::alreadyConnnected(const int sid, const int cid)
 
     QSqlQuery query(db);
 
-    query.exec("SELECT * FROM Invents WHERE isDeleted IS 0");
+    query.exec("SELECT * FROM Invents");
 
     bool connected = false;
 
@@ -153,10 +153,6 @@ bool dataFetch::editPersonDb(const int &id, const string &name, const string &ge
 {
     QSqlQuery query(db);
     people personCheck(name, gender, birth, death);
-    if(personAlreadyOnList(personCheck))
-    {
-        return false;
-    }
     string comm = "UPDATE Scientists SET sName=\"" + name + "\", gender=\"" + gender + "\", birth=" + to_string(birth) + ", death=" + to_string(death) + ", sInfo=\""+ info + "\" WHERE s_id = " + to_string(id);
     QString command = QString::fromStdString(comm);
     query.prepare(command);
@@ -168,10 +164,6 @@ bool dataFetch::editComputerDb(const int &id, const string &name, const int &yea
 {
     QSqlQuery query(db);
     computers computerCheck(name,year, type, wasBuilt);
-    if(computerAlreadyOnList(computerCheck))
-    {
-        return false;
-    }
     string comm = "UPDATE Computers SET cName=\"" + name + "\", yearCreated=" + to_string(year) + ", type=\"" + type + "\", wasbuilt=" + to_string(wasBuilt) + ", cInfo=\""+ info + "\" WHERE c_id = " + to_string(id);
     QString command = QString::fromStdString(comm);
     query.prepare(command);

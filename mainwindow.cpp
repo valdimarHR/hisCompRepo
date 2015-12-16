@@ -494,17 +494,13 @@ void MainWindow::editSelectedPerson()
             int comID = com.getId();
             if ( std::find(checkedComputers.begin(), checkedComputers.end(), comID) == checkedComputers.end() )
             {
+                if(com.getName() == "default") break;
                 theLogic.deleteConnection(personToDisplay.p.getId(),comID);
             }
 
         }
 
         bool success = theLogic.editPerson(edit.getPersonChanged());
-        if(!success)
-        {
-            ui->statusBar->showMessage("This person was already in the database!", 2000);
-            return;
-        }
         ui->statusBar->showMessage("Changes were successfully submitted", 2000);
         ui->lineEditPeopleFilter->setText("");
         //Disabling table sorting is a Qt protocall when editing rows. This is then enabled at the bottom.
@@ -535,6 +531,7 @@ void MainWindow::editSelectedComputer()
             int pepID = pep.getId();
             if ( std::find(checkedPeople.begin(), checkedPeople.end(), pepID) == checkedPeople.end() )
             {
+                if(pep.getName() == "default") break;
                 theLogic.deleteConnection(pepID, selectedComputer.c.getId());
             }
 
