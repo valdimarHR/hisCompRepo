@@ -2,14 +2,18 @@
 
 dataFetch::dataFetch()
 {
+    //Setting the databease type (SQLite).
     db = QSqlDatabase::addDatabase("QSQLITE");
     QFile dbfile;
+    //If the database file does not exist it is created.
     if(!dbfile.exists(constants::NAME_OF_DATABASE))
     {
         createDatabase();
         return;
     }
+    //The database filename.
     QString dbName = constants::NAME_OF_DATABASE;
+    //Connecting the Qt database object to the actual database file.
     db.setDatabaseName(dbName);
     db.open();
 }
@@ -19,15 +23,18 @@ dataFetch::~dataFetch()
     db.close();
 }
 
+//Fetches all the people and the computers they are linked to and returns it in a peopleWithComputers vector.
 vector<peopleWithComputers> dataFetch::fetchPeople(string columnName, string searchString)
 {
     QSqlQuery query(db);
 
+    //The query string to get all the people and the computers they are linked to.
     QString command = "SELECT * FROM Scientists AS S "
             "LEFT JOIN (SELECT * FROM Computers AS C "
             "LEFT JOIN Invents AS I "
             "ON I.cid = C.c_id AND I.isDeleted != 1) AS T "
             "ON T.sid = S.s_id WHERE S." + QString::fromStdString(columnName) + " LIKE ";
+    //A special case when looking or 'male' in gender column since feMALE contains that string too.
     if(searchString != "male" && searchString != "Male")
     {
         command += "'%" + QString::fromStdString(searchString) + "%'";
@@ -37,21 +44,22 @@ vector<peopleWithComputers> dataFetch::fetchPeople(string columnName, string sea
         command += "'" + QString::fromStdString(searchString) + "%'";
     }
 
-
     query.prepare(command);
     query.exec();
 
+    //Converts the query table to a peopleWithComputers vector.
     vector<peopleWithComputers> pepVector = convertPeopleTable(query);
-
 
     return pepVector;
 
 }
 
+//Fetches all the computers and the people they are linked to and returns it in a computerWithPeople vector.
 vector<computersWithPeople> dataFetch::fetchComputers(string columnName, string seartchString)
 {
     QSqlQuery query(db);
 
+    //The query string to get all the computers and the people they are linked to.
     QString command = "SELECT * FROM Computers AS C "
             "LEFT JOIN (SELECT * FROM Scientists AS S "
             "LEFT JOIN Invents AS I "
@@ -61,6 +69,7 @@ vector<computersWithPeople> dataFetch::fetchComputers(string columnName, string 
     query.prepare(command);
     query.exec();
 
+    //Converts the query table to a computersWithPeople vector.
     vector<computersWithPeople> comVector = convertComputersTable(query);
 
     return comVector;
@@ -170,12 +179,20 @@ bool dataFetch::editConnectionDb(const int &sid, const int &cid, const bool &isD
     return true;
 }
 
+//Converts the query table to a peopleWithComputers vector.
 vector<peopleWithComputers> dataFetch::convertPeopleTable(QSqlQuery& query)
 {
+    //The vector to push_back on and return at the end.
     vector<peopleWithComputers> peopleVector;
+
+    // The query is coded so it will return a row for every computer the person
+    // is connected to or one row with null computer if no computer is connected to that person.
+    // To see if a computer should be added to a new person or the last person we make a lastId variable
+    // to hold the last persons id.
     int lastId = -1;
     while(query.next())
     {
+        //If the person is marked deleted it will not create an object for it.
         bool isDeleted = query.value("sIsDeleted").toBool();
         
         if (isDeleted) 
@@ -186,6 +203,9 @@ vector<peopleWithComputers> dataFetch::convertPeopleTable(QSqlQuery& query)
         int currentPersonId = query.value("s_id").toUInt();
 
         computers comp;
+
+        //If the person has a computer id(c_id) linked to it, convert the column values to
+        //the corresponding computer-object variables.
         if(query.value("c_id").toUInt() != 0)
         {
             bool connectionDeleted = query.value("isDeleted").toBool();
@@ -204,6 +224,9 @@ vector<peopleWithComputers> dataFetch::convertPeopleTable(QSqlQuery& query)
             comp.setWasBuilt(CwasBuilt);
             comp.setInfo(Cinfo);
 
+            //If the current person id is the same as the last persons id
+            //then there is no reason to make a new person-object but just add
+            //that computer under the last persons computer-verctor.
             if(currentPersonId == lastId)
             {
                 peopleVector.back().creations.push_back(comp);
@@ -211,6 +234,8 @@ vector<peopleWithComputers> dataFetch::convertPeopleTable(QSqlQuery& query)
             }
         }
 
+        //Convert the person column values to
+        //the corresponding person-object variables.
         string Pname = query.value("sName").toString().toStdString();
         string Pgender = query.value("gender").toString().toStdString();
         int Pborn = query.value("birth").toUInt();
@@ -233,12 +258,20 @@ vector<peopleWithComputers> dataFetch::convertPeopleTable(QSqlQuery& query)
     return peopleVector;
 }
 
+//Converts the query table to a computersWithPeople vector.
 vector<computersWithPeople> dataFetch::convertComputersTable(QSqlQuery& query)
 {
+    //The vector to push_back on and return at the end.
     vector<computersWithPeople> computersVector;
+
+    // The query is coded so it will return a row for every person the computer
+    // is connected to or one row with null person if no person is connected to that computer.
+    // To see if a person should be added to a new computer or the last computer we make a lastId variable
+    // to hold the last computer id.
     int lastId = -1;
     while(query.next())
     {
+        //If the computer is marked deleted it will not create an object for it.
         bool isDeleted = query.value("cIsDeleted").toBool();
 
         if (isDeleted)
@@ -249,6 +282,9 @@ vector<computersWithPeople> dataFetch::convertComputersTable(QSqlQuery& query)
         int currentComputerId = query.value("c_id").toUInt();
 
         people per;
+
+        //If the computer has a scientist id(s_id) linked to it, convert the column values to
+        //the corresponding person-object variables.
         if(query.value("s_id").toUInt() != 0)
         {
             bool connectionDeleted = query.value("isDeleted").toBool();
@@ -267,6 +303,9 @@ vector<computersWithPeople> dataFetch::convertComputersTable(QSqlQuery& query)
             per.setDeath(Pdeath);
             per.setInfo(Pinfo);
 
+            //If the current computer id is the same as the last computer id
+            //then there is no reason to make a new computer-object but just add
+            //that person under the last computer people-verctor.
             if(currentComputerId == lastId)
             {
                 computersVector.back().creators.push_back(per);
@@ -274,6 +313,8 @@ vector<computersWithPeople> dataFetch::convertComputersTable(QSqlQuery& query)
             }
         }
 
+        //Convert the computer column values to
+        //the corresponding computer-object variables.
         computersWithPeople comp;
         string Cname = query.value("cName").toString().toStdString();
         int CyearCreated = query.value("yearCreated").toUInt();
@@ -377,12 +418,15 @@ bool dataFetch::deleteConnectionDb(const int &sid, const int &cid)
     return true;
 }
 
+// Creates a database. This should be called if the database file does not exist.
 void dataFetch::createDatabase()
 {
+    //Creates the database file on disk and connects it to the  Qt database object.
     db.setDatabaseName(constants::NAME_OF_DATABASE);
     db.open();
     QSqlQuery query(db);
 
+    //The query to create the right tables of the newly created database.
     query.prepare("CREATE TABLE 'Computers' ('c_id' INTEGER PRIMARY KEY  "
                   "NOT NULL ,'cName' VARCHAR NOT NULL ,'yearCreated' "
                   "INTEGER NOT NULL ,'type' VARCHAR NOT NULL ,"
