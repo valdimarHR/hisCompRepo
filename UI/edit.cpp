@@ -57,14 +57,14 @@ void Edit::on_pushButtonSubmit_clicked()
         return;
     }
 
-    if(birth == 0) //því ef toUnt convertar texta í 0;
+    if(birth == 0) //Because toUnt converts text to 0;
     {
         QMessageBox::warning(this, "Warning", "Don't put a text for year\nof birth!");
         ui->lineEditPeopleBirth->setText("");
         return;
     }
 
-    if(death == 0) //því ef toUnt convertar texta í 0;
+    if(death == 0)
     {
         QMessageBox::warning(this, "Warning", "Don't put a text for year\nof death!");
         ui->lineEditPeopleDeath->setText("");

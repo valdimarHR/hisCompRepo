@@ -15,6 +15,7 @@
 #include <QMenu>
 #include "UI/secretsanta.h"
 #include "UI/readme.h"
+#include <QFile>
 
 namespace Ui {
 class MainWindow;

@@ -31,16 +31,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::displayAllPeople()
 {
-    //The allPeopleSorted function takes in a orderby number and ascending number.
-    //1 and 1 means sort by person name and ascending.
     vector<peopleWithComputers> people = theLogic.allPeopleSorted(1, 1);
     displayPeople(people);
 }
 
 void MainWindow::displayAllComputers()
 {
-    //The allComputersSorted function takes in a orderby number and ascending number.
-    //1 and 1 means sort by computer name and ascending.
     vector<computersWithPeople> computers = theLogic.allComputersSorted(1, 1);
     displayComputers(computers);
 }
