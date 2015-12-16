@@ -45,6 +45,7 @@ void MainWindow::displayAllComputers()
 
 void MainWindow::displayPeople(vector<peopleWithComputers> people)
 {
+    //Disabling table sorting is a Qt protocall when editing rows. This is then enabled at the bottom.
     ui->tablePeople->setSortingEnabled(false);
     ui->tablePeople->clearContents();
     ui->tablePeople->setRowCount(people.size());
@@ -140,6 +141,7 @@ void MainWindow::on_buttonPeopleAdd_clicked()
     {
         ui->statusBar->showMessage("Person was successfully added", 3000);
         ui->lineEditPeopleFilter->setText("");
+        //Disabling table sorting is a Qt protocall when editing rows. This is then enabled at the bottom.
         ui->tablePeople->setSortingEnabled(false);
         displayAllPeople();
         ui->tablePeople->setSortingEnabled(true);
@@ -169,6 +171,7 @@ void MainWindow::on_dropDownPeopleGender_activated(const QString &arg1)
 
 void MainWindow::displayComputers(vector<computersWithPeople> computers)
 {
+    //Disabling table sorting is a Qt protocall when editing rows. This is then enabled at the bottom.
     ui->tableComputer->setSortingEnabled(false);
     ui->tableComputer->clearContents();
     ui->tableComputer->setRowCount(computers.size());
@@ -270,6 +273,7 @@ void MainWindow::on_buttonPeopleDelete_clicked()
     int id = getSelectedIdPeople();
 
     theLogic.eraseChosenPeople(id);
+    //Disabling table sorting is a Qt protocall when editing rows. This is then enabled at the bottom.
     ui->tablePeople->setSortingEnabled(false);
     displayAllPeople();
     ui->ButtonPeopleEdit->setEnabled(false);
@@ -325,6 +329,7 @@ void MainWindow::on_buttonComputerAdd_clicked()
     {
         ui->statusBar->showMessage("Computer was successfully added", 3000);
         ui->lineEditComputersFilter->setText("");
+        //Disabling table sorting is a Qt protocall when editing rows. This is then enabled at the bottom.
         ui->tableComputer->setSortingEnabled(false);
         displayAllComputers();
         ui->tableComputer->setSortingEnabled(true);
@@ -369,6 +374,7 @@ void MainWindow::on_buttonComputerDelete_clicked()
 
     int id = getSelectedIdComputer();
     theLogic.eraseChosenComputer(id);
+    //Disabling table sorting is a Qt protocall when editing rows. This is then enabled at the bottom.
     ui->tableComputer->setSortingEnabled(false);
     displayAllComputers();
     ui->buttonComputerDelete->setEnabled(false);
@@ -376,6 +382,7 @@ void MainWindow::on_buttonComputerDelete_clicked()
     ui->tableComputer->setSortingEnabled(true);
 }
 
+//This is the string that the table is filtered by.
 void MainWindow::on_lineEditPeopleFilter_textChanged(const QString &inputText)
 {
     int rowCount = ui->tablePeople->rowCount();
@@ -385,15 +392,22 @@ void MainWindow::on_lineEditPeopleFilter_textChanged(const QString &inputText)
     }
     else
     {
+        //The column to filter by.
         int columnNum = ui->dropDownPeopleFilter->currentIndex() + 1;
+        //For every row, hider or unhide dependant on the filterstring and column to filter on.
         for(int row = 0; row < rowCount; row++)
         {
+            //If user is filtering by gender string Male/Female then it need to be
+            //casesensitive because there is male in feMALE.
             bool genderFind = columnNum == 2;
+            //Get the text.
             QString columnText = ui->tablePeople->item(row,columnNum)->text();
+            //Case-INsensitive
             if(!genderFind && !columnText.contains(inputText, Qt::CaseInsensitive))
             {
                 ui->tablePeople->hideRow(row);
             }
+            //else Case-sensitive
             else if(genderFind && !columnText.contains(inputText))
             {
                 ui->tablePeople->hideRow(row);
@@ -417,6 +431,7 @@ void MainWindow::on_lineEditComputersFilter_textChanged(const QString &inputText
     else
     {
         int columnNum = ui->dropDownComputersFilter->currentIndex() + 1;
+        //For every row, hider or unhide dependant on the filterstring and column to filter on.
         for(int row = 0; row < rowCount; row++)
         {
             QString columnText = ui->tableComputer->item(row,columnNum)->text();
@@ -485,6 +500,7 @@ void MainWindow::editSelectedPerson()
         }
         ui->statusBar->showMessage("Changes were successfully submitted", 2000);
         ui->lineEditPeopleFilter->setText("");
+        //Disabling table sorting is a Qt protocall when editing rows. This is then enabled at the bottom.
         ui->tablePeople->setSortingEnabled(false);
         displayAllPeople();
         ui->tablePeople->setSortingEnabled(true);
@@ -524,6 +540,7 @@ void MainWindow::editSelectedComputer()
         }
         ui->statusBar->showMessage("Changes were successfully submitted", 2000);
         ui->lineEditComputersFilter->setText("");
+        //Disabling table sorting is a Qt protocall when editing rows. This is then enabled at the bottom.
         ui->tableComputer->setSortingEnabled(false);
         displayAllComputers();
         ui->tableComputer->setSortingEnabled(true);
