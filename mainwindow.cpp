@@ -31,13 +31,17 @@ MainWindow::~MainWindow()
 
 void MainWindow::displayAllPeople()
 {
-    vector<peopleWithComputers> people = theLogic.printerSortPeople(1, 1);
+    //The allPeopleSorted function takes in a orderby number and ascending number.
+    //1 and 1 means sort by person name and ascending.
+    vector<peopleWithComputers> people = theLogic.allPeopleSorted(1, 1);
     displayPeople(people);
 }
 
 void MainWindow::displayAllComputers()
 {
-    vector<computersWithPeople> computers = theLogic.printerSortComputers(1, 1);
+    //The allComputersSorted function takes in a orderby number and ascending number.
+    //1 and 1 means sort by computer name and ascending.
+    vector<computersWithPeople> computers = theLogic.allComputersSorted(1, 1);
     displayComputers(computers);
 }
 
@@ -465,7 +469,7 @@ void MainWindow::editSelectedPerson()
     Edit edit;
     peopleWithComputers personToDisplay = getSelectedPerson();
     edit.setSelectedPerson(personToDisplay);
-    edit.displayComputers(theLogic.printerSortComputers(1,1));
+    edit.displayComputers(theLogic.allComputersSorted(1,1));
     bool edited = edit.exec();
     if(edited)
     {
@@ -505,7 +509,7 @@ void MainWindow::editSelectedComputer()
     editComputers editcomputers;
     computersWithPeople selectedComputer = getSelectedComputer();
     editcomputers.setSelectedComputer(selectedComputer);
-    editcomputers.displayPeople(theLogic.printerSortPeople(1,1));
+    editcomputers.displayPeople(theLogic.allPeopleSorted(1,1));
     bool edited = editcomputers.exec();
     if(edited)
     {

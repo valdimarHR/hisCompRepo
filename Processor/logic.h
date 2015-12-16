@@ -86,7 +86,7 @@ public:
      * @param ascending order or not.
      * @return returns a sorted vector with people to the ui for it to display.
      */
-    vector<peopleWithComputers> printerSortPeople(int orderBy, int ascending);
+    vector<peopleWithComputers> allPeopleSorted(int orderBy, int ascending);
     /**
      * @brief printerSortComputers sends a request for a computer vector from data and then sorts that vector as the
      * user has requested.
@@ -94,7 +94,7 @@ public:
      * @param ascending order or not.
      * @return returns a sorted vector with computers to the ui for it to display.
      */
-    vector<computersWithPeople> printerSortComputers(int orderBy, int ascending);
+    vector<computersWithPeople> allComputersSorted(int orderBy, int ascending);
     /**
      * @brief finds people in database using vector and sorts them as the
      * user wants to sort them
