@@ -5,7 +5,7 @@ logic::logic()
 
 }
 
-vector<peopleWithComputers> logic::printerSortPeople(int orderBy, int ascending)
+vector<peopleWithComputers> logic::allPeopleSorted(int orderBy, int ascending)
 {
     vector<peopleWithComputers> sortedVector = theData.fetchPeople("sName", "");
 
@@ -49,7 +49,7 @@ vector<peopleWithComputers> logic::printerSortPeople(int orderBy, int ascending)
     return sortedVector;
 }
 
-vector<computersWithPeople> logic::printerSortComputers(int orderBy, int ascending)
+vector<computersWithPeople> logic::allComputersSorted(int orderBy, int ascending)
 {
     vector<computersWithPeople> sortedVector = theData.fetchComputers("cName", "");
 

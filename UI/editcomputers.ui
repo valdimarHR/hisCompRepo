@@ -14,7 +14,7 @@
    <string>Edit a computer</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../resources.qrc">
+   <iconset resource="../images.qrc">
     <normaloff>:/icons/icons/edit computer.png</normaloff>:/icons/icons/edit computer.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -138,7 +138,7 @@
      </column>
      <column>
       <property name="text">
-       <string>birth-death</string>
+       <string>birth</string>
       </property>
      </column>
     </widget>
@@ -171,7 +171,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../resources.qrc"/>
+  <include location="../images.qrc"/>
  </resources>
  <connections/>
 </ui>
